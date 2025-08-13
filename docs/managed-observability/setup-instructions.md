@@ -1,73 +1,193 @@
 # Setup Instructions
 
-On this page you will learn, how you can setup a new Managed Observability instance and connect it to your existing cluster.
+On this page you will learn how to setup a new Managed Observability instance using our single chart installation from the clusterpirate helm chart.
 
 ## Prerequisites
 
-Before setting up our managed observability solution, ensure that the following prerequisites are met:
+Before installing the managed observability chart, you need to complete the following setup steps in our portal:
 
-1. **Kubernetes Clusters**:
-   - You must have at least one Kubernetes cluster already set up.
-   - The Kubernetes cluster(s) should be accessible and properly configured for integration with observability tools.
+1. **Portal Registration**: Register at [portal.cloudpirates.io](https://portal.cloudpirates.io)
+2. **Workspace Creation**: Create a workspace in the portal
+3. **Observability Instance**: Create an observability instance within your workspace
+4. **Cluster Setup**: Create a cluster in the observability instance to obtain the required accessToken
 
-2. **Grafana Instance**:
-   - A Grafana instance should be running and accessible within your infrastructure.
-   - Ensure that you have the `admin` role on the Grafana instance.
+## Chart Installation
 
-3. **Dashboards and Alerting Rules**:
-   - Our predefined dashboards and alerting rules must be installed in your Grafana instance.
+The managed observability solution is now available as a single chart installation from the clusterpirate helm chart. Follow these steps to install the chart in your Kubernetes cluster.
 
-4. **AccessToken**:
-   - A created observability instance with the required credentials.
-   - The accessToken can be found inside our [Customer Portal](https://auth.cloudpirates.io) by navigating to the Managed Observability
+### Installation Steps
 
+1. **Create Namespace**:
+   ```bash
+   kubectl create namespace clusterpirate-system
+   ```
 
-## Required Parameters
-You will need the following data to create the Grafana Webhook:
+2. **Install the Chart from OCI Registry**:
+   ```bash
+   helm install clusterpirate oci://registry-1.docker.io/cloudpirates/clusterpirate \
+     --namespace clusterpirate-system \
+     --set auth.accessToken="YOUR_ACCESS_TOKEN_HERE"
+   ```
 
-| Setting                          | Value                                                     |
-|----------------------------------|-----------------------------------------------------------|
-| **Name**                         | [Meaningful name of the webhook]                          |
-| **URL**                          |  `https://api.cloudpirates.io/v1/webhooks/grafana/alerts` |
-| **Authorization Header - Credentials**         | [accessToken from customer portal]                        |
+3. **Install with Custom Values** (recommended):
+   ```bash
+   helm install clusterpirate oci://registry-1.docker.io/cloudpirates/clusterpirate \
+     --namespace clusterpirate-system \
+     --values values.yaml
+   ```
 
+4. **Alternative: Install from Local Chart** (for development):
+   ```bash
+   helm install clusterpirate ./charts/clusterpirate \
+     --namespace clusterpirate-system \
+     --set auth.accessToken="YOUR_ACCESS_TOKEN_HERE"
+   ```
 
-## Create a new Grafana Webhook
+### Required Configuration
 
-1. **Access Grafana Dashboard**:
-   - Log in to your Grafana instance using your credentials.
-   - Ensure that you have the `admin` role to configure webhooks.
+The following parameters are required for the chart installation:
 
-2. **Navigate to Notification Channels**:
-   - Once logged in, navigate to the main menu by clicking on the navigation icon located on the left-hand side of the dashboard.
-   - Select `Alerting` from the dropdown menu.
-   - Click on `Contact Points` channels.
+| Parameter | Description | Required |
+|-----------|-------------|----------|
+| `auth.accessToken` | Token obtained from cluster creation in portal | ✓ |
 
-3. **Add Contact point**:
-   - On the `Contact Points` page, click on the `Add Contact Point` button.
-   - Choose `Webhook` from the list of available integrations.
+### Example values.yaml
 
-4. **Configure Webhook**:
-   - Provide a meaningful name for the webhook in the `Name` field.
-   - Enter the `URL` given above as endpoint.
-   - Enter the previously created `accessToken` to the `Authorization Header - Credentials` field.
+Create a `values.yaml` file with your configuration:
 
-::: warning
-Please ensure that the `Disable resolved messages` option is not enabled in the Notification settings. Resolved messages are crucial for our system to detect when an alert is resolved.
-:::
+```yaml
+# Required: Access token from portal cluster creation
+auth:
+  accessToken: "your-access-token-here"
 
-5. **Test Webhook**:
-   - Optionally, you can click on the `Test` button to verify that Grafana can successfully send a test payload to the webhook URL.
-   - This step helps ensure that the webhook is properly configured and can receive alerts from Grafana.
-   - Once you have configured the webhook settings, click on the `Save` button to add the webhook as a notification channel in Grafana.
+# Optional: ClusterPirate application settings
+clusterPirate:
+  logLevel: "info"
+  healthPort: 3000
+  metrics:
+    enabled: true
+    updateIntervalSeconds: 60
+    cache:
+      ttl: 86400  # 24 hours
+  monitoring:
+    resourceEventsEnabled: true
+    systemEventsEnabled: true
 
+# Optional: Deployment configuration
+deployment:
+  image:
+    registry: "harbor.cloudpirates.io"
+    repository: "koperator-internal/services/clusterpirate"
+    tag: "latest"
+    pullPolicy: "Always"
+  resources:
+    requests:
+      cpu: "10m"
+      memory: "100Mi"
+    limits:
+      memory: "300Mi"
+  extraEnvVars: []
 
-## Add Notification Policy
+# Optional: Valkey configuration (caching)
+valkey:
+  enabled: true
+  auth:
+    enabled: true
+    password: ""  # Auto-generated if empty
 
-Once you have setup your Contact Point, you need to add it as Notification Policy.
+# Optional: RBAC and ServiceAccount
+rbac:
+  create: true
+serviceAccount:
+  create: true
+  name: ""
 
-1. **Add Notification Policy**
-    - Navigate to the Notification Policies and click on `+ new nested policy`.
-    - Remove all Matching labels by clicking on the trash icon.
-    - Select the previously created `Contact Point`
-    - To allow all following Contact Points to also send alerts, enable the setting `Continue matching subsequent sibling nodes`
+# Optional: Common labels and annotations
+commonLabels: {}
+commonAnnotations: {}
+```
+
+### Verification
+
+After installation, verify that the chart is deployed successfully:
+
+```bash
+# Check the deployment status
+kubectl get pods -n clusterpirate-system
+
+# Check the logs
+kubectl logs -f deployment/clusterpirate -n clusterpirate-system
+
+# Verify all resources are created
+kubectl get all -n clusterpirate-system
+```
+
+### Upgrade
+
+To upgrade the chart to a newer version:
+
+```bash
+helm upgrade clusterpirate oci://registry-1.docker.io/cloudpirates/clusterpirate \
+  --namespace clusterpirate-system \
+  --values values.yaml
+```
+
+### Uninstall
+
+To remove the chart:
+
+```bash
+helm uninstall clusterpirate --namespace clusterpirate-system
+```
+
+## Troubleshooting
+
+### Common Issues
+
+#### 1. Invalid Access Token
+**Error**: `Authentication failed` or `Unauthorized`
+**Solution**: 
+- Verify the accessToken is correctly copied from the portal
+- Ensure the cluster was created in the correct observability instance
+- Check that the token hasn't expired
+
+#### 2. Chart Not Found
+**Error**: `Error: failed to download chart from OCI registry`
+**Solution**: Ensure you have access to the OCI registry and correct chart name:
+```bash
+# Verify you can access the registry
+helm pull oci://registry-1.docker.io/cloudpirates/clusterpirate --version latest
+```
+
+#### 3. Namespace Issues
+**Error**: `Error: create: failed to create: namespaces "clusterpirate-system" is forbidden`
+**Solution**: Ensure you have sufficient RBAC permissions to create namespaces, or create the namespace manually:
+```bash
+kubectl create namespace clusterpirate-system
+```
+
+#### 4. Pod Startup Issues
+**Error**: Pods stuck in `Pending` or `CrashLoopBackOff` state
+**Solution**: 
+```bash
+# Check pod events
+kubectl describe pod -n clusterpirate-system -l app.kubernetes.io/name=clusterpirate
+```
+
+#### 5. Network Connectivity
+**Error**: Cannot connect to portal services
+**Solution**: 
+- Verify outbound internet access from your cluster
+- Check if corporate firewall blocks connections to `*.cloudpirates.io`
+- Ensure DNS resolution works for `api.cloudpirates.io`
+
+### Getting Help
+
+If you encounter issues not covered here:
+1. Check the pod logs: `kubectl logs -n clusterpirate-system -l app.kubernetes.io/name=clusterpirate`
+2. Contact support with the following information:
+   - Helm chart version
+   - Kubernetes version
+   - Error messages and logs
+   - Cluster configuration details
+
