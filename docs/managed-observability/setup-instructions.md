@@ -1,59 +1,55 @@
 # Setup Instructions
 
-On this page you will learn how to setup a new Managed Observability instance using our single chart installation from the clusterpirate helm chart.
+Get your cluster connected to CloudPirates Managed Observability in less than 5 minutes. Just one helm chart installation — no complex configuration required.
 
-## Prerequisites
+## What You'll Install
 
-Before installing the managed observability chart, you need to complete the following setup steps in our portal:
+**ClusterPirate** is a lightweight agent that runs in your cluster and securely sends monitoring data to CloudPirates. It:
 
-1. **Portal Registration**: Register at [portal.cloudpirates.io](https://portal.cloudpirates.io)
-2. **Workspace Creation**: Create a workspace in the portal
-3. **Observability Instance**: Create an observability instance within your workspace
-4. **Cluster Setup**: Create a cluster in the observability instance to obtain the required accessToken
+- Discovers all Kubernetes resources automatically
+- Collects metrics, events, and logs
+- Validates security and best practices
+- Scans container images for vulnerabilities
+- Requires minimal resources (10m CPU, 100Mi memory)
 
-## Chart Installation
+::: tip Lightweight & Secure
+ClusterPirate only **reads** data from your cluster and sends it securely to CloudPirates. It never modifies your workloads or stores sensitive data.
+:::
 
-The managed observability solution is now available as a single chart installation from the clusterpirate helm chart. Follow these steps to install the chart in your Kubernetes cluster.
+## Before You Begin
 
-### Installation Steps
+Complete these quick steps in the portal first:
 
-1. **Create Namespace**:
-   ```bash
-   kubectl create namespace clusterpirate-system
-   ```
+1. **Register**: Sign up at [portal.cloudpirates.io](https://portal.cloudpirates.io)
+2. **Create Workspace**: Organize your observability instances
+3. **Create Observability Instance**: Set up monitoring for your clusters
+4. **Register Cluster**: Add your cluster to get the **access token**
 
-2. **Install the Chart from OCI Registry**:
-   ```bash
-   helm install clusterpirate oci://registry-1.docker.io/cloudpirates/clusterpirate \
-     --namespace clusterpirate-system \
-     --set auth.accessToken="YOUR_ACCESS_TOKEN_HERE"
-   ```
+The access token is your cluster's unique identifier — keep it secure.
 
-3. **Install with Custom Values** (recommended):
-   ```bash
-   helm install clusterpirate oci://registry-1.docker.io/cloudpirates/clusterpirate \
-     --namespace clusterpirate-system \
-     --values values.yaml
-   ```
+## Installation
 
-4. **Alternative: Install from Local Chart** (for development):
-   ```bash
-   helm install clusterpirate ./charts/clusterpirate \
-     --namespace clusterpirate-system \
-     --set auth.accessToken="YOUR_ACCESS_TOKEN_HERE"
-   ```
+### Quick Start (Recommended)
 
-### Required Configuration
+This is all you need for most clusters:
 
-The following parameters are required for the chart installation:
+```bash
+# Create namespace
+kubectl create namespace clusterpirate-system
 
-| Parameter | Description | Required |
-|-----------|-------------|----------|
-| `auth.accessToken` | Token obtained from cluster creation in portal | ✓ |
+# Install ClusterPirate
+helm install clusterpirate oci://registry-1.docker.io/cloudpirates/clusterpirate \
+  --namespace clusterpirate-system \
+  --set auth.accessToken="YOUR_ACCESS_TOKEN_HERE"
+```
 
-### Example values.yaml
+Replace `YOUR_ACCESS_TOKEN_HERE` with the token from your portal cluster registration.
 
-Create a `values.yaml` file with your configuration:
+**That's it!** The agent starts monitoring immediately. Check your portal to see cluster data flowing in.
+
+### Advanced Configuration (Optional)
+
+Need to customize the installation? Create a `values.yaml` file with your preferences:
 
 ```yaml
 # Required: Access token from portal cluster creation
@@ -86,7 +82,6 @@ deployment:
       memory: "100Mi"
     limits:
       memory: "300Mi"
-  extraEnvVars: []
 
 # Optional: Valkey configuration (caching)
 valkey:
@@ -101,30 +96,62 @@ rbac:
 serviceAccount:
   create: true
   name: ""
-
-# Optional: Common labels and annotations
-commonLabels: {}
-commonAnnotations: {}
 ```
 
-### Verification
-
-After installation, verify that the chart is deployed successfully:
+Install with values:
 
 ```bash
-# Check the deployment status
+helm install clusterpirate oci://registry-1.docker.io/cloudpirates/clusterpirate \
+  --namespace clusterpirate-system \
+  --values values.yaml
+```
+
+## Configuration
+
+### Required Parameters
+
+| Parameter | Description | Required |
+|-----------|-------------|----------|
+| `auth.accessToken` | Token from cluster creation in portal | ✓ |
+
+### Optional Parameters
+
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| `clusterPirate.logLevel` | Log level (debug, info, warn, error) | `info` |
+| `clusterPirate.healthPort` | Health check port | `3000` |
+| `clusterPirate.metrics.enabled` | Enable metrics collection | `true` |
+| `clusterPirate.metrics.updateIntervalSeconds` | Metrics update interval | `60` |
+| `deployment.resources.requests.cpu` | CPU request | `10m` |
+| `deployment.resources.requests.memory` | Memory request | `100Mi` |
+| `deployment.resources.limits.memory` | Memory limit | `300Mi` |
+| `valkey.enabled` | Enable Valkey caching | `true` |
+
+## Verification
+
+Check installation status:
+
+```bash
+# Check pod status
 kubectl get pods -n clusterpirate-system
 
-# Check the logs
+# Check logs
 kubectl logs -f deployment/clusterpirate -n clusterpirate-system
 
-# Verify all resources are created
+# Verify all resources
 kubectl get all -n clusterpirate-system
 ```
 
-### Upgrade
+Expected output:
+```
+NAME                               READY   STATUS    RESTARTS   AGE
+pod/clusterpirate-xxxxx-xxxxx     1/1     Running   0          1m
+pod/clusterpirate-valkey-xxxxx    1/1     Running   0          1m
+```
 
-To upgrade the chart to a newer version:
+## Management
+
+### Upgrade
 
 ```bash
 helm upgrade clusterpirate oci://registry-1.docker.io/cloudpirates/clusterpirate \
@@ -134,60 +161,52 @@ helm upgrade clusterpirate oci://registry-1.docker.io/cloudpirates/clusterpirate
 
 ### Uninstall
 
-To remove the chart:
-
 ```bash
 helm uninstall clusterpirate --namespace clusterpirate-system
 ```
 
 ## Troubleshooting
 
-### Common Issues
+### Invalid Access Token
 
-#### 1. Invalid Access Token
-**Error**: `Authentication failed` or `Unauthorized`
-**Solution**: 
-- Verify the accessToken is correctly copied from the portal
-- Ensure the cluster was created in the correct observability instance
-- Check that the token hasn't expired
+**Symptoms**: `Authentication failed` or `Unauthorized` errors
 
-#### 2. Chart Not Found
-**Error**: `Error: failed to download chart from OCI registry`
-**Solution**: Ensure you have access to the OCI registry and correct chart name:
-```bash
-# Verify you can access the registry
-helm pull oci://registry-1.docker.io/cloudpirates/clusterpirate --version latest
-```
+**Solution**:
+- Verify token is correctly copied from portal
+- Ensure cluster was created in correct observability instance
+- Check token hasn't expired
 
-#### 3. Namespace Issues
-**Error**: `Error: create: failed to create: namespaces "clusterpirate-system" is forbidden`
-**Solution**: Ensure you have sufficient RBAC permissions to create namespaces, or create the namespace manually:
-```bash
-kubectl create namespace clusterpirate-system
-```
+### Pod Not Starting
 
-#### 4. Pod Startup Issues
-**Error**: Pods stuck in `Pending` or `CrashLoopBackOff` state
-**Solution**: 
+**Symptoms**: Pods stuck in `Pending` or `CrashLoopBackOff`
+
+**Solution**:
 ```bash
 # Check pod events
 kubectl describe pod -n clusterpirate-system -l app.kubernetes.io/name=clusterpirate
+
+# Check logs
+kubectl logs -n clusterpirate-system -l app.kubernetes.io/name=clusterpirate
 ```
 
-#### 5. Network Connectivity
-**Error**: Cannot connect to portal services
-**Solution**: 
-- Verify outbound internet access from your cluster
-- Check if corporate firewall blocks connections to `*.cloudpirates.io`
+### Network Connectivity
+
+**Symptoms**: Cannot connect to portal services
+
+**Solution**:
+- Verify outbound internet access from cluster
+- Check if firewall blocks connections to `*.cloudpirates.io`
 - Ensure DNS resolution works for `api.cloudpirates.io`
 
 ### Getting Help
 
-If you encounter issues not covered here:
-1. Check the pod logs: `kubectl logs -n clusterpirate-system -l app.kubernetes.io/name=clusterpirate`
-2. Contact support with the following information:
-   - Helm chart version
-   - Kubernetes version
-   - Error messages and logs
-   - Cluster configuration details
+Contact support with:
+- Helm chart version
+- Kubernetes version
+- Error messages and logs
+- Cluster configuration details
 
+## Related Resources
+
+- [Managed Observability Overview](./index.md)
+- [Alert Reference](./alert-reference.md)

@@ -1,11 +1,11 @@
 :root {
-  --vp-c-indigo-1: #395398;
-  --vp-c-indigo-2: #395398;
-  --vp-c-indigo-3: #395398;
+  --vp-c-indigo-1: #005290;
+  --vp-c-indigo-2: #005290;
+  --vp-c-indigo-3: #005290;
 }
 
 .dark {
   --vp-c-indigo-1: #dff1fd;
   --vp-c-indigo-2: #a5d8f9;
-  --vp-c-indigo-3: #395398;
+  --vp-c-indigo-3: #005290;
 }
