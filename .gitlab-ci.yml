@@ -4,3 +4,4 @@ include:
       image-name: koperator-internal/documentation/developer-portal
       trigger-project: koperator/infrastructure/Kubernetes
       kustomize-path: developer-portal/base
+      node-build-step-image: harbor.cloudpirates.io/docker/library/node:24
