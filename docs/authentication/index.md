@@ -15,6 +15,7 @@ All authentication management is handled through the [CloudPirates Portal](https
 CloudPirates supports the following authentication methods:
 
 ### Password Authentication
+
 Traditional email and password authentication with multi-factor authentication (MFA) support. This is the default authentication method for new accounts.
 
 - Account registration at [/register](https://portal.cloudpirates.io/register)
@@ -25,6 +26,7 @@ Traditional email and password authentication with multi-factor authentication (
 [Learn more about password authentication →](./password.md)
 
 ### WebAuthn (Passkeys)
+
 Modern passwordless authentication using hardware security keys, biometric authenticators, or platform authenticators (Face ID, Touch ID, Windows Hello).
 
 - Alternative authentication method (password login remains available)
@@ -36,6 +38,7 @@ Modern passwordless authentication using hardware security keys, biometric authe
 [Learn more about WebAuthn →](./webauthn.md)
 
 ### API Keys
+
 Programmatic API access for automated systems and integrations.
 
 - Create multiple API keys with custom labels

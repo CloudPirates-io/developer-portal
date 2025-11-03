@@ -17,6 +17,7 @@ Choose the right balance between stability and features for each application.
 **Best for**: Production workloads
 
 **Characteristics**:
+
 - Released approximately 2 weeks after upstream
 - Extensive checks and validation by CloudPirates team
 - Automated Helm chart value migrations
@@ -25,12 +26,14 @@ Choose the right balance between stability and features for each application.
 - Upgrade paths verified
 
 **What We Do**:
+
 - Comprehensive testing across multiple scenarios
 - Automated and manual validation
 - Gradual rollout monitoring
 - **Automatic migration of Helm chart values** to new versions
 
 **Example Timeline**:
+
 - Day 0: Upstream releases v2.5.0
 - Day 1-10: CloudPirates extensive testing and validation
 - Day 11-14: Migration path verification
@@ -41,6 +44,7 @@ Choose the right balance between stability and features for each application.
 **Best for**: Balanced environments, teams wanting latest stable without waiting
 
 **Characteristics**:
+
 - Latest stable release from upstream
 - Rolled out instantly upon upstream release
 - Production-ready according to upstream
@@ -52,6 +56,7 @@ Choose the right balance between stability and features for each application.
 **Best for**: Development, testing, early adopters
 
 **Characteristics**:
+
 - Latest available version of the software
 - Includes pre-release and beta versions
 - May include breaking changes
@@ -59,6 +64,7 @@ Choose the right balance between stability and features for each application.
 - Not recommended for production
 
 **Use Cases**:
+
 - Development environments
 - Feature testing and preview
 - Bug reproduction
@@ -71,6 +77,7 @@ Choose the right balance between stability and features for each application.
 Update channels are configured via annotations on the ArgoCD Application resource:
 
 **Example ArgoCD Application**:
+
 ```yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -92,11 +99,13 @@ spec:
 ```
 
 **Available Update Channels**:
+
 - `cloudpirates-stable` - Recommended for production
 - `stable` - Latest stable from upstream
 - `latest` - Latest available version
 
 **Auto-Update Behavior**:
+
 - **Enabled** (`auto-update: "true"`): Application automatically updated to latest version in selected channel, committed to Git
 - **Disabled** (`auto-update: "false"`): Notification sent when new version available, manual approval required
 
@@ -123,6 +132,7 @@ Notification Sent
 ```
 
 **Safety Features**:
+
 - Health checks before marking as successful
 - Automatic rollback on failure (if configured)
 - Update history in Git
@@ -133,6 +143,7 @@ Notification Sent
 **Automatic Backup**: For applications hosted on CloudPirates Managed Kubernetes clusters, we automatically create a backup before rolling out updates.
 
 **What's Included**:
+
 - Application configuration
 - Persistent Volume Claims (PVCs)
 - Database snapshots (where applicable)
@@ -146,16 +157,19 @@ This ensures you can quickly restore your application if an update causes issues
 ### Notification Types
 
 **New Version Available**:
+
 - When new version in your channel
 - Includes changelog
 - Shows current vs available version
 
 **Update Applied**:
+
 - Automatic update completed
 - Links to Git commit
 - Deployment status
 
 **Update Failed**:
+
 - Automatic update encountered error
 - Error details and logs
 - Recommended actions
@@ -172,6 +186,7 @@ This ensures you can quickly restore your application if an update causes issues
 ### View Changes
 
 **Per Application**:
+
 - Version history
 - Changelog from upstream
 - CloudPirates testing notes (Stable channel)
@@ -179,24 +194,29 @@ This ensures you can quickly restore your application if an update causes issues
 - Upgrade instructions
 
 **Example Changelog**:
+
 ```markdown
 ## MariaDB 11.2.2 → 11.2.3
 
 ### Changes
+
 - Security fix for CVE-2024-1234
 - Performance improvements for replication
 - Bug fix for connection pooling
 
 ### CloudPirates Testing (Stable Channel)
+
 - Tested with 1000+ concurrent connections
 - Validated replication across 3 nodes
 - Backup/restore verified
 - Upgrade from 11.2.2 successful
 
 ### Breaking Changes
+
 None
 
 ### Recommended Actions
+
 - No configuration changes required
 - Update recommended for security fix
 ```
@@ -206,12 +226,14 @@ None
 ### Critical Security Patches
 
 **Priority Handling**:
+
 - Released to all channels immediately
 - Notification sent to all users
 - Automatic update recommended (even if disabled)
 - Clear security advisory
 
 **Example**:
+
 ```
 ⚠️ SECURITY ADVISORY
 

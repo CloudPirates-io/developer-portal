@@ -64,7 +64,7 @@ clusterPirate:
     enabled: true
     updateIntervalSeconds: 60
     cache:
-      ttl: 86400  # 24 hours
+      ttl: 86400 # 24 hours
   monitoring:
     resourceEventsEnabled: true
     systemEventsEnabled: true
@@ -88,7 +88,7 @@ valkey:
   enabled: true
   auth:
     enabled: true
-    password: ""  # Auto-generated if empty
+    password: "" # Auto-generated if empty
 
 # Optional: RBAC and ServiceAccount
 rbac:
@@ -110,22 +110,22 @@ helm install clusterpirate oci://registry-1.docker.io/cloudpirates/clusterpirate
 
 ### Required Parameters
 
-| Parameter | Description | Required |
-|-----------|-------------|----------|
-| `auth.accessToken` | Token from cluster creation in portal | ✓ |
+| Parameter          | Description                           | Required |
+| ------------------ | ------------------------------------- | -------- |
+| `auth.accessToken` | Token from cluster creation in portal | ✓        |
 
 ### Optional Parameters
 
-| Parameter | Description | Default |
-|-----------|-------------|---------|
-| `clusterPirate.logLevel` | Log level (debug, info, warn, error) | `info` |
-| `clusterPirate.healthPort` | Health check port | `3000` |
-| `clusterPirate.metrics.enabled` | Enable metrics collection | `true` |
-| `clusterPirate.metrics.updateIntervalSeconds` | Metrics update interval | `60` |
-| `deployment.resources.requests.cpu` | CPU request | `10m` |
-| `deployment.resources.requests.memory` | Memory request | `100Mi` |
-| `deployment.resources.limits.memory` | Memory limit | `300Mi` |
-| `valkey.enabled` | Enable Valkey caching | `true` |
+| Parameter                                     | Description                          | Default |
+| --------------------------------------------- | ------------------------------------ | ------- |
+| `clusterPirate.logLevel`                      | Log level (debug, info, warn, error) | `info`  |
+| `clusterPirate.healthPort`                    | Health check port                    | `3000`  |
+| `clusterPirate.metrics.enabled`               | Enable metrics collection            | `true`  |
+| `clusterPirate.metrics.updateIntervalSeconds` | Metrics update interval              | `60`    |
+| `deployment.resources.requests.cpu`           | CPU request                          | `10m`   |
+| `deployment.resources.requests.memory`        | Memory request                       | `100Mi` |
+| `deployment.resources.limits.memory`          | Memory limit                         | `300Mi` |
+| `valkey.enabled`                              | Enable Valkey caching                | `true`  |
 
 ## Verification
 
@@ -143,6 +143,7 @@ kubectl get all -n clusterpirate-system
 ```
 
 Expected output:
+
 ```
 NAME                               READY   STATUS    RESTARTS   AGE
 pod/clusterpirate-xxxxx-xxxxx     1/1     Running   0          1m
@@ -172,6 +173,7 @@ helm uninstall clusterpirate --namespace clusterpirate-system
 **Symptoms**: `Authentication failed` or `Unauthorized` errors
 
 **Solution**:
+
 - Verify token is correctly copied from portal
 - Ensure cluster was created in correct observability instance
 - Check token hasn't expired
@@ -181,6 +183,7 @@ helm uninstall clusterpirate --namespace clusterpirate-system
 **Symptoms**: Pods stuck in `Pending` or `CrashLoopBackOff`
 
 **Solution**:
+
 ```bash
 # Check pod events
 kubectl describe pod -n clusterpirate-system -l app.kubernetes.io/name=clusterpirate
@@ -194,6 +197,7 @@ kubectl logs -n clusterpirate-system -l app.kubernetes.io/name=clusterpirate
 **Symptoms**: Cannot connect to portal services
 
 **Solution**:
+
 - Verify outbound internet access from cluster
 - Check if firewall blocks connections to `*.cloudpirates.io`
 - Ensure DNS resolution works for `api.cloudpirates.io`
@@ -201,6 +205,7 @@ kubectl logs -n clusterpirate-system -l app.kubernetes.io/name=clusterpirate
 ### Getting Help
 
 Contact support with:
+
 - Helm chart version
 - Kubernetes version
 - Error messages and logs

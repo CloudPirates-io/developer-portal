@@ -59,6 +59,7 @@ Keep at least one active authentication method.
 ## Multiple Devices
 
 Register multiple devices for flexibility:
+
 - Primary device (laptop/phone)
 - Backup security key
 - Mobile device

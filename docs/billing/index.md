@@ -40,10 +40,11 @@ Currently, all payments are processed via **wire transfer** (Überweisung).
 
 ::: info Coming Soon
 Additional payment methods in development:
+
 - PayPal
 - Credit Card
 - Direct Debit (SEPA)
-:::
+  :::
 
 ## Related Resources
 

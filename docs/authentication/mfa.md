@@ -66,6 +66,7 @@ Ensure device clock is accurate for TOTP codes.
 ## Managing MFA
 
 Access [security page](https://portal.cloudpirates.io/security) to:
+
 - View active MFA methods
 - Enable additional methods
 - Disable methods
@@ -73,6 +74,7 @@ Access [security page](https://portal.cloudpirates.io/security) to:
 ### Multiple Methods
 
 Enable both SMS and TOTP:
+
 - Use SMS when authenticator unavailable
 - Use TOTP when SMS unavailable
 - Choose preferred method during login

@@ -20,11 +20,11 @@ CloudPirates Managed Application Platform is a **GitOps-based application manage
 
 Choose what fits your infrastructure and workflow:
 
-| Component | CloudPirates Managed | Bring Your Own |
-|-----------|---------------------|----------------|
-| **Git Repository** | We provide and host a GitOps repository for you | Connect your existing Git repository (GitHub, GitLab, Bitbucket) |
-| **ArgoCD** | Use our managed ArgoCD installation | Connect your existing ArgoCD instance |
-| **Kubernetes Cluster** | Deploy to our managed Kubernetes clusters (Germany, US East) | Deploy to your own infrastructure |
+| Component              | CloudPirates Managed                                         | Bring Your Own                                                   |
+| ---------------------- | ------------------------------------------------------------ | ---------------------------------------------------------------- |
+| **Git Repository**     | We provide and host a GitOps repository for you              | Connect your existing Git repository (GitHub, GitLab, Bitbucket) |
+| **ArgoCD**             | Use our managed ArgoCD installation                          | Connect your existing ArgoCD instance                            |
+| **Kubernetes Cluster** | Deploy to our managed Kubernetes clusters (Germany, US East) | Deploy to your own infrastructure                                |
 
 **Mix and Match**: You can combine options — for example, use our managed ArgoCD with your own Git repository and Kubernetes cluster.
 
@@ -60,6 +60,7 @@ Choose what fits your infrastructure and workflow:
 ### Flexible Update Management
 
 Three update channels with automatic update support:
+
 - **CloudPirates Stable**: Released ~2 weeks after upstream with extensive testing and automatic Helm value migrations
 - **Stable**: Latest stable release rolled out instantly from upstream
 - **Latest**: Latest available version including pre-releases and breaking changes
@@ -81,6 +82,7 @@ Portal Action → Git Commit → ArgoCD Sync → Kubernetes Deployment
 5. **Manage**: Update, configure, and monitor through the portal
 
 **What Gets Created**:
+
 - ArgoCD Application manifests
 - Application values and configuration
 - SealedSecret resources for sensitive data
@@ -91,6 +93,7 @@ Portal Action → Git Commit → ArgoCD Sync → Kubernetes Deployment
 ## Why Choose Managed Application Platform?
 
 **Perfect For**:
+
 - GitOps adoption without extensive setup
 - Application standardization with vetted configurations
 - Multi-cluster application management
@@ -98,6 +101,7 @@ Portal Action → Git Commit → ArgoCD Sync → Kubernetes Deployment
 - Compliance requirements with full audit trail
 
 **No Vendor Lock-In**:
+
 - All configurations in standard ArgoCD format
 - Standard Helm charts and Kubernetes manifests
 - Cancel platform subscription anytime

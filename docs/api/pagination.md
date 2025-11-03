@@ -53,6 +53,7 @@ Link: </v1/trainings?limit=20&offset=0>; rel="first",
 ```
 
 In this example:
+
 - The `first` link points to the first page of the results.
 - The `prev` link points to the previous page of the results.
 - The `next` link points to the next page of the results.
@@ -61,12 +62,14 @@ In this example:
 ## Handling Empty Links
 
 When navigating through the pages:
+
 - The `prev` link will be missing if you are on the first page.
 - The `next` link will be missing if you are on the last page.
 
 ### Example of non existing Links
 
 On the first page:
+
 ```bash
 Link: </api/trainings?limit=20&offset=0>; rel="first",
       </api/trainings?limit=20&offset=20>; rel="next",
@@ -74,6 +77,7 @@ Link: </api/trainings?limit=20&offset=0>; rel="first",
 ```
 
 On the last page:
+
 ```bash
 Link: </api/trainings?limit=20&offset=0>; rel="first",
       </api/trainings?limit=20&offset=60>; rel="prev",

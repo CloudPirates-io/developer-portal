@@ -24,6 +24,7 @@ Every resource shows not just its status, but **what that status means** and **w
 **What they are**: The physical or virtual machines that run your applications.
 
 **What we show you**:
+
 - Health status in plain terms ("Healthy", "Running low on memory", "Disk almost full")
 - Resource capacity and usage with clear warnings
 - Which applications are running on each node
@@ -36,6 +37,7 @@ Every resource shows not just its status, but **what that status means** and **w
 **What they are**: Logical groups for organizing your applications — like folders for your workloads.
 
 **What we show you**:
+
 - All your namespaces and what's running in each
 - Resource usage per namespace
 - Which team or environment each namespace represents
@@ -47,6 +49,7 @@ Every resource shows not just its status, but **what that status means** and **w
 **What they are**: Your running applications managed by Kubernetes.
 
 **What we show you**:
+
 - How many copies (replicas) are running
 - Whether updates are in progress
 - If any copies are failing and why
@@ -59,6 +62,7 @@ Every resource shows not just its status, but **what that status means** and **w
 **What they are**: Individual running copies of your application.
 
 **What we show you**:
+
 - Current state explained clearly ("Running", "Crashed and restarting", "Waiting for image download")
 - Why a pod might be failing with troubleshooting steps
 - Resource usage and whether it's appropriate
@@ -71,6 +75,7 @@ Every resource shows not just its status, but **what that status means** and **w
 **What they are**: How traffic reaches your applications.
 
 **What we show you**:
+
 - Which pods receive traffic from this service
 - External access points (if any)
 - Connection health
@@ -99,6 +104,7 @@ Authorization: Bearer <access-token>
 **Resource Types**: `nodes`, `namespaces`, `deployments`, `statefulsets`, `daemonsets`, `jobs`, `cronjobs`, `pods`, `services`
 
 **Query Parameters**:
+
 - `labelSelector`: Filter by labels (e.g., `app=nginx,environment=prod`)
 
 **Examples**:
@@ -138,6 +144,7 @@ Authorization: Bearer <access-token>
 **Resource Types**: `deployments`, `statefulsets`, `daemonsets`, `jobs`, `cronjobs`, `pods`, `services`
 
 **Query Parameters**:
+
 - `labelSelector`: Filter by labels
 
 **Examples**:
@@ -172,6 +179,7 @@ GET /v1/workspaces/{workspaceId}/observability/{observabilityInstanceId}/cluster
 ### Node Details
 
 Each node provides:
+
 - **Capacity**: Total CPU, memory, and storage capacity
 - **Allocatable**: Resources available for pods
 - **Conditions**: Ready, MemoryPressure, DiskPressure, PIDPressure
@@ -181,6 +189,7 @@ Each node provides:
 ### Pod Details
 
 Each pod provides:
+
 - **Status**: Phase (Pending, Running, Succeeded, Failed, Unknown)
 - **Conditions**: PodScheduled, Initialized, ContainersReady, Ready
 - **Container Status**: Running, waiting, terminated states
@@ -191,6 +200,7 @@ Each pod provides:
 ### Deployment Details
 
 Each deployment provides:
+
 - **Replica Status**: Desired, current, available, unavailable replicas
 - **Strategy**: RollingUpdate or Recreate
 - **Conditions**: Available, Progressing, ReplicaFailure
@@ -202,18 +212,21 @@ Each deployment provides:
 Filter resources using Kubernetes label selectors:
 
 **Equality-based**:
+
 ```
 app=nginx
 environment=production
 ```
 
 **Set-based**:
+
 ```
 app in (nginx,apache)
 environment notin (dev,test)
 ```
 
 **Combined**:
+
 ```
 app=nginx,environment=production,tier=frontend
 ```

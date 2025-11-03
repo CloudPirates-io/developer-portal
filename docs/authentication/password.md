@@ -7,6 +7,7 @@ Email and password-based authentication for CloudPirates accounts.
 Create an account at [portal.cloudpirates.io/register](https://portal.cloudpirates.io/register).
 
 **Required Information**:
+
 - First and last name
 - Email address (used as username)
 - Secure password
