@@ -26,6 +26,7 @@ View workspace details:
 ## Deleting Workspaces
 
 **Requirements**:
+
 - Only Owners can delete workspaces
 - All services must be deleted first
 - Deletion is permanent
@@ -37,6 +38,7 @@ You must delete all Managed Observability, Managed Applications, and Managed Clu
 ### Deletion Steps
 
 1. **Delete all services first**
+
    - Managed Observability configurations
    - Managed Applications
    - Managed Cluster Components
@@ -44,6 +46,7 @@ You must delete all Managed Observability, Managed Applications, and Managed Clu
 2. **Navigate to workspace settings**
 
 3. **Click "Delete Workspace"**
+
    - Error shown if services remain
    - Confirmation required
 

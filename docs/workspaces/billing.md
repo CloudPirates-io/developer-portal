@@ -13,10 +13,12 @@ Billing profiles are personal and belong to your account. Learn more about [Bill
 ## Assigning Billing Profiles
 
 **Prerequisites**:
+
 - You must be a workspace Owner
 - You must have a billing profile
 
 **Steps**:
+
 1. Navigate to workspace settings
 2. Find billing section
 3. Click "Assign Billing Profile"

@@ -5,6 +5,7 @@ Programmatic access to CloudPirates API for automated systems and applications.
 ## Overview
 
 API keys enable:
+
 - Authentication without interactive login
 - CI/CD pipeline integration
 - Service accounts for applications
@@ -25,6 +26,7 @@ The API key is shown only once during creation. You must store it securely. If t
 ### Labeling
 
 Use clear labels:
+
 - Purpose: "Production Server", "CI/CD"
 - Service: "GitHub Actions", "Jenkins"
 - Environment: "Production", "Staging"
@@ -40,19 +42,22 @@ Authorization: ApiKey <YOUR_API_KEY>
 ### Examples
 
 **curl**:
+
 ```bash
 curl -H "Authorization: ApiKey YOUR_KEY" \
   https://api.cloudpirates.io/v1/auth/me
 ```
 
 **JavaScript**:
+
 ```javascript
-fetch('https://api.cloudpirates.io/v1/auth/me', {
-  headers: { 'Authorization': 'ApiKey YOUR_KEY' }
+fetch("https://api.cloudpirates.io/v1/auth/me", {
+  headers: { Authorization: "ApiKey YOUR_KEY" },
 });
 ```
 
 **Python**:
+
 ```python
 requests.get(
   'https://api.cloudpirates.io/v1/auth/me',
@@ -65,6 +70,7 @@ requests.get(
 ### View Keys
 
 Access [security page](https://portal.cloudpirates.io/security) to see:
+
 - Label
 - Key ID
 - Creation date
@@ -89,6 +95,7 @@ Keys are immediately invalidated.
 ## Limitations
 
 API keys cannot be used for:
+
 - `/v1/auth/change-password`
 - `/v1/auth/challenges/*` (MFA)
 - `/v1/auth/webauthn/register`

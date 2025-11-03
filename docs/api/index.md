@@ -1,11 +1,14 @@
 ---
 prev: false
 ---
+
 # CloudPirates API
-Our API provides programmatic access to our platform's features and data, allowing you to 
+
+Our API provides programmatic access to our platform's features and data, allowing you to
 to manage all our managed services, integrate with third-party services, and automate processes.
 
 ## API Specification
+
 You can find the full API specification in the [OpenAPI 3.1](https://spec.openapis.org/oas/v3.1.0) format here:
 
 https://api.cloudpirates.io/docs/
@@ -15,7 +18,6 @@ https://api.cloudpirates.io/docs/
 Our event sourced architecture employs eventually consistent read models. As a result, changes made by a `POST`, `PUT`, `PATCH`, or `DELETE` request may take a moment until all read models are fully updated.
 
 This delay might cause a subsequent (`GET`) request, executed immediately after the mutating request, to encounter an error, often indicated by an HTTP status code such as `404` or `403`.
-
 
 ## Obtaining an API key
 
@@ -28,6 +30,7 @@ Treat your API key with the same level of security as you would your password. A
 :::
 
 ## Authenticating your Request
+
 Once you have obtained an API key, you can use it in your requests:
 
 ```bash
@@ -37,6 +40,7 @@ Authorization: ApiKey <API_KEY>
 ```
 
 As an example, you can get your current identity with the following `curl` request:
+
 ```bash
 curl -H "Authorization:ApiKey <API_KEY>" https://api.cloudpirates.io/v1/auth/me
 ```
@@ -46,6 +50,7 @@ Certain API endpoints, such as those that alter security-related settings like `
 :::
 
 ## API Reference
+
 Our base URL for API requests is `https://api.cloudpirates.io/v1`. Ensure to prepend this base URL to all endpoint paths when making requests to our API.
 
 All endpoints adhere to the RESTful standard, providing a structured and intuitive approach to interacting with our platform's resources.

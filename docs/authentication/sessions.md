@@ -9,6 +9,7 @@ Monitor and control active login sessions across devices.
 ## Overview
 
 Access session management from the [security page](https://portal.cloudpirates.io/security) to:
+
 - View all active sessions
 - Monitor activity and locations
 - Remotely logout from devices
@@ -16,6 +17,7 @@ Access session management from the [security page](https://portal.cloudpirates.i
 ## Viewing Sessions
 
 Each session shows:
+
 - Device and browser info
 - Operating system
 - Location (city-level, GDPR-compliant)
@@ -40,6 +42,7 @@ Session logout is immediate. The device must re-authenticate to regain access.
 ### Location
 
 Location estimated from IP address (last octet removed for GDPR compliance):
+
 - City-level approximation
 - Identifies unusual login locations
 
@@ -74,6 +77,7 @@ Content-Type: application/json
 ```
 
 Response:
+
 ```json
 {
   "accessToken": "new-access-token",
@@ -108,6 +112,7 @@ Authorization: Bearer <access-token>
 ```
 
 Query Parameters:
+
 - `includeExpired` (optional): Set to `true` to include expired sessions
 
 ### Logout Session

@@ -20,11 +20,13 @@ Performance metrics include descriptions and recommendations to help you underst
 ### CPU: Is Your Server Keeping Up?
 
 **What we show**:
+
 - Clear health status: "Healthy", "Under pressure", or "Overloaded"
 - Usage patterns: consistent, spiky, or growing trend
 - Impact on your applications
 
 **Example insights**:
+
 - ✅ "CPU usage is healthy at 45%. Your server has plenty of capacity."
 - ⚠️ "CPU usage is at 85%. Your server is working hard but managing. Consider scaling if usage continues to grow."
 - 🔴 "CPU usage is at 95%. Your applications may be slow. Add more nodes or reduce workload."
@@ -32,11 +34,13 @@ Performance metrics include descriptions and recommendations to help you underst
 ### Memory: Do You Have Enough RAM?
 
 **What we show**:
+
 - Available memory in simple terms
 - Memory pressure warnings before problems occur
 - Which applications are using the most memory
 
 **Example insights**:
+
 - ✅ "Memory usage is healthy at 60%. Plenty of room for growth."
 - ⚠️ "Only 15% memory free. New pods may have trouble starting. Consider adding nodes."
 - 🔴 "Memory is critically low at 95%. The server may start killing processes. Immediate action needed."
@@ -44,11 +48,13 @@ Performance metrics include descriptions and recommendations to help you underst
 ### Disk Space: Running Out of Room?
 
 **What we show**:
+
 - Free disk space in GB/TB (not just percentages)
 - Growth rate: how quickly you're filling up
 - Which areas are using the most space
 
 **Example insights**:
+
 - ✅ "Disk usage is at 45% (220 GB free). Plenty of space available."
 - ⚠️ "Disk is 88% full (30 GB free). You'll run out of space in approximately 2 weeks at current usage."
 - 🔴 "Disk is 96% full (8 GB free). Critical: Pods may fail to start or write logs."
@@ -56,6 +62,7 @@ Performance metrics include descriptions and recommendations to help you underst
 ### Network Metrics
 
 **Network Throughput**
+
 - Inbound traffic (bytes/sec)
 - Outbound traffic (bytes/sec)
 - Network errors and drops
@@ -64,19 +71,22 @@ Performance metrics include descriptions and recommendations to help you underst
 ### Load Average
 
 **System Load**
+
 - 1-minute load average
 - 5-minute load average
 - 15-minute load average
 
 **Alert Thresholds**:
-- Warning: Load5 > CPU count * 0.8
-- Critical: Load15 > CPU count * 0.8
+
+- Warning: Load5 > CPU count \* 0.8
+- Critical: Load15 > CPU count \* 0.8
 
 ## Pod Monitoring
 
 ### Resource Consumption
 
 **CPU Usage**
+
 - Current CPU consumption
 - CPU requests vs actual usage
 - CPU limits and throttling
@@ -84,24 +94,28 @@ Performance metrics include descriptions and recommendations to help you underst
 **Alert**: Pod CPU throttling > 25%
 
 **Memory Usage**
+
 - Current memory consumption
 - Memory requests vs actual usage
 - Memory limits
 - Out-of-memory (OOM) events
 
 **Alert Thresholds**:
+
 - Warning: Memory usage > 90% of requests
 - Critical: Memory usage > 95% of limits
 
 ### Pod Health
 
 **Status Monitoring**
+
 - Pod phase (Running, Pending, Failed, etc.)
 - Container readiness
 - Liveness probe status
 - Restart counts
 
 **Alerts**:
+
 - Pod not ready > 5 minutes
 - Excessive restarts (> 5 in 1 hour)
 - Pod OOM killed
@@ -110,6 +124,7 @@ Performance metrics include descriptions and recommendations to help you underst
 ### Container Metrics
 
 **Per-Container Statistics**:
+
 - CPU usage per container
 - Memory usage per container
 - Restart history
@@ -120,6 +135,7 @@ Performance metrics include descriptions and recommendations to help you underst
 ### Deployment Status
 
 **Replica Monitoring**:
+
 - Desired replicas
 - Current replicas
 - Available replicas
@@ -130,6 +146,7 @@ Performance metrics include descriptions and recommendations to help you underst
 ### StatefulSet Status
 
 **Ordered Pod Monitoring**:
+
 - Desired replicas
 - Current replicas
 - Ready replicas
@@ -140,6 +157,7 @@ Performance metrics include descriptions and recommendations to help you underst
 ### DaemonSet Status
 
 **Node Coverage**:
+
 - Desired pods (one per node)
 - Current pods
 - Available pods
@@ -152,11 +170,13 @@ Performance metrics include descriptions and recommendations to help you underst
 ### Persistent Volume Claims
 
 **Storage Metrics**:
+
 - Volume capacity
 - Volume usage percentage
 - Available space
 
 **Alert Thresholds**:
+
 - Warning: Volume usage > 90%
 - Critical: Volume usage > 95%
 
@@ -167,6 +187,7 @@ Performance metrics include descriptions and recommendations to help you underst
 ### Traffic Metrics
 
 **Request Statistics**:
+
 - Request count
 - Request rate (requests/sec)
 - Response latency (p50, p95, p99)
@@ -176,6 +197,7 @@ Performance metrics include descriptions and recommendations to help you underst
 ### Error Rates
 
 **HTTP Status Codes**:
+
 - 2xx success rate
 - 4xx client error rate
 - 5xx server error rate
@@ -185,6 +207,7 @@ Performance metrics include descriptions and recommendations to help you underst
 ### Request Latency
 
 **Response Time Monitoring**:
+
 - Average request latency
 - 95th percentile latency
 - 99th percentile latency
@@ -194,6 +217,7 @@ Performance metrics include descriptions and recommendations to help you underst
 ### Certificate Monitoring
 
 **TLS Certificate Status**:
+
 - Certificate expiration date
 - Days until expiry
 - Certificate validity
@@ -205,6 +229,7 @@ Performance metrics include descriptions and recommendations to help you underst
 ### Overall Status
 
 **Cluster Indicators**:
+
 - Total node count
 - Healthy nodes vs total
 - Total pod count
@@ -214,6 +239,7 @@ Performance metrics include descriptions and recommendations to help you underst
 ### Resource Capacity
 
 **Cluster Resources**:
+
 - Total CPU capacity
 - Total memory capacity
 - Total storage capacity
@@ -222,6 +248,7 @@ Performance metrics include descriptions and recommendations to help you underst
 ### Component Health
 
 **Control Plane**:
+
 - API server availability
 - Controller manager status
 - Scheduler status
@@ -234,6 +261,7 @@ Performance metrics include descriptions and recommendations to help you underst
 Metrics are collected and updated at a configurable interval (60 seconds by default):
 
 Configure via ClusterPirate helm chart:
+
 ```yaml
 clusterPirate:
   metrics:
@@ -247,6 +275,7 @@ clusterPirate:
 - **Cache TTL**: 24 hours (86400 seconds)
 
 Configure cache:
+
 ```yaml
 clusterPirate:
   metrics:
@@ -266,6 +295,7 @@ Access metrics through the portal:
 4. View metrics dashboard with real-time data
 
 **Dashboard Features**:
+
 - Interactive charts and graphs
 - Time range selection
 - Resource filtering

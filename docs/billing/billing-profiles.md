@@ -30,6 +30,7 @@ Display name used for identification and organization purposes.
 ### Address Details
 
 Required information:
+
 - Street address
 - City
 - Postal code / ZIP
@@ -72,6 +73,7 @@ Changes apply to future invoices.
 ### Delete Profile
 
 Requirements:
+
 - No active assignments to workspaces or services
 - No transactions exist
 
@@ -80,6 +82,7 @@ Billing Profiles cannot be deleted if any transactions exist. Profiles with tran
 :::
 
 Steps:
+
 1. Remove all workspace/service assignments
 2. Navigate to profile settings
 3. Click "Delete Profile"
@@ -90,6 +93,7 @@ Steps:
 Billing Profiles can be transferred to a different user by CloudPirates support.
 
 **How to Request**:
+
 1. Contact [support@cloudpirates.io](mailto:support@cloudpirates.io)
 2. Provide:
    - Billing Profile ID

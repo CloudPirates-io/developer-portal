@@ -7,6 +7,7 @@ Manage workspace access with role-based permissions.
 ### Owner
 
 Full access to all workspace features:
+
 - Member management (invite, remove, change roles)
 - Service access and management
 - Workspace settings and deletion
@@ -21,6 +22,7 @@ Owners can delete the workspace. Limit the number of owners.
 ### Member (Default)
 
 Standard team access:
+
 - Use all services
 - View workspace members
 - Cannot manage billing or roles
@@ -30,6 +32,7 @@ Standard team access:
 ### Viewer
 
 Read-only access:
+
 - View services and configurations
 - View workspace members
 - Cannot modify anything
@@ -38,21 +41,22 @@ Read-only access:
 
 ## Permission Matrix
 
-| Permission | Owner | Member | Viewer |
-|-----------|-------|--------|--------|
-| View services | ✓ | ✓ | ✓ |
-| View members | ✓ | ✓ | ✓ |
-| Modify services | ✓ | ✓ | ✗ |
-| Invite members | ✓ | ✗ | ✗ |
-| Change roles | ✓ | ✗ | ✗ |
-| Access billing | ✓ | ✗ | ✗ |
-| Delete workspace | ✓ | ✗ | ✗ |
+| Permission       | Owner | Member | Viewer |
+| ---------------- | ----- | ------ | ------ |
+| View services    | ✓     | ✓      | ✓      |
+| View members     | ✓     | ✓      | ✓      |
+| Modify services  | ✓     | ✓      | ✗      |
+| Invite members   | ✓     | ✗      | ✗      |
+| Change roles     | ✓     | ✗      | ✗      |
+| Access billing   | ✓     | ✗      | ✗      |
+| Delete workspace | ✓     | ✗      | ✗      |
 
 ## Inviting Members
 
 **Prerequisites**: You must be an Owner
 
 **Steps**:
+
 1. Navigate to workspace members section
 2. Click "Invite Member"
 3. Enter email address
@@ -79,7 +83,6 @@ The invitee receives an email and must accept to join.
 4. Confirm
 
 Member loses access immediately.
-
 
 ## Product-Specific Access
 

@@ -13,6 +13,7 @@ CloudPirates Managed Observability is an **observability solution** that provide
 ### Two Approaches to Observability
 
 **Managed Observability** (This service):
+
 - Single helm chart installation (ClusterPirate agent)
 - Essential cluster insights through web portal
 - Automated security and best practice checks
@@ -21,6 +22,7 @@ CloudPirates Managed Observability is an **observability solution** that provide
 - **Unique features**: CVE scanning, Kubernetes event monitoring, AI-assisted insights, automated resource recommendations
 
 **Full Observability Stack** (Available separately):
+
 - Complete observability platform with Grafana, Prometheus, Loki, Tempo, and Alloy
 - Advanced metrics, custom dashboards, and alerting rules
 - Powerful query capabilities and long-term metric storage
@@ -36,6 +38,7 @@ Use Managed Observability for essential visibility with intelligent insights, or
 ### 1. Quick to Deploy
 
 Get essential cluster visibility in minutes:
+
 - Single helm chart installation (ClusterPirate agent)
 - Automatic resource discovery
 - Immediate access to cluster insights through the web portal
@@ -44,6 +47,7 @@ Get essential cluster visibility in minutes:
 ### 2. Essential Cluster Insights
 
 Focus on what matters for day-to-day operations:
+
 - Resource health and status
 - Security and best practice validation
 - Container vulnerability scanning
@@ -53,6 +57,7 @@ Focus on what matters for day-to-day operations:
 ### 3. Zero Infrastructure Management
 
 Let CloudPirates handle the backend:
+
 - No servers or databases to maintain
 - Automatic updates and scaling
 - Secure data transmission and storage
@@ -63,21 +68,25 @@ Let CloudPirates handle the backend:
 Managed Observability includes capabilities not available in traditional observability stacks:
 
 **Container Vulnerability Scanning**:
+
 - Daily automated CVE scans with Trivy
 - Clear severity classifications and remediation guidance
 - Track security posture over time
 
 **Kubernetes Event Monitoring**:
+
 - Contextual event tracking with explanations
 - Troubleshooting guidance for common issues
 - Real-time event correlation (not possible in native observability stacks)
 
 **AI-Assisted Insights**:
+
 - Intelligent analysis of cluster health
 - Automated pattern recognition
 - Proactive issue detection
 
 **Resource Recommendations**:
+
 - Automated best practice validation
 - Right-sizing suggestions based on actual usage
 - Cost optimization opportunities
@@ -85,6 +94,7 @@ Managed Observability includes capabilities not available in traditional observa
 ### 5. Flexible Observability Options
 
 Choose the right level of observability for your needs:
+
 - **Start Simple**: Begin with Managed Observability for essential visibility with intelligent features
 - **Scale Up**: Add our full observability stack when you need advanced capabilities
 - **Combine Both**: Use Managed Observability alongside the full stack for complementary insights
@@ -103,6 +113,7 @@ Choose the right level of observability for your needs:
 ### What Gets Observed
 
 The ClusterPirate agent automatically discovers and observes:
+
 - **All Kubernetes Resources**: Nodes, namespaces, deployments, pods, services, ingresses
 - **Performance Metrics**: CPU, memory, disk, and network usage
 - **Application Health**: Container status, restart counts, probe failures
@@ -203,6 +214,7 @@ You don't need a dedicated platform engineering team to run Kubernetes effective
 ### Ideal Use Cases
 
 **✅ Perfect For:**
+
 - Quick cluster visibility and essential observability
 - Security and best practice validation
 - Development and staging environments
@@ -210,6 +222,7 @@ You don't need a dedicated platform engineering team to run Kubernetes effective
 - Teams that need basic visibility without managing infrastructure
 
 **🔄 Works Well With:**
+
 - Our full observability stack for comprehensive observability
 - Existing observability tools for additional perspectives
 - CI/CD pipelines for deployment validation

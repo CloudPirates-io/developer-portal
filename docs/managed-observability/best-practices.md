@@ -18,6 +18,7 @@ Each policy violation includes a clear explanation of the requirement and specif
 ## What We Check
 
 Our automated scans validate your workloads against:
+
 - **Pod Security Standards** (industry-standard security baseline)
 - **Resource Configuration** (preventing performance and cost issues)
 - **Security Contexts** (protecting against vulnerabilities)
@@ -37,16 +38,19 @@ Our automated scans validate your workloads against:
 All containers must specify CPU and memory requests and limits to ensure proper resource allocation and prevent resource exhaustion.
 
 **Requirements**:
+
 - CPU requests defined
 - Memory requests defined
 - Memory limits defined
 
 **Why It Matters**:
+
 - Prevents resource contention
 - Enables proper cluster capacity planning
 - Protects against out-of-memory situations
 
 **Recommendation**:
+
 ```yaml
 resources:
   requests:
@@ -63,11 +67,13 @@ resources:
 The platform analyzes actual resource consumption over the last 30 days and compares it to configured requests/limits.
 
 **Recommendations Provided**:
+
 - **Over-provisioned**: Resources set too high, wasting cluster capacity
 - **Under-provisioned**: Resources too low, risking performance issues
 - **Optimal**: Resources properly configured
 
 **Example Alert**:
+
 ```
 Pod "web-app" memory request (2Gi) exceeds average usage (512Mi)
 by 75%. Consider reducing to 1Gi.
@@ -84,16 +90,19 @@ by 75%. Consider reducing to 1Gi.
 All containers must define at least one probe (liveness, readiness, or startup) for proper lifecycle management.
 
 **Probe Types**:
+
 - **Liveness Probe**: Determines if container needs restart
 - **Readiness Probe**: Determines if pod can receive traffic
 - **Startup Probe**: Handles slow-starting containers
 
 **Why It Matters**:
+
 - Enables automatic failure recovery
 - Prevents traffic to unhealthy pods
 - Improves deployment reliability
 
 **Recommendation**:
+
 ```yaml
 livenessProbe:
   httpGet:
@@ -125,9 +134,10 @@ Fundamental security controls that should be applied to all workloads.
 Privileged containers have unrestricted access to host resources and should be avoided.
 
 **Blocked Configuration**:
+
 ```yaml
 securityContext:
-  privileged: true  # ❌ Not allowed
+  privileged: true # ❌ Not allowed
 ```
 
 #### Disallow Host Namespaces
@@ -138,10 +148,11 @@ securityContext:
 Containers should not share host network, PID, or IPC namespaces.
 
 **Blocked Configurations**:
+
 ```yaml
-hostNetwork: true  # ❌ Not allowed
-hostPID: true      # ❌ Not allowed
-hostIPC: true      # ❌ Not allowed
+hostNetwork: true # ❌ Not allowed
+hostPID: true # ❌ Not allowed
+hostIPC: true # ❌ Not allowed
 ```
 
 #### Restrict Host Ports
@@ -152,10 +163,11 @@ hostIPC: true      # ❌ Not allowed
 Containers should not bind to host ports, except within approved ranges.
 
 **Blocked Configuration**:
+
 ```yaml
 ports:
-- containerPort: 80
-  hostPort: 80  # ❌ Not allowed
+  - containerPort: 80
+    hostPort: 80 # ❌ Not allowed
 ```
 
 #### Disallow Host Path Volumes
@@ -166,11 +178,12 @@ ports:
 HostPath volumes provide access to the host filesystem and pose security risks.
 
 **Blocked Configuration**:
+
 ```yaml
 volumes:
-- name: host-volume
-  hostPath:  # ❌ Not allowed
-    path: /data
+  - name: host-volume
+    hostPath: # ❌ Not allowed
+      path: /data
 ```
 
 #### Restrict Capabilities
@@ -183,11 +196,12 @@ Linux capabilities should be dropped, with only explicitly required capabilities
 **Allowed Capabilities**: `NET_BIND_SERVICE`
 
 **Recommended Configuration**:
+
 ```yaml
 securityContext:
   capabilities:
     drop: ["ALL"]
-    add: ["NET_BIND_SERVICE"]  # Only if needed
+    add: ["NET_BIND_SERVICE"] # Only if needed
 ```
 
 #### Restrict Seccomp Profiles
@@ -198,6 +212,7 @@ securityContext:
 Seccomp profiles must be set to `RuntimeDefault` or `Localhost`.
 
 **Required Configuration**:
+
 ```yaml
 securityContext:
   seccompProfile:
@@ -212,6 +227,7 @@ securityContext:
 AppArmor profiles must be set to `runtime/default` or a defined profile.
 
 **Annotation Required**:
+
 ```yaml
 annotations:
   container.apparmor.security.beta.kubernetes.io/nginx: runtime/default
@@ -238,6 +254,7 @@ Heavily restricted security controls for defense-in-depth.
 Containers must run as non-root user (UID > 0).
 
 **Required Configuration**:
+
 ```yaml
 securityContext:
   runAsNonRoot: true
@@ -252,6 +269,7 @@ securityContext:
 Privilege escalation must be explicitly disabled.
 
 **Required Configuration**:
+
 ```yaml
 securityContext:
   allowPrivilegeEscalation: false
@@ -265,6 +283,7 @@ securityContext:
 All capabilities must be dropped with no additions allowed.
 
 **Required Configuration**:
+
 ```yaml
 securityContext:
   capabilities:
@@ -296,6 +315,7 @@ Only specific volume types allowed: `configMap`, `csi`, `downwardAPI`, `emptyDir
 Each Certificate resource should contain only one DNS name for compatibility with applications that don't support multi-domain certificates.
 
 **Recommendation**:
+
 ```yaml
 apiVersion: cert-manager.io/v1
 kind: Certificate
@@ -303,14 +323,15 @@ metadata:
   name: example-com
 spec:
   dnsNames:
-  - example.com  # ✅ Single domain
+    - example.com # ✅ Single domain
 ```
 
 **Blocked Configuration**:
+
 ```yaml
 dnsNames:
-- example.com
-- www.example.com  # ❌ Multiple domains not allowed
+  - example.com
+  - www.example.com # ❌ Multiple domains not allowed
 ```
 
 ### Certificate Duration Limits
@@ -332,16 +353,19 @@ Certificate duration should not exceed 90 days, following best practices for cer
 Container images must use specific version tags, not `latest` or no tag.
 
 **Why It Matters**:
+
 - Ensures reproducible deployments
 - Prevents unexpected updates
 - Improves security and stability
 
 **Recommendation**:
+
 ```yaml
-image: nginx:1.21.6  # ✅ Specific version
+image: nginx:1.21.6 # ✅ Specific version
 ```
 
 **Blocked**:
+
 ```yaml
 image: nginx:latest  # ❌ Not allowed
 image: nginx         # ❌ Not allowed (implies latest)
@@ -356,6 +380,7 @@ image: nginx         # ❌ Not allowed (implies latest)
 Images must come from approved container registries.
 
 **Allowed Registries** (configurable):
+
 - `docker.io`
 - `gcr.io`
 - `ghcr.io`
@@ -370,6 +395,7 @@ Images must come from approved container registries.
 Resources using deprecated Kubernetes APIs are flagged for migration.
 
 **Common Deprecated APIs**:
+
 - `extensions/v1beta1` → `apps/v1` (Deployments)
 - `policy/v1beta1` → `policy/v1` (PodDisruptionBudget)
 
@@ -444,19 +470,21 @@ Ingress should use explicit path rules instead of default backend.
 Containers should use read-only root filesystem when possible.
 
 **Recommendation**:
+
 ```yaml
 securityContext:
   readOnlyRootFilesystem: true
 ```
 
 Use `emptyDir` volumes for writable directories:
+
 ```yaml
 volumeMounts:
-- name: tmp
-  mountPath: /tmp
+  - name: tmp
+    mountPath: /tmp
 volumes:
-- name: tmp
-  emptyDir: {}
+  - name: tmp
+    emptyDir: {}
 ```
 
 ### Disallow CRI Socket Mount
@@ -477,6 +505,7 @@ Containers should not mount container runtime sockets (`/var/run/docker.sock`, `
 4. Review violations and recommendations
 
 **Dashboard Features**:
+
 - Policy compliance score
 - Violation breakdown by severity
 - Trend analysis over time
@@ -485,6 +514,7 @@ Containers should not mount container runtime sockets (`/var/run/docker.sock`, `
 ### Policy Violation Structure
 
 Each violation includes:
+
 - **Policy Name**: Identifier of the rule
 - **Severity**: Low, Medium, High, Critical
 - **Category**: Classification (Security, Best Practices, etc.)
@@ -498,6 +528,7 @@ Each violation includes:
 ### Compliance Score
 
 Overall health metric based on policy violations:
+
 - **Critical violations**: -10 points each
 - **High violations**: -5 points each
 - **Medium violations**: -2 points each
@@ -508,6 +539,7 @@ Overall health metric based on policy violations:
 ### Historical Trends
 
 Track compliance improvements over time:
+
 - Daily compliance scores
 - New vs resolved violations
 - Most common violation types

@@ -15,6 +15,7 @@ Access invoices at [portal.cloudpirates.io/billing](https://portal.cloudpirates.
 ### Invoice List
 
 All invoices with:
+
 - Invoice number
 - Date issued
 - Amount
@@ -25,6 +26,7 @@ All invoices with:
 ### Invoice Details
 
 Click any invoice to view:
+
 - Line items
 - Billing address
 - Payment information
@@ -53,6 +55,7 @@ PDFs include complete invoice details, payment instructions, and purchase order 
 ## Account Balance
 
 View current balance:
+
 - **Positive**: Credit on account
 - **Negative**: Outstanding payments
 - **Zero**: All invoices settled
@@ -64,6 +67,7 @@ Balance details include current balance, pending charges, recent payments, and n
 Complete record of all transactions:
 
 **Types**:
+
 - Invoice charges
 - Payments received
 - Credits applied
@@ -78,6 +82,7 @@ Complete record of all transactions:
 Invoices automatically sent to email addresses configured in Billing Profile.
 
 Email includes:
+
 - Invoice PDF attachment
 - Payment instructions
 - Due date
@@ -134,6 +139,7 @@ Authorization: Bearer <access-token>
 ```
 
 Response:
+
 ```json
 {
   "url": "https://api.cloudpirates.io/v1/billing/billing-profiles/{billingProfileId}/invoices/{invoiceId}/pdf/Rechnung%20{number}.pdf?expires={timestamp}&token={token}"
