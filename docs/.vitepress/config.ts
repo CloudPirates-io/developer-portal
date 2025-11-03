@@ -39,7 +39,7 @@ export default defineConfig({
           { text: "Overview", link: "/authentication/" },
           { text: "Password", link: "/authentication/password" },
           { text: "Multi-Factor (MFA)", link: "/authentication/mfa" },
-          { text: "WebAuthn", link: "/authentication/webauthn" },
+          { text: "Passkeys (WebAuthn)", link: "/authentication/webauthn" },
           { text: "API Keys", link: "/authentication/api-keys" },
           { text: "Session Management", link: "/authentication/sessions" },
         ],

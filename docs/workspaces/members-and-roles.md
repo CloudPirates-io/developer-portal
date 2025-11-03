@@ -36,6 +36,18 @@ Read-only access:
 
 **Use for**: Stakeholders, auditors, read-only monitoring
 
+## Permission Matrix
+
+| Permission | Owner | Member | Viewer |
+|-----------|-------|--------|--------|
+| View services | ✓ | ✓ | ✓ |
+| View members | ✓ | ✓ | ✓ |
+| Modify services | ✓ | ✓ | ✗ |
+| Invite members | ✓ | ✗ | ✗ |
+| Change roles | ✓ | ✗ | ✗ |
+| Access billing | ✓ | ✗ | ✗ |
+| Delete workspace | ✓ | ✗ | ✗ |
+
 ## Inviting Members
 
 **Prerequisites**: You must be an Owner
@@ -68,17 +80,6 @@ The invitee receives an email and must accept to join.
 
 Member loses access immediately.
 
-## Permission Matrix
-
-| Permission | Owner | Member | Viewer |
-|-----------|-------|--------|--------|
-| View services | ✓ | ✓ | ✓ |
-| View members | ✓ | ✓ | ✓ |
-| Modify services | ✓ | ✓ | ✗ |
-| Invite members | ✓ | ✗ | ✗ |
-| Change roles | ✓ | ✗ | ✗ |
-| Access billing | ✓ | ✗ | ✗ |
-| Delete workspace | ✓ | ✗ | ✗ |
 
 ## Product-Specific Access
 
@@ -90,7 +91,7 @@ Beyond workspace roles, individual services may have additional access control:
 
 Configure service-specific permissions after granting workspace access.
 
-## API Access
+## API Reference
 
 ### List Members
 
@@ -130,6 +131,10 @@ Content-Type: application/json
 DELETE /v1/workspaces/{workspaceId}/members/{identityId}
 Authorization: Bearer <access-token>
 ```
+
+::: info Info: Full API Documentation Available
+These are example requests. For complete API documentation including all parameters, response schemas, and authentication details, visit [api.cloudpirates.io/docs](https://api.cloudpirates.io/docs/).
+:::
 
 ## Related Resources
 

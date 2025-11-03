@@ -41,8 +41,8 @@ Forgot password?
 3. Click reset link in email
 4. Enter new password
 
-::: warning Account Locked?
-Contact [support@cloudpirates.io](mailto:support@cloudpirates.io) if locked. Password reset doesn't disable MFA.
+::: info Info: No Access to Email or MFA Device?
+If you do not have access to your email address or MFA device, contact [support@cloudpirates.io](mailto:support@cloudpirates.io) for assistance. Note that password reset does not disable MFA.
 :::
 
 ## Changing Password
@@ -53,7 +53,7 @@ Contact [support@cloudpirates.io](mailto:support@cloudpirates.io) if locked. Pas
 4. Enter new password
 5. Confirm
 
-## API Endpoints
+## API Reference
 
 ### Registration
 
@@ -105,8 +105,12 @@ Content-Type: application/json
 }
 ```
 
-::: tip
-Change password requires Bearer token, not API keys.
+::: tip Tip: API Keys Cannot Modify Passwords
+API keys cannot be used to modify your password. You must use your Bearer token instead for this operation.
+:::
+
+::: info Info: Full API Documentation Available
+These are example requests. For complete API documentation including all parameters, response schemas, and authentication details, visit [api.cloudpirates.io/docs](https://api.cloudpirates.io/docs/).
 :::
 
 ## Related Resources
@@ -114,4 +118,3 @@ Change password requires Bearer token, not API keys.
 - [Multi-Factor Authentication (MFA)](./mfa.md)
 - [WebAuthn Authentication](./webauthn.md)
 - [Session Management](./sessions.md)
-- [API Reference](https://api.cloudpirates.io/docs/#tag/Auth)

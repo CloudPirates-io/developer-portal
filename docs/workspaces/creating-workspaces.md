@@ -15,21 +15,8 @@ Create a workspace to start using CloudPirates services.
 4. **Enter** a descriptive workspace name
 5. **Confirm** creation
 
-::: tip Automatic Owner Role
-You're automatically assigned the Owner role with full access when you create a workspace.
-:::
-
-## Naming Guidelines
-
-Choose descriptive names that identify the workspace purpose:
-
-- **Personal**: "John's Workspace", "Development Environment"
-- **Company**: "Acme Corporation", "Engineering Team"
-- **Environment**: "Production", "Staging", "Development"
-- **Project**: "Mobile App", "E-commerce Platform"
-
-::: info Changing Names
-You can change the workspace name anytime from workspace settings.
+::: info Info: Automatic Owner Role Assignment
+You are automatically assigned the Owner role with full access when you create a workspace.
 :::
 
 ## Multiple Workspaces
@@ -40,7 +27,7 @@ Create separate workspaces for:
 - **Team Isolation**: Different departments or teams
 - **Project Separation**: Different products or applications
 
-## API Access
+## API Reference
 
 ### Create Workspace
 
@@ -60,6 +47,10 @@ Content-Type: application/json
 GET /v1/workspaces
 Authorization: Bearer <access-token>
 ```
+
+::: info Info: Full API Documentation Available
+These are example requests. For complete API documentation including all parameters, response schemas, and authentication details, visit [api.cloudpirates.io/docs](https://api.cloudpirates.io/docs/).
+:::
 
 ## Related Resources
 

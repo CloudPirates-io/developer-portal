@@ -9,8 +9,8 @@ Configure and manage your workspaces.
 3. Enter new name
 4. Save changes
 
-::: tip
-Workspace ID remains unchanged. API integrations continue working.
+::: tip Tip: Workspace ID Remains Unchanged
+The workspace ID remains unchanged after renaming. All API integrations will continue working without any modifications.
 :::
 
 ## Workspace Information
@@ -30,8 +30,8 @@ View workspace details:
 - All services must be deleted first
 - Deletion is permanent
 
-::: warning Services Must Be Deleted First
-Delete all Managed Observability, Managed Applications, and Managed Cluster Components before deleting the workspace.
+::: warning Warning: All Services Must Be Deleted First
+You must delete all Managed Observability, Managed Applications, and Managed Cluster Components before you can delete the workspace.
 :::
 
 ### Deletion Steps
@@ -51,8 +51,8 @@ Delete all Managed Observability, Managed Applications, and Managed Cluster Comp
    - Type workspace name to confirm
    - Workspace deleted immediately
 
-::: danger
-Deletion is permanent. Backup all data before deleting.
+::: danger Danger: Workspace Deletion Is Permanent
+Workspace deletion is permanent and cannot be undone. You must back up all data before deleting a workspace.
 :::
 
 ## Workspace Switching
@@ -63,7 +63,7 @@ If you're in multiple workspaces:
 2. Select target workspace
 3. Portal switches context
 
-## API Access
+## API Reference
 
 ### Get Workspace Details
 
@@ -91,8 +91,12 @@ DELETE /v1/workspaces/{workspaceId}
 Authorization: Bearer <access-token>
 ```
 
-::: warning
-Delete via API is permanent. Ensure correct workspace ID.
+::: warning Warning: API Deletion Is Permanent
+Workspace deletion via API is permanent and cannot be undone. Ensure you are using the correct workspace ID before executing this operation.
+:::
+
+::: info Info: Full API Documentation Available
+These are example requests. For complete API documentation including all parameters, response schemas, and authentication details, visit [api.cloudpirates.io/docs](https://api.cloudpirates.io/docs/).
 :::
 
 ## Related Resources

@@ -11,7 +11,7 @@ Kubernetes generates events as things happen in your cluster. Each event include
 - **What to do**: Recommended actions if needed
 - **Context**: Related resources and timeline
 
-::: tip Event Context
+::: tip Tip: Event Context Provided
 Events include descriptions and troubleshooting steps to help you quickly identify and resolve issues.
 :::
 
@@ -227,7 +227,7 @@ Logs are available for all containers in running and recently terminated pods.
 3. **Access Events**: Review authentication/authorization events
 4. **Deletion Events**: Track resource cleanup
 
-## Event API Access
+## Kubernetes Events
 
 Access events through Kubernetes resource endpoints.
 

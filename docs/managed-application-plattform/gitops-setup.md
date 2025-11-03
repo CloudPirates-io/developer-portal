@@ -1,5 +1,5 @@
-::: warning Private Beta
-The Managed Application Platform is currently in private beta. Contact us at [hello@cloudpirates.io](mailto:hello@cloudpirates.io) to get access.
+::: warning Warning: Private Beta Access Only
+The Managed Application Platform is currently in private beta. Contact us at [hello@cloudpirates.io](mailto:hello@cloudpirates.io) to request access.
 :::
 
 <br>
@@ -73,7 +73,7 @@ Connect your existing ArgoCD instance:
 
 **Requirements**:
 - ArgoCD 3.0 or newer
-- API access credentials
+- Access credentials
 - Network connectivity to CloudPirates platform
 - Permissions to create Application resources
 
