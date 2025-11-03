@@ -2,8 +2,8 @@
 prev: false
 ---
 
-::: warning Private Beta
-The Managed Application Platform is currently in private beta. Contact us at [hello@cloudpirates.io](mailto:hello@cloudpirates.io) to get access.
+::: warning Warning: Private Beta Access Only
+The Managed Application Platform is currently in private beta. Contact us at [hello@cloudpirates.io](mailto:hello@cloudpirates.io) to request access.
 :::
 
 <br>
@@ -118,7 +118,7 @@ Portal Action → Git Commit → ArgoCD Sync → Kubernetes Deployment
 
 Ready to deploy applications? [Contact us](mailto:developer@cloudpirates.io) to get beta access.
 
-## API Access
+## API Reference
 
 ### List Applications
 
@@ -171,10 +171,13 @@ DELETE /v1/workspaces/{workspaceId}/applications/{applicationId}
 Authorization: Bearer <access-token>
 ```
 
+::: info Info: Full API Documentation Available
+These are example requests. For complete API documentation including all parameters, response schemas, and authentication details, visit [api.cloudpirates.io/docs](https://api.cloudpirates.io/docs/).
+:::
+
 ## Related Resources
 
 - [GitOps Setup](./gitops-setup.md)
 - [Deployment Options](./deployment-options.md)
 - [Application Templates](./templates.md)
 - [Update Management](./update-management.md)
-- [API Reference](https://api.cloudpirates.io/docs/)

@@ -1,3 +1,7 @@
+---
+next: false
+---
+
 # Alert Reference
 
 On the following page you find explainations and first possible problem solutions for all alerts, that you can encounter on our Observability Platform.

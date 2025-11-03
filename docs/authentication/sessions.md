@@ -1,3 +1,7 @@
+---
+next: false
+---
+
 # Session Management
 
 Monitor and control active login sessions across devices.
@@ -27,13 +31,9 @@ Each session shows:
 3. Click "Logout Device"
 4. Confirm
 
-::: warning
-Session logout is immediate. Device must re-authenticate.
+::: info Info: Immediate Session Logout
+Session logout is immediate. The device must re-authenticate to regain access.
 :::
-
-### Logout Current Session
-
-Use standard logout button in portal.
 
 ## Session Information
 
@@ -84,7 +84,7 @@ Response:
 
 Both tokens rotate for security.
 
-## API Endpoints
+## API Reference
 
 ### Get Current User
 
@@ -117,8 +117,12 @@ POST /v1/auth/sessions/{sessionId}/logout
 Authorization: Bearer <access-token>
 ```
 
-::: warning
-API keys cannot be used for session management. Requires Bearer token.
+::: warning Warning: Bearer Token Required for Session Management
+API keys cannot be used for session management operations. A Bearer token is required.
+:::
+
+::: info Info: Full API Documentation Available
+These are example requests. For complete API documentation including all parameters, response schemas, and authentication details, visit [api.cloudpirates.io/docs](https://api.cloudpirates.io/docs/).
 :::
 
 ## Related Resources
@@ -127,4 +131,3 @@ API keys cannot be used for session management. Requires Bearer token.
 - [WebAuthn Authentication](./webauthn.md)
 - [Multi-Factor Authentication (MFA)](./mfa.md)
 - [API Keys](./api-keys.md)
-- [API Reference](https://api.cloudpirates.io/docs/#tag/Auth)
