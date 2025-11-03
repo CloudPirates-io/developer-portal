@@ -9,8 +9,8 @@ MFA adds a second verification step after password entry:
 - **SMS**: Receive codes via text message
 - **TOTP**: Use authenticator apps
 
-::: tip WebAuthn Users
-WebAuthn provides strong authentication by default. MFA not required for WebAuthn login.
+::: tip Tip: WebAuthn Users
+WebAuthn provides strong authentication by default. MFA is not required for WebAuthn login.
 :::
 
 ## SMS Authentication
@@ -35,7 +35,6 @@ WebAuthn provides strong authentication by default. MFA not required for WebAuth
 
 - Google Authenticator: [iOS](https://apps.apple.com/app/google-authenticator/id388497605) | [Android](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2)
 - Authy: [iOS](https://apps.apple.com/app/authy/id494168017) | [Android](https://play.google.com/store/apps/details?id=com.authy.authy)
-- 1Password: [Website](https://1password.com/)
 - Any TOTP-compatible authenticator
 
 ### Setup with QR Code
@@ -59,8 +58,8 @@ WebAuthn provides strong authentication by default. MFA not required for WebAuth
 2. Open authenticator app
 3. Enter current 6-digit code
 
-::: tip
-Ensure device clock is accurate for TOTP codes.
+::: tip Tip: Accurate Device Clock Required
+Ensure your device clock is accurate for TOTP codes to work correctly.
 :::
 
 ## Managing MFA
@@ -79,7 +78,7 @@ Enable both SMS and TOTP:
 - Use TOTP when SMS unavailable
 - Choose preferred method during login
 
-## API Endpoints
+## API Reference
 
 ### List MFA Methods
 
@@ -132,9 +131,12 @@ Content-Type: application/json
 }
 ```
 
+::: info Info: Full API Documentation Available
+These are example requests. For complete API documentation including all parameters, response schemas, and authentication details, visit [api.cloudpirates.io/docs](https://api.cloudpirates.io/docs/).
+:::
+
 ## Related Resources
 
 - [Password Authentication](./password.md)
 - [WebAuthn Authentication](./webauthn.md)
 - [Session Management](./sessions.md)
-- [API Reference](https://api.cloudpirates.io/docs/#tag/Auth-Challenge)

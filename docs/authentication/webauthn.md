@@ -1,4 +1,4 @@
-# WebAuthn Authentication
+# Passkeys (WebAuthn)
 
 Passwordless authentication using hardware security keys, biometrics, or passkeys.
 
@@ -17,8 +17,8 @@ WebAuthn enables authentication using:
 - No MFA required for WebAuthn login
 - User-friendly
 
-::: warning Password Login Still Available
-WebAuthn doesn't disable password authentication. Enable MFA for password login as an additional security layer.
+::: warning Warning: Password Login Still Available
+WebAuthn does not disable password authentication. You should enable MFA for password login as an additional security layer.
 :::
 
 ## Setting Up WebAuthn
@@ -35,8 +35,8 @@ WebAuthn doesn't disable password authentication. Enable MFA for password login 
 2. Click "Sign in with WebAuthn"
 3. Use biometrics or security key
 
-::: tip No MFA Required
-WebAuthn provides strong authentication by default. MFA not needed for WebAuthn login.
+::: tip Tip: No MFA Required
+WebAuthn provides strong authentication by default. MFA is not needed for WebAuthn login.
 :::
 
 ## Managing Devices
@@ -52,8 +52,8 @@ Access the [security page](https://portal.cloudpirates.io/security) to see all r
 3. Click "Delete"
 4. Confirm
 
-::: warning
-Keep at least one active authentication method.
+::: warning Warning: Keep at Least One Authentication Method
+You must keep at least one active authentication method to maintain access to your account.
 :::
 
 ## Multiple Devices
@@ -65,7 +65,7 @@ Register multiple devices for flexibility:
 - Mobile device
 - Desktop device
 
-## API Endpoints
+## API Reference
 
 ### Register Device
 
@@ -105,10 +105,13 @@ DELETE /v1/auth/webauthn/devices/{deviceId}
 Authorization: Bearer <access-token>
 ```
 
+::: info Info: Full API Documentation Available
+These are example requests. For complete API documentation including all parameters, response schemas, and authentication details, visit [api.cloudpirates.io/docs](https://api.cloudpirates.io/docs/).
+:::
+
 ## Related Resources
 
 - [Password Authentication](./password.md)
 - [Multi-Factor Authentication (MFA)](./mfa.md)
 - [Session Management](./sessions.md)
-- [API Reference](https://api.cloudpirates.io/docs/#tag/Auth-Challenge)
 - [WebAuthn Specification](https://www.w3.org/TR/webauthn/)

@@ -12,7 +12,7 @@ Get your cluster connected to CloudPirates Managed Observability in less than 5 
 - Scans container images for vulnerabilities
 - Requires minimal resources (10m CPU, 100Mi memory)
 
-::: tip Lightweight & Secure
+::: tip Tip: Lightweight & Secure
 ClusterPirate only **reads** data from your cluster and sends it securely to CloudPirates. It never modifies your workloads or stores sensitive data.
 :::
 
@@ -40,10 +40,10 @@ kubectl create namespace clusterpirate-system
 # Install ClusterPirate
 helm install clusterpirate oci://registry-1.docker.io/cloudpirates/clusterpirate \
   --namespace clusterpirate-system \
-  --set auth.accessToken="YOUR_ACCESS_TOKEN_HERE"
+  --set auth.accessToken="YOUR_ACCESS_TOKEN"
 ```
 
-Replace `YOUR_ACCESS_TOKEN_HERE` with the token from your portal cluster registration.
+Replace `YOUR_ACCESS_TOKEN` with the token from your portal cluster registration.
 
 **That's it!** The agent starts monitoring immediately. Check your portal to see cluster data flowing in.
 
@@ -54,7 +54,7 @@ Need to customize the installation? Create a `values.yaml` file with your prefer
 ```yaml
 # Required: Access token from portal cluster creation
 auth:
-  accessToken: "your-access-token-here"
+  accessToken: "your-access-token"
 
 # Optional: ClusterPirate application settings
 clusterPirate:

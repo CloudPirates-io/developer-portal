@@ -100,8 +100,8 @@ Forbidden - The server understood the request, but is refusing to fulfill it. Re
 
 The server could not find the requested resource. This typically occurs when the requested URL is invalid, or the resource does not exist on the server.
 
-::: warning
-Our event sourced architecture employs eventually consistent read models. As a result, changes made by a POST, PUT, PATCH, or DELETE request may take a moment until all read models are fully updated. This delay might cause a subsequent (GET) request, executed immediately after the mutating request, to encounter an error like 404 or 403.
+::: warning Warning: Eventually Consistent Read Models
+Our event sourced architecture employs eventually consistent read models. As a result, changes made by a POST, PUT, PATCH, or DELETE request may take a moment until all read models are fully updated. This delay might cause a subsequent GET request, executed immediately after the mutating request, to encounter an error like 404 or 403.
 :::
 
 **Example**
@@ -146,8 +146,8 @@ This status code is used for all unexpected errors that do not specifically fall
 
 Our backend service for this endpoint is (temporarily) unavailable.
 
-::: warning
-Our internal backend system uses asynchronous handlers to process requests. Therefore, even if you encounter an error, your request can still be executed asynchronously at a later time.
+::: warning Warning: Asynchronous Request Processing
+Our internal backend system uses asynchronous handlers to process requests. Therefore, even if you encounter an error, your request may still be executed asynchronously at a later time.
 :::
 
 **Example**
@@ -163,8 +163,8 @@ Our internal backend system uses asynchronous handlers to process requests. Ther
 
 Our backend service was unable to handle your request due to a timeout.
 
-::: warning
-Our internal backend system uses asynchronous handlers to process requests. Therefore, even if you encounter an error, your request can still be executed asynchronously at a later time.
+::: warning Warning: Asynchronous Request Processing
+Our internal backend system uses asynchronous handlers to process requests. Therefore, even if you encounter an error, your request may still be executed asynchronously at a later time.
 :::
 
 **Example**

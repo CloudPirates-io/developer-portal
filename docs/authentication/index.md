@@ -25,7 +25,7 @@ Traditional email and password authentication with multi-factor authentication (
 
 [Learn more about password authentication →](./password.md)
 
-### WebAuthn (Passkeys)
+### Passkeys (WebAuthn)
 
 Modern passwordless authentication using hardware security keys, biometric authenticators, or platform authenticators (Face ID, Touch ID, Windows Hello).
 
@@ -35,7 +35,7 @@ Modern passwordless authentication using hardware security keys, biometric authe
 - Enhanced security with hardware-backed credentials
 - Recommended: Enable MFA for password login when using WebAuthn
 
-[Learn more about WebAuthn →](./webauthn.md)
+[Learn more about Passkeys →](./webauthn.md)
 
 ### API Keys
 
@@ -91,4 +91,3 @@ Manage your account security through the [security page](https://portal.cloudpir
 
 - [API Documentation](/api/)
 - [CloudPirates Portal](https://portal.cloudpirates.io)
-- [API Reference](https://api.cloudpirates.io/docs/)

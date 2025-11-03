@@ -76,6 +76,6 @@ Our expert team is here to help you navigate your Cloud Native journey.
 
 <br/>
 
-::: tip Developer Portal
+::: info Continuously Updated Portal
 This portal is continuously updated with new features and improvements. We value your feedback — reach out with questions or suggestions to help us serve you better.
 :::

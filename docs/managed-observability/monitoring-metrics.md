@@ -11,7 +11,7 @@ Performance data with context to help you make informed decisions about your inf
 - **Resource Usage**: Capacity and optimization opportunities
 - **Capacity Planning**: Growth trends and recommendations
 
-::: tip Metrics with Context
+::: tip Tip: Metrics with Context
 Performance metrics include descriptions and recommendations to help you understand what actions to take.
 :::
 
@@ -258,11 +258,7 @@ Performance metrics include descriptions and recommendations to help you underst
 
 ### Update Intervals
 
-Metrics are collected and updated at configurable intervals:
-
-- **Node metrics**: Every 60 seconds (default)
-- **Pod metrics**: Every 60 seconds (default)
-- **Cluster metrics**: Every 60 seconds (default)
+Metrics are collected and updated at a configurable interval (60 seconds by default):
 
 Configure via ClusterPirate helm chart:
 
@@ -305,7 +301,7 @@ Access metrics through the portal:
 - Resource filtering
 - Alert status indicators
 
-### API Access
+### API Reference
 
 Metrics are exposed through the Kubernetes resource API endpoints.
 

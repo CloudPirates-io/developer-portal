@@ -11,7 +11,7 @@ Every deployment, job, and workload in your cluster is automatically checked aga
 - **Remediation steps** with code examples
 - **Severity rating** to help prioritize
 
-::: tip Policy Guidance
+::: tip Tip: Clear Policy Guidance Provided
 Each policy violation includes a clear explanation of the requirement and specific steps to resolve the issue.
 :::
 

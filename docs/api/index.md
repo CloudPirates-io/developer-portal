@@ -25,7 +25,7 @@ To access our API endpoints, you need to authenticate your requests using an `AP
 
 After you have logged in to our customer portal, you can create a new API key by going to your [security page](https://auth.cloudpirates.io/security).
 
-::: warning
+::: warning Warning: Secure Your API Key
 Treat your API key with the same level of security as you would your password. Avoid exposing it in public repositories, sharing it indiscriminately, or including it directly in client-side code.
 :::
 
@@ -45,11 +45,11 @@ As an example, you can get your current identity with the following `curl` reque
 curl -H "Authorization:ApiKey <API_KEY>" https://api.cloudpirates.io/v1/auth/me
 ```
 
-::: tip
+::: tip Tip: API Key Limitations
 Certain API endpoints, such as those that alter security-related settings like `/v1/auth/change-password`, cannot be accessed using API keys. Please consult our [API documentation](https://api.cloudpirates.io/docs/) to identify which endpoints are compatible with API keys.
 :::
 
-## API Endpoints
+## API Reference
 
 Our base URL for API requests is `https://api.cloudpirates.io/v1`. Ensure to prepend this base URL to all endpoint paths when making requests to our API.
 

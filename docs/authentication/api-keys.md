@@ -19,8 +19,8 @@ API keys enable:
 4. Enter descriptive label
 5. **Save key immediately** (shown only once)
 
-::: danger
-API key shown only once. Store securely. If lost, create new key.
+::: danger Danger: API Key Shown Only Once
+The API key is shown only once during creation. You must store it securely. If the key is lost, you will need to create a new key.
 :::
 
 ### Labeling
@@ -101,11 +101,11 @@ API keys cannot be used for:
 - `/v1/auth/webauthn/register`
 - `/v1/auth/api-keys` (key management)
 
-::: info
-Security-sensitive operations require interactive authentication (Bearer token).
+::: info Info: Bearer Token Required for Security-Sensitive Operations
+Security-sensitive operations require interactive authentication using a Bearer token instead of an API key.
 :::
 
-## API Endpoints
+## API Reference
 
 ### List Keys
 
@@ -133,34 +133,12 @@ DELETE /v1/auth/api-keys/{apiKeyId}
 Authorization: Bearer <access-token>
 ```
 
-## Security Best Practices
-
-### Storage
-
-- Use environment variables
-- Use secret management services (AWS Secrets Manager, HashiCorp Vault)
-- Never commit to version control
-- Never expose in client-side code
-
-### Management
-
-- Create separate keys per purpose
-- Rotate keys periodically (every 90 days)
-- Delete unused keys
-- Monitor key usage
-
-### Incident Response
-
-If compromised:
-
-1. Delete key immediately
-2. Create replacement key
-3. Update all services
-4. Review logs for unauthorized usage
+::: info Info: Full API Documentation Available
+These are example requests. For complete API documentation including all parameters, response schemas, and authentication details, visit [api.cloudpirates.io/docs](https://api.cloudpirates.io/docs/).
+:::
 
 ## Related Resources
 
 - [Password Authentication](./password.md)
 - [WebAuthn Authentication](./webauthn.md)
 - [Session Management](./sessions.md)
-- [API Reference](https://api.cloudpirates.io/docs/#tag/Auth-API-Key)

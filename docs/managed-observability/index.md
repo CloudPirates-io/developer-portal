@@ -29,7 +29,7 @@ CloudPirates Managed Observability is an **observability solution** that provide
 - Available as fully managed (hosted by CloudPirates) or managed in-house (in your cluster)
 - Designed for comprehensive observability needs
 
-::: tip Choose What Fits Your Needs
+::: tip Tip: Choose What Fits Your Needs
 Use Managed Observability for essential visibility with intelligent insights, or opt for our full observability stack when you need advanced capabilities, custom metrics, and deep instrumentation. Both options are fully supported by CloudPirates.
 :::
 
@@ -200,7 +200,7 @@ Alerts are carefully designed to avoid noise. Each alert includes context, impac
 
 [Learn more →](./alert-reference.md)
 
-## Who Is This For?
+## Who is this for?
 
 ### Perfect for Small to Medium Teams
 
@@ -236,7 +236,7 @@ Ready to try Managed Observability? [View Setup Instructions →](./setup-instru
 
 The installation takes less than 5 minutes and requires only a single helm command.
 
-## API Access
+## API Reference
 
 ### List Observability Instances
 

@@ -1,5 +1,5 @@
-::: warning Private Beta
-The Managed Application Platform is currently in private beta. Contact us at [hello@cloudpirates.io](mailto:hello@cloudpirates.io) to get access.
+::: warning Warning: Private Beta Access Only
+The Managed Application Platform is currently in private beta. Contact us at [hello@cloudpirates.io](mailto:hello@cloudpirates.io) to request access.
 :::
 
 <br>
@@ -52,7 +52,7 @@ Customize any template by overriding Helm values for resources, storage, replica
 
 [Learn more about GitOps setup →](./gitops-setup.md)
 
-## API Access
+## API Reference
 
 ### List Available Templates
 
@@ -124,6 +124,10 @@ Authorization: Bearer <access-token>
   ]
 }
 ```
+
+::: info Info: Full API Documentation Available
+These are example requests. For complete API documentation including all parameters, response schemas, and authentication details, visit [api.cloudpirates.io/docs](https://api.cloudpirates.io/docs/).
+:::
 
 ## Related Resources
 

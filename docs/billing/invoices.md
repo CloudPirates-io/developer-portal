@@ -1,3 +1,7 @@
+---
+next: false
+---
+
 # Invoices
 
 View, download, and manage your CloudPirates invoices.
@@ -101,15 +105,15 @@ Current payment method:
 3. Send payment via bank transfer
 4. Include invoice reference number
 
-::: warning Payment Reference
-Always include the invoice reference number in your payment to ensure proper allocation.
+::: warning Warning: Always Include Payment Reference
+You must always include the invoice reference number in your payment to ensure proper allocation to your account.
 :::
 
 ### Payment Confirmation
 
 Payment typically reflected within 2-3 business days. Invoice status updates to "Paid" and receipt becomes available for download.
 
-## API Access
+## API Reference
 
 ### List Invoices
 
@@ -148,6 +152,10 @@ Response:
 GET /v1/billing/billing-profiles/{billingProfileId}/transactions
 Authorization: Bearer <access-token>
 ```
+
+::: info Info: Full API Documentation Available
+These are example requests. For complete API documentation including all parameters, response schemas, and authentication details, visit [api.cloudpirates.io/docs](https://api.cloudpirates.io/docs/).
+:::
 
 ## Related Resources
 

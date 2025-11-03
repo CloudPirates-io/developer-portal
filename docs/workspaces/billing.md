@@ -1,9 +1,13 @@
+---
+next: false
+---
+
 # Workspace Billing
 
 Assign billing profiles to workspaces to enable paid features.
 
-::: info Personal Billing Profiles
-Billing profiles are personal and belong to your account. Learn more about [Billing Profiles →](/billing/billing-profiles.md)
+::: info Info: Personal Billing Profiles
+Billing profiles are personal and belong to your account. Learn more about [Billing Profiles →](/billing/billing-profiles.md).
 :::
 
 ## Assigning Billing Profiles
@@ -23,8 +27,8 @@ Billing profiles are personal and belong to your account. Learn more about [Bill
 
 Paid features are enabled immediately.
 
-::: warning
-You're responsible for all workspace charges, regardless of which member uses services.
+::: warning Warning: You Are Responsible for All Workspace Charges
+You are responsible for all workspace charges, regardless of which member uses the services.
 :::
 
 ## Managing Billing
@@ -42,15 +46,15 @@ You're responsible for all workspace charges, regardless of which member uses se
 2. Click "Remove Billing Profile"
 3. Confirm removal
 
-::: warning
-Removing billing disables paid features.
+::: warning Warning: Removing Billing Disables Paid Features
+Removing the billing profile from a workspace will immediately disable all paid features for that workspace.
 :::
 
 ## Multiple Workspaces
 
 One billing profile can be assigned to multiple workspaces, providing consolidated billing with a single invoice. Per-workspace breakdown available in billing portal.
 
-## API Access
+## API Reference
 
 ### Get Billing Status
 
@@ -77,6 +81,10 @@ Content-Type: application/json
 DELETE /v1/workspaces/{workspaceId}/billing
 Authorization: Bearer <access-token>
 ```
+
+::: info Info: Full API Documentation Available
+These are example requests. For complete API documentation including all parameters, response schemas, and authentication details, visit [api.cloudpirates.io/docs](https://api.cloudpirates.io/docs/).
+:::
 
 ## Related Resources
 

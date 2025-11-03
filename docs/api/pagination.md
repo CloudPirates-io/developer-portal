@@ -83,7 +83,3 @@ Link: </api/trainings?limit=20&offset=0>; rel="first",
       </api/trainings?limit=20&offset=60>; rel="prev",
       </api/trainings?limit=20&offset=80>; rel="last"
 ```
-
-## Summary
-
-Pagination in the API is designed to efficiently manage large datasets by breaking them into smaller pages. Utilize the `limit` and `offset` query parameters to control the pagination, and refer to the response headers for navigation and total item information. The `Link` header provides easy navigation between pages, ensuring a smooth experience when dealing with large datasets.

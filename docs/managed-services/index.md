@@ -1,3 +1,8 @@
+---
+prev: false
+next: false
+---
+
 # Managed Services
 
 CloudPirates offers managed Kubernetes services designed to simplify your cloud operations. Focus on your applications while we handle the infrastructure, monitoring, and maintenance.
@@ -30,8 +35,8 @@ Get comprehensive monitoring and observability for your Kubernetes clusters thro
 
 **Deploy production-ready applications with GitOps workflows**
 
-::: warning Private Beta
-Currently in private beta. [Contact us](mailto:hello@cloudpirates.io) to get access.
+::: warning Warning: Private Beta Access Only
+Currently in private beta. [Contact us](mailto:hello@cloudpirates.io) to request access.
 :::
 
 Streamline application deployment with pre-configured templates, automatic updates, and GitOps-based management.

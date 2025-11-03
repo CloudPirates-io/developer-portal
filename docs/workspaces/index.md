@@ -8,8 +8,8 @@ Workspaces are logical groups of users that organize and manage CloudPirates ser
 
 ## Overview
 
-::: warning Workspace Required
-You cannot use CloudPirates services without a workspace. Managed Observability, Managed Applications, and Managed Cluster Components are all workspace-based.
+::: warning Warning: Workspace Required for All Services
+You cannot use CloudPirates services without a workspace. All services including Managed Observability, Managed Applications, and Managed Cluster Components are workspace-based.
 :::
 
 ### Key Features

@@ -1,5 +1,5 @@
-::: warning Private Beta
-The Managed Application Platform is currently in private beta. Contact us at [hello@cloudpirates.io](mailto:hello@cloudpirates.io) to get access.
+::: warning Warning: Private Beta Access Only
+The Managed Application Platform is currently in private beta. Contact us at [hello@cloudpirates.io](mailto:hello@cloudpirates.io) to request access.
 :::
 
 <br>
