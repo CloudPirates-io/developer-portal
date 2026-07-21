@@ -13,7 +13,7 @@ export default defineConfig({
   themeConfig: {
     siteTitle: "Developer Portal",
     search: {
-      provider: 'local'
+      provider: "local",
     },
     logo: {
       dark: "/logo-white.svg",
@@ -21,7 +21,7 @@ export default defineConfig({
     },
     nav: [
       { text: "Website", link: "https://www.cloudpirates.io" },
-      { text: "Customer Portal", link: "https://auth.cloudpirates.io" },
+      { text: "Customer Portal", link: "https://portal.cloudpirates.io" },
     ],
 
     sidebar: [
@@ -48,17 +48,21 @@ export default defineConfig({
         text: "Workspaces",
         items: [
           { text: "Overview", link: "/workspaces/" },
-          { text: "Creating Workspaces", link: "/workspaces/creating-workspaces" },
+          {
+            text: "Creating Workspaces",
+            link: "/workspaces/creating-workspaces",
+          },
           { text: "Members and Roles", link: "/workspaces/members-and-roles" },
-          { text: "Managing Workspaces", link: "/workspaces/managing-workspaces" },
+          {
+            text: "Managing Workspaces",
+            link: "/workspaces/managing-workspaces",
+          },
           { text: "Workspace Billing", link: "/workspaces/billing" },
         ],
       },
       {
         text: "Managed Services",
-        items: [
-          { text: "Overview", link: "/managed-services/" },
-        ],
+        items: [{ text: "Overview", link: "/managed-services/" }],
       },
       {
         text: "Managed Observability",
