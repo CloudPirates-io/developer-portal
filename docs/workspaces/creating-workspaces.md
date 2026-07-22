@@ -37,9 +37,13 @@ Authorization: Bearer <access-token>
 Content-Type: application/json
 
 {
-  "name": "My Workspace"
+  "workspaceName": "My Workspace",
+  "workspaceKey": "my-workspace"
 }
 ```
+
+`workspaceKey` is a unique, URL-safe identifier for the workspace (lowercase letters, digits, and
+single hyphens between segments) — it must be unique across all workspaces.
 
 ### List Workspaces
 

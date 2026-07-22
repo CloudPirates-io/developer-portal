@@ -82,9 +82,15 @@ Response:
 {
   "accessToken": "new-access-token",
   "refreshToken": "new-refresh-token",
-  "expiresIn": 3600
+  "auth": {
+    "jti": "...",
+    "exp": 1234567890
+  }
 }
 ```
+
+`auth` is the decoded JWT payload for the new access token (includes `exp`, the expiration as a Unix
+timestamp) — there is no separate `expiresIn` seconds field.
 
 Both tokens rotate for security.
 

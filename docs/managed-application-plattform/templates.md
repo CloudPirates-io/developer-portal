@@ -57,30 +57,32 @@ Customize any template by overriding Helm values for resources, storage, replica
 ### List Available Templates
 
 ```http
-GET /v1/templates
+GET /v1/applications/templates
 Authorization: Bearer <access-token>
 ```
 
-**Response**:
+**Response**: a bare, paginated array (see [Pagination](/api/pagination.md)) — not wrapped in a `templates` key:
 
 ```json
-{
-  "templates": [
-    {
-      "id": "mariadb",
-      "name": "MariaDB",
-      "description": "High-performance, open-source relational database",
-      "category": "database",
-      "latestVersion": "0.6.0"
+[
+  {
+    "applicationTemplateId": "6571f2b1e4b0a1a2b3c4d5e6",
+    "name": "MariaDB",
+    "description": "High-performance, open-source relational database",
+    "logoUrl": "https://.../mariadb.svg",
+    "source": {
+      "type": "HELM_CHART",
+      "repositoryUrl": "https://github.com/CloudPirates-io/helm-charts",
+      "chartName": "mariadb"
     }
-  ]
-}
+  }
+]
 ```
 
 ### Get Template Details
 
 ```http
-GET /v1/templates/{applicationTemplateId}
+GET /v1/applications/templates/{applicationTemplateId}
 Authorization: Bearer <access-token>
 ```
 
@@ -88,42 +90,41 @@ Authorization: Bearer <access-token>
 
 ```json
 {
-  "id": "mariadb",
+  "applicationTemplateId": "6571f2b1e4b0a1a2b3c4d5e6",
   "name": "MariaDB",
   "description": "High-performance, open-source relational database",
-  "category": "database",
-  "chartUrl": "https://github.com/CloudPirates-io/helm-charts/tree/main/charts/mariadb",
+  "logoUrl": "https://.../mariadb.svg",
+  "source": {
+    "type": "HELM_CHART",
+    "repositoryUrl": "https://github.com/CloudPirates-io/helm-charts",
+    "chartName": "mariadb"
+  },
   "versions": [
     {
-      "version": "0.6.0",
       "appVersion": "12.0.2",
-      "releaseDate": "2024-01-15T10:00:00Z"
+      "chartVersion": "0.6.0",
+      "publishDate": "2024-01-15T10:00:00Z"
     }
   ],
   "presets": [
     {
-      "id": "preset-123",
-      "name": "Single",
-      "description": "Development and testing",
-      "resources": {
-        "cpu": "500m",
-        "memory": "1Gi",
-        "storage": "10Gi"
-      }
+      "applicationTemplatePresetId": "6571f2b1e4b0a1a2b3c4d5e7",
+      "presetName": "Single",
+      "supportedVersionRange": ">=12.0.0",
+      "valuesSchema": {}
     },
     {
-      "id": "preset-456",
-      "name": "Small",
-      "description": "Small production apps",
-      "resources": {
-        "cpu": "1",
-        "memory": "2Gi",
-        "storage": "20Gi"
-      }
+      "applicationTemplatePresetId": "6571f2b1e4b0a1a2b3c4d5e8",
+      "presetName": "Small",
+      "supportedVersionRange": ">=12.0.0",
+      "valuesSchema": {}
     }
   ]
 }
 ```
+
+There is no fixed `resources` object on a preset — sizing (CPU/memory/storage) is validated against
+`valuesSchema`, an arbitrary per-preset JSON Schema, not a hardcoded shape.
 
 ::: info Info: Full API Documentation Available
 These are example requests. For complete API documentation including all parameters, response schemas, and authentication details, visit [api.cloudpirates.io/docs](https://api.cloudpirates.io/docs/).

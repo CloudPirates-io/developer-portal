@@ -18,26 +18,30 @@ The workspace ID remains unchanged after renaming. All API integrations will con
 View workspace details:
 
 - **Workspace ID**: Unique identifier for API access
+- **Workspace Key**: Unique, URL-safe identifier chosen at creation
+- **Workspace Domain**: Derived from the workspace key
 - **Workspace Name**: Current name
-- **Creation Date**: When created
-- **Member Count**: Number of users
-- **Active Services**: Services in use
+- **Members**: Current members and their roles
+- **Open Invitations**: Pending member invitations
+
+There is no creation-date, member-count, or "active services" field on the workspace today.
 
 ## Deleting Workspaces
 
 **Requirements**:
 
 - Only Owners can delete workspaces
-- All services must be deleted first
 - Deletion is permanent
 
-::: warning Warning: All Services Must Be Deleted First
-You must delete all Managed Observability, Managed Applications, and Managed Cluster Components before you can delete the workspace.
+::: warning Warning: Deleting a Workspace Does Not Clean Up Its Resources
+The delete-workspace operation only checks that you're an Owner — it does not check for or block
+on remaining Managed Observability, Managed Applications, or Managed Cluster Components. We still
+recommend removing those first, since the workspace itself won't do it for you.
 :::
 
 ### Deletion Steps
 
-1. **Delete all services first**
+1. **Recommended: remove services first** (not enforced by the platform)
 
    - Managed Observability configurations
    - Managed Applications
@@ -47,7 +51,6 @@ You must delete all Managed Observability, Managed Applications, and Managed Clu
 
 3. **Click "Delete Workspace"**
 
-   - Error shown if services remain
    - Confirmation required
 
 4. **Confirm deletion**
@@ -78,12 +81,12 @@ Authorization: Bearer <access-token>
 ### Update Name
 
 ```http
-PATCH /v1/workspaces/{workspaceId}
+PUT /v1/workspaces/{workspaceId}/name
 Authorization: Bearer <access-token>
 Content-Type: application/json
 
 {
-  "name": "New Name"
+  "workspaceName": "New Name"
 }
 ```
 

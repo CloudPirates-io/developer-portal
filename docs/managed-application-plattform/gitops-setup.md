@@ -2,6 +2,18 @@
 The Managed Application Platform is currently in private beta. Contact us at [hello@cloudpirates.io](mailto:hello@cloudpirates.io) to request access.
 :::
 
+::: danger Danger: This Page Describes Planned, Not Current, Functionality
+None of the GitOps mechanics below exist in the platform today. Concretely: application creation
+(the only thing that would trigger any of this) always fails with a `501 Not Implemented`; the
+"CloudPirates Managed Repository" is in reality one shared, service-global GitLab project, not an
+isolated repository per workspace; "Bring Your Own Repository" supports none of GitHub/Bitbucket/
+Azure DevOps/self-hosted — the GitOps integration is hardcoded to GitLab only; "Bring Your Own
+ArgoCD" has no backend support at all — the only ArgoCD client is a single global, **read-only**
+client with no way to register a customer-supplied instance; there is no SealedSecrets integration,
+no update-channel annotations, and no rollback/revert capability anywhere in the codebase. Treat
+everything on this page as a roadmap description, not a how-to for something you can use today.
+:::
+
 <br>
 
 # GitOps Setup

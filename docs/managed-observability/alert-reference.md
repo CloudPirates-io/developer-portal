@@ -4,7 +4,13 @@ next: false
 
 # Alert Reference
 
-On the following page you find explainations and first possible problem solutions for all alerts, that you can encounter on our Observability Platform.
+::: danger Danger: No Alerting Engine Exists
+There is no alerting or threshold-evaluation feature anywhere in the backend today, under any
+name — none of the alerts below can actually fire. This page describes planned/roadmap
+functionality, not something you'll currently encounter on the platform.
+:::
+
+On the following page you find explainations and first possible problem solutions for all alerts, that you plan to support on the Observability Platform.
 
 ## ArgoCD Alerts
 

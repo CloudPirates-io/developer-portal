@@ -66,7 +66,6 @@ Every resource shows not just its status, but **what that status means** and **w
 - Current state explained clearly ("Running", "Crashed and restarting", "Waiting for image download")
 - Why a pod might be failing with troubleshooting steps
 - Resource usage and whether it's appropriate
-- Quick access to logs
 
 **Example explanation**: "Pod `web-app-abc123` crashed due to out-of-memory error. The container is using more memory than its 256Mi limit. Consider increasing the memory limit to 512Mi."
 
@@ -88,20 +87,22 @@ Every resource shows not just its status, but **what that status means** and **w
 
 1. Navigate to [portal.cloudpirates.io](https://portal.cloudpirates.io)
 2. Select your workspace
-3. Choose observability instance
-4. Select cluster
-5. Browse resources by type or namespace
+3. Select cluster
+4. Browse resources by type or namespace
 
 ### Via API
+
+All resource browsing goes through the `kubernetes-proxy` sub-path, keyed by `clusterId` directly
+(there is no separate "observability instance" resource to route through).
 
 #### List Cluster-Scoped Resources
 
 ```http
-GET /v1/workspaces/{workspaceId}/observability/{observabilityInstanceId}/clusters/{clusterId}/{resourceType}
+GET /v1/workspaces/{workspaceId}/observability/{clusterId}/kubernetes-proxy/{resourceType}
 Authorization: Bearer <access-token>
 ```
 
-**Resource Types**: `nodes`, `namespaces`, `deployments`, `statefulsets`, `daemonsets`, `jobs`, `cronjobs`, `pods`, `services`
+**Resource Types** (singular, case-insensitive — normalized to uppercase server-side): `node`, `namespace`, `deployment`, `statefulset`, `daemonset`, `job`, `cronjob`, `pod`, `service`
 
 **Query Parameters**:
 
@@ -111,19 +112,19 @@ Authorization: Bearer <access-token>
 
 ```bash
 # List all nodes
-GET /v1/workspaces/{workspaceId}/observability/{observabilityInstanceId}/clusters/{clusterId}/nodes
+GET /v1/workspaces/{workspaceId}/observability/{clusterId}/kubernetes-proxy/node
 
 # List all namespaces
-GET /v1/workspaces/{workspaceId}/observability/{observabilityInstanceId}/clusters/{clusterId}/namespaces
+GET /v1/workspaces/{workspaceId}/observability/{clusterId}/kubernetes-proxy/namespace
 
 # List deployments with label filter
-GET /v1/workspaces/{workspaceId}/observability/{observabilityInstanceId}/clusters/{clusterId}/deployments?labelSelector=app=nginx
+GET /v1/workspaces/{workspaceId}/observability/{clusterId}/kubernetes-proxy/deployment?labelSelector=app=nginx
 ```
 
 #### Get Specific Resource
 
 ```http
-GET /v1/workspaces/{workspaceId}/observability/{observabilityInstanceId}/clusters/{clusterId}/{resourceType}/{resourceName}
+GET /v1/workspaces/{workspaceId}/observability/{clusterId}/kubernetes-proxy/{resourceType}/{resourceName}
 Authorization: Bearer <access-token>
 ```
 
@@ -131,17 +132,17 @@ Authorization: Bearer <access-token>
 
 ```bash
 # Get specific node details
-GET /v1/workspaces/{workspaceId}/observability/{observabilityInstanceId}/clusters/{clusterId}/nodes/worker-node-1
+GET /v1/workspaces/{workspaceId}/observability/{clusterId}/kubernetes-proxy/node/worker-node-1
 ```
 
 #### List Namespaced Resources
 
 ```http
-GET /v1/workspaces/{workspaceId}/observability/{observabilityInstanceId}/clusters/{clusterId}/namespaces/{namespace}/{resourceType}
+GET /v1/workspaces/{workspaceId}/observability/{clusterId}/kubernetes-proxy/namespaces/{namespace}/{resourceType}
 Authorization: Bearer <access-token>
 ```
 
-**Resource Types**: `deployments`, `statefulsets`, `daemonsets`, `jobs`, `cronjobs`, `pods`, `services`
+**Resource Types**: `deployment`, `statefulset`, `daemonset`, `job`, `cronjob`, `pod`, `service`
 
 **Query Parameters**:
 
@@ -151,16 +152,16 @@ Authorization: Bearer <access-token>
 
 ```bash
 # List pods in namespace
-GET /v1/workspaces/{workspaceId}/observability/{observabilityInstanceId}/clusters/{clusterId}/namespaces/production/pods
+GET /v1/workspaces/{workspaceId}/observability/{clusterId}/kubernetes-proxy/namespaces/production/pod
 
 # List deployments with label filter
-GET /v1/workspaces/{workspaceId}/observability/{observabilityInstanceId}/clusters/{clusterId}/namespaces/production/deployments?labelSelector=tier=frontend
+GET /v1/workspaces/{workspaceId}/observability/{clusterId}/kubernetes-proxy/namespaces/production/deployment?labelSelector=tier=frontend
 ```
 
 #### Get Specific Namespaced Resource
 
 ```http
-GET /v1/workspaces/{workspaceId}/observability/{observabilityInstanceId}/clusters/{clusterId}/namespaces/{namespace}/{resourceType}/{resourceName}
+GET /v1/workspaces/{workspaceId}/observability/{clusterId}/kubernetes-proxy/namespaces/{namespace}/{resourceType}/{resourceName}
 Authorization: Bearer <access-token>
 ```
 
@@ -168,10 +169,10 @@ Authorization: Bearer <access-token>
 
 ```bash
 # Get specific deployment
-GET /v1/workspaces/{workspaceId}/observability/{observabilityInstanceId}/clusters/{clusterId}/namespaces/production/deployments/web-app
+GET /v1/workspaces/{workspaceId}/observability/{clusterId}/kubernetes-proxy/namespaces/production/deployment/web-app
 
 # Get specific pod
-GET /v1/workspaces/{workspaceId}/observability/{observabilityInstanceId}/clusters/{clusterId}/namespaces/production/pods/web-app-7d8f9c5b6-xyz123
+GET /v1/workspaces/{workspaceId}/observability/{clusterId}/kubernetes-proxy/namespaces/production/pod/web-app-7d8f9c5b6-xyz123
 ```
 
 ## Resource Information
@@ -195,7 +196,8 @@ Each pod provides:
 - **Container Status**: Running, waiting, terminated states
 - **Restart Count**: Number of container restarts
 - **Resource Usage**: Current CPU and memory consumption
-- **Events**: Recent events related to the pod
+
+Events aren't embedded in the pod fetch — see [Events & Logs](./events-logs.md) for the separate cluster-wide events endpoint.
 
 ### Deployment Details
 
@@ -205,7 +207,6 @@ Each deployment provides:
 - **Strategy**: RollingUpdate or Recreate
 - **Conditions**: Available, Progressing, ReplicaFailure
 - **Pod Template**: Container specifications and configurations
-- **Rollout History**: Previous replica set revisions
 
 ## Label Selectors
 

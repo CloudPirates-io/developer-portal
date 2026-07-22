@@ -50,7 +50,7 @@ Choose what fits your infrastructure and workflow:
 
 [Browse application templates →](./templates.md)
 
-### Secure Secret Management
+### Secure Secret Management _(planned)_
 
 - SealedSecrets integration with automatic key pair generation
 - Secure secrets stored in Git (encrypted)
@@ -81,7 +81,12 @@ Portal Action → Git Commit → ArgoCD Sync → Kubernetes Deployment
 4. **Deploy**: We create ArgoCD Applications in your repository
 5. **Manage**: Update, configure, and monitor through the portal
 
-**What Gets Created**:
+::: danger Danger: Application Creation Is Not Yet Functional
+Creating an application currently always fails with a `501 Not Implemented` — the underlying
+GitOps/ArgoCD provisioning described below is not wired up yet.
+:::
+
+**What Gets Created** _(planned — not implemented yet)_:
 
 - ArgoCD Application manifests
 - Application values and configuration
@@ -133,18 +138,22 @@ Authorization: Bearer <access-token>
 
 ### Create Application
 
+::: danger Danger: Always Returns 501
+This request currently always fails with `501 Not Implemented`. The route, validation, and request
+shape below are real; the actual provisioning behind it isn't built yet.
+:::
+
 ```http
 POST /v1/workspaces/{workspaceId}/applications
 Authorization: Bearer <access-token>
 Content-Type: application/json
 
 {
-  "templateId": "mariadb",
-  "name": "my-database",
-  "clusterId": "cluster-123",
-  "preset": "small",
-  "autoUpdate": true,
-  "updateChannel": "cloudpirates-stable"
+  "applicationTemplateId": "6571f2b1e4b0a1a2b3c4d5e6",
+  "applicationTemplatePresetId": "6571f2b1e4b0a1a2b3c4d5e7",
+  "clusterId": "6571f2b1e4b0a1a2b3c4d5e8",
+  "appVersion": "12.0.2",
+  "name": "my-database"
 }
 ```
 
@@ -157,14 +166,33 @@ Authorization: Bearer <access-token>
 
 ### Update Application
 
+::: danger Danger: No Backend Handler Registered
+These two routes exist and accept requests, but no command handler is registered for them anywhere
+in the backend — a request never gets a response and will time out (`503`/`504`). There is also no
+`preset`/`autoUpdate` concept on this endpoint.
+:::
+
+Change the values used to render the application:
+
 ```http
-PUT /v1/workspaces/{workspaceId}/applications/{applicationId}
+PUT /v1/workspaces/{workspaceId}/applications/{applicationId}/values
 Authorization: Bearer <access-token>
 Content-Type: application/json
 
 {
-  "preset": "medium",
-  "autoUpdate": false
+  "applicationValues": {}
+}
+```
+
+Bump the application's version:
+
+```http
+POST /v1/workspaces/{workspaceId}/applications/{applicationId}/actions/update
+Authorization: Bearer <access-token>
+Content-Type: application/json
+
+{
+  "appVersion": "12.1.0"
 }
 ```
 

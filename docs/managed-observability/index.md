@@ -79,17 +79,17 @@ Managed Observability includes capabilities not available in traditional observa
 - Troubleshooting guidance for common issues
 - Real-time event correlation (not possible in native observability stacks)
 
-**AI-Assisted Insights**:
+**AI-Assisted Insights** _(planned)_:
 
 - Intelligent analysis of cluster health
 - Automated pattern recognition
 - Proactive issue detection
 
-**Resource Recommendations**:
+**Resource Recommendations** _(planned)_:
 
-- Automated best practice validation
-- Right-sizing suggestions based on actual usage
-- Cost optimization opportunities
+- Automated best practice validation — real today, see [Best Practices](./best-practices.md)
+- Right-sizing suggestions based on actual usage — not yet implemented
+- Cost optimization opportunities — not yet implemented
 
 ### 5. Flexible Observability Options
 
@@ -103,10 +103,9 @@ Choose the right level of observability for your needs:
 
 ### Simple 5-Minute Setup
 
-1. **Create Instance**: Register at [portal.cloudpirates.io](https://portal.cloudpirates.io) and create an observability instance
-2. **Get Access Token**: Register your cluster to receive an access token
-3. **Install Agent**: Deploy ClusterPirate helm chart with your access token
-4. **Start Monitoring**: Access all insights through the web console
+1. **Register a Cluster**: Register at [portal.cloudpirates.io](https://portal.cloudpirates.io) and create a cluster in your workspace to receive an access token
+2. **Install Agent**: Deploy ClusterPirate helm chart with your access token
+3. **Start Monitoring**: Access all insights through the web console
 
 [View Setup Instructions →](./setup-instructions.md)
 
@@ -115,10 +114,10 @@ Choose the right level of observability for your needs:
 The ClusterPirate agent automatically discovers and observes:
 
 - **All Kubernetes Resources**: Nodes, namespaces, deployments, pods, services, ingresses
-- **Performance Metrics**: CPU, memory, disk, and network usage
+- **Performance Metrics**: CPU and memory usage (disk and network usage are not collected)
 - **Application Health**: Container status, restart counts, probe failures
 - **Security Posture**: Policy violations, CVE vulnerabilities
-- **Events & Logs**: Real-time access to Kubernetes events and container logs
+- **Events**: Real-time access to Kubernetes events (there is no container log-streaming feature)
 
 ## Platform Features
 
@@ -139,12 +138,9 @@ View all cluster components with clear status information and troubleshooting gu
 
 **Observe resource usage with context and recommendations.**
 
-Track CPU, memory, disk, and network metrics with insights that help you make informed decisions about capacity and optimization.
+Track CPU and memory metrics per node and pod.
 
-- Server health and resource utilization
-- Application performance metrics
-- Resource optimization recommendations
-- Capacity planning insights
+- Resource utilization (CPU/memory only — no disk or network metrics)
 
 [Learn more →](./monitoring-metrics.md)
 
@@ -156,8 +152,6 @@ Observe cluster events in real-time with clear descriptions and troubleshooting 
 
 - Normal events (confirmations)
 - Warning events (potential issues with guidance)
-- Error events (active problems with troubleshooting)
-- Container logs with context
 
 [Learn more →](./events-logs.md)
 
@@ -187,9 +181,14 @@ Scan all images with Trivy to identify CVEs, with severity ratings and recommend
 
 [Learn more →](./cve-scans.md)
 
-### Smart Alerting
+### Smart Alerting _(planned)_
 
 **Only get notified when you need to take action.**
+
+::: danger Danger: No Alerting Engine Exists Yet
+There is no alerting/threshold-evaluation feature in the backend today, under any name. Everything
+in this section, and the linked reference page, describes planned functionality.
+:::
 
 Alerts are carefully designed to avoid noise. Each alert includes context, impact explanation, and recommended actions.
 
@@ -238,81 +237,68 @@ The installation takes less than 5 minutes and requires only a single helm comma
 
 ## API Reference
 
-### List Observability Instances
-
-```http
-GET /v1/workspaces/{workspaceId}/observability
-Authorization: Bearer <access-token>
-```
-
-### Create Observability Instance
-
-```http
-POST /v1/workspaces/{workspaceId}/observability
-Authorization: Bearer <access-token>
-Content-Type: application/json
-
-{
-  "name": "Production Observability"
-}
-```
-
-### Get Observability Instance
-
-```http
-GET /v1/workspaces/{workspaceId}/observability/{observabilityInstanceId}
-Authorization: Bearer <access-token>
-```
-
-### Update Instance Name
-
-```http
-PUT /v1/workspaces/{workspaceId}/observability/{observabilityInstanceId}/name
-Authorization: Bearer <access-token>
-Content-Type: application/json
-
-{
-  "name": "Updated Name"
-}
-```
-
-### Delete Observability Instance
-
-```http
-DELETE /v1/workspaces/{workspaceId}/observability/{observabilityInstanceId}
-Authorization: Bearer <access-token>
-```
+There is no separate "observability instance" resource to create — a cluster registered through
+the Cluster API below is what you observe. Once it exists, browse it through the flat
+`/v1/workspaces/{workspaceId}/observability/{clusterId}/...` routes documented in
+[Kubernetes Resources](./kubernetes-resources.md) and [Events & Logs](./events-logs.md).
 
 ### List Clusters
 
 ```http
-GET /v1/workspaces/{workspaceId}/observability/{observabilityInstanceId}/clusters
+GET /v1/workspaces/{workspaceId}/clusters
 Authorization: Bearer <access-token>
 ```
+
+Response is a bare array of `{clusterId, workspaceId, clusterName, clusterType, serverInfo}` — no
+`accessToken` (only the single-cluster `GET` below includes it).
+
+### Create Cluster (Register)
+
+Only `clusterType: "EXTERNAL"` is supported — `MANAGED` always fails with `501 Not Implemented`.
+
+```http
+POST /v1/workspaces/{workspaceId}/clusters
+Authorization: Bearer <access-token>
+Content-Type: application/json
+
+{
+  "clusterName": "Production Cluster",
+  "clusterType": "EXTERNAL"
+}
+```
+
+The response includes the `accessToken` you use to install the ClusterPirate agent.
 
 ### Get Cluster
 
 ```http
-GET /v1/workspaces/{workspaceId}/observability/{observabilityInstanceId}/clusters/{clusterId}
+GET /v1/workspaces/{workspaceId}/clusters/{clusterId}
 Authorization: Bearer <access-token>
 ```
 
 ### Update Cluster Name
 
 ```http
-PUT /v1/workspaces/{workspaceId}/observability/{observabilityInstanceId}/clusters/{clusterId}/name
+PUT /v1/workspaces/{workspaceId}/clusters/{clusterId}/name
 Authorization: Bearer <access-token>
 Content-Type: application/json
 
 {
-  "name": "Updated Cluster Name"
+  "clusterName": "Updated Cluster Name"
 }
+```
+
+### Rotate Cluster Access Token
+
+```http
+POST /v1/workspaces/{workspaceId}/clusters/{clusterId}/actions/rotate-access-token
+Authorization: Bearer <access-token>
 ```
 
 ### Delete Cluster
 
 ```http
-DELETE /v1/workspaces/{workspaceId}/observability/{observabilityInstanceId}/clusters/{clusterId}
+DELETE /v1/workspaces/{workspaceId}/clusters/{clusterId}
 Authorization: Bearer <access-token>
 ```
 

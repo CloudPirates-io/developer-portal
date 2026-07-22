@@ -146,12 +146,12 @@ Authorization: Bearer <access-token>
 Content-Type: application/json
 
 {
-  "name": "My Billing Profile",
-  "address": {
-    "street": "Main St 123",
+  "billingProfileName": "My Billing Profile",
+  "billingProfileAddress": {
+    "addressLine1": "Main St 123",
     "city": "Berlin",
     "postalCode": "10115",
-    "country": "Germany"
+    "countryCode": "DE"
   }
 }
 ```
@@ -177,10 +177,10 @@ Content-Type: application/json
 
 {
   "billingProfileAddress": {
-    "street": "New Street 456",
+    "addressLine1": "New Street 456",
     "city": "Munich",
     "postalCode": "80331",
-    "country": "Germany"
+    "countryCode": "DE"
   }
 }
 ```
