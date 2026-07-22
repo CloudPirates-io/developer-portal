@@ -21,9 +21,9 @@ This delay might cause a subsequent (`GET`) request, executed immediately after 
 
 ## Obtaining an API key
 
-To access our API endpoints, you need to authenticate your requests using an `API key` included in the Authorization header of your HTTP requests. Obtain an API key by signing up on our [customer portal](https://auth.cloudpirates.io).
+To access our API endpoints, you need to authenticate your requests using an `API key` included in the Authorization header of your HTTP requests. Obtain an API key by signing up on our [customer portal](https://portal.cloudpirates.io).
 
-After you have logged in to our customer portal, you can create a new API key by going to your [security page](https://auth.cloudpirates.io/security).
+After you have logged in to our customer portal, you can create a new API key by going to your [security page](https://portal.cloudpirates.io/security).
 
 ::: warning Warning: Secure Your API Key
 Treat your API key with the same level of security as you would your password. Avoid exposing it in public repositories, sharing it indiscriminately, or including it directly in client-side code.
