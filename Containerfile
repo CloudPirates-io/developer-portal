@@ -6,4 +6,6 @@ WORKDIR /usr/share/nginx/html
 COPY /dist /usr/share/nginx/html
 
 # User nginx (gid 101, uid: 101 from base image)
-RUN chown -R 101:101 /usr/share/nginx/html
+RUN chown -R 101:101 /usr/share/nginx/html && chown -R 101:101 /var/cache/nginx
+
+USER nginx
