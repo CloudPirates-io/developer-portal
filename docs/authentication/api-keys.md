@@ -13,14 +13,14 @@ API keys enable:
 
 ## Creating API Keys
 
-1. Login to [portal.cloudpirates.io](https://portal.cloudpirates.io)
-2. Navigate to [security page](https://portal.cloudpirates.io/security)
-3. Click "Create API Key"
-4. Enter descriptive label
-5. **Save key immediately** (shown only once)
+1. Navigate to [portal.cloudpirates.io/security](https://portal.cloudpirates.io/security)
+2. Click "Create API Key"
+3. Enter descriptive label
+4. **Save key immediately** (shown only once)
 
-::: danger Danger: API Key Shown Only Once
-The API key is shown only once during creation. You must store it securely. If the key is lost, you will need to create a new key.
+::: warning API Key Shown Only Once
+The API key is shown only once during creation. You must store it securely. If the key is lost,
+you will need to create a new key.
 :::
 
 ### Labeling
@@ -67,9 +67,11 @@ requests.get(
 
 ## Managing Keys
 
+API Keys are managed at [portal.cloudpirates.io/security](https://portal.cloudpirates.io/security).
+
 ### View Keys
 
-Access [security page](https://portal.cloudpirates.io/security) to see:
+There you can see all your API Keys, for each:
 
 - Label
 - Key ID
@@ -77,64 +79,37 @@ Access [security page](https://portal.cloudpirates.io/security) to see:
 
 ### Delete Keys
 
-1. Navigate to security page
-2. Find key to delete
-3. Click "Delete"
-4. Confirm
+1. Find the correct API Key in list
+2. Click "Delete"
+3. Confirm
 
 Keys are immediately invalidated.
 
 ### Rotate Keys
 
-1. Create new key
-2. Update applications with new key
-3. Test new key
-4. Delete old key
+1. Create a new key
+2. Update your applications with the new key
+3. Test that the new key works
+4. Delete the old key
 
 ## Limitations
 
-API keys cannot be used for:
+API keys can't be used for:
 
 - `/v1/auth/change-password`
 - `/v1/auth/challenges/*` (MFA)
 - `/v1/auth/webauthn/register`
 - `/v1/auth/api-keys` (key management)
 
-::: info Info: Bearer Token Required for Security-Sensitive Operations
-Security-sensitive operations require interactive authentication using a Bearer token instead of an API key.
+::: info Bearer Token Required for Security-Sensitive Operations
+Security-sensitive operations require interactive authentication using a Bearer token instead of
+an API key.
 :::
 
 ## API Reference
 
-### List Keys
-
-```http
-GET /v1/auth/api-keys
-Authorization: Bearer <access-token>
-```
-
-### Create Key
-
-```http
-POST /v1/auth/api-keys
-Authorization: Bearer <access-token>
-Content-Type: application/json
-
-{
-  "label": "My Application"
-}
-```
-
-### Delete Key
-
-```http
-DELETE /v1/auth/api-keys/{apiKeyId}
-Authorization: Bearer <access-token>
-```
-
-::: info Info: Full API Documentation Available
-These are example requests. For complete API documentation including all parameters, response schemas, and authentication details, visit [api.cloudpirates.io/docs](https://api.cloudpirates.io/docs/).
-:::
+For key listing, creation, and deletion requests, see the
+[API Key reference](https://api.cloudpirates.dev/docs/#/Auth%20API%20Key).
 
 ## Related Resources
 

@@ -10,7 +10,7 @@ Manage your CloudPirates billing through Billing Profiles.
 
 CloudPirates uses **Billing Profiles** to manage payments and invoices.
 
-::: info Info: Personal Billing Profiles
+::: info Personal Billing Profiles
 Billing Profiles are personal and can only be accessed by their owner. You must assign your Billing Profile to workspaces to enable paid features.
 :::
 
@@ -38,7 +38,7 @@ View, download, and track invoices.
 
 Currently, all payments are processed via **wire transfer** (Überweisung).
 
-::: info Info: Additional Payment Methods Coming Soon
+::: info Additional Payment Methods Coming Soon
 Additional payment methods are currently in development and will be available soon:
 
 - PayPal

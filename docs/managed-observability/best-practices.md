@@ -11,7 +11,7 @@ Every deployment, job, and workload in your cluster is automatically checked aga
 - **Remediation steps** with code examples
 - **Severity rating** to help prioritize
 
-::: tip Tip: Clear Policy Guidance Provided
+::: tip Clear Policy Guidance Provided
 Each policy violation includes a clear explanation of the requirement and specific steps to resolve the issue.
 :::
 
@@ -377,7 +377,7 @@ image: nginx         # ❌ Not allowed (implies latest)
 
 ### Check Deprecated APIs
 
-::: tip Tip: No Registry-Restriction Policy Exists
+::: tip No Registry-Restriction Policy Exists
 There is no `restrict-image-registries` (or equivalent) policy — image origin isn't checked at all
 today.
 :::
@@ -403,7 +403,7 @@ Resources using deprecated Kubernetes APIs are flagged for migration.
 
 Workloads should not run in the `default` namespace.
 
-::: tip Tip: No NetworkPolicy-Enforcement Policy Exists
+::: tip No NetworkPolicy-Enforcement Policy Exists
 There is no `add-networkpolicy` (or equivalent) policy — namespace-level NetworkPolicy presence
 isn't checked today.
 :::

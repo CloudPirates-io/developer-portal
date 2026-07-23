@@ -35,7 +35,7 @@ Get comprehensive monitoring and observability for your Kubernetes clusters thro
 
 **Deploy production-ready applications with GitOps workflows**
 
-::: warning Warning: Private Beta Access Only
+::: warning Private Beta Access Only
 Currently in private beta. [Contact us](mailto:hello@cloudpirates.io) to request access.
 :::
 

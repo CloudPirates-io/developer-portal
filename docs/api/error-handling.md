@@ -15,7 +15,7 @@ Here are the most common ones you'll run into.
 | 422  | Unprocessable Entity - The request was well-formed but could not be processed due to semantic errors.                      |
 | 429  | Too Many Requests - The client has sent too many requests in a given amount of time (rate limiting).                       |
 | 500  | Internal Server Error - The server encountered an unexpected condition preventing it from fulfilling the request.          |
-| 501  | Not Implemented - The server does not support the functionality required to fulfill the request.                          |
+| 501  | Not Implemented - The server does not support the functionality required to fulfill the request.                           |
 | 502  | Bad Gateway - The server received an invalid response from an upstream server while trying to fulfill the request.         |
 | 503  | Service Unavailable - The server is currently unable to handle the request due to temporary overloading or maintenance.    |
 | 504  | Gateway Timeout - The server did not receive a timely response from an upstream server or proxy.                           |
@@ -140,7 +140,7 @@ future):
 
 This typically occurs when the requested URL is invalid, or the resource doesn't exist.
 
-::: warning Warning: Eventually Consistent Read Models
+::: warning Eventually Consistent Read Models
 Our event sourced architecture employs eventually consistent read models.
 As a result, a `POST`, `PUT`, `PATCH`, or `DELETE` request may return `200` or `201` right away,
 but the read models can take a moment to catch up.
@@ -191,7 +191,7 @@ It covers any unexpected error that doesn't fall under
 
 Our backend service for this endpoint is (temporarily) unavailable.
 
-::: warning Warning: Asynchronous Request Processing
+::: warning Asynchronous Request Processing
 Our system uses asynchronous handlers to process requests.
 Therefore, even if you encounter this error, your request may still be executed asynchronously
 at a later time.
@@ -210,7 +210,7 @@ at a later time.
 
 Our backend service was unable to handle your request due to a timeout.
 
-::: warning Warning: Asynchronous Request Processing
+::: warning Asynchronous Request Processing
 Our system uses asynchronous handlers to process requests.
 Therefore, even if you encounter this error, your request may still be executed asynchronously
 at a later time.

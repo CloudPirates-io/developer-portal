@@ -2,11 +2,11 @@
 next: false
 ---
 
-::: warning Warning: Private Beta Access Only
+::: warning Private Beta Access Only
 The Managed Application Platform is currently in private beta. Contact us at [hello@cloudpirates.io](mailto:hello@cloudpirates.io) to request access.
 :::
 
-::: danger Danger: This Page Describes Planned, Not Current, Functionality
+::: danger This Page Describes Planned, Not Current, Functionality
 Update channels, annotation-based configuration, automatic Helm value migrations, pre-update
 PVC/database backups, and changelog/notification/CVE-SLA handling have no corresponding backend
 code today. The one real primitive is a plain version bump (`{workspaceId, applicationId,

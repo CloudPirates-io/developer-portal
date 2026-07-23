@@ -1,4 +1,4 @@
-::: warning Warning: Private Beta Access Only
+::: warning Private Beta Access Only
 The Managed Application Platform is currently in private beta. Contact us at [hello@cloudpirates.io](mailto:hello@cloudpirates.io) to request access.
 :::
 
@@ -126,7 +126,7 @@ Authorization: Bearer <access-token>
 There is no fixed `resources` object on a preset — sizing (CPU/memory/storage) is validated against
 `valuesSchema`, an arbitrary per-preset JSON Schema, not a hardcoded shape.
 
-::: info Info: Full API Documentation Available
+::: info Full API Documentation Available
 These are example requests. For complete API documentation including all parameters, response schemas, and authentication details, visit [api.cloudpirates.io/docs](https://api.cloudpirates.io/docs/).
 :::
 

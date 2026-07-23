@@ -4,7 +4,7 @@ next: false
 
 # Alert Reference
 
-::: danger Danger: No Alerting Engine Exists
+::: danger No Alerting Engine Exists
 There is no alerting or threshold-evaluation feature anywhere in the backend today, under any
 name — none of the alerts below can actually fire. This page describes planned/roadmap
 functionality, not something you'll currently encounter on the platform.
