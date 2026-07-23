@@ -4,7 +4,7 @@ layout: home
 hero:
   name: CloudPirates
   text: Developer Portal
-  tagline: Navigate your Cloud Native journey with managed Kubernetes services, intelligent observability, and comprehensive automation APIs
+  tagline: Manage Kubernetes clusters, know what's happening inside them, and deploy applications, all through one API
   actions:
     - theme: brand
       text: API Documentation
@@ -16,40 +16,40 @@ hero:
 features:
   - icon: 🔌
     title: CloudPirates API
-    details: Complete platform automation with our comprehensive REST API. Integrate managed services into your workflows and automate operations programmatically.
+    details: One REST API for the whole platform. Manage workspaces, clusters, and deployments from your own tools and pipelines.
     link: /api/
     linkText: Explore API
 
   - icon: 👥
     title: Workspaces
-    details: Organize teams and resources efficiently. Manage members, control access with role-based permissions, and track resource usage across your organization.
+    details: Organize teams and resources. Add members, assign role-based permissions, and see who's using what.
     link: /workspaces/
     linkText: Manage Workspaces
 
   - icon: 📊
     title: Managed Observability
-    details: Gain essential Kubernetes cluster visibility with intelligent insights. CVE scanning, AI-powered event analysis, and automated recommendations through a lightweight agent.
+    details: CVE scanning, Kubernetes event analysis, and resource recommendations from a lightweight in-cluster agent.
     link: /managed-observability/
     linkText: View Observability
 
   - icon: 🚀
     title: Managed Application Platform
-    details: Streamline application lifecycle management with production-ready templates. Deploy databases, caching, messaging, and storage with GitOps workflows and automatic updates.
+    details: Deploy databases, caches, message queues, and storage from production-ready templates, kept up to date via GitOps.
     link: /managed-application-plattform/
     linkText: Deploy Applications
 ---
 
 ## What is CloudPirates?
 
-CloudPirates specializes in Cloud Native Application Lifecycle management, helping organizations navigate their Kubernetes journey with confidence. Our platform provides:
+CloudPirates runs Kubernetes infrastructure and the tooling around it, so your team can focus on building. The platform covers:
 
-**Managed Kubernetes**: Provider-independent Kubernetes operations with 24/7 expert support. Run on modern cloud native infrastructure with the flexibility to choose your preferred cloud provider or infrastructure.
+**Managed Kubernetes**: Kubernetes clusters on the cloud provider or infrastructure of your choice, with our team on call 24/7 for operations support.
 
-**Managed Observability**: Essential cluster visibility with intelligent features including CVE scanning, Kubernetes event monitoring with AI-powered context, automated resource recommendations, and security insights. Available as fully managed (hosted by CloudPirates) or deployed in your cluster.
+**Managed Observability**: CVE scanning, Kubernetes event analysis, automated resource recommendations, and security insights for your cluster. Run it fully managed by us, or deploy the lightweight agent in your own cluster.
 
-**Managed Application Platform**: Streamline application deployment and lifecycle management with pre-configured templates, GitOps workflows, and automatic updates. Deploy databases, caching layers, message queues, and more with production-ready configurations.
+**Managed Application Platform**: Pre-configured templates for databases, caches, message queues, and storage, deployed with GitOps and kept up to date automatically.
 
-**Developer-First API**: Complete platform automation through our REST API, enabling seamless integration with your existing tools and workflows.
+**Developer-First API**: Every part of the platform (workspaces, clusters, deployments) is available through our REST API, so you can plug it into the tools and workflows you already use.
 
 ## Getting Started
 
@@ -57,18 +57,18 @@ CloudPirates specializes in Cloud Native Application Lifecycle management, helpi
 2. **Create a workspace** to organize your teams and resources
 3. **Connect your Kubernetes clusters** or use our managed infrastructure
 4. **Generate API keys** for programmatic access and automation
-5. **Deploy and monitor** your applications with confidence
+5. **Deploy and monitor** your applications
 
 ## Quick Links
 
-- 📖 [API Reference](https://api.cloudpirates.io/docs/) — Complete OpenAPI 3.1 specification
-- 🚀 [Managed Services](/managed-services/) — Overview of all managed offerings
-- 🔍 [Managed Observability](/managed-observability/) — Intelligent cluster visibility
-- 🎯 [Application Platform](/managed-application-plattform/) — Production-ready templates
+- 📖 [API Reference](https://api.cloudpirates.io/docs/): OpenAPI 3.1 specification
+- 🚀 [Managed Services](/managed-services/): overview of all managed offerings
+- 🔍 [Managed Observability](/managed-observability/): CVE scanning, event analysis, and cluster visibility
+- 🎯 [Application Platform](/managed-application-plattform/): production-ready templates
 
 ## Contact
 
-Our expert team is here to help you navigate your Cloud Native journey.
+Questions, feedback, or something not working as documented? Reach out.
 
 - 📧 Email: [developer@cloudpirates.io](mailto:developer@cloudpirates.io)
 - 📞 Phone: [+49-571-784628-20](tel:+4957178462820)
@@ -77,5 +77,5 @@ Our expert team is here to help you navigate your Cloud Native journey.
 <br/>
 
 ::: info Continuously Updated Portal
-This portal is continuously updated with new features and improvements. We value your feedback — reach out with questions or suggestions to help us serve you better.
+This portal changes as the platform does. If you spot something outdated or missing, let us know.
 :::
