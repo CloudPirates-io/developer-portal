@@ -1,8 +1,8 @@
-::: warning Warning: Private Beta Access Only
+::: warning Private Beta Access Only
 The Managed Application Platform is currently in private beta. Contact us at [hello@cloudpirates.io](mailto:hello@cloudpirates.io) to request access.
 :::
 
-::: danger Danger: This Page Describes Planned, Not Current, Functionality
+::: danger This Page Describes Planned, Not Current, Functionality
 None of the GitOps mechanics below exist in the platform today. Concretely: application creation
 (the only thing that would trigger any of this) always fails with a `501 Not Implemented`; the
 "CloudPirates Managed Repository" is in reality one shared, service-global GitLab project, not an

@@ -4,11 +4,13 @@ prev: false
 
 # Authentication
 
-CloudPirates provides multiple authentication methods to secure your account and API access. Our authentication system is designed to be flexible, secure, and user-friendly.
+CloudPirates supports several ways to authenticate your account and API requests: passwords,
+WebAuthn passkeys, and API keys. Add MFA to strengthen password logins.
 
 ## Portal Access
 
-All authentication management is handled through the [CloudPirates Portal](https://portal.cloudpirates.io). The portal provides a user-friendly interface to manage your account security settings, authentication methods, and active sessions.
+Manage your authentication methods, security settings, and active sessions from the
+[CloudPirates Portal](https://portal.cloudpirates.io).
 
 ## Authentication Methods
 
@@ -16,7 +18,7 @@ CloudPirates supports the following authentication methods:
 
 ### Password Authentication
 
-Traditional email and password authentication with multi-factor authentication (MFA) support. This is the default authentication method for new accounts.
+Email and password authentication with optional MFA. This is the default method for new accounts.
 
 - Account registration at [/register](https://portal.cloudpirates.io/register)
 - Email validation required before first login
@@ -27,13 +29,16 @@ Traditional email and password authentication with multi-factor authentication (
 
 ### Passkeys (WebAuthn)
 
-Modern passwordless authentication using hardware security keys, biometric authenticators, or platform authenticators (Face ID, Touch ID, Windows Hello).
+Passwordless authentication using hardware security keys, biometric authenticators, or platform
+authenticators (Face ID, Touch ID, Windows Hello).
 
-- Alternative authentication method (password login remains available)
-- No MFA required when using WebAuthn
+- No MFA required when logging in while using WebAuthn
 - Support for multiple devices
-- Enhanced security with hardware-backed credentials
-- Recommended: Enable MFA for password login when using WebAuthn
+
+::: warning Password Login Still Available
+WebAuthn does not disable password authentication.
+Enable [MFA](./mfa.md) for password login as an additional layer.
+:::
 
 [Learn more about Passkeys →](./webauthn.md)
 
@@ -44,7 +49,7 @@ Programmatic API access for automated systems and integrations.
 - Create multiple API keys with custom labels
 - Manage keys through the portal
 - Use for API authentication instead of session tokens
-- Cannot be used for security-sensitive operations
+- Can't be used for security-sensitive operations
 
 [Learn more about API keys →](./api-keys.md)
 
@@ -55,7 +60,9 @@ Add an extra layer of security to password-based authentication:
 - **SMS Authentication**: Receive verification codes via text message
 - **Authenticator Apps**: Use TOTP codes from apps like Google Authenticator, 1Password, or Authy
 
-Note: MFA is only required for password authentication. WebAuthn provides strong authentication by default and does not require additional MFA.
+::: info Passkey Login Skips the MFA Prompt
+Logging in with a Passkey (WebAuthn) doesn't require MFA, even if it is set up for password login.
+:::
 
 [Learn more about MFA →](./mfa.md)
 
@@ -70,22 +77,14 @@ Monitor and control your active login sessions across all devices:
 
 [Learn more about session management →](./sessions.md)
 
-## Account Security
-
-Manage your account security through the [security page](https://portal.cloudpirates.io/security):
-
-- Change your password
-- Register and manage WebAuthn devices
-- Configure multi-factor authentication
-- Manage API keys
-- View and control active sessions
-
 ## Getting Started
 
-1. **Register**: Create an account at [portal.cloudpirates.io/register](https://portal.cloudpirates.io/register)
+1. **Register**: Create an account at
+   [portal.cloudpirates.io/register](https://portal.cloudpirates.io/register)
 2. **Verify Email**: Check your inbox and verify your email address
 3. **Login**: Access your account at [portal.cloudpirates.io](https://portal.cloudpirates.io)
-4. **Secure Your Account**: Visit the [security page](https://portal.cloudpirates.io/security) to add MFA or WebAuthn
+4. **Secure Your Account**: Visit [portal.cloudpirates.io/security](https://portal.cloudpirates.io/security)
+   to add MFA or WebAuthn
 
 ## Related Resources
 

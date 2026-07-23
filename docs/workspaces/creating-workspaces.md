@@ -15,7 +15,7 @@ Create a workspace to start using CloudPirates services.
 4. **Enter** a descriptive workspace name
 5. **Confirm** creation
 
-::: info Info: Automatic Owner Role Assignment
+::: info Automatic Owner Role Assignment
 You are automatically assigned the Owner role with full access when you create a workspace.
 :::
 
@@ -52,7 +52,7 @@ GET /v1/workspaces
 Authorization: Bearer <access-token>
 ```
 
-::: info Info: Full API Documentation Available
+::: info Full API Documentation Available
 These are example requests. For complete API documentation including all parameters, response schemas, and authentication details, visit [api.cloudpirates.io/docs](https://api.cloudpirates.io/docs/).
 :::
 

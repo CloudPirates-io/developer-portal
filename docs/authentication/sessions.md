@@ -8,7 +8,8 @@ Monitor and control active login sessions across devices.
 
 ## Overview
 
-Access session management from the [security page](https://portal.cloudpirates.io/security) to:
+Access session management at
+[portal.cloudpirates.io/security](https://portal.cloudpirates.io/security):
 
 - View all active sessions
 - Monitor activity and locations
@@ -28,12 +29,12 @@ Each session shows:
 
 ### Logout from Session
 
-1. Navigate to [security page](https://portal.cloudpirates.io/security)
+1. Navigate to [portal.cloudpirates.io/security](https://portal.cloudpirates.io/security)
 2. Find session to terminate
 3. Click "Logout Device"
 4. Confirm
 
-::: info Info: Immediate Session Logout
+::: info Immediate Session Logout
 Session logout is immediate. The device must re-authenticate to regain access.
 :::
 
@@ -89,26 +90,12 @@ Response:
 }
 ```
 
-`auth` is the decoded JWT payload for the new access token (includes `exp`, the expiration as a Unix
-timestamp) — there is no separate `expiresIn` seconds field.
+`auth` is the decoded JWT payload for the new access token (includes `exp`, the expiration as a
+Unix timestamp). There's no separate `expiresIn` seconds field.
 
 Both tokens rotate for security.
 
 ## API Reference
-
-### Get Current User
-
-```http
-GET /v1/auth/me
-Authorization: Bearer <access-token>
-```
-
-### Validate Session
-
-```http
-GET /v1/auth/validate
-Authorization: Bearer <access-token>
-```
 
 ### List Sessions
 
@@ -128,12 +115,12 @@ POST /v1/auth/sessions/{sessionId}/logout
 Authorization: Bearer <access-token>
 ```
 
-::: warning Warning: Bearer Token Required for Session Management
-API keys cannot be used for session management operations. A Bearer token is required.
-:::
+<!-- TODO: Implement session API documentation -->
+<!-- For session listing and logout requests, see the
+[Session API reference](https://api.cloudpirates.dev/docs/#/Auth%20Session). -->
 
-::: info Info: Full API Documentation Available
-These are example requests. For complete API documentation including all parameters, response schemas, and authentication details, visit [api.cloudpirates.io/docs](https://api.cloudpirates.io/docs/).
+::: warning Bearer Token Required for Session Management
+API keys cannot be used for session management operations. A Bearer token is required.
 :::
 
 ## Related Resources

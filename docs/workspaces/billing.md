@@ -4,7 +4,7 @@ next: false
 
 # Workspace Billing
 
-::: danger Danger: There Is No Workspace-Scoped Billing Concept
+::: danger There Is No Workspace-Scoped Billing Concept
 Everything this page previously described (assigning/changing/removing a billing profile "on a
 workspace", the `/v1/workspaces/{workspaceId}/billing` API) does not exist anywhere in the
 backend. `WorkspaceApi.ts` has no `/billing` route, and neither `workspaceservice` nor

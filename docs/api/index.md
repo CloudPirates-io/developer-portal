@@ -31,9 +31,9 @@ in the `Authorization` header.
 Obtain one by signing up on our [customer portal](https://portal.cloudpirates.io).
 
 After you have logged in to our customer portal, you can create a new API key by going to your
-[security page](https://portal.cloudpirates.io/security).
+[portal.cloudpirates.io/security](https://portal.cloudpirates.io/security).
 
-::: warning Warning: Secure Your API Key
+::: warning Secure Your API Key
 Treat your API key with the same level of security as you would your password.
 Don't expose it in public repositories, share it indiscriminately, or include it directly in
 client-side code.
@@ -55,7 +55,7 @@ As an example, you can get your current identity with the following `curl` reque
 curl -H "Authorization:ApiKey <API_KEY>" https://api.cloudpirates.io/v1/auth/me
 ```
 
-::: tip Tip: API Key Limitations
+::: tip API Key Limitations
 Certain API endpoints, such as those that alter security-related settings like
 `/v1/auth/change-password`, cannot be accessed using API keys.
 See our [API documentation](https://api.cloudpirates.io/docs/) for which ones support them.

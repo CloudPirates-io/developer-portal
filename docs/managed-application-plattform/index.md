@@ -2,7 +2,7 @@
 prev: false
 ---
 
-::: warning Warning: Private Beta Access Only
+::: warning Private Beta Access Only
 The Managed Application Platform is currently in private beta. Contact us at [hello@cloudpirates.io](mailto:hello@cloudpirates.io) to request access.
 :::
 
@@ -81,7 +81,7 @@ Portal Action → Git Commit → ArgoCD Sync → Kubernetes Deployment
 4. **Deploy**: We create ArgoCD Applications in your repository
 5. **Manage**: Update, configure, and monitor through the portal
 
-::: danger Danger: Application Creation Is Not Yet Functional
+::: danger Application Creation Is Not Yet Functional
 Creating an application currently always fails with a `501 Not Implemented` — the underlying
 GitOps/ArgoCD provisioning described below is not wired up yet.
 :::
@@ -138,7 +138,7 @@ Authorization: Bearer <access-token>
 
 ### Create Application
 
-::: danger Danger: Always Returns 501
+::: danger Always Returns 501
 This request currently always fails with `501 Not Implemented`. The route, validation, and request
 shape below are real; the actual provisioning behind it isn't built yet.
 :::
@@ -166,7 +166,7 @@ Authorization: Bearer <access-token>
 
 ### Update Application
 
-::: danger Danger: No Backend Handler Registered
+::: danger No Backend Handler Registered
 These two routes exist and accept requests, but no command handler is registered for them anywhere
 in the backend — a request never gets a response and will time out (`503`/`504`). There is also no
 `preset`/`autoUpdate` concept on this endpoint.
@@ -203,7 +203,7 @@ DELETE /v1/workspaces/{workspaceId}/applications/{applicationId}
 Authorization: Bearer <access-token>
 ```
 
-::: info Info: Full API Documentation Available
+::: info Full API Documentation Available
 These are example requests. For complete API documentation including all parameters, response schemas, and authentication details, visit [api.cloudpirates.io/docs](https://api.cloudpirates.io/docs/).
 :::
 

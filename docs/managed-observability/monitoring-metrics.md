@@ -2,7 +2,7 @@
 
 Monitor node and pod CPU/memory usage for capacity planning.
 
-::: danger Danger: CPU/Memory Only
+::: danger CPU/Memory Only
 Metrics collection covers **only CPU and memory** for nodes and pods, pulled from the Kubernetes
 `metrics.k8s.io` API. Disk, network, load average, ingress traffic/latency, volume usage, and
 control-plane component health are **not collected anywhere** — the sections below that describe
@@ -27,9 +27,7 @@ Kubernetes `metrics.k8s.io` API. The response is a raw numeric series — there 
 classification, no "Healthy"/"Under pressure"/"Overloaded" labeling, and no derived insight text:
 
 ```json
-[
-  { "created": "2024-01-15T10:30:00Z", "cpu": 450, "memory": 2147483648 }
-]
+[{ "created": "2024-01-15T10:30:00Z", "cpu": 450, "memory": 2147483648 }]
 ```
 
 ### Disk Space _(not collected)_

@@ -14,7 +14,8 @@ Create an account at [portal.cloudpirates.io/register](https://portal.cloudpirat
 
 ### Password Requirements
 
-Passwords are validated against known data breaches using [Have I Been Pwned](https://haveibeenpwned.com/):
+Passwords are validated against known data breaches using
+[Have I Been Pwned](https://haveibeenpwned.com/):
 
 - Not found in known data breaches
 - Sufficiently complex
@@ -23,95 +24,47 @@ Passwords are validated against known data breaches using [Have I Been Pwned](ht
 
 After registration, verify your email before logging in:
 
-1. Check your inbox for verification email
-2. Click the activation link
-3. Account is activated
+1. Check your inbox for the verification email
+2. Click the activation link or copy the activation code
+3. Activate your account at [portal.cloudpirates.io/auth/activate](https://portal.cloudpirates.io/auth/activate)
 
 ## Login
 
 Login at [portal.cloudpirates.io](https://portal.cloudpirates.io) with email and password.
 
-**With MFA**: Enter password, then verification code.
+If MFA is enabled, input the verification code.
 
 ## Password Recovery
 
 Forgot password?
 
-1. Go to [request-reset-password](https://portal.cloudpirates.io/request-reset-password)
-2. Enter email address
-3. Click reset link in email
-4. Enter new password
+1. Go to [portal.cloudpirates.io/request-reset-password](https://portal.cloudpirates.io/request-reset-password)
+2. Enter your email address
+3. Check your inbox for the reset email
+4. Click the reset link
+5. Enter a new password
 
-::: info Info: No Access to Email or MFA Device?
-If you do not have access to your email address or MFA device, contact [support@cloudpirates.io](mailto:support@cloudpirates.io) for assistance. Note that password reset does not disable MFA.
+::: info No Access to Email or MFA Device?
+If you don't have access to your email address or MFA device, contact
+[support@cloudpirates.io](mailto:support@cloudpirates.io) for assistance.
+A password reset doesn't disable MFA.
 :::
 
 ## Changing Password
 
-1. Navigate to [security page](https://portal.cloudpirates.io/security)
-2. Locate password change section
-3. Enter current password
-4. Enter new password
+1. Navigate to [portal.cloudpirates.io/security](https://portal.cloudpirates.io/security)
+2. Locate the Change Password section
+3. Enter your current password
+4. Enter a new password
 5. Confirm
 
 ## API Reference
 
-### Registration
+For registration, login, password reset, and password change requests, see the
+[Auth API reference](https://api.cloudpirates.dev/docs/#/Auth).
 
-```http
-POST /v1/auth/register
-Content-Type: application/json
-
-{
-  "email": "user@example.com",
-  "password": "your-password",
-  "firstName": "John",
-  "lastName": "Doe"
-}
-```
-
-### Login
-
-```http
-POST /v1/auth/login
-Content-Type: application/json
-
-{
-  "email": "user@example.com",
-  "password": "your-password"
-}
-```
-
-### Password Reset
-
-```http
-POST /v1/auth/request-reset-password
-Content-Type: application/json
-
-{
-  "email": "user@example.com"
-}
-```
-
-### Change Password
-
-```http
-POST /v1/auth/change-password
-Authorization: Bearer <access-token>
-Content-Type: application/json
-
-{
-  "existingPassword": "current",
-  "password": "new"
-}
-```
-
-::: tip Tip: API Keys Cannot Modify Passwords
-API keys cannot be used to modify your password. You must use your Bearer token instead for this operation.
-:::
-
-::: info Info: Full API Documentation Available
-These are example requests. For complete API documentation including all parameters, response schemas, and authentication details, visit [api.cloudpirates.io/docs](https://api.cloudpirates.io/docs/).
+::: tip API Keys Cannot Modify Passwords
+API keys cannot be used to modify your password. Use your Bearer token instead for this operation.
 :::
 
 ## Related Resources

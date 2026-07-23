@@ -1,8 +1,8 @@
-::: warning Warning: Private Beta Access Only
+::: warning Private Beta Access Only
 The Managed Application Platform is currently in private beta. Contact us at [hello@cloudpirates.io](mailto:hello@cloudpirates.io) to request access.
 :::
 
-::: danger Danger: Most of This Page Describes Planned, Not Current, Capabilities
+::: danger Most of This Page Describes Planned, Not Current, Capabilities
 Deploying an application at all currently always fails with a `501 Not Implemented` (see
 [Managed Application Platform](./index.md)). Beyond that, the cluster this points at only carries
 `clusterId`, `workspaceId`, `clusterName`, `clusterType` (`EXTERNAL`/`MANAGED`), a cluster-class

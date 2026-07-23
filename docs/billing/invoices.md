@@ -105,7 +105,7 @@ Current payment method:
 3. Send payment via bank transfer
 4. Include invoice reference number
 
-::: warning Warning: Always Include Payment Reference
+::: warning Always Include Payment Reference
 You must always include the invoice reference number in your payment to ensure proper allocation to your account.
 :::
 
@@ -153,12 +153,12 @@ GET /v1/billing/billing-profiles/{billingProfileId}/transactions
 Authorization: Bearer <access-token>
 ```
 
-::: tip Tip: Paginated List Endpoints
+::: tip Paginated List Endpoints
 `List Invoices` and `List Transactions` are paginated like every other list endpoint in the API —
 see [Pagination](/api/pagination.md) for the `x-Total`/`x-Limit`/`x-Offset`/`Link` headers.
 :::
 
-::: info Info: Full API Documentation Available
+::: info Full API Documentation Available
 These are example requests. For complete API documentation including all parameters, response schemas, and authentication details, visit [api.cloudpirates.io/docs](https://api.cloudpirates.io/docs/).
 :::
 

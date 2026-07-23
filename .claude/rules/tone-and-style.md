@@ -22,7 +22,9 @@ thing actually does. Words/patterns to hunt down and remove or replace when edit
 
 - "comprehensive", "intelligent", "seamless(ly)", "streamline", "leverage", "empower(ing)",
   "unlock", "robust", "cutting-edge", "state-of-the-art", "ecosystem", "journey" (as in "Cloud
-  Native journey"), "solution" used as filler, "navigate ... with confidence"
+  Native journey"), "solution" used as filler, "navigate ... with confidence", "user-friendly"
+  (found in `docs/authentication/*.md`, 2026-07-23: "designed to be flexible, secure, and
+  user-friendly", "user-friendly interface")
 - Feature descriptions that describe a _feeling_ ("gain essential visibility", "streamline
   lifecycle management") instead of a _capability_ ("scans images for known CVEs", "restarts a
   container when its health check fails")
@@ -157,6 +159,24 @@ Exceptions, don't wrap these:
 - List item continuation lines: if you do wrap a bullet's text, indent the continuation to line up
   with the bullet's content (2 spaces past a `- ` marker) so it stays part of the same list item
   instead of starting a new paragraph or breaking out of the list.
+
+## Headings and box titles use Title Case, including short verbs
+
+Applies to `#`/`##`/`###` headings and VitePress container titles (`::: warning Some Title`).
+Found and fixed 2026-07-23 in `docs/authentication/webauthn.md`: `## What is WebAuthn?` should be
+`## What Is WebAuthn?`.
+
+The rule (standard Title Case, matches Chicago/APA conventions, not something specific to this
+repo): capitalize every word except articles (`a`, `an`, `the`), coordinating conjunctions (`and`,
+`but`, `or`, `nor`), and prepositions (`of`, `in`, `on`, `at`, `to`, `with`, `for`, `from`, `by`,
+...), regardless of how short those are. Always capitalize the first and last word of the title.
+
+The trap: short verbs look like the "small words" that get lowercased, but verbs are never in the
+lowercase list, so they're capitalized regardless of length. "Is", "Be", "Do", "Am", "Are" stay
+capitalized. Compare the correctly-lowercased prepositions already in this codebase (`### Setup
+with QR Code`, `### Logout from Session`, `::: warning ... Required for Session Management`, all
+in `docs/authentication/`) against the verb case: "is" is the sentence's verb ("What [is] WebAuthn"),
+not a preposition, so it capitalizes.
 
 ## Open question — nautical/pirate metaphors
 

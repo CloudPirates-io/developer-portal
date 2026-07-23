@@ -4,7 +4,7 @@ Personal payment accounts that contain your billing information and enable paid 
 
 ## Overview
 
-::: info Info: Personal Access Only
+::: info Personal Access Only
 Billing Profiles are personal and can only be accessed by their owner.
 :::
 
@@ -55,7 +55,7 @@ Add email addresses to receive invoices:
 
 Assign a custom identifier to all invoices from this Billing Profile.
 
-::: tip Tip: Purchase Order Number Usage
+::: tip Purchase Order Number Usage
 The purchase order number appears on all invoices from this profile and in the subject line of invoice emails. You can update it anytime.
 :::
 
@@ -77,7 +77,7 @@ Requirements:
 - No active assignments to workspaces or services
 - No transactions exist
 
-::: warning Warning: Cannot Delete Profiles with Transaction History
+::: warning Cannot Delete Profiles with Transaction History
 Billing Profiles cannot be deleted if any transactions exist. Profiles with transaction history are permanently retained for accounting and compliance purposes.
 :::
 
@@ -101,7 +101,7 @@ Billing Profiles can be transferred to a different user by CloudPirates support.
    - New owner email
    - Reason for transfer
 
-::: warning Warning: Profile Transfers Require Support
+::: warning Profile Transfers Require Support
 Billing Profile transfers must be requested through support. Contact [support@cloudpirates.io](mailto:support@cloudpirates.io) to initiate a transfer.
 :::
 
@@ -247,7 +247,7 @@ DELETE /v1/billing/billing-profiles/{billingProfileId}
 Authorization: Bearer <access-token>
 ```
 
-::: info Info: Full API Documentation Available
+::: info Full API Documentation Available
 These are example requests. For complete API documentation including all parameters, response schemas, and authentication details, visit [api.cloudpirates.io/docs](https://api.cloudpirates.io/docs/).
 :::
 

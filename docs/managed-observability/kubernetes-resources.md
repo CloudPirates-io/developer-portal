@@ -13,7 +13,7 @@ The Resource Explorer gives you a complete view of your cluster with clear expla
 - **Networking**: Services and how traffic flows
 - **Jobs**: Batch processing and scheduled tasks
 
-::: tip Tip: Everything Explained
+::: tip Everything Explained
 Every resource shows not just its status, but **what that status means** and **what to do if there's a problem**. No Kubernetes expertise required.
 :::
 
