@@ -1,6 +1,7 @@
 # Error Handling
 
-Our API utilizes HTTP status codes extensively to communicate errors and outcomes effectively for your requests. Below is a list of the most common errors you may encounter when using our API.
+Our API uses standard HTTP status codes to signal errors.
+Here are the most common ones you'll run into.
 
 ## Error Codes Overview
 
@@ -20,14 +21,21 @@ Our API utilizes HTTP status codes extensively to communicate errors and outcome
 | 504  | Gateway Timeout - The server did not receive a timely response from an upstream server or proxy.                           |
 
 ::: tip 429 Too Many Requests
-Rate limiting, if enforced, happens at the infrastructure/ingress layer in front of our API and is not something our backend services implement or guarantee. Treat a `429` as a signal to back off and retry with backoff, but don't rely on specific limits unless we document them separately.
+Rate limiting, if enforced, happens at the infrastructure/ingress layer in front of our API and
+is not something our backend services implement or guarantee.
+Treat a `429` as a signal to back off and retry with backoff, but don't rely on specific limits
+unless we document them separately.
 :::
 
-When you encounter an error, you get a detailed explanation of the error in the response body. Depending on which layer rejected the request, the status code is exposed either under a `status` field or under a `code` field — see the `401`/`403` examples below.
+When you encounter an error, the response body includes a detailed explanation.
+Depending on which layer rejected the request, the status code is exposed either under a
+`status` field or under a `code` field.
+See the `401`/`403` examples below.
 
 ## 400 Bad Request
 
-You send an invalid request with missing or wrong payload. Please look at the response body to get the exact error details.
+You sent a request with a missing or invalid payload.
+Check the response body for the exact error details.
 
 **Examples**
 
@@ -61,7 +69,9 @@ Invalid request with disallowed additional property `myAdditionalProperty`:
 }
 ```
 
-Requests that pass schema validation but are rejected by business-rule checks use a different, flatter shape (no `instancePath`/`schemaPath`/`keyword`). For example, creating a workspace with an invalid `workspaceKey`:
+Requests that pass schema validation but are rejected by business-rule checks use a different,
+flatter shape.
+For example, creating a workspace with an invalid `workspaceKey`:
 
 ```json
 {
@@ -77,12 +87,12 @@ Requests that pass schema validation but are rejected by business-rule checks us
 
 ## 401 Unauthorized
 
-Unauthorized - The request requires user authentication or, if the request included authorization credentials, authorization
-has been refused for those credentials.
+The request requires authentication, or the credentials you provided were rejected.
 
-The response shape depends on why the request was rejected:
+The response shape depends on why the request was rejected (this might be unified in the
+future):
 
-- Missing, invalid, or expired credentials — status is exposed under `status`:
+- Missing, invalid, or expired credentials: status is exposed under `status`:
 
   ```json
   {
@@ -91,7 +101,7 @@ The response shape depends on why the request was rejected:
   }
   ```
 
-- No authenticated identity when a role-based permission check runs — status is exposed under `code`:
+- No authenticated identity when a role-based permission check runs: status is exposed under `code`:
 
   ```json
   {
@@ -102,11 +112,12 @@ The response shape depends on why the request was rejected:
 
 ## 403 Forbidden
 
-Forbidden - The server understood the request, but is refusing to fulfill it. Re-Authentication will not change this.
+The server understood the request but refuses to fulfill it. Re-authenticating won't change that.
 
-The response shape depends on which check rejected the request:
+The response shape depends on which check rejected the request (this might be unified in the
+future):
 
-- Missing role/permission for the resource type — status is exposed under `code`:
+- Missing role/permission for the resource type: status is exposed under `code`:
 
   ```json
   {
@@ -115,7 +126,8 @@ The response shape depends on which check rejected the request:
   }
   ```
 
-- Missing access to a specific resource instance (e.g. a workspace or cluster you're not a member of) — status is exposed under `status`:
+- Missing access to a specific resource instance (e.g. a workspace or cluster you're not a
+  member of): status is exposed under `status`:
 
   ```json
   {
@@ -126,10 +138,14 @@ The response shape depends on which check rejected the request:
 
 ## 404 Not Found
 
-The server could not find the requested resource. This typically occurs when the requested URL is invalid, or the resource does not exist on the server.
+This typically occurs when the requested URL is invalid, or the resource doesn't exist.
 
 ::: warning Warning: Eventually Consistent Read Models
-Our event sourced architecture employs eventually consistent read models. As a result, changes made by a POST, PUT, PATCH, or DELETE request may take a moment until all read models are fully updated. This delay might cause a subsequent GET request, executed immediately after the mutating request, to encounter an error like 404 or 403.
+Our event sourced architecture employs eventually consistent read models.
+As a result, a `POST`, `PUT`, `PATCH`, or `DELETE` request may return `200` or `201` right away,
+but the read models can take a moment to catch up.
+This delay might cause a subsequent `GET` request, executed immediately after the mutating
+request, to encounter an error like `404` or `403`.
 :::
 
 **Example**
@@ -143,8 +159,7 @@ Our event sourced architecture employs eventually consistent read models. As a r
 
 ## 500 Internal Server Error
 
-The HTTP status code 500 indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.
-This is a generic error message used when the server cannot provide a more specific error message.
+This is a generic error, used when nothing more specific applies.
 
 **Example**
 
@@ -157,9 +172,11 @@ This is a generic error message used when the server cannot provide a more speci
 
 ## 502 Bad Gateway
 
-Our API gateway returns a 502 Bad Gateway status when it encounters an issue with our internal backend service that prevents it from fulfilling your request.
-
-This status code is used for all unexpected errors that do not specifically fall under the [Service Unavailable](#_503-service-unavailable) (`503`) or [Gateway Timeout](#_504-gateway-timeout) (`504`) categories.
+Our API gateway returns this status when an internal backend service fails in a way that
+prevents it from fulfilling your request.
+It covers any unexpected error that doesn't fall under
+[Service Unavailable](#_503-service-unavailable) (`503`) or
+[Gateway Timeout](#_504-gateway-timeout) (`504`).
 
 **Example**
 
@@ -175,7 +192,9 @@ This status code is used for all unexpected errors that do not specifically fall
 Our backend service for this endpoint is (temporarily) unavailable.
 
 ::: warning Warning: Asynchronous Request Processing
-Our internal backend system uses asynchronous handlers to process requests. Therefore, even if you encounter an error, your request may still be executed asynchronously at a later time.
+Our system uses asynchronous handlers to process requests.
+Therefore, even if you encounter this error, your request may still be executed asynchronously
+at a later time.
 :::
 
 **Example**
@@ -192,7 +211,9 @@ Our internal backend system uses asynchronous handlers to process requests. Ther
 Our backend service was unable to handle your request due to a timeout.
 
 ::: warning Warning: Asynchronous Request Processing
-Our internal backend system uses asynchronous handlers to process requests. Therefore, even if you encounter an error, your request may still be executed asynchronously at a later time.
+Our system uses asynchronous handlers to process requests.
+Therefore, even if you encounter this error, your request may still be executed asynchronously
+at a later time.
 :::
 
 **Example**

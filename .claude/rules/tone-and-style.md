@@ -1,6 +1,6 @@
 ---
 paths:
-  - 'docs/**'
+  - "docs/**"
 ---
 
 # Tone & style for developer-portal docs
@@ -23,8 +23,8 @@ thing actually does. Words/patterns to hunt down and remove or replace when edit
 - "comprehensive", "intelligent", "seamless(ly)", "streamline", "leverage", "empower(ing)",
   "unlock", "robust", "cutting-edge", "state-of-the-art", "ecosystem", "journey" (as in "Cloud
   Native journey"), "solution" used as filler, "navigate ... with confidence"
-- Feature descriptions that describe a *feeling* ("gain essential visibility", "streamline
-  lifecycle management") instead of a *capability* ("scans images for known CVEs", "restarts a
+- Feature descriptions that describe a _feeling_ ("gain essential visibility", "streamline
+  lifecycle management") instead of a _capability_ ("scans images for known CVEs", "restarts a
   container when its health check fails")
 - Stacked adjective marketing openers ("Complete platform automation with our comprehensive REST
   API") — say what the API lets you do instead
@@ -46,7 +46,7 @@ Confirmed from the managed-observability page and the Kubernetes Probes blog pos
 - **Analogy or concrete scenario before the technical detail**, not after. The probes article
   grounds the concept in a real-world scenario before showing YAML/kubectl.
 - **Examples do the explaining.** Config snippets and command output are used liberally instead of
-  prose describing what a config *would* look like.
+  prose describing what a config _would_ look like.
 
 ## Avoid em dashes ("—")
 
@@ -62,6 +62,101 @@ Applied to `index.md` this session: `"...applications — all through one API"` 
 applications, all through one API"`; `"platform — workspaces, clusters, deployments — is
 available"` became `"platform (workspaces, clusters, deployments) is available"`; Quick Links
 entries changed from `[Text](url) — description` to `[Text](url): description`.
+
+## Cut duplicate information, not just buzzwords
+
+Separate from the buzzword list above: actively hunt for facts restated somewhere they're already
+established (a header, the example right below, an adjacent sentence). This reads as
+padding/AI-verbosity even when none of the individual words are marketing-speak.
+
+Examples fixed in `docs/api/error-handling.md` and `docs/api/pagination.md` (2026-07-23):
+
+- `## 502 Bad Gateway` followed by prose starting "Our API gateway returns a 502 Bad Gateway
+  status..." restates the status the header already names. Rewrite the prose to not repeat it
+  ("Our API gateway returns this status when...").
+- "Requests... use a different, flatter shape (no `instancePath`/`schemaPath`/`keyword`)" was
+  redundant once the very next block is a JSON example showing that exact shape. Drop the
+  parenthetical; let the example demonstrate it.
+- "Our internal backend system uses asynchronous handlers..." repeated "backend" information
+  already obvious from context; tightened to "Our system uses asynchronous handlers...".
+- When two response shapes exist for what's conceptually the same error (e.g. 401/403 sometimes
+  under `status`, sometimes under `code`, depending on which middleware rejects the request) and
+  that's a real inconsistency rather than deliberate design, say so plainly instead of presenting
+  it as intentional: "The response shape depends on which check rejected the request (this might
+  be unified in the future)."
+- `docs/api/index.md`'s "authenticate your requests using an `API key` included in the
+  Authorization header of your HTTP requests. Obtain an API key by signing up on..." named the
+  concept three times ("your requests" twice, "API key" twice, plus "of your HTTP requests" adding
+  nothing "your requests" hadn't already said) in two sentences. Fixed to "authenticate your
+  requests using an `ApiKey` included in the `Authorization` header. Obtain one by signing up
+  on...": state the term once per sentence, use a pronoun ("one") on the repeat instead of
+  respelling it, and use the actual casing the API expects (`ApiKey`, matching the `Authorization:
+ApiKey <API_KEY>` header example elsewhere on the same page) rather than a looser prose form.
+
+When adding a second example to illustrate a mechanism (e.g. a second set of response headers),
+prefer values tied to a concrete, stated scenario over repeating the same defaults already shown
+elsewhere in the page. `docs/api/pagination.md`'s response-headers example uses `x-Limit: 5` /
+`x-Offset: 40` with the sentence "these headers would be returned alongside items 40 through 44",
+instead of reusing the `limit=20&offset=0` defaults already shown in the query-parameters example.
+
+## Some duplicate information is intentional — don't strip it
+
+Not all repetition is padding. Before deduping a repeated fact, check whether a reader could land
+directly on the section/page repeating it (via an anchor link, a nav entry, or by opening one file
+without the other) without ever seeing the "original" instance. If so, keep both copies so each
+section/page stays self-contained.
+
+Confirmed intentional duplicates as of 2026-07-23, don't merge or remove these:
+
+- The "Asynchronous Request Processing" warning box is repeated verbatim in both `## 503 Service
+Unavailable` and `## 504 Gateway Timeout` in `docs/api/error-handling.md`. A reader jumping
+  straight to `#504-gateway-timeout` from a link elsewhere would otherwise miss it.
+- The eventually-consistent-read-models explanation appears in both `docs/api/index.md` (under
+  `## Event Sourced Architecture`) and `docs/api/error-handling.md` (in the `## 404 Not Found`
+  warning box). Same reasoning: a reader who opens `error-handling.md` directly, without having
+  read `index.md` first, still needs the context for why a fresh `GET` can 404.
+  - These two copies should stay in sync in wording even though they live in different files. If
+    you improve one, check the other and update it to match rather than letting them drift (they
+    drifted out of sync once already this session and had to be re-synced).
+
+## Wrap long source lines (cosmetic only, doesn't change the rendered page)
+
+Markdown collapses soft line breaks: two source lines with no blank line between them render as
+one continuous paragraph, wrapped by the reader's viewport width. So breaking a long line into
+several shorter ones in the `.md` source is a purely visual change to the source file. It does not
+add a line break, paragraph break, or any other change in the rendered developer portal.
+
+Do this anyway: long unbroken lines in the source force horizontal scrolling for anyone reading the
+raw file in an editor or a narrow diff view. Wrap prose lines at roughly 100 characters (matching
+the width already used across `.claude/rules/*.md` in this repo), never in the middle of an
+inline-code span (`` `like this` ``) or a `[link](url)`.
+
+Prefer breaking at a sentence boundary over a mid-sentence clause boundary, when the line stays
+under the ~100-character target either way. It's not a hard rule (a clause break is fine when a
+sentence is long enough that a sentence-boundary break would leave one line much longer than the
+other, or when there's no earlier sentence break to use), just the better default when both options
+fit. For example, prefer:
+
+```
+Our base URL for API requests is `https://api.cloudpirates.io/v1`.
+Prepend it to every endpoint path below.
+```
+
+over:
+
+```
+Our base URL for API requests is `https://api.cloudpirates.io/v1`. Prepend it to every endpoint
+path below.
+```
+
+Exceptions, don't wrap these:
+
+- Markdown table rows: breaking mid-row breaks the table syntax. Long table cells are an accepted
+  tradeoff of using a table at all.
+- Fenced code blocks and raw URLs on their own line: these must stay intact.
+- List item continuation lines: if you do wrap a bullet's text, indent the continuation to line up
+  with the bullet's content (2 spaces past a `- ` marker) so it stays part of the same list item
+  instead of starting a new paragraph or breaking out of the list.
 
 ## Open question — nautical/pirate metaphors
 
@@ -82,5 +177,11 @@ to infer from the marketing site.
 5. Prefer "you" addressing the reader over passive/third-person phrasing.
 6. Don't invent nautical metaphors unprompted (see open question above).
 7. Don't use em dashes ("—"); rewrite the sentence instead (see section above).
-8. Don't change factual/technical claims (endpoints, feature lists, links) without verifying them
+8. After the buzzword pass, do a second pass for duplicate information: does this sentence repeat
+   something the header, the example right below, or an adjacent sentence already established? Cut
+   it if so, unless it's a case where a reader could land on this section/page directly without
+   seeing the other instance (see "Some duplicate information is intentional" above).
+9. Don't change factual/technical claims (endpoints, feature lists, links) without verifying them
    against source. This file is about wording, not content accuracy.
+10. Wrap long lines in the source at ~100 characters (see "Wrap long source lines" above). Purely
+    cosmetic, do this on every page you touch regardless of whether you changed the wording.
