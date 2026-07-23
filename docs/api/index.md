@@ -69,16 +69,14 @@ Prepend it to every endpoint path below.
 All endpoints follow REST conventions: resources map to URL paths, and standard HTTP methods
 (`GET`, `POST`, `PUT`, `PATCH`, `DELETE`) map to actions on them.
 
-Endpoints are built like this:
+## Examples
 
-```
-https://api.cloudpirates.io/v1/{service}/{resource}
-```
+A few example endpoints:
 
-For example:
-
-https://api.cloudpirates.io/v1/auth/me
-
-https://api.cloudpirates.io/v1/workspaces/{workspaceId}
-
-https://api.cloudpirates.io/v1/workspaces/{workspaceId}/members
+| Method   | Endpoint                            | Description                            |
+| -------- | ----------------------------------- | -------------------------------------- |
+| `GET`    | `/workspaces`                       | List all workspaces you're a member of |
+| `POST`   | `/workspaces`                       | Create a new workspace                 |
+| `GET`    | `/workspaces/{workspaceId}`         | Get details of a workspace             |
+| `DELETE` | `/workspaces/{workspaceId}`         | Delete a workspace                     |
+| `GET`    | `/workspaces/{workspaceId}/members` | Get all members of a workspace         |
