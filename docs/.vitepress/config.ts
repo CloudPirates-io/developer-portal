@@ -132,6 +132,7 @@ export default defineConfig({
 
     socialLinks: [
       { icon: "github", link: "https://github.com/CloudPirates-io" },
+      { icon: "discord", link: "https://discord.gg/XUn9Kt5dsy" },
     ],
 
     editLink: {

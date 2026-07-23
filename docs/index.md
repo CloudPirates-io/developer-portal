@@ -41,15 +41,15 @@ features:
 
 ## What is CloudPirates?
 
-CloudPirates runs Kubernetes infrastructure and the tooling around it, so your team can focus on building. The platform covers:
+[CloudPirates](https://www.cloudpirates.io) runs Kubernetes infrastructure and the tooling around it, so your team can focus on building. The platform covers:
 
-**Managed Kubernetes**: Kubernetes clusters on the cloud provider or infrastructure of your choice, with our team on call 24/7 for operations support.
+[Managed Kubernetes](https://www.cloudpirates.io/solutions/managed-services/managed-kubernetes): Kubernetes clusters on the cloud provider or infrastructure of your choice, with our team on call 24/7 for operations support.
 
-**Managed Observability**: CVE scanning, Kubernetes event analysis, automated resource recommendations, and security insights for your cluster. Run it fully managed by us, or deploy the lightweight agent in your own cluster.
+[Managed Observability](https://www.cloudpirates.io/solutions/managed-services/managed-observability): CVE scanning, Kubernetes event analysis, automated resource recommendations, and security insights for your cluster. Run it fully managed by us, or deploy the lightweight agent in your own cluster.
 
-**Managed Application Platform**: Pre-configured templates for databases, caches, message queues, and storage, deployed with GitOps and kept up to date automatically.
+[Managed Application Platform](https://www.cloudpirates.io/solutions/managed-services/managed-application-plattform): Pre-configured templates for databases, caches, message queues, and storage, deployed with GitOps and kept up to date automatically.
 
-**Developer-First API**: Every part of the platform (workspaces, clusters, deployments) is available through our REST API, so you can plug it into the tools and workflows you already use.
+[Developer-First API](https://api.cloudpirates.io/docs/): Every part of the platform (workspaces, clusters, deployments) is available through our REST API, so you can plug it into the tools and workflows you already use.
 
 ## Getting Started
 
@@ -59,13 +59,6 @@ CloudPirates runs Kubernetes infrastructure and the tooling around it, so your t
 4. **Generate API keys** for programmatic access and automation
 5. **Deploy and monitor** your applications
 
-## Quick Links
-
-- 📖 [API Reference](https://api.cloudpirates.io/docs/): OpenAPI 3.1 specification
-- 🚀 [Managed Services](/managed-services/): overview of all managed offerings
-- 🔍 [Managed Observability](/managed-observability/): CVE scanning, event analysis, and cluster visibility
-- 🎯 [Application Platform](/managed-application-plattform/): production-ready templates
-
 ## Contact
 
 Questions, feedback, or something not working as documented? Reach out.
@@ -73,6 +66,7 @@ Questions, feedback, or something not working as documented? Reach out.
 - 📧 Email: [developer@cloudpirates.io](mailto:developer@cloudpirates.io)
 - 📞 Phone: [+49-571-784628-20](tel:+4957178462820)
 - 🌐 Website: [www.cloudpirates.io](https://www.cloudpirates.io)
+- 💬 Discord: <a href="https://discord.gg/XUn9Kt5dsy"><img src="https://img.shields.io/discord/1426189195285762150?logo=discord&label=CloudPirates" alt="CloudPirates Discord" style="display:inline-block; vertical-align:middle" /></a>
 
 <br/>
 
