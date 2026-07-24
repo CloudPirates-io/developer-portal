@@ -22,6 +22,9 @@ when working on matching files. Current files:
 - **`tone-and-style.md`** (`docs/**`): house style guide for the ongoing de-AI-speech rewrite of
   these docs (cut buzzwords/marketing filler, avoid em dashes, cut duplicate information, model the
   cloudpirates.io site's own voice).
+- **`api-reference-links.md`** (`docs/**`): convention that a page's `## API Reference` section
+  should link to the matching tag on the live Swagger docs instead of embedding raw request/
+  response examples, plus the full list of API tags/anchors from `openapi.yaml` to link to.
 - **`api-docs.md`** (`docs/api/**`): audit notes on the general API docs (pagination, error
   handling) cross-checked against ApiGateway's `handleApiCall`/`errorMiddleware` source.
 - **`authentication-docs.md`** (`docs/authentication/**`): audit notes on the auth docs

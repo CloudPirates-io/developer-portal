@@ -77,24 +77,43 @@ per member (`workspaceQueryHandler.ts`). The doc now uses `workspaceMemberId` th
 out that using `identityId` there gets a 404. `GET /v1/workspaces/{workspaceId}/members` (list)
 was already accurate and is untouched.
 
-## `billing.md` — fixed, rewritten to describe the real identity-based model
+## `billing.md` — status flipped 2026-07-24: workspace-scoped billing is now a confirmed roadmap item
 
-There is no workspace-scoped billing concept anywhere in the backend. `WorkspaceApi.ts` has no
-`/billing` sub-route at all (verified by reading the full file); `workspaceservice/src` has zero
-references to "billing" (grepped); `billingservice/src` has zero references to `workspaceId`
-(grepped). The real assignment mechanism is
-`POST /v1/billing/billing-profiles/{billingProfileId}/identity`
+Backend reality as of the 2026-07-22 audit, still true today: there is no workspace-scoped billing
+concept anywhere in the backend. `WorkspaceApi.ts` has no `/billing` sub-route at all (verified by
+reading the full file); `workspaceservice/src` has zero references to "billing" (grepped);
+`billingservice/src` has zero references to `workspaceId` (grepped). The real, currently-live
+assignment mechanism is `POST /v1/billing/billing-profiles/{billingProfileId}/identity`
 (`AssignBillingProfileToIdentityCommandV1`, requires `{billingProfileId, identityId}`) — billing
-profiles attach to a **user identity**, not a workspace. This directly contradicts
-`docs/billing/index.md`/`billing-profiles.md`, which correctly describe billing as
-personal/identity-owned (see `billing-docs.md` rule file). Every concrete claim the page used to
-make (`GET/POST/DELETE /v1/workspaces/{workspaceId}/billing`, "one profile assignable to multiple
-workspaces", the whole API reference) was fictional. Rather than wait on product clarification,
-the page was rewritten to state plainly that there is no workspace-scoped billing and to document
-the real identity-assignment endpoint instead — if workspace-scoped billing turns out to be a real
-near-term roadmap item after all, revert this framing accordingly. The "Billing Management" bullet
-in `workspaces/index.md` and the "Workspace Owners can assign personal billing profiles" line made
-the same false claim and were corrected to describe billing as identity-owned.
+profiles attach to a **user identity**, not a workspace. This still directly contradicts what
+`billing.md` now describes, and `docs/billing/index.md`/`billing-profiles.md` still correctly
+describe today's identity-owned model (see `billing-docs.md` rule file) — don't let `billing.md`'s
+roadmap content override that for anything *currently* accurate.
+
+On 2026-07-22 this was treated as a pure documentation bug and `billing.md` was rewritten to state
+plainly that there is no workspace-scoped billing, pointing readers to the identity-assignment
+endpoint instead. On 2026-07-24 the user confirmed (in a session where a different agent had been
+asked to "fix" this page to match the backend) that workspace-scoped billing is in fact a real,
+confirmed near-term product roadmap item, not a doc bug — the intent is for `billing.md` to
+describe the *planned* workspace-scoped flow, clearly marked as not implemented yet, rather than
+deny the concept exists at all. The page was rewritten again accordingly, then twice more refined
+by the user the same session down to the final shape: a top-level `::: danger Roadmap` box (title
+is always exactly "Roadmap", two short sentences: what's planned, then a link to how billing works
+today — see `tone-and-style.md`'s "Roadmap disclaimer boxes" section for the general convention),
+the same short `::: danger Roadmap` box repeated directly above the illustrative/subject-to-change
+API examples so the caveat survives someone landing on that section via a direct anchor link, and
+everything else on the page (the numbered steps, the other warning boxes, the API examples) worded
+as if the feature already shipped, present tense, no "once this ships"/"will be" hedging anywhere
+outside the two Roadmap boxes themselves (see `tone-and-style.md`'s "Everything below a Roadmap box
+is written as if already shipped" section). The "Billing Management" bullet in
+`workspaces/index.md` and any "billing is identity-owned only" framing elsewhere that leans on the
+old "no workspace billing at all" claim should be re-checked against this — they may need the same
+roadmap caveat rather than a flat "no such thing" statement.
+
+If this file is stale when you read it: check whether workspace-scoped billing has actually shipped
+(look for a `/billing` route on `WorkspaceApi.ts` and `workspaceId` references in
+`billingservice/src`) and update `billing.md` from "planned" to "live" accordingly, or re-confirm
+with the user if it still looks unimplemented but the roadmap status is unclear.
 
 ## Confirmed accurate
 

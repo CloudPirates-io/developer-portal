@@ -91,3 +91,42 @@ genuinely implemented in `getDeviceFingerprint.ts`) was already accurate and unt
 `loginIdentityWithWebAuthn.ts` never checks challenge/MFA state, unlike
 `loginIdentityWithLocalAuth.ts`) and the API-key security-sensitive-operation restriction — are
 both accurate.
+
+## `## API Reference` sections now link out instead of embedding raw examples
+
+Changed 2026-07-23 across `password.md`, `mfa.md`, `webauthn.md`, `api-keys.md`, `sessions.md`
+(user-driven refactor, done page by page in one session). Each page's `## API Reference` section
+used to list every endpoint as a raw `POST /v1/...` request/response code block, ending in a
+generic "Full API Documentation Available" box linking to `api.cloudpirates.io/docs`. That's now
+condensed to one or two sentences linking directly to the relevant tag on
+`https://api.cloudpirates.dev/docs/` (note: `.dev`, not `.io`, a different host than the old
+generic link, confirmed intentional by the user). Standalone tip/warning/info boxes that state a
+general capability fact (e.g. "API Keys Cannot Modify Passwords", "Bearer Token Required for
+Session Management") are kept; prose that only explained a specific removed request/response body
+(e.g. the old two-step SMS/TOTP activation explanation in `mfa.md`) was cut along with its code
+block. If asked to apply this same pattern to another domain (billing, workspaces, etc.), follow
+the same split: keep general-fact boxes, cut example-bound prose and code, link to the matching
+Swagger tag.
+
+**Swagger UI tag naming on `api.cloudpirates.dev/docs/`** (confirmed by the user correcting
+first-guess anchors, so treat as verified, not inferred): tags are prefixed `Auth`, not the bare
+backend class name minus `Api`:
+
+| Page | Backend class (see top of this file) | Real anchor |
+| --- | --- | --- |
+| `password.md` | `AuthApi` | `#/Auth` |
+| `mfa.md` | `ChallengeApi` | `#/Auth%20Challenge` |
+| `webauthn.md` | `WebAuthnApi` | `#/Auth%20Challenge` (same tag as `mfa.md` — WebAuthn's challenge endpoint apparently shares the Challenge tag rather than getting its own; re-verify if this looks wrong) |
+| `api-keys.md` | `ApiKeyApi` | `#/Auth%20API%20Key` |
+| `sessions.md` | `SessionApi` | `#/Auth%20Session` (see below, not live yet) |
+
+Don't re-guess anchors as `#/<ClassName>` (e.g. `#/Session`, `#/WebAuthn`) — that was the first
+attempt and the user corrected all of it to the `Auth ...` form above.
+
+**`sessions.md`'s API Reference is intentionally NOT yet converted to a link.** As of 2026-07-23
+the `#/Auth%20Session` tag doesn't exist yet on the live docs site, so `sessions.md` still has raw
+`List Sessions`/`Logout Session` examples (its `Get Current User`/`Validate Session` examples were
+dropped outright rather than kept). There's a `<!-- TODO: Implement session API documentation -->`
+HTML comment with the intended link commented out right below the examples. When that tag goes
+live, swap the raw examples for that commented-out link (matching the other four pages) and check
+whether `Get Current User`/`Validate Session` need to come back too.
