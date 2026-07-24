@@ -22,11 +22,11 @@ Choose where to deploy your applications and how to manage your infrastructure. 
 
 ## Options Overview
 
-| Component          | CloudPirates Managed    | Bring Your Own          | Mix & Match |
-| ------------------ | ----------------------- | ----------------------- | ----------- |
-| **Git Repository** | ✅ Hosted by us         | ✅ Your Git provider    | ✅ Yes      |
-| **ArgoCD**         | ✅ Managed installation | ✅ Your ArgoCD instance | ✅ Yes      |
-| **Kubernetes**     | ✅ Our managed clusters | ✅ Your infrastructure  | ✅ Yes      |
+| Component          | CloudPirates Managed | Bring Your Own       | Mix & Match |
+| ------------------ | -------------------- | -------------------- | ----------- |
+| **Git Repository** | Hosted by us         | Your Git provider    | Yes         |
+| **ArgoCD**         | Managed installation | Your ArgoCD instance | Yes         |
+| **Kubernetes**     | Our managed clusters | Your infrastructure  | Yes         |
 
 **Flexibility**: You can combine any options. For example, use our managed ArgoCD with your own Git repository and Kubernetes cluster.
 

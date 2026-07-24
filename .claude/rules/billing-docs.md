@@ -47,8 +47,11 @@ all accurate. The one gap (List Invoices/List Transactions not mentioning pagina
 pointing readers at the `x-Total`/`Link` headers.
 
 `docs/billing/index.md`'s "Billing Profiles are personal and can only be accessed by their owner"
-framing is accurate and matches the identity-based assignment model — this is the correct mental
-model; do not let `workspaces/billing.md`'s contradictory (and fictional) workspace-scoped billing
-claims override it. See `workspaces-docs.md` for that finding. Payment-methods claims (wire
-transfer only, others "in development") could not be verified either way from backend code — not
-contradicted, but not confirmable; treat as unverified.
+framing is accurate and matches today's identity-based assignment model, this is still the correct
+mental model for *current* behavior. `workspaces/billing.md` describes a workspace-scoped billing
+flow that doesn't exist in the backend yet, but as of 2026-07-24 that's confirmed as a real product
+roadmap item rather than a doc bug, so it's now intentionally documented there as planned/not-live
+(see `workspaces-docs.md`'s updated note). Don't treat that page's roadmap content as contradicting
+this page, both are correct for their own timeframe (today vs. planned). Payment-methods claims
+(wire transfer only, others "in development") could not be verified either way from backend code,
+not contradicted, but not confirmable; treat as unverified.

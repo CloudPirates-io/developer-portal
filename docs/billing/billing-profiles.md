@@ -8,18 +8,16 @@ Personal payment accounts that contain your billing information and enable paid 
 Billing Profiles are personal and can only be accessed by their owner.
 :::
 
-Access your Billing Profiles at [portal.cloudpirates.io/billing](https://portal.cloudpirates.io/billing).
+Access your Billing Profiles at
+[portal.cloudpirates.io/billing](https://portal.cloudpirates.io/billing).
 
 ## Creating a Billing Profile
 
 1. Navigate to [portal.cloudpirates.io/billing](https://portal.cloudpirates.io/billing)
 2. Click "Create Billing Profile"
-3. Enter billing information:
-   - **Name**: Display name for identification
-   - **Company Name** (if applicable)
-   - **Full Address**: Street, city, postal code, country
-   - **Tax Information**: VAT ID (if applicable)
-4. Save profile
+3. Enter your billing information (see [Billing Information](#billing-information) below for
+   what each field means)
+4. Save the profile
 
 ## Billing Information
 
@@ -49,14 +47,16 @@ Add email addresses to receive invoices:
 
 **Multiple Emails**: Add multiple addresses to send invoices to different recipients.
 
-**Disable Email Delivery**: Toggle "Send invoices by email" off to only access invoices in the portal.
+**Disable Email Delivery**: Toggle "Send invoices by email" off to only access invoices in the
+portal.
 
 ### Purchase Order Number
 
 Assign a custom identifier to all invoices from this Billing Profile.
 
 ::: tip Purchase Order Number Usage
-The purchase order number appears on all invoices from this profile and in the subject line of invoice emails. You can update it anytime.
+It appears on all invoices from this profile and in the subject line of invoice emails.
+You can update it anytime.
 :::
 
 ## Managing Billing Profiles
@@ -77,8 +77,9 @@ Requirements:
 - No active assignments to workspaces or services
 - No transactions exist
 
-::: warning Cannot Delete Profiles with Transaction History
-Billing Profiles cannot be deleted if any transactions exist. Profiles with transaction history are permanently retained for accounting and compliance purposes.
+::: warning Transaction History Is Permanent
+Once a profile has any transactions, it's retained indefinitely for accounting and compliance,
+even after you remove its workspace and service assignments.
 :::
 
 Steps:
@@ -101,10 +102,6 @@ Billing Profiles can be transferred to a different user by CloudPirates support.
    - New owner email
    - Reason for transfer
 
-::: warning Profile Transfers Require Support
-Billing Profile transfers must be requested through support. Contact [support@cloudpirates.io](mailto:support@cloudpirates.io) to initiate a transfer.
-:::
-
 ## Assignments
 
 ### Assign to Workspaces
@@ -120,136 +117,13 @@ Link Billing Profile to workspaces to enable paid features:
 
 ### Multiple Assignments
 
-One Billing Profile can be assigned to multiple workspaces and services, providing consolidated billing with a single invoice.
+One Billing Profile can be assigned to multiple workspaces and services at once, so they're all
+covered by a single invoice.
 
 ## API Reference
 
-### List Billing Profiles
-
-```http
-GET /v1/billing/billing-profiles
-Authorization: Bearer <access-token>
-```
-
-### Get Billing Profile
-
-```http
-GET /v1/billing/billing-profiles/{billingProfileId}
-Authorization: Bearer <access-token>
-```
-
-### Create Billing Profile
-
-```http
-POST /v1/billing/billing-profiles
-Authorization: Bearer <access-token>
-Content-Type: application/json
-
-{
-  "billingProfileName": "My Billing Profile",
-  "billingProfileAddress": {
-    "addressLine1": "Main St 123",
-    "city": "Berlin",
-    "postalCode": "10115",
-    "countryCode": "DE"
-  }
-}
-```
-
-### Update Billing Profile Name
-
-```http
-PUT /v1/billing/billing-profiles/{billingProfileId}/name
-Authorization: Bearer <access-token>
-Content-Type: application/json
-
-{
-  "billingProfileName": "Updated Profile Name"
-}
-```
-
-### Update Billing Profile Address
-
-```http
-PUT /v1/billing/billing-profiles/{billingProfileId}/address
-Authorization: Bearer <access-token>
-Content-Type: application/json
-
-{
-  "billingProfileAddress": {
-    "addressLine1": "New Street 456",
-    "city": "Munich",
-    "postalCode": "80331",
-    "countryCode": "DE"
-  }
-}
-```
-
-### Update Purchase Order Number
-
-```http
-PUT /v1/billing/billing-profiles/{billingProfileId}/purchase-order-number
-Authorization: Bearer <access-token>
-Content-Type: application/json
-
-{
-  "purchaseOrderNumber": "PO-2024-002"
-}
-```
-
-### Delete Purchase Order Number
-
-```http
-DELETE /v1/billing/billing-profiles/{billingProfileId}/purchase-order-number
-Authorization: Bearer <access-token>
-```
-
-### Add Email Address
-
-```http
-POST /v1/billing/billing-profiles/{billingProfileId}/email-addresses
-Authorization: Bearer <access-token>
-Content-Type: application/json
-
-{
-  "emailAddress": "billing@example.com"
-}
-```
-
-### Delete Email Address
-
-```http
-DELETE /v1/billing/billing-profiles/{billingProfileId}/email-addresses
-Authorization: Bearer <access-token>
-Content-Type: application/json
-
-{
-  "emailAddress": "billing@example.com"
-}
-```
-
-### Enable/Disable Invoice Email Delivery
-
-```http
-PUT /v1/billing/billing-profiles/{billingProfileId}/send-invoices-by-email
-Authorization: Bearer <access-token>
-Content-Type: application/json
-
-{
-  "sendInvoicesByEmail": true
-}
-```
-
-### Delete Billing Profile
-
-```http
-DELETE /v1/billing/billing-profiles/{billingProfileId}
-Authorization: Bearer <access-token>
-```
-
-::: info Full API Documentation Available
-These are example requests. For complete API documentation including all parameters, response schemas, and authentication details, visit [api.cloudpirates.io/docs](https://api.cloudpirates.io/docs/).
-:::
+For billing profile listing, creation, updates, and deletion requests, see the
+[Billing API reference](https://api.cloudpirates.dev/docs/#/Billing).
 
 ## Related Resources
 

@@ -95,6 +95,29 @@ Examples fixed in `docs/api/error-handling.md` and `docs/api/pagination.md` (202
   respelling it, and use the actual casing the API expects (`ApiKey`, matching the `Authorization:
 ApiKey <API_KEY>` header example elsewhere on the same page) rather than a looser prose form.
 
+## "Header, then just a link" is a duplication smell too, not only prose
+
+Found 2026-07-24 in `docs/billing/index.md`'s `## Getting Started`: every step was a bold
+mini-heading with a one-line description immediately followed by "[Learn more →](...)" and
+nothing else, e.g. `**1. Create a Billing Profile**` / `[Learn more →](./billing-profiles.md)`.
+The user flagged this directly: it reads as a header pointing at a link, not actual content, and
+the page's own `## Related Resources` at the bottom linked to the exact same three pages, so the
+whole section carried zero information a reader couldn't get from the nav or the bottom list.
+Fixed by turning it into a real numbered how-to (one instruction per step, e.g. "Add your billing
+information at portal.cloudpirates.io/billing", with the doc link folded in as a "see X for
+details" trailer) and deleting the now-fully-redundant `## Related Resources` section, since it
+added nothing beyond the Getting Started list right above it on the same page.
+
+The same "two sections describing the same thing" smell can also show up as duplicated *field
+lists* rather than duplicated links. `docs/billing/billing-profiles.md`'s `## Creating a Billing
+Profile` procedure re-listed every field (name, address, tax ID) inline in step 3, and the very
+next section, `## Billing Information`, listed the same fields again in more detail. Fixed by
+making the procedure step reference the reference section (`3. Enter your billing information
+(see Billing Information below for what each field means)`) instead of repeating the field list,
+so there's exactly one place a reader learns what each field means. General rule: when a page has
+both a "how to do X" procedure and a "what X's parts mean" reference right next to each other, the
+procedure should point at the reference, not restate it.
+
 When adding a second example to illustrate a mechanism (e.g. a second set of response headers),
 prefer values tied to a concrete, stated scenario over repeating the same defaults already shown
 elsewhere in the page. `docs/api/pagination.md`'s response-headers example uses `x-Limit: 5` /
@@ -177,6 +200,64 @@ capitalized. Compare the correctly-lowercased prepositions already in this codeb
 with QR Code`, `### Logout from Session`, `::: warning ... Required for Session Management`, all
 in `docs/authentication/`) against the verb case: "is" is the sentence's verb ("What [is] WebAuthn"),
 not a preposition, so it capitalizes.
+
+## Roadmap disclaimer boxes: title is always "Roadmap", body stays short
+
+For pages (or sections of a page) that describe a planned/not-yet-implemented feature, the
+disclaimer box has one fixed shape, corrected by the user 2026-07-24 after a first attempt was too
+long-winded:
+
+- **Title is always "Roadmap"**, verbatim, every time. Not "Planned Feature, Not Yet Available",
+  not "Not Live Yet", not any other one-off phrasing per page. One consistent word means a reader
+  recognizes it on sight regardless of which page they're on, the same way `::: warning`/`::: tip`
+  box titles are consistent in shape elsewhere in this codebase.
+- **Body is two short sentences, nothing more:** what's planned, then a link to how it works
+  today (if a "today" state exists). Don't write a justification or contrast sentence like "It's
+  actually Y, not X" or "Everything below describes the planned behavior, not something you can
+  use today" — just state the fact and give the link.
+- If a page needs the caveat in more than one place (e.g. a top-of-page box plus another right
+  before a set of not-yet-live API examples further down), repeat the same short two-sentence shape
+  each time rather than writing a longer explanation once and a different, shorter one elsewhere.
+  Consistency of shape matters more than not repeating the word "planned".
+
+Example, `docs/workspaces/billing.md` (2026-07-24), used at the top of the page:
+
+```
+::: danger Roadmap
+Workspace-scoped billing is on the roadmap, but none of it is implemented yet.
+See [Billing Profiles](/billing/billing-profiles.md) for current usage.
+:::
+```
+
+And again, right before that page's `## API Reference` examples, same shape:
+
+```
+::: danger Roadmap
+These endpoints aren't live yet and may still change.
+See [Billing Profiles](/billing/billing-profiles.md) for how billing works today.
+:::
+```
+
+## Everything below a "Roadmap" box is written as if already shipped
+
+Corrected by the user 2026-07-24, same session as the box above: only the "Roadmap" box itself
+carries the "this isn't live yet" signal. Everything else on the page, the numbered steps, the
+other tip/warning boxes, the API examples, is worded in plain present tense as if the feature
+already exists, exactly like every other page in these docs. Don't hedge the surrounding prose
+with "once this ships", "will be", "would", etc.
+
+Wrong (first attempt, `docs/workspaces/billing.md`): "Paid features will be enabled immediately
+once this ships." / `::: warning You'll Be Responsible for All Workspace Charges` / "Once this
+ships, you'll be responsible for all charges the workspace incurs...".
+
+Right (corrected): "Paid features are enabled immediately." /
+`::: warning You Are Responsible for All Workspace Charges` / "You are responsible for all
+charges the workspace incurs...".
+
+Reasoning: the "Roadmap" box already told the reader this isn't live. Repeating that caveat in
+every sentence below it is the same duplicate-information problem the rest of this file warns
+about elsewhere, just spread across a whole page instead of one paragraph, and it reads as
+hedging rather than documentation. State the box once, then document the feature normally.
 
 ## Open question — nautical/pirate metaphors
 
