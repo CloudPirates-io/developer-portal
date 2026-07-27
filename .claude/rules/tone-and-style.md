@@ -5,15 +5,14 @@ paths:
 
 # Tone & style for developer-portal docs
 
-Written 2026-07-23. Context: most docs under `docs/` were originally drafted 1-2 years ago with
-older LLMs and read as generic "AI-management-speech" — vague, superlative-heavy marketing copy
-instead of direct technical writing. The ongoing effort (tracked as DEV-892 and follow-ups) is to
-rewrite this content for human readability, aimed at developers, without losing accuracy.
+Most docs under `docs/` were originally drafted with older LLMs and read as generic
+"AI-management-speech": vague, superlative-heavy marketing copy instead of direct technical
+writing. The goal of this file is to rewrite this content for human readability, aimed at
+developers, without losing accuracy.
 
-Reference basis: `https://www.cloudpirates.io/` (marketing site, mostly German) and its sitemap,
-fetched 2026-07-23 via WebFetch summaries (not full manual reads — re-check the live site if this
-note is old). Looked at the managed-observability solutions page and a "101 series" technical blog
-post (Kubernetes Probes) as the closest analogues to developer-facing technical writing.
+Reference basis: `https://www.cloudpirates.io/` (marketing site, mostly German) — specifically its
+managed-observability solutions page and a "101 series" technical blog post (Kubernetes Probes) as
+the closest analogues to developer-facing technical writing on that site.
 
 ## The core problem to fix
 
@@ -23,8 +22,6 @@ thing actually does. Words/patterns to hunt down and remove or replace when edit
 - "comprehensive", "intelligent", "seamless(ly)", "streamline", "leverage", "empower(ing)",
   "unlock", "robust", "cutting-edge", "state-of-the-art", "ecosystem", "journey" (as in "Cloud
   Native journey"), "solution" used as filler, "navigate ... with confidence", "user-friendly"
-  (found in `docs/authentication/*.md`, 2026-07-23: "designed to be flexible, secure, and
-  user-friendly", "user-friendly interface")
 - Feature descriptions that describe a _feeling_ ("gain essential visibility", "streamline
   lifecycle management") instead of a _capability_ ("scans images for known CVEs", "restarts a
   container when its health check fails")
@@ -32,8 +29,6 @@ thing actually does. Words/patterns to hunt down and remove or replace when edit
   API") — say what the API lets you do instead
 
 ## What the site's own voice actually does (model this instead)
-
-Confirmed from the managed-observability page and the Kubernetes Probes blog post:
 
 - **Concrete over aspirational.** The site says "20+ Best Practice Dashboards" and "30+ Alerting
   Regeln", not "comprehensive monitoring". Prefer real numbers, real tool names (Grafana,
@@ -52,18 +47,18 @@ Confirmed from the managed-observability page and the Kubernetes Probes blog pos
 
 ## Avoid em dashes ("—")
 
-User feedback (2026-07-23): cut down on em dashes. Many readers now treat "—" as a tell-tale sign
-of AI-generated text and discount the content on sight, regardless of whether a human wrote it.
-Rewrite around it instead of using it as a default connector:
+Many readers treat "—" as a tell-tale sign of AI-generated text and discount the content on sight,
+regardless of whether a human wrote it. Rewrite around it instead of using it as a default
+connector:
 
 - Two independent clauses: split into two sentences, or use a comma if they're tightly linked.
 - Aside/clarification (`X — meaning Y`): use parentheses, or a colon if Y explains X.
 - List item "link — description" pattern: use a colon (`link: description`) instead.
 
-Applied to `index.md` this session: `"...applications — all through one API"` became `"...
-applications, all through one API"`; `"platform — workspaces, clusters, deployments — is
-available"` became `"platform (workspaces, clusters, deployments) is available"`; Quick Links
-entries changed from `[Text](url) — description` to `[Text](url): description`.
+Examples: `"...applications — all through one API"` becomes `"...applications, all through one
+API"`; `"platform — workspaces, clusters, deployments — is available"` becomes `"platform
+(workspaces, clusters, deployments) is available"`; a Quick Links entry `[Text](url) —
+description` becomes `[Text](url): description`.
 
 ## Cut duplicate information, not just buzzwords
 
@@ -71,58 +66,51 @@ Separate from the buzzword list above: actively hunt for facts restated somewher
 established (a header, the example right below, an adjacent sentence). This reads as
 padding/AI-verbosity even when none of the individual words are marketing-speak.
 
-Examples fixed in `docs/api/error-handling.md` and `docs/api/pagination.md` (2026-07-23):
+Patterns to watch for, with examples:
 
-- `## 502 Bad Gateway` followed by prose starting "Our API gateway returns a 502 Bad Gateway
-  status..." restates the status the header already names. Rewrite the prose to not repeat it
-  ("Our API gateway returns this status when...").
-- "Requests... use a different, flatter shape (no `instancePath`/`schemaPath`/`keyword`)" was
-  redundant once the very next block is a JSON example showing that exact shape. Drop the
-  parenthetical; let the example demonstrate it.
-- "Our internal backend system uses asynchronous handlers..." repeated "backend" information
-  already obvious from context; tightened to "Our system uses asynchronous handlers...".
+- A heading followed by prose that just restates the heading, e.g. `## 502 Bad Gateway` followed by
+  "Our API gateway returns a 502 Bad Gateway status..." Rewrite the prose to not repeat the status
+  the header already names ("Our API gateway returns this status when...").
+- A sentence describing a shape immediately followed by an example showing that exact shape, e.g.
+  "Requests... use a different, flatter shape (no `instancePath`/`schemaPath`/`keyword`)"
+  immediately above a JSON example demonstrating it. Drop the parenthetical; let the example
+  demonstrate it.
+- Restating a word already implied by context, e.g. "Our internal backend system uses asynchronous
+  handlers..." tightens to "Our system uses asynchronous handlers...".
+- Naming a concept more times than needed per sentence, e.g. "authenticate your requests using an
+  `API key` included in the Authorization header of your HTTP requests. Obtain an API key by
+  signing up..." names the concept three times across two sentences. Tighten to "authenticate your
+  requests using an `ApiKey` included in the `Authorization` header. Obtain one by signing up...":
+  state the term once per sentence, use a pronoun ("one") on the repeat instead of respelling it,
+  and match the actual casing the API expects.
 - When two response shapes exist for what's conceptually the same error (e.g. 401/403 sometimes
   under `status`, sometimes under `code`, depending on which middleware rejects the request) and
   that's a real inconsistency rather than deliberate design, say so plainly instead of presenting
   it as intentional: "The response shape depends on which check rejected the request (this might
   be unified in the future)."
-- `docs/api/index.md`'s "authenticate your requests using an `API key` included in the
-  Authorization header of your HTTP requests. Obtain an API key by signing up on..." named the
-  concept three times ("your requests" twice, "API key" twice, plus "of your HTTP requests" adding
-  nothing "your requests" hadn't already said) in two sentences. Fixed to "authenticate your
-  requests using an `ApiKey` included in the `Authorization` header. Obtain one by signing up
-  on...": state the term once per sentence, use a pronoun ("one") on the repeat instead of
-  respelling it, and use the actual casing the API expects (`ApiKey`, matching the `Authorization:
-ApiKey <API_KEY>` header example elsewhere on the same page) rather than a looser prose form.
 
 ## "Header, then just a link" is a duplication smell too, not only prose
 
-Found 2026-07-24 in `docs/billing/index.md`'s `## Getting Started`: every step was a bold
-mini-heading with a one-line description immediately followed by "[Learn more →](...)" and
-nothing else, e.g. `**1. Create a Billing Profile**` / `[Learn more →](./billing-profiles.md)`.
-The user flagged this directly: it reads as a header pointing at a link, not actual content, and
-the page's own `## Related Resources` at the bottom linked to the exact same three pages, so the
-whole section carried zero information a reader couldn't get from the nav or the bottom list.
-Fixed by turning it into a real numbered how-to (one instruction per step, e.g. "Add your billing
-information at portal.cloudpirates.io/billing", with the doc link folded in as a "see X for
-details" trailer) and deleting the now-fully-redundant `## Related Resources` section, since it
-added nothing beyond the Getting Started list right above it on the same page.
+Watch for a section where every item is a bold mini-heading with a one-line description
+immediately followed by "[Learn more →](...)" and nothing else, especially when the page's own
+"Related Resources" section at the bottom links to the exact same pages. This reads as a header
+pointing at a link, not actual content — it carries zero information a reader couldn't get from the
+nav or the bottom list. Fix by turning it into a real numbered how-to (one instruction per step,
+e.g. "Add your billing information at portal.cloudpirates.io/billing", with the doc link folded in
+as a "see X for details" trailer), and consider deleting a "Related Resources" section that becomes
+fully redundant with the list right above it.
 
 The same "two sections describing the same thing" smell can also show up as duplicated *field
-lists* rather than duplicated links. `docs/billing/billing-profiles.md`'s `## Creating a Billing
-Profile` procedure re-listed every field (name, address, tax ID) inline in step 3, and the very
-next section, `## Billing Information`, listed the same fields again in more detail. Fixed by
-making the procedure step reference the reference section (`3. Enter your billing information
-(see Billing Information below for what each field means)`) instead of repeating the field list,
-so there's exactly one place a reader learns what each field means. General rule: when a page has
-both a "how to do X" procedure and a "what X's parts mean" reference right next to each other, the
-procedure should point at the reference, not restate it.
+lists* rather than duplicated links. If a page has both a "how to do X" procedure and a "what X's
+parts mean" reference right next to each other, the procedure should point at the reference instead
+of restating it, e.g. "3. Enter your billing information (see Billing Information below for what
+each field means)" instead of re-listing every field inline.
 
 When adding a second example to illustrate a mechanism (e.g. a second set of response headers),
 prefer values tied to a concrete, stated scenario over repeating the same defaults already shown
-elsewhere in the page. `docs/api/pagination.md`'s response-headers example uses `x-Limit: 5` /
-`x-Offset: 40` with the sentence "these headers would be returned alongside items 40 through 44",
-instead of reusing the `limit=20&offset=0` defaults already shown in the query-parameters example.
+elsewhere in the page — e.g. a response-headers example using `x-Limit: 5` / `x-Offset: 40` with
+"these headers would be returned alongside items 40 through 44", instead of reusing the
+`limit=20&offset=0` defaults already shown in the query-parameters example.
 
 ## Some duplicate information is intentional — don't strip it
 
@@ -131,18 +119,19 @@ directly on the section/page repeating it (via an anchor link, a nav entry, or b
 without the other) without ever seeing the "original" instance. If so, keep both copies so each
 section/page stays self-contained.
 
-Confirmed intentional duplicates as of 2026-07-23, don't merge or remove these:
+Examples of intentional duplication, don't merge or remove these patterns:
 
-- The "Asynchronous Request Processing" warning box is repeated verbatim in both `## 503 Service
-Unavailable` and `## 504 Gateway Timeout` in `docs/api/error-handling.md`. A reader jumping
-  straight to `#504-gateway-timeout` from a link elsewhere would otherwise miss it.
-- The eventually-consistent-read-models explanation appears in both `docs/api/index.md` (under
+- A warning box repeated verbatim across two sibling sections, e.g. an "Asynchronous Request
+  Processing" warning box that appears in both `## 503 Service Unavailable` and `## 504 Gateway
+  Timeout` in `docs/api/error-handling.md`. A reader jumping straight to `#504-gateway-timeout` from
+  a link elsewhere would otherwise miss it.
+- The same explanation appearing in two different files at the two places a reader is likely to
+  land, e.g. the eventually-consistent-read-models explanation in both `docs/api/index.md` (under
   `## Event Sourced Architecture`) and `docs/api/error-handling.md` (in the `## 404 Not Found`
-  warning box). Same reasoning: a reader who opens `error-handling.md` directly, without having
-  read `index.md` first, still needs the context for why a fresh `GET` can 404.
-  - These two copies should stay in sync in wording even though they live in different files. If
-    you improve one, check the other and update it to match rather than letting them drift (they
-    drifted out of sync once already this session and had to be re-synced).
+  warning box) — a reader who opens `error-handling.md` directly, without having read `index.md`
+  first, still needs the context for why a fresh `GET` can 404.
+  - When two copies like this exist across files, keep their wording in sync. If you improve one,
+    check the other and update it to match rather than letting them drift.
 
 ## Wrap long source lines (cosmetic only, doesn't change the rendered page)
 
@@ -185,9 +174,8 @@ Exceptions, don't wrap these:
 
 ## Headings and box titles use Title Case, including short verbs
 
-Applies to `#`/`##`/`###` headings and VitePress container titles (`::: warning Some Title`).
-Found and fixed 2026-07-23 in `docs/authentication/webauthn.md`: `## What is WebAuthn?` should be
-`## What Is WebAuthn?`.
+Applies to `#`/`##`/`###` headings and VitePress container titles (`::: warning Some Title`). For
+example, `## What is WebAuthn?` should be `## What Is WebAuthn?`.
 
 The rule (standard Title Case, matches Chicago/APA conventions, not something specific to this
 repo): capitalize every word except articles (`a`, `an`, `the`), coordinating conjunctions (`and`,
@@ -196,31 +184,35 @@ repo): capitalize every word except articles (`a`, `an`, `the`), coordinating co
 
 The trap: short verbs look like the "small words" that get lowercased, but verbs are never in the
 lowercase list, so they're capitalized regardless of length. "Is", "Be", "Do", "Am", "Are" stay
-capitalized. Compare the correctly-lowercased prepositions already in this codebase (`### Setup
-with QR Code`, `### Logout from Session`, `::: warning ... Required for Session Management`, all
-in `docs/authentication/`) against the verb case: "is" is the sentence's verb ("What [is] WebAuthn"),
-not a preposition, so it capitalizes.
+capitalized. Compare correctly-lowercased prepositions (`### Setup with QR Code`, `### Logout from
+Session`, `::: warning ... Required for Session Management`) against the verb case: "is" is the
+sentence's verb ("What [is] WebAuthn"), not a preposition, so it capitalizes.
 
 ## Roadmap disclaimer boxes: title is always "Roadmap", body stays short
 
 For pages (or sections of a page) that describe a planned/not-yet-implemented feature, the
-disclaimer box has one fixed shape, corrected by the user 2026-07-24 after a first attempt was too
-long-winded:
+disclaimer box has one fixed shape:
 
 - **Title is always "Roadmap"**, verbatim, every time. Not "Planned Feature, Not Yet Available",
   not "Not Live Yet", not any other one-off phrasing per page. One consistent word means a reader
   recognizes it on sight regardless of which page they're on, the same way `::: warning`/`::: tip`
   box titles are consistent in shape elsewhere in this codebase.
-- **Body is two short sentences, nothing more:** what's planned, then a link to how it works
+- **Body is one or two short sentences, nothing more:** what's planned, then a link to how it works
   today (if a "today" state exists). Don't write a justification or contrast sentence like "It's
   actually Y, not X" or "Everything below describes the planned behavior, not something you can
   use today" — just state the fact and give the link.
 - If a page needs the caveat in more than one place (e.g. a top-of-page box plus another right
-  before a set of not-yet-live API examples further down), repeat the same short two-sentence shape
-  each time rather than writing a longer explanation once and a different, shorter one elsewhere.
-  Consistency of shape matters more than not repeating the word "planned".
+  before a set of not-yet-live API examples further down), repeat the same short shape each time
+  rather than writing a longer explanation once and a different, shorter one elsewhere. Consistency
+  of shape matters more than not repeating the word "planned".
+- Don't editorialize the exact technical failure mode inside the box (e.g. "these routes have no
+  registered command handler, so a request hangs and times out with `503`/`504` instead of failing
+  cleanly"). Keep it to the same short shape as every other Roadmap box on the page — the precise
+  mechanism belongs in the relevant `.claude/rules/*.md` audit note, not in reader-facing prose,
+  once the box's job (tell the reader not to rely on this) is already done by the word "Roadmap"
+  plus one plain sentence.
 
-Example, `docs/workspaces/billing.md` (2026-07-24), used at the top of the page:
+Example, used at the top of a page:
 
 ```
 ::: danger Roadmap
@@ -238,37 +230,25 @@ See [Billing Profiles](/billing/billing-profiles.md) for how billing works today
 :::
 ```
 
-## Roadmap boxes stay minimal, don't editorialize the exact failure mode
-
-Corrected by the user 2026-07-27, `docs/managed-application-plattform/index.md`: even when an
-audit note ([[managed-application-platform-docs]]) records a precise technical detail (e.g. "these
-routes have no registered command handler, so a request hangs and times out with `503`/`504`
-instead of failing cleanly"), don't write that detail into the box body. Keep it to the same short
-shape as every other Roadmap box on the page ("X is not yet implemented", plus a link if a "today"
-state exists) rather than explaining *how* it's broken. The precise mechanism belongs in the
-`.claude/rules/*.md` audit note, not in reader-facing prose, once the box's job (tell the reader not
-to rely on this) is already done by the word "Roadmap" plus one plain sentence.
-
 ## Everything below a "Roadmap" box is written as if already shipped
 
-Corrected by the user 2026-07-24, same session as the box above: only the "Roadmap" box itself
-carries the "this isn't live yet" signal. Everything else on the page, the numbered steps, the
-other tip/warning boxes, the API examples, is worded in plain present tense as if the feature
-already exists, exactly like every other page in these docs. Don't hedge the surrounding prose
-with "once this ships", "will be", "would", etc.
+Only the "Roadmap" box itself carries the "this isn't live yet" signal. Everything else on the
+page, the numbered steps, the other tip/warning boxes, the API examples, is worded in plain present
+tense as if the feature already exists, exactly like every other page in these docs. Don't hedge
+the surrounding prose with "once this ships", "will be", "would", etc.
 
-Wrong (first attempt, `docs/workspaces/billing.md`): "Paid features will be enabled immediately
-once this ships." / `::: warning You'll Be Responsible for All Workspace Charges` / "Once this
-ships, you'll be responsible for all charges the workspace incurs...".
+Wrong: "Paid features will be enabled immediately once this ships." /
+`::: warning You'll Be Responsible for All Workspace Charges` / "Once this ships, you'll be
+responsible for all charges the workspace incurs...".
 
-Right (corrected): "Paid features are enabled immediately." /
+Right: "Paid features are enabled immediately." /
 `::: warning You Are Responsible for All Workspace Charges` / "You are responsible for all
 charges the workspace incurs...".
 
 Reasoning: the "Roadmap" box already told the reader this isn't live. Repeating that caveat in
-every sentence below it is the same duplicate-information problem the rest of this file warns
-about elsewhere, just spread across a whole page instead of one paragraph, and it reads as
-hedging rather than documentation. State the box once, then document the feature normally.
+every sentence below it is the same duplicate-information problem covered above, just spread across
+a whole page instead of one paragraph, and it reads as hedging rather than documentation. State the
+box once, then document the feature normally.
 
 ## Open question — nautical/pirate metaphors
 

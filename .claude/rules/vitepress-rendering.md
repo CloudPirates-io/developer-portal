@@ -6,9 +6,9 @@ paths:
 
 # VitePress rendering quirks
 
-Written 2026-07-23, while adding a Discord link/badge to the homepage and nav. Verified by reading
-the installed `vitepress` package source directly (`node_modules/vitepress/dist/client/theme-default`),
-not just docs — re-check against the installed version if it's been upgraded since.
+Verified by reading the installed `vitepress` package source directly
+(`node_modules/vitepress/dist/client/theme-default`), not just docs — re-check against the
+installed version if it's been upgraded since these notes were written.
 
 ## `themeConfig.nav[].text` supports raw HTML (v-html) — but don't nest an `<a>` in it
 
@@ -37,7 +37,7 @@ a shields.io badge) will drop to its own line despite `vertical-align: middle`, 
 `display` back, e.g. `style="display:inline-block; vertical-align:middle"` — inline `style`
 attributes win over the external stylesheet regardless of selector specificity.
 
-Applied example, `docs/index.md` Contact section:
+Example:
 
 ```html
 - 💬 Discord:

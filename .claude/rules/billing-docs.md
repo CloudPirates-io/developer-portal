@@ -5,53 +5,49 @@ paths:
 
 # Billing docs
 
-Written 2026-07-22, from an audit that read every file in `docs/billing/` in full and cross-checked
-concrete claims against `src/services/apigateway/src/Api/v1/Billing/{BillingProfileApi,InvoiceApi}.ts`
-and the JSON command-payload contracts under
-`src/shared/contracts/schemas/src/Contracts/Billing/BillingProfile/Commands/**`. If this note is
-many months/years old when you read it, re-verify against current source before trusting it. This
-domain is mostly accurate — smaller set of findings than the other doc areas audited in this pass.
+Ground truth cross-checked against
+`src/services/apigateway/src/Api/v1/Billing/{BillingProfileApi,InvoiceApi}.ts` and the JSON
+command-payload contracts under
+`src/shared/contracts/schemas/src/Contracts/Billing/BillingProfile/Commands/**`. Re-verify against
+current source before trusting this if it's been a while. This domain has the smallest drift of
+the areas audited so far.
 
-## Create/Update Billing Profile bodies — fixed 2026-07-22, now accurate
+## Billing profile field names
 
-`billing-profiles.md`'s "Create Billing Profile" and "Update Billing Profile Address" examples
-used to show `{"name": "...", "address": {"street", "city", "postalCode", "country"}}` /
-`{"billingProfileAddress": {"street", ...}}`. The real contracts
-(`create_billing_profile_command_payload_v1.json`, `ChangeBillingProfileAddressCommandPayloadV1`,
-both `additionalProperties: false`) require `{"billingProfileName": string,
-"billingProfileAddress": {...}}`, and `billingProfileAddress` itself (`billing_address.json`)
-requires `addressLine1, postalCode, city, countryCode` (2-letter ISO code) — `addressLine2` is
-optional. Both examples now use the real field names (`billingProfileName`, `addressLine1`,
-`countryCode`).
+The real contracts (`create_billing_profile_command_payload_v1.json`,
+`ChangeBillingProfileAddressCommandPayloadV1`, both `additionalProperties: false`) require
+`{"billingProfileName": string, "billingProfileAddress": {...}}` for create/update, and
+`billingProfileAddress` itself (`billing_address.json`) requires `addressLine1, postalCode, city,
+countryCode` (2-letter ISO code) — `addressLine2` is optional. Don't drift toward looser,
+more-generic-sounding names like `name`/`address`/`street` — the strict `additionalProperties:
+false` schema rejects anything that doesn't match exactly.
 
-## Scope gap (not necessarily a bug): a second, larger invoice API isn't documented
+## A second, larger invoice API exists but isn't documented — not necessarily a bug
 
-A separate, more extensive `Api/v1/Billing/InvoiceApi.ts` exists (drafts, line items, cancel/post/
-send/mark-paid, payment terms) beyond what `billing/invoices.md` documents. This is likely an
-intentional simplification for customer-facing docs vs. an internal accounting API — flagging in
-case that assumption turns out to be wrong, not asserting it's a documentation bug.
+`Api/v1/Billing/InvoiceApi.ts` has more surface (drafts, line items, cancel/post/send/mark-paid,
+payment terms) than `billing/invoices.md` documents. Likely an intentional simplification for
+customer-facing docs vs. an internal accounting API. Don't assume this is a gap to fill without
+confirming with the user first.
 
-## Confirmed accurate — the majority of this domain
+## Confirmed accurate, don't "fix" these
 
-Verified field-by-field against the real contracts, all of the following in `billing-profiles.md`
-match exactly and don't need touching: Update Name (`PUT .../name`, `{"billingProfileName"}`),
-Update/Delete Purchase Order Number, Add/Delete Email Address (`{"emailAddress"}`), Enable/Disable
-email delivery (`PUT .../send-invoices-by-email`, `{"sendInvoicesByEmail"}`), and List/Get/Delete
-Billing Profile routes.
+In `billing-profiles.md`: Update Name (`PUT .../name`, `{"billingProfileName"}`), Update/Delete
+Purchase Order Number, Add/Delete Email Address (`{"emailAddress"}`), Enable/Disable email delivery
+(`PUT .../send-invoices-by-email`, `{"sendInvoicesByEmail"}`), and List/Get/Delete Billing Profile
+routes all match the real contracts field-by-field.
 
 In `invoices.md`: List Invoices, Get Invoice Details (the real API genuinely uses the singular
-`/invoice/{invoiceId}` segment — not a doc typo), Get Invoice PDF URL (response shape `{"url":
-...}`, filename pattern both match `BillingProfileApi.ts` literally), and List Transactions are
-all accurate. The one gap (List Invoices/List Transactions not mentioning pagination — see
-`api-docs.md`'s pagination rule, the mechanism applies here too) was closed 2026-07-22 with a tip
-pointing readers at the `x-Total`/`Link` headers.
+`/invoice/{invoiceId}` segment, not a doc typo), Get Invoice PDF URL (response shape `{"url":
+...}`, filename pattern both match `BillingProfileApi.ts` literally), and List Transactions are all
+accurate; both list endpoints should mention pagination (see `api-docs.md`'s pagination rule, the
+same mechanism applies here).
 
 `docs/billing/index.md`'s "Billing Profiles are personal and can only be accessed by their owner"
-framing is accurate and matches today's identity-based assignment model, this is still the correct
-mental model for *current* behavior. `workspaces/billing.md` describes a workspace-scoped billing
-flow that doesn't exist in the backend yet, but as of 2026-07-24 that's confirmed as a real product
-roadmap item rather than a doc bug, so it's now intentionally documented there as planned/not-live
-(see `workspaces-docs.md`'s updated note). Don't treat that page's roadmap content as contradicting
-this page, both are correct for their own timeframe (today vs. planned). Payment-methods claims
-(wire transfer only, others "in development") could not be verified either way from backend code,
-not contradicted, but not confirmable; treat as unverified.
+framing matches today's identity-based assignment model and is the correct mental model for
+*current* behavior. `workspaces/billing.md` describes a workspace-scoped billing flow that doesn't
+exist in the backend yet, but is a confirmed product roadmap item (see `workspaces-docs.md`), so
+it's intentionally documented there as planned/not-live rather than denied outright. Both pages are
+correct for their own timeframe (today vs. planned) — don't let one override the other.
+
+Payment-methods claims (wire transfer only, others "in development") can't be verified either way
+from backend code. Treat as unverified, not confirmed wrong.

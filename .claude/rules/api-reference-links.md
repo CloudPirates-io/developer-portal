@@ -5,18 +5,17 @@ paths:
 
 # "## API Reference" sections link out to the live Swagger docs, not raw examples
 
-Written 2026-07-24. This is a repo-wide structural convention, not just wording (contrast with
-`tone-and-style.md`, which is about wording only). It supersedes the older pattern still visible
-in some untouched pages, where a page's `## API Reference` section listed every endpoint as a full
-raw `POST /v1/...` request/response code block, usually ending in a generic
-"visit api.cloudpirates.io/docs" info box.
+This is a repo-wide structural convention, not just wording (contrast with `tone-and-style.md`,
+which is about wording only). It supersedes the older pattern still visible on some pages, where a
+page's `## API Reference` section listed every endpoint as a full raw `POST /v1/...`
+request/response code block, usually ending in a generic "visit api.cloudpirates.io/docs" info box.
 
 ## The rule
 
 A page's `## API Reference` section should not embed raw request/response examples for endpoints
 that are already documented on the live Swagger UI. Instead, condense it to one or two sentences
 linking straight to the matching tag on `https://api.cloudpirates.dev/docs/` (note: `.dev`, not
-`.io`, a different host than the old generic link scattered through untouched pages).
+`.io`, a different host than the old generic link still on some pages).
 
 **Why:** the Swagger docs are generated from the same OpenAPI spec the API itself ships from, so
 they can't drift out of sync the way a hand-written markdown example can. Maintaining two copies of
@@ -33,41 +32,27 @@ sentence level.
   exactly what the Swagger UI already shows, interactively, for every endpoint at once.
 - Do not remove or alter anything outside the `## API Reference` section itself. This convention is
   about that one section, not the rest of the page.
+- Don't convert a page's `## API Reference` section as a side effect of an unrelated edit; treat it
+  as its own deliberate step per domain (confirm the real tag/anchor first, see below) unless the
+  user has already asked for it on that page.
 
-**Already applied** (treat these as the reference examples for what "done" looks like):
-`docs/api/index.md`, all of `docs/authentication/` (`password.md`, `mfa.md`, `webauthn.md`,
-`api-keys.md`; `sessions.md` is a deliberate partial exception, see `authentication-docs.md`'s note
-on it), all of `docs/billing/` (`billing-profiles.md`, `invoices.md`, done 2026-07-24, both
-linking to `#/Billing` since one tag covers the whole billing domain; `invoices.md` kept its
-"Paginated List Endpoints" tip box since that's a general fact, not example-bound), and
-`docs/managed-application-plattform/index.md` and `templates.md` (done 2026-07-24 as part of a
-combined tone-and-style pass, user opted in when asked; `index.md` links to `#/Application` and
-kept a Roadmap danger box in that section covering both the create-501 and the
-update/values-no-handler-registered facts, in addition to the separate Roadmap box already earlier
-on the page about create; `templates.md` links to `#/Application%20Template` and kept a "Response
-Shapes" tip box for the bare-array/no-`resources`-object facts). See `authentication-docs.md` for
-the session this was first done in and the tag-anchor lessons learned there.
-
-**Not yet applied** as of 2026-07-24: everything under `docs/workspaces/`,
-`docs/managed-observability/`, and `docs/managed-application-plattform/deployment-options.md`,
-`gitops-setup.md`, `update-management.md` (these three have no `## API Reference` section at all,
-nothing to convert). Don't convert a page's `## API Reference` section as a side effect of an
-unrelated edit; treat it as its own deliberate step per domain (confirm the real tag/anchor first,
-see below) unless the user has already asked for it on that page.
+See `authentication-docs.md`, `billing-docs.md`, and `managed-application-platform-docs.md` for
+domain-specific notes on which boxes were kept per page (e.g. `sessions.md`'s deliberate exception,
+still on raw examples because its tag isn't live yet).
 
 ## Finding the right tag/anchor — don't guess, verify
 
 Swagger UI tags on `api.cloudpirates.dev/docs/` are not always the bare backend class/domain name.
-`authentication-docs.md` records a confirmed case: tags there are prefixed `Auth ...`
+Confirmed case: tags are prefixed `Auth ...` for the authentication domain
 (`AuthApi` → `#/Auth`, not `#/AuthApi`; `ChallengeApi` → `#/Auth%20Challenge`, not `#/Challenge`).
-That mapping was corrected by the user after a first wrong guess — re-verify against the live docs
-or the source `openapi.yaml` `tags:` block before linking to a tag this file hasn't already
-confirmed, rather than inferring it from a backend class or docs folder name.
+Re-verify against the live docs or the source `openapi.yaml` `tags:` block before linking to a tag
+this file hasn't already confirmed (the table below), rather than inferring it from a backend class
+or docs folder name.
 
 The anchor format is `#/<tag-name-with-spaces-replaced-by-%20>` (case preserved), e.g. `Auth API
 Key` → `#/Auth%20API%20Key`.
 
-## Full tag list (source of truth: `openapi.yaml` `tags:`, copied by the user 2026-07-24)
+## Full tag list (source of truth: `openapi.yaml` `tags:` block)
 
 This is every tag currently defined on the API, with its Swagger anchor and, where the OpenAPI spec
 sets one, its `externalDocs` target (the developer-portal page the spec itself already considers
@@ -101,8 +86,7 @@ Notes:
   `invoices.md` — link both to the same `#/Billing` anchor rather than expecting a split like
   `Auth`'s three-way one).
 - Several tags (`Training*`, `Notification`, `Country`, `Request`, `System`) have no corresponding
-  `docs/**` domain at all yet as of 2026-07-24. Don't invent a docs page for a tag just because the
-  tag exists.
+  `docs/**` domain at all. Don't invent a docs page for a tag just because the tag exists.
 - `Kubernetes` most likely corresponds to `docs/managed-observability/kubernetes-resources.md`
   given the description overlap, but this is an inference from the description text, not confirmed
   against the live Swagger UI the way the `Auth ...` tags were — verify before relying on it.
