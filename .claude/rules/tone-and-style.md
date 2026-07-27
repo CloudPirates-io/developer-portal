@@ -238,6 +238,17 @@ See [Billing Profiles](/billing/billing-profiles.md) for how billing works today
 :::
 ```
 
+## Roadmap boxes stay minimal, don't editorialize the exact failure mode
+
+Corrected by the user 2026-07-27, `docs/managed-application-plattform/index.md`: even when an
+audit note ([[managed-application-platform-docs]]) records a precise technical detail (e.g. "these
+routes have no registered command handler, so a request hangs and times out with `503`/`504`
+instead of failing cleanly"), don't write that detail into the box body. Keep it to the same short
+shape as every other Roadmap box on the page ("X is not yet implemented", plus a link if a "today"
+state exists) rather than explaining *how* it's broken. The precise mechanism belongs in the
+`.claude/rules/*.md` audit note, not in reader-facing prose, once the box's job (tell the reader not
+to rely on this) is already done by the word "Roadmap" plus one plain sentence.
+
 ## Everything below a "Roadmap" box is written as if already shipped
 
 Corrected by the user 2026-07-24, same session as the box above: only the "Roadmap" box itself

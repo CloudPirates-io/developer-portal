@@ -105,7 +105,16 @@ Note: even ApiGateway's own OpenAPI schema (`ApplicationTemplates.yaml`) still d
 enveloped shape — this is a pre-existing ApiGateway docs bug independent of the portal, useful
 context but not something to copy from. The specific chart catalog (MariaDB, PostgreSQL, etc.) has
 no seed script or hardcoded list in code — it's live DB data if real, unverifiable from source;
-don't treat its presence/absence in code as evidence either way. Left untouched.
+don't treat its presence/absence in code as evidence either way.
+
+**Update 2026-07-24**: the "Available Templates" table was synced against
+`https://github.com/CloudPirates-io/helm-charts`'s own README "Available Charts" table (the
+closest available source of truth, since the actual template catalog is unverifiable live DB data
+per above). Added `Kafka` and `RabbitMQ Cluster Operator`, both new since the table was last
+written. Deliberately did NOT add `ClusterPirate` (the Managed Observability agent chart, not an
+application a user deploys through this platform) or `Common` (a library chart with nothing
+standalone to deploy). Re-diff against that README next time this page is touched, since the
+chart repo adds charts independently of this portal.
 
 ## `gitops-setup.md` — fixed 2026-07-22 (flagged, not line-item-corrected)
 
@@ -148,6 +157,17 @@ command handler at all, so even this minimal real primitive is currently an orph
 but are never produced by any handler in this repo (consistent with their missing command
 handlers). Per the same treatment as `gitops-setup.md`, the page now opens with a single danger box
 rather than being line-item-corrected.
+
+## Follow-up 2026-07-24: tone-and-style pass added two missed Roadmap flags
+
+The 2026-07-22 audit above focused on API request/response bodies and didn't flag two prose
+sections that describe entirely non-existent functionality the same way `gitops-setup.md` and
+`update-management.md` do: `index.md`'s "Secure Secret Management" (SealedSecrets, already had a
+loose `_(planned)_` marker, converted to a proper `::: danger Roadmap` box) and "Flexible Update
+Management" (update channels, had no flag at all before this pass). `templates.md`'s "Updates &
+Security" section describes the same fictional channels/SealedSecrets and also got a Roadmap box.
+No underlying facts changed, this only applied the existing audit findings above (still accurate as
+of this date) to sections that had fallen through the cracks of the first pass.
 
 ## Summary
 

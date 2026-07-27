@@ -1,24 +1,18 @@
 ::: warning Private Beta Access Only
-The Managed Application Platform is currently in private beta. Contact us at [hello@cloudpirates.io](mailto:hello@cloudpirates.io) to request access.
+The Managed Application Platform is currently in private beta.
+Contact us at [hello@cloudpirates.io](mailto:hello@cloudpirates.io) to request access.
 :::
 
-::: danger Most of This Page Describes Planned, Not Current, Capabilities
-Deploying an application at all currently always fails with a `501 Not Implemented` (see
-[Managed Application Platform](./index.md)). Beyond that, the cluster this points at only carries
-`clusterId`, `workspaceId`, `clusterName`, `clusterType` (`EXTERNAL`/`MANAGED`), a cluster-class
-string, and an access token — there is no region, shared-vs-dedicated flag, or cloud-provider
-metadata anywhere in the backend. Deploying to a `MANAGED` cluster is separately rejected with a
-`501` at the cluster level. "Bring Your Own Git"/"Bring Your Own ArgoCD" also have no backend
-support today: the GitOps integration is hardcoded to a single global GitLab project and a single
-global, **read-only** ArgoCD client — there is no way to connect a customer-supplied Git provider
-or ArgoCD instance. Treat everything below as the intended end state, not the current behavior.
+::: danger Roadmap
+Most of the features described here are not yet implemented.
 :::
 
 <br>
 
 # Deployment Options
 
-Choose where to deploy your applications and how to manage your infrastructure. CloudPirates offers flexible options to match your requirements.
+Choose where to deploy your applications: use CloudPirates-hosted infrastructure, bring your own,
+or mix the two.
 
 ## Options Overview
 
@@ -28,7 +22,8 @@ Choose where to deploy your applications and how to manage your infrastructure. 
 | **ArgoCD**         | Managed installation | Your ArgoCD instance | Yes         |
 | **Kubernetes**     | Our managed clusters | Your infrastructure  | Yes         |
 
-**Flexibility**: You can combine any options. For example, use our managed ArgoCD with your own Git repository and Kubernetes cluster.
+**Flexibility**: combine any options, for example our managed ArgoCD with your own Git repository
+and Kubernetes cluster.
 
 ## Kubernetes Cluster Options
 
@@ -55,9 +50,10 @@ Fully managed Kubernetes clusters in your preferred region.
 
 **Available Regions**:
 
-- **Germany (EU)**: SysEleven (OpenStack) or Azure Germany — GDPR compliant
+- **Germany (EU)**: SysEleven (OpenStack) or Azure Germany, GDPR compliant
 - **America East (US)**: Azure US East
-- **Custom Regions**: [Contact us](mailto:developer@cloudpirates.io) for other regions (AWS, GCP, Azure)
+- **Custom Regions**: [contact us](mailto:developer@cloudpirates.io) for other regions (AWS, GCP,
+  Azure)
 
 ### Shared vs. Dedicated Clusters
 
@@ -67,14 +63,14 @@ Fully managed Kubernetes clusters in your preferred region.
 - Multiple workspaces share infrastructure
 - Namespace isolation
 - Resource quotas per workspace
-- Best for: Development, testing, small production workloads
+- Best for: development, testing, small production workloads
 
 **Dedicated Clusters** (Your Own or Custom):
 
 - Full cluster dedicated to you
 - Complete isolation
 - Custom configurations
-- Best for: Production, compliance-sensitive workloads
+- Best for: production, compliance-sensitive workloads
 
 ## Comparison Matrix
 
@@ -117,15 +113,17 @@ Fully managed Kubernetes clusters in your preferred region.
 
 ## Recommended Configurations
 
-**Startups & Small Teams**: Fully managed (Git + ArgoCD + Kubernetes) for fastest time to value
+**Startups & Small Teams**: fully managed (Git + ArgoCD + Kubernetes) for the fewest setup steps.
 
-**Growing Companies**: Mix of managed and self-hosted — use your Git repository with our managed ArgoCD and Kubernetes
+**Growing Companies**: mix managed and self-hosted, use your own Git repository with our managed
+ArgoCD and Kubernetes.
 
-**Enterprises**: Bring your own infrastructure for full control, use CloudPirates for application template management and unified oversight
+**Enterprises**: bring your own infrastructure for full control, use CloudPirates for application
+template management and monitoring.
 
 ## Migration & Flexibility
 
-**No Lock-In**: All configurations use standard ArgoCD/Helm formats. You can:
+**No Lock-In**: all configurations use standard ArgoCD/Helm formats. You can:
 
 - Start fully managed and migrate to self-hosted later
 - Start self-hosted and add managed components over time
@@ -133,9 +131,11 @@ Fully managed Kubernetes clusters in your preferred region.
 
 ## Pricing
 
-**Your Infrastructure**: Platform subscription only — you manage your own Kubernetes, Git, and/or ArgoCD costs
+**Your Infrastructure**: platform subscription only, you manage your own Kubernetes, Git, and/or
+ArgoCD costs.
 
-**CloudPirates Managed Kubernetes**: Pay-as-you-go based on memory usage (per GB of container memory requests)
+**CloudPirates Managed Kubernetes**: pay-as-you-go based on memory usage (per GB of container
+memory requests).
 
 - Example: MariaDB (2Gi) + PostgreSQL (4Gi) = 6 GB billed monthly
 - Includes: GitOps repository, ArgoCD, monitoring, 24/7 support, backups
@@ -144,14 +144,14 @@ Fully managed Kubernetes clusters in your preferred region.
 
 ### Setup Process
 
-1. **Choose Your Options**: Decide on Git, ArgoCD, and Kubernetes
-2. **Configure in Portal**: Set up connections and credentials
-3. **Deploy First Application**: Test with a simple application
-4. **Monitor and Adjust**: Refine based on your needs
+1. **Choose Your Options**: decide on Git, ArgoCD, and Kubernetes
+2. **Configure in Portal**: set up connections and credentials
+3. **Deploy First Application**: test with a simple application
+4. **Monitor and Adjust**: refine based on your needs
 
 ### Need Help Deciding?
 
-[Contact our team](mailto:hello@cloudpirates.io) for a consultation. We'll help you choose the best options for your requirements.
+[Contact our team](mailto:hello@cloudpirates.io) for help choosing the right options.
 
 ## Related Resources
 

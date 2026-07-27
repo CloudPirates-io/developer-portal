@@ -37,17 +37,23 @@ sentence level.
 **Already applied** (treat these as the reference examples for what "done" looks like):
 `docs/api/index.md`, all of `docs/authentication/` (`password.md`, `mfa.md`, `webauthn.md`,
 `api-keys.md`; `sessions.md` is a deliberate partial exception, see `authentication-docs.md`'s note
-on it), and all of `docs/billing/` (`billing-profiles.md`, `invoices.md`, done 2026-07-24, both
+on it), all of `docs/billing/` (`billing-profiles.md`, `invoices.md`, done 2026-07-24, both
 linking to `#/Billing` since one tag covers the whole billing domain; `invoices.md` kept its
-"Paginated List Endpoints" tip box since that's a general fact, not example-bound). See
-`authentication-docs.md` for the session this was first done in and the tag-anchor lessons learned
-there.
+"Paginated List Endpoints" tip box since that's a general fact, not example-bound), and
+`docs/managed-application-plattform/index.md` and `templates.md` (done 2026-07-24 as part of a
+combined tone-and-style pass, user opted in when asked; `index.md` links to `#/Application` and
+kept a Roadmap danger box in that section covering both the create-501 and the
+update/values-no-handler-registered facts, in addition to the separate Roadmap box already earlier
+on the page about create; `templates.md` links to `#/Application%20Template` and kept a "Response
+Shapes" tip box for the bare-array/no-`resources`-object facts). See `authentication-docs.md` for
+the session this was first done in and the tag-anchor lessons learned there.
 
 **Not yet applied** as of 2026-07-24: everything under `docs/workspaces/`,
-`docs/managed-observability/`, and `docs/managed-application-plattform/`. Don't convert a page's
-`## API Reference` section as a side effect of an unrelated edit; treat it as its own deliberate
-step per domain (confirm the real tag/anchor first, see below) unless the user has already asked
-for it on that page.
+`docs/managed-observability/`, and `docs/managed-application-plattform/deployment-options.md`,
+`gitops-setup.md`, `update-management.md` (these three have no `## API Reference` section at all,
+nothing to convert). Don't convert a page's `## API Reference` section as a side effect of an
+unrelated edit; treat it as its own deliberate step per domain (confirm the real tag/anchor first,
+see below) unless the user has already asked for it on that page.
 
 ## Finding the right tag/anchor — don't guess, verify
 
