@@ -3,7 +3,8 @@ next: false
 ---
 
 ::: warning Private Beta Access Only
-The Managed Application Platform is currently in private beta. Contact us at [hello@cloudpirates.io](mailto:hello@cloudpirates.io) to request access.
+The Managed Application Platform is currently in private beta.
+Contact us at [hello@cloudpirates.io](mailto:hello@cloudpirates.io) to request access.
 :::
 
 ::: danger Roadmap
@@ -14,7 +15,8 @@ Most of the features described here are not yet implemented.
 
 # Update Management
 
-Control how and when your applications are updated. CloudPirates offers flexible update channels and automatic update options to match your operational requirements.
+Control how and when your applications are updated: pick an update channel per application, and
+choose whether new versions roll out automatically or wait for your approval.
 
 ## Update Channels
 
@@ -35,7 +37,7 @@ Choose the right balance between stability and features for each application.
 
 **What We Do**:
 
-- Comprehensive testing across multiple scenarios
+- Testing across multiple scenarios
 - Automated and manual validation
 - Gradual rollout monitoring
 - **Automatic migration of Helm chart values** to new versions
@@ -68,7 +70,6 @@ Choose the right balance between stability and features for each application.
 - Latest available version of the software
 - Includes pre-release and beta versions
 - May include breaking changes
-- Cutting-edge features
 - Not recommended for production
 
 **Use Cases**:
@@ -114,8 +115,10 @@ spec:
 
 **Auto-Update Behavior**:
 
-- **Enabled** (`auto-update: "true"`): Application automatically updated to latest version in selected channel, committed to Git
-- **Disabled** (`auto-update: "false"`): Notification sent when new version available, manual approval required
+- **Enabled** (`auto-update: "true"`): application automatically updated to the latest version in
+  the selected channel, committed to Git
+- **Disabled** (`auto-update: "false"`): notification sent when a new version is available, manual
+  approval required
 
 ### Update Process
 
@@ -148,7 +151,8 @@ Notification Sent
 
 ### Pre-Update Backup (Managed Kubernetes Only)
 
-**Automatic Backup**: For applications hosted on CloudPirates Managed Kubernetes clusters, we automatically create a backup before rolling out updates.
+**Automatic Backup**: for applications hosted on CloudPirates Managed Kubernetes clusters, we
+automatically create a backup before rolling out updates.
 
 **What's Included**:
 
@@ -187,7 +191,8 @@ This ensures you can quickly restore your application if an update causes issues
 - Portal notifications
 - Email
 - Webhooks (for integration)
-- **Coming Soon**: Slack, Microsoft Teams
+- Slack
+- Microsoft Teams
 
 ## Changelog and Release Notes
 

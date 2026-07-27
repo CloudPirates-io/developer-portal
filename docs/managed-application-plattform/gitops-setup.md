@@ -11,7 +11,8 @@ Most of the features described here are not yet implemented.
 
 # GitOps Setup
 
-Configure your GitOps workflow for application deployment. CloudPirates supports both managed and bring-your-own Git repositories and ArgoCD installations.
+Configure your GitOps workflow for application deployment. CloudPirates supports both managed and
+bring-your-own Git repositories and ArgoCD installations.
 
 ## Git Repository Options
 
