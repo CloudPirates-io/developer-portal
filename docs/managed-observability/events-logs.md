@@ -12,7 +12,7 @@ Kubernetes generates events as things happen in your cluster. Each event include
 - **What to do**: Recommended actions if needed
 - **Context**: Related resources and timeline
 
-::: tip Tip: Event Context Provided
+::: tip Event Context Provided
 Events include descriptions and troubleshooting steps to help you quickly identify and resolve issues.
 :::
 
@@ -38,12 +38,10 @@ These events indicate potential issues that haven't caused failures yet:
 **What you'll see** (with explanations):
 
 - **"Pod waiting to be scheduled"**
-
   - _What it means_: No node has enough resources for this pod
   - _What to do_: Check if you need to add nodes or reduce resource requests
 
 - **"Image pull is slow"**
-
   - _What it means_: Container image is taking a while to download
   - _What to do_: Usually resolves itself. If persistent, check network connectivity
 
@@ -51,7 +49,7 @@ These events indicate potential issues that haven't caused failures yet:
   - _What it means_: Your application isn't responding to readiness probes
   - _What to do_: Check application logs for startup issues
 
-::: tip Tip: Only Two Real Event Types
+::: tip Only Two Real Event Types
 Kubernetes (and our API) only classifies events as `Normal` or `Warning` — there is no separate
 "Error" type. The scenarios below surface as `Warning` events; we still call out the more serious
 ones separately here because they usually need immediate action.
@@ -64,12 +62,10 @@ These `Warning` events indicate active problems:
 **What you'll see** (with troubleshooting):
 
 - **"Container crashed with exit code 1"**
-
   - _What it means_: Your application exited with an error
   - _What to do_: Check your application's own logging/monitoring for the error message (this platform doesn't provide container log access)
 
 - **"Out of memory (OOMKilled)"**
-
   - _What it means_: Container used more memory than its limit
   - _What to do_: Increase memory limits or optimize your application
 
@@ -194,7 +190,7 @@ clusterPirate:
 
 ## Pod Logs
 
-::: danger Danger: Not Implemented
+::: danger Not Implemented
 There is no container log-streaming feature anywhere in the platform today — no way to view
 stdout/stderr, historical logs, or filter log content. Everything below is a planned capability,
 not something you can use now. Don't confuse this with the unrelated, real

@@ -29,7 +29,7 @@ CloudPirates Managed Observability is an **observability solution** that provide
 - Available as fully managed (hosted by CloudPirates) or managed in-house (in your cluster)
 - Designed for comprehensive observability needs
 
-::: tip Tip: Choose What Fits Your Needs
+::: tip Choose What Fits Your Needs
 Use Managed Observability for essential visibility with intelligent insights, or opt for our full observability stack when you need advanced capabilities, custom metrics, and deep instrumentation. Both options are fully supported by CloudPirates.
 :::
 
@@ -185,7 +185,7 @@ Scan all images with Trivy to identify CVEs, with severity ratings and recommend
 
 **Only get notified when you need to take action.**
 
-::: danger Danger: No Alerting Engine Exists Yet
+::: danger No Alerting Engine Exists Yet
 There is no alerting/threshold-evaluation feature in the backend today, under any name. Everything
 in this section, and the linked reference page, describes planned functionality.
 :::

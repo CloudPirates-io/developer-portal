@@ -1,32 +1,37 @@
-::: warning Warning: Private Beta Access Only
-The Managed Application Platform is currently in private beta. Contact us at [hello@cloudpirates.io](mailto:hello@cloudpirates.io) to request access.
+::: warning Private Beta Access Only
+The Managed Application Platform is currently in private beta.
+Contact us at [hello@cloudpirates.io](mailto:hello@cloudpirates.io) to request access.
 :::
 
 <br>
 
 # Application Templates
 
-Browse and deploy curated application templates with production-ready configurations. All templates are based on CloudPirates [open source Helm charts](https://github.com/CloudPirates-io/helm-charts).
+Browse and deploy curated application templates with production-ready configurations. All
+templates are based on CloudPirates
+[open source Helm charts](https://github.com/CloudPirates-io/helm-charts).
 
 ## Available Templates
 
-| Chart                                                                                      | Description                                                                                                                      | Version                                                                                                                                                                                  |
-| ------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [MariaDB](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/mariadb)         | High-performance, open-source relational database server that is a drop-in replacement for MySQL                                 | ![Version](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/CloudPirates-io/helm-charts/main/charts/mariadb/Chart.yaml&label=&query=version&prefix=v)     |
-| [PostgreSQL](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/postgres)     | The World's Most Advanced Open Source Relational Database                                                                        | ![Version](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/CloudPirates-io/helm-charts/main/charts/postgres/Chart.yaml&label=&query=version&prefix=v)    |
-| [MongoDB](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/mongodb)         | MongoDB a flexible NoSQL database for scalable, real-time data management                                                        | ![Version](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/CloudPirates-io/helm-charts/main/charts/mongodb/Chart.yaml&label=&query=version&prefix=v)     |
-| [TimescaleDB](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/timescaledb) | TimescaleDB is a PostgreSQL extension for high-performance real-time analytics on time-series and event data                     | ![Version](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/CloudPirates-io/helm-charts/main/charts/timescaledb/Chart.yaml&label=&query=version&prefix=v) |
-| [Redis](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/redis)             | In-memory data structure store, used as a database, cache, and message broker                                                    | ![Version](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/CloudPirates-io/helm-charts/main/charts/redis/Chart.yaml&label=&query=version&prefix=v)       |
-| [Valkey](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/valkey)           | High-performance in-memory data structure store, fork of Redis                                                                   | ![Version](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/CloudPirates-io/helm-charts/main/charts/valkey/Chart.yaml&label=&query=version&prefix=v)      |
-| [Memcached](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/memcached)     | High-performance, distributed memory object caching system                                                                       | ![Version](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/CloudPirates-io/helm-charts/main/charts/memcached/Chart.yaml&label=&query=version&prefix=v)   |
-| [MinIO](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/minio)             | High-Performance Object Storage compatible with Amazon S3 APIs                                                                   | ![Version](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/CloudPirates-io/helm-charts/main/charts/minio/Chart.yaml&label=&query=version&prefix=v)       |
-| [RustFS](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/rustfs)           | High-performance distributed object storage with S3-compatible API (MinIO alternative) [ALPHA]                                   | ![Version](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/CloudPirates-io/helm-charts/main/charts/rustfs/Chart.yaml&label=&query=version&prefix=v)      |
-| [Ghost](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/ghost)             | A simple, powerful publishing platform that allows you to share your stories with the world                                      | ![Version](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/CloudPirates-io/helm-charts/main/charts/ghost/Chart.yaml&label=&query=version&prefix=v)       |
-| [Nginx](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/nginx)             | High-performance HTTP server and reverse proxy                                                                                   | ![Version](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/CloudPirates-io/helm-charts/main/charts/nginx/Chart.yaml&label=&query=version&prefix=v)       |
-| [Keycloak](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/keycloak)       | Open Source Identity and Access Management solution                                                                              | ![Version](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/CloudPirates-io/helm-charts/main/charts/keycloak/Chart.yaml&label=&query=version&prefix=v)    |
-| [RabbitMQ](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/rabbitmq)       | A messaging broker that implements the Advanced Message Queuing Protocol (AMQP)                                                  | ![Version](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/CloudPirates-io/helm-charts/main/charts/rabbitmq/Chart.yaml&label=&query=version&prefix=v)    |
-| [Zookeeper](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/zookeeper)     | Centralized service for maintaining configuration information, naming, providing distributed synchronization, and group services | ![Version](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/CloudPirates-io/helm-charts/main/charts/zookeeper/Chart.yaml&label=&query=version&prefix=v)   |
-| [Etcd](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/etcd)               | A distributed reliable key-value store                                                                                           | ![Version](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/CloudPirates-io/helm-charts/main/charts/etcd/Chart.yaml&label=&query=version&prefix=v)        |
+| Chart                                                                                                                  | Description                                                                                                                      | Version                                                                                                                                                                                                |
+| ---------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [MariaDB](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/mariadb)                                     | High-performance, open-source relational database server that is a drop-in replacement for MySQL                                 | ![Version](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/CloudPirates-io/helm-charts/main/charts/mariadb/Chart.yaml&label=&query=version&prefix=v)                   |
+| [PostgreSQL](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/postgres)                                 | The World's Most Advanced Open Source Relational Database                                                                        | ![Version](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/CloudPirates-io/helm-charts/main/charts/postgres/Chart.yaml&label=&query=version&prefix=v)                  |
+| [MongoDB](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/mongodb)                                     | MongoDB a flexible NoSQL database for scalable, real-time data management                                                        | ![Version](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/CloudPirates-io/helm-charts/main/charts/mongodb/Chart.yaml&label=&query=version&prefix=v)                   |
+| [TimescaleDB](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/timescaledb)                             | TimescaleDB is a PostgreSQL extension for high-performance real-time analytics on time-series and event data                     | ![Version](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/CloudPirates-io/helm-charts/main/charts/timescaledb/Chart.yaml&label=&query=version&prefix=v)               |
+| [Redis](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/redis)                                         | In-memory data structure store, used as a database, cache, and message broker                                                    | ![Version](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/CloudPirates-io/helm-charts/main/charts/redis/Chart.yaml&label=&query=version&prefix=v)                     |
+| [Valkey](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/valkey)                                       | High-performance in-memory data structure store, fork of Redis                                                                   | ![Version](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/CloudPirates-io/helm-charts/main/charts/valkey/Chart.yaml&label=&query=version&prefix=v)                    |
+| [Memcached](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/memcached)                                 | High-performance, distributed memory object caching system                                                                       | ![Version](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/CloudPirates-io/helm-charts/main/charts/memcached/Chart.yaml&label=&query=version&prefix=v)                 |
+| [MinIO](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/minio)                                         | High-Performance Object Storage compatible with Amazon S3 APIs                                                                   | ![Version](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/CloudPirates-io/helm-charts/main/charts/minio/Chart.yaml&label=&query=version&prefix=v)                     |
+| [RustFS](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/rustfs)                                       | High-performance distributed object storage with S3-compatible API (MinIO alternative) [ALPHA]                                   | ![Version](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/CloudPirates-io/helm-charts/main/charts/rustfs/Chart.yaml&label=&query=version&prefix=v)                    |
+| [Ghost](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/ghost)                                         | A simple, powerful publishing platform that allows you to share your stories with the world                                      | ![Version](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/CloudPirates-io/helm-charts/main/charts/ghost/Chart.yaml&label=&query=version&prefix=v)                     |
+| [Nginx](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/nginx)                                         | High-performance HTTP server and reverse proxy                                                                                   | ![Version](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/CloudPirates-io/helm-charts/main/charts/nginx/Chart.yaml&label=&query=version&prefix=v)                     |
+| [Keycloak](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/keycloak)                                   | Open Source Identity and Access Management solution                                                                              | ![Version](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/CloudPirates-io/helm-charts/main/charts/keycloak/Chart.yaml&label=&query=version&prefix=v)                  |
+| [RabbitMQ](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/rabbitmq)                                   | A messaging broker that implements the Advanced Message Queuing Protocol (AMQP)                                                  | ![Version](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/CloudPirates-io/helm-charts/main/charts/rabbitmq/Chart.yaml&label=&query=version&prefix=v)                  |
+| [RabbitMQ Cluster Operator](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/rabbitmq-cluster-operator) | Kubernetes operator to deploy and manage RabbitMQ clusters                                                                       | ![Version](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/CloudPirates-io/helm-charts/main/charts/rabbitmq-cluster-operator/Chart.yaml&label=&query=version&prefix=v) |
+| [Kafka](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/kafka)                                         | Distributed event streaming platform for high-performance data pipelines and streaming analytics (KRaft mode, no ZooKeeper)      | ![Version](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/CloudPirates-io/helm-charts/main/charts/kafka/Chart.yaml&label=&query=version&prefix=v)                     |
+| [Zookeeper](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/zookeeper)                                 | Centralized service for maintaining configuration information, naming, providing distributed synchronization, and group services | ![Version](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/CloudPirates-io/helm-charts/main/charts/zookeeper/Chart.yaml&label=&query=version&prefix=v)                 |
+| [Etcd](https://github.com/CloudPirates-io/helm-charts/tree/main/charts/etcd)                                           | A distributed reliable key-value store                                                                                           | ![Version](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/CloudPirates-io/helm-charts/main/charts/etcd/Chart.yaml&label=&query=version&prefix=v)                      |
 
 ## Template Configuration
 
@@ -40,94 +45,31 @@ Customize any template by overriding Helm values for resources, storage, replica
 
 ## Updates & Security
 
+::: danger Roadmap
+Update channels and SealedSecrets-based secret encryption are planned but not implemented yet.
+See [Update Management](./update-management.md) and [GitOps Setup](./gitops-setup.md) for details.
+:::
+
 **Update Channels**:
 
-- **CloudPirates Stable**: Released ~2 weeks after upstream with extensive testing and automatic value migrations
-- **Stable**: Latest stable release, rolled out instantly from upstream
-- **Latest**: Latest available version including pre-releases and potential breaking changes
+- **CloudPirates Stable**: released ~2 weeks after upstream with extensive testing and automatic
+  value migrations
+- **Stable**: latest stable release, rolled out instantly from upstream
+- **Latest**: latest available version, including pre-releases and potential breaking changes
 
-[Learn more about update management →](./update-management.md)
-
-**Security**: All secrets encrypted via SealedSecrets and stored safely in Git
-
-[Learn more about GitOps setup →](./gitops-setup.md)
+**Security**: all secrets encrypted via SealedSecrets and stored safely in Git.
 
 ## API Reference
 
-### List Available Templates
+For listing and retrieving application templates, see the
+[Application Template API reference](https://api.cloudpirates.dev/docs/#/Application%20Template).
 
-```http
-GET /v1/applications/templates
-Authorization: Bearer <access-token>
-```
-
-**Response**: a bare, paginated array (see [Pagination](/api/pagination.md)) — not wrapped in a `templates` key:
-
-```json
-[
-  {
-    "applicationTemplateId": "6571f2b1e4b0a1a2b3c4d5e6",
-    "name": "MariaDB",
-    "description": "High-performance, open-source relational database",
-    "logoUrl": "https://.../mariadb.svg",
-    "source": {
-      "type": "HELM_CHART",
-      "repositoryUrl": "https://github.com/CloudPirates-io/helm-charts",
-      "chartName": "mariadb"
-    }
-  }
-]
-```
-
-### Get Template Details
-
-```http
-GET /v1/applications/templates/{applicationTemplateId}
-Authorization: Bearer <access-token>
-```
-
-**Response**:
-
-```json
-{
-  "applicationTemplateId": "6571f2b1e4b0a1a2b3c4d5e6",
-  "name": "MariaDB",
-  "description": "High-performance, open-source relational database",
-  "logoUrl": "https://.../mariadb.svg",
-  "source": {
-    "type": "HELM_CHART",
-    "repositoryUrl": "https://github.com/CloudPirates-io/helm-charts",
-    "chartName": "mariadb"
-  },
-  "versions": [
-    {
-      "appVersion": "12.0.2",
-      "chartVersion": "0.6.0",
-      "publishDate": "2024-01-15T10:00:00Z"
-    }
-  ],
-  "presets": [
-    {
-      "applicationTemplatePresetId": "6571f2b1e4b0a1a2b3c4d5e7",
-      "presetName": "Single",
-      "supportedVersionRange": ">=12.0.0",
-      "valuesSchema": {}
-    },
-    {
-      "applicationTemplatePresetId": "6571f2b1e4b0a1a2b3c4d5e8",
-      "presetName": "Small",
-      "supportedVersionRange": ">=12.0.0",
-      "valuesSchema": {}
-    }
-  ]
-}
-```
-
-There is no fixed `resources` object on a preset — sizing (CPU/memory/storage) is validated against
-`valuesSchema`, an arbitrary per-preset JSON Schema, not a hardcoded shape.
-
-::: info Info: Full API Documentation Available
-These are example requests. For complete API documentation including all parameters, response schemas, and authentication details, visit [api.cloudpirates.io/docs](https://api.cloudpirates.io/docs/).
+::: tip Response Shapes
+`GET /v1/applications/templates` returns a bare, paginated array (see
+[Pagination](/api/pagination.md)), not wrapped in a `templates` key. A template's real fields are
+`applicationTemplateId`, `name`, `description`, `logoUrl`, and a `source` object
+(`{type, repositoryUrl, chartName}`); a preset has no fixed `resources` object, sizing
+(CPU/memory/storage) is validated against `valuesSchema`, an arbitrary per-preset JSON Schema.
 :::
 
 ## Related Resources

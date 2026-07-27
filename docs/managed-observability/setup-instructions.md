@@ -12,7 +12,7 @@ Get your cluster connected to CloudPirates Managed Observability in less than 5 
 - Scans container images for vulnerabilities
 - Requires minimal resources (10m CPU, 100Mi memory)
 
-::: tip Tip: Lightweight & Secure
+::: tip Lightweight & Secure
 ClusterPirate only **reads** data from your cluster and sends it securely to CloudPirates. It never modifies your workloads or stores sensitive data.
 :::
 

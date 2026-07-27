@@ -4,50 +4,26 @@ prev: false
 
 # Billing
 
-Manage your CloudPirates billing through Billing Profiles.
+CloudPirates uses **Billing Profiles** to manage payments and invoices.
+A workspace needs one assigned before it can use paid features.
 
 ## Overview
 
-CloudPirates uses **Billing Profiles** to manage payments and invoices.
+A Billing Profile holds your billing information: name, address, and tax details.
+Only its owner can access it, and one profile can cover several workspaces at once for
+consolidated billing.
 
-::: info Info: Personal Billing Profiles
-Billing Profiles are personal and can only be accessed by their owner. You must assign your Billing Profile to workspaces to enable paid features.
-:::
-
-Access billing at [portal.cloudpirates.io/billing](https://portal.cloudpirates.io/billing).
+Manage your Billing Profiles at
+[portal.cloudpirates.io/billing](https://portal.cloudpirates.io/billing).
 
 ## Getting Started
 
-**1. Create a Billing Profile**
-
-[Learn more →](./billing-profiles.md)
-
-**2. Assign to Workspaces**
-
-Link your Billing Profile to workspaces to enable paid features.
-
-[Learn more →](/workspaces/billing.md)
-
-**3. Manage Invoices**
-
-View, download, and track invoices.
-
-[Learn more →](./invoices.md)
+1. [Create a Billing Profile.](./billing-profiles.md) Add your billing information at
+   [portal.cloudpirates.io/billing](https://portal.cloudpirates.io/billing).
+2. [Assign it to a workspace.](/workspaces/billing.md) Link the profile to a workspace to enable paid features there.
+3. [Track your invoices.](./invoices.md) View, download, and pay invoices as they come in.
 
 ## Payment Methods
 
-Currently, all payments are processed via **wire transfer** (Überweisung).
-
-::: info Info: Additional Payment Methods Coming Soon
-Additional payment methods are currently in development and will be available soon:
-
-- PayPal
-- Credit Card
-- Direct Debit (SEPA)
-  :::
-
-## Related Resources
-
-- [Billing Profiles](./billing-profiles.md)
-- [Invoices](./invoices.md)
-- [Workspace Billing](/workspaces/billing.md)
+All payments currently go through **wire transfer** (Überweisung).
+Additional payment methods are coming soon (PayPal, Credit Card, Direct Debit (SEPA)).

@@ -143,7 +143,7 @@ DELETE /v1/workspaces/{workspaceId}/members/{workspaceMemberId}
 Authorization: Bearer <access-token>
 ```
 
-::: info Info: Full API Documentation Available
+::: info Full API Documentation Available
 These are example requests. For complete API documentation including all parameters, response schemas, and authentication details, visit [api.cloudpirates.io/docs](https://api.cloudpirates.io/docs/).
 :::
 

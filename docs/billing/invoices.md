@@ -8,13 +8,13 @@ View, download, and manage your CloudPirates invoices.
 
 ## Overview
 
-Access invoices at [portal.cloudpirates.io/billing](https://portal.cloudpirates.io/billing).
+View your invoices at [portal.cloudpirates.io/billing](https://portal.cloudpirates.io/billing).
 
 ## Viewing Invoices
 
 ### Invoice List
 
-All invoices with:
+Each entry shows:
 
 - Invoice number
 - Date issued
@@ -35,11 +35,11 @@ Click any invoice to view:
 
 ## Invoice Status
 
-**Paid**: Payment received and completed
+**Paid**: We've received your payment.
 
-**Pending**: Payment not yet received, within payment period
+**Pending**: Still within the payment period, we haven't received your payment yet.
 
-**Overdue**: Payment past due date, payment required
+**Overdue**: Past the due date, payment is now required.
 
 ## Downloading Invoices
 
@@ -50,36 +50,30 @@ Click any invoice to view:
 3. Click "Download PDF"
 4. Save to device
 
-PDFs include complete invoice details, payment instructions, and purchase order number (if set).
+PDFs include the same details as the invoice page, plus payment instructions and your purchase
+order number (if set).
 
 ## Account Balance
 
-View current balance:
+Your balance can be:
 
 - **Positive**: Credit on account
 - **Negative**: Outstanding payments
 - **Zero**: All invoices settled
 
-Balance details include current balance, pending charges, recent payments, and next invoice date.
+The balance page also shows pending charges, recent payments, and your next invoice date.
 
 ## Transaction History
 
-Complete record of all transactions:
-
-**Types**:
-
-- Invoice charges
-- Payments received
-- Credits applied
-- Refunds processed
-
-**Details**: Date, amount, type, invoice reference, payment method, status
+Every transaction on your account is logged here: invoice charges, payments received, credits
+applied, and refunds processed. Each entry lists date, amount, type, invoice reference, payment
+method, and status.
 
 ## Email Invoices
 
 ### Automatic Delivery
 
-Invoices automatically sent to email addresses configured in Billing Profile.
+We automatically email each invoice to the addresses configured in your Billing Profile.
 
 Email includes:
 
@@ -98,68 +92,30 @@ Email includes:
 
 ### Wire Transfer
 
-Current payment method:
+To pay by wire transfer:
 
-1. Review invoice amount and details
-2. Get bank details from invoice
-3. Send payment via bank transfer
-4. Include invoice reference number
+1. Review the invoice amount and details
+2. Get the bank details from the invoice
+3. Send the payment via bank transfer
+4. Include the invoice reference number
 
-::: warning Warning: Always Include Payment Reference
-You must always include the invoice reference number in your payment to ensure proper allocation to your account.
+::: warning Always Include Payment Reference
+Include the invoice reference number in your payment, or we can't match it to your account.
 :::
 
 ### Payment Confirmation
 
-Payment typically reflected within 2-3 business days. Invoice status updates to "Paid" and receipt becomes available for download.
+Your payment is usually reflected within 2-3 business days. The invoice status then updates to
+"Paid" and a receipt becomes available for download.
 
 ## API Reference
 
-### List Invoices
+For invoice listing, invoice detail, PDF download, and transaction requests, see the
+[Billing API reference](https://api.cloudpirates.dev/docs/#/Billing).
 
-```http
-GET /v1/billing/billing-profiles/{billingProfileId}/invoices
-Authorization: Bearer <access-token>
-```
-
-### Get Invoice Details
-
-```http
-GET /v1/billing/billing-profiles/{billingProfileId}/invoice/{invoiceId}
-Authorization: Bearer <access-token>
-```
-
-### Get Invoice PDF URL
-
-Get a signed URL to download the invoice PDF:
-
-```http
-GET /v1/billing/billing-profiles/{billingProfileId}/invoices/{invoiceId}/pdf-url
-Authorization: Bearer <access-token>
-```
-
-Response:
-
-```json
-{
-  "url": "https://api.cloudpirates.io/v1/billing/billing-profiles/{billingProfileId}/invoices/{invoiceId}/pdf/Rechnung%20{number}.pdf?expires={timestamp}&token={token}"
-}
-```
-
-### List Transactions
-
-```http
-GET /v1/billing/billing-profiles/{billingProfileId}/transactions
-Authorization: Bearer <access-token>
-```
-
-::: tip Tip: Paginated List Endpoints
-`List Invoices` and `List Transactions` are paginated like every other list endpoint in the API —
-see [Pagination](/api/pagination.md) for the `x-Total`/`x-Limit`/`x-Offset`/`Link` headers.
-:::
-
-::: info Info: Full API Documentation Available
-These are example requests. For complete API documentation including all parameters, response schemas, and authentication details, visit [api.cloudpirates.io/docs](https://api.cloudpirates.io/docs/).
+::: tip Paginated List Endpoints
+`List Invoices` and `List Transactions` are paginated like every other list endpoint in the API.
+See [Pagination](/api/pagination.md) for the `x-Total`/`x-Limit`/`x-Offset`/`Link` headers.
 :::
 
 ## Related Resources
