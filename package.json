@@ -3,9 +3,9 @@
   "description": "CloudPirates Documentation",
   "type": "module",
   "scripts": {
-    "dev": "vitepress dev docs",
-    "build": "vitepress build docs --outDir dist",
-    "serve": "vitepress serve docs"
+    "dev": "vitepress dev",
+    "build": "vitepress build --outDir dist",
+    "serve": "vitepress serve"
   },
   "devDependencies": {
     "vitepress": "latest"
