@@ -4,13 +4,9 @@ Monitor node and pod CPU/memory usage for capacity planning.
 
 ::: danger CPU/Memory Only
 Metrics collection covers **only CPU and memory** for nodes and pods, pulled from the Kubernetes
-`metrics.k8s.io` API. Disk, network, load average, ingress traffic/latency, volume usage, and
-control-plane component health are **not collected anywhere** — the sections below that describe
-them are planned, not current, functionality. There is also no server-side health classification
-layer ("Healthy"/"Under pressure"/"Overloaded") or alerting engine — the real data is a raw
-numeric `{created, cpu, memory}[]` time series per node/pod, with no thresholds or labels applied.
-Every "Alert"/"Alert Thresholds" callout on this page describes the same nonexistent alerting
-feature (see [Alert Reference](./alert-reference.md)).
+`metrics.k8s.io` API. Everything else on this page (disk, network, load average, ingress, volume
+usage, control-plane health, and alerting) is planned, not current, functionality: see the
+"(not collected)" notes on each section below and the [Alert Reference](./alert-reference.md).
 :::
 
 ## What We Monitor
@@ -23,7 +19,7 @@ feature (see [Alert Reference](./alert-reference.md)).
 ### CPU and Memory
 
 CPU and memory usage per node, collected every `updateIntervalSeconds` (60s by default) from the
-Kubernetes `metrics.k8s.io` API. The response is a raw numeric series — there is no health
+Kubernetes `metrics.k8s.io` API. The response is a raw numeric series. There is no health
 classification, no "Healthy"/"Under pressure"/"Overloaded" labeling, and no derived insight text:
 
 ```json
@@ -36,7 +32,8 @@ Free disk space, growth-rate tracking, and per-path breakdowns are not collected
 
 ### Network Metrics _(not collected)_
 
-Inbound/outbound throughput, error/drop counts, and connection statistics are not collected anywhere.
+Inbound/outbound throughput, error/drop counts, and connection statistics are not collected
+anywhere.
 
 ### Load Average _(not collected)_
 
@@ -47,8 +44,8 @@ Inbound/outbound throughput, error/drop counts, and connection statistics are no
 ### CPU/Memory Usage
 
 Same raw `{created, cpu, memory}[]` series as node metrics, collected per pod. There is no
-computed throttling percentage or alerting — CPU/memory limits and requests are visible on the
-raw pod manifest (see [Kubernetes Resources](./kubernetes-resources.md)), not as a derived metric.
+computed throttling percentage or alerting. CPU/memory limits and requests are visible on the raw
+pod manifest (see [Kubernetes Resources](./kubernetes-resources.md)), not as a derived metric.
 
 ### Pod Health
 
@@ -69,13 +66,13 @@ via the resource explorer (see [Kubernetes Resources](./kubernetes-resources.md)
 
 ## Volume Monitoring _(not collected)_
 
-PVC capacity/usage metrics are not collected anywhere — the Kubernetes `metrics.k8s.io` API this
+PVC capacity/usage metrics are not collected anywhere: the Kubernetes `metrics.k8s.io` API this
 platform reads from has no volume-metrics endpoint.
 
 ## Ingress Monitoring _(not collected)_
 
 Request rate, latency, error rate, and certificate-expiry tracking are not collected anywhere.
-Ingress resources also aren't browsable through the resource explorer today — `Ingress` isn't in
+Ingress resources also aren't browsable through the resource explorer today; `Ingress` isn't in
 the supported resource-type list.
 
 ## Cluster Health
@@ -96,8 +93,8 @@ Read directly off the resource explorer/summary endpoint:
 
 ### Component Health _(not collected)_
 
-Nothing probes control-plane components (API server, controller manager, scheduler, etcd) — there
-is no component health signal.
+Nothing probes control-plane components (API server, controller manager, scheduler, etcd), so
+there is no component health signal.
 
 ## Metrics Collection
 

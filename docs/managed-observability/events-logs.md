@@ -1,11 +1,12 @@
 # Events & Troubleshooting
 
 Access Kubernetes events with descriptions and troubleshooting guidance. There is currently no
-container log-streaming feature — see the [Pod Logs](#pod-logs) note below.
+container log-streaming feature, see the [Pod Logs](#pod-logs) note below.
 
 ## What Are Events?
 
-Kubernetes generates events as things happen in your cluster. Each event includes context and guidance:
+Kubernetes generates events as things happen in your cluster. Each event includes context and
+guidance:
 
 - **What happened**: Description of the event
 - **Why it matters**: Impact on your applications
@@ -13,7 +14,8 @@ Kubernetes generates events as things happen in your cluster. Each event include
 - **Context**: Related resources and timeline
 
 ::: tip Event Context Provided
-Events include descriptions and troubleshooting steps to help you quickly identify and resolve issues.
+Events include descriptions and troubleshooting steps to help you quickly identify and resolve
+issues.
 :::
 
 ## Event Categories
@@ -50,7 +52,7 @@ These events indicate potential issues that haven't caused failures yet:
   - _What to do_: Check application logs for startup issues
 
 ::: tip Only Two Real Event Types
-Kubernetes (and our API) only classifies events as `Normal` or `Warning` — there is no separate
+Kubernetes (and our API) only classifies events as `Normal` or `Warning`, there is no separate
 "Error" type. The scenarios below surface as `Warning` events; we still call out the more serious
 ones separately here because they usually need immediate action.
 :::
@@ -63,7 +65,8 @@ These `Warning` events indicate active problems:
 
 - **"Container crashed with exit code 1"**
   - _What it means_: Your application exited with an error
-  - _What to do_: Check your application's own logging/monitoring for the error message (this platform doesn't provide container log access)
+  - _What to do_: Check your application's own logging/monitoring for the error message (this
+    platform doesn't provide container log access)
 
 - **"Out of memory (OOMKilled)"**
   - _What it means_: Container used more memory than its limit
@@ -186,12 +189,13 @@ clusterPirate:
 
 - **Reason**: `Unhealthy`
 - **Common Causes**: Application not ready, incorrect probe configuration, network issues
-- **Resolution**: Check application startup time, adjust probe settings, verify endpoint availability
+- **Resolution**: Check application startup time, adjust probe settings, verify endpoint
+  availability
 
 ## Pod Logs
 
 ::: danger Not Implemented
-There is no container log-streaming feature anywhere in the platform today — no way to view
+There is no container log-streaming feature anywhere in the platform today, no way to view
 stdout/stderr, historical logs, or filter log content. Everything below is a planned capability,
 not something you can use now. Don't confuse this with the unrelated, real
 [deployed-application logs](/managed-application-plattform/) endpoint in the Managed Application
@@ -238,7 +242,8 @@ Logs are available for all containers in running and recently terminated pods.
 ### Troubleshooting Application Issues
 
 1. **Check Pod Events**: Identify scheduling or startup issues
-2. **Review Container Logs**: Look for application errors or exceptions (via your own logging setup — not available through this platform)
+2. **Review Container Logs**: Look for application errors or exceptions (via your own logging
+   setup, not available through this platform)
 3. **Monitor Resource Events**: Track deployment updates and rollouts
 4. **Examine System Events**: Identify infrastructure problems
 
@@ -264,7 +269,7 @@ Logs are available for all containers in running and recently terminated pods.
 
 ## Kubernetes Events
 
-Events come from a dedicated, cluster-wide endpoint — fetching a specific resource (see
+Events come from a dedicated, cluster-wide endpoint. Fetching a specific resource (see
 [Kubernetes Resources](./kubernetes-resources.md)) never embeds events in its response.
 
 ### List Cluster Events
@@ -274,7 +279,7 @@ GET /v1/workspaces/{workspaceId}/observability/{clusterId}/kubernetes-events
 Authorization: Bearer <access-token>
 ```
 
-This is a paginated list (see [Pagination](/api/pagination.md)) — the response body is a bare
+This is a paginated list (see [Pagination](/api/pagination.md)). The response body is a bare
 array:
 
 ```json
@@ -330,7 +335,8 @@ Response:
 ### Event Monitoring
 
 - Enable both resource and system events for complete visibility
-- Regularly review warning events to catch issues early (there is no alerting engine yet — see [Alert Reference](./alert-reference.md))
+- Regularly review warning events to catch issues early (there is no alerting engine yet, see
+  [Alert Reference](./alert-reference.md))
 
 ### Log Management
 
@@ -342,7 +348,8 @@ Response:
 ### Troubleshooting Workflow
 
 1. Start with events to identify the problem type
-2. Review your application's own logs for application-specific details (not available through this platform)
+2. Review your application's own logs for application-specific details (not available through
+   this platform)
 3. Check resource configuration for misconfigurations
 4. Examine metrics for resource constraints
 5. Review cluster-wide events for infrastructure issues

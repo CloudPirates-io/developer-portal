@@ -100,8 +100,8 @@ e.g. "Add your billing information at portal.cloudpirates.io/billing", with the 
 as a "see X for details" trailer), and consider deleting a "Related Resources" section that becomes
 fully redundant with the list right above it.
 
-The same "two sections describing the same thing" smell can also show up as duplicated *field
-lists* rather than duplicated links. If a page has both a "how to do X" procedure and a "what X's
+The same "two sections describing the same thing" smell can also show up as duplicated _field
+lists_ rather than duplicated links. If a page has both a "how to do X" procedure and a "what X's
 parts mean" reference right next to each other, the procedure should point at the reference instead
 of restating it, e.g. "3. Enter your billing information (see Billing Information below for what
 each field means)" instead of re-listing every field inline.
@@ -123,7 +123,7 @@ Examples of intentional duplication, don't merge or remove these patterns:
 
 - A warning box repeated verbatim across two sibling sections, e.g. an "Asynchronous Request
   Processing" warning box that appears in both `## 503 Service Unavailable` and `## 504 Gateway
-  Timeout` in `docs/api/error-handling.md`. A reader jumping straight to `#504-gateway-timeout` from
+Timeout` in `docs/api/error-handling.md`. A reader jumping straight to `#504-gateway-timeout` from
   a link elsewhere would otherwise miss it.
 - The same explanation appearing in two different files at the two places a reader is likely to
   land, e.g. the eventually-consistent-read-models explanation in both `docs/api/index.md` (under
@@ -216,7 +216,15 @@ Example, used at the top of a page:
 
 ```
 ::: danger Roadmap
-Workspace-scoped billing is on the roadmap, but none of it is implemented yet.
+Most of the features described here are not yet implemented.
+:::
+```
+
+Optionally, can have a bit more information (but not too much):
+
+```
+::: danger Roadmap
+Workspace-scoped billing is not implemented yet.
 See [Billing Profiles](/billing/billing-profiles.md) for current usage.
 :::
 ```
@@ -249,6 +257,15 @@ Reasoning: the "Roadmap" box already told the reader this isn't live. Repeating 
 every sentence below it is the same duplicate-information problem covered above, just spread across
 a whole page instead of one paragraph, and it reads as hedging rather than documentation. State the
 box once, then document the feature normally.
+
+This holds across a whole page, not just directly below one box. If a page already has a Roadmap
+box for a feature (even in an earlier or later section, or on a top-of-page box covering several
+features at once), don't re-hedge that same feature with mixed real/planned phrasing somewhere
+else on the page, e.g. don't write "Kubernetes event monitoring today; CVE scanning, AI-assisted
+insights, and automated resource recommendations are on the roadmap" in a feature list. List the
+capabilities plainly ("Kubernetes event monitoring, CVE scanning, AI-assisted insights, and
+automated resource recommendations") and let the page's Roadmap box(es) carry the caveat, the same
+way a single "planned" tag on a heading isn't repeated in the prose underneath it.
 
 ## Open question — nautical/pirate metaphors
 

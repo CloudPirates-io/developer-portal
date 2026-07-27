@@ -1,10 +1,12 @@
 # Security & Best Practices
 
-Automated validation of cluster configuration against industry security standards and best practices.
+Automated validation of cluster configuration against
+industry security standards and best practices.
 
 ## How It Works
 
-Every deployment, job, and workload in your cluster is automatically checked against security standards and best practices. Each finding includes:
+Every deployment, job, and workload in your cluster is automatically checked against
+security standards and best practices. Each finding includes:
 
 - **Issue description** with context
 - **Impact explanation** for security and reliability
@@ -12,7 +14,8 @@ Every deployment, job, and workload in your cluster is automatically checked aga
 - **Severity rating** to help prioritize
 
 ::: tip Clear Policy Guidance Provided
-Each policy violation includes a clear explanation of the requirement and specific steps to resolve the issue.
+Each policy violation includes a clear explanation of the requirement and specific steps to
+resolve the issue.
 :::
 
 ## What We Check
@@ -35,7 +38,8 @@ Our automated scans validate your workloads against:
 **Severity**: Medium
 **Category**: Best Practices
 
-All containers must specify CPU and memory requests and limits to ensure proper resource allocation and prevent resource exhaustion.
+All containers must specify CPU and memory requests and limits to ensure proper resource
+allocation and prevent resource exhaustion.
 
 **Requirements**:
 
@@ -60,15 +64,16 @@ resources:
     memory: "256Mi"
 ```
 
-#### Resource Usage Analysis _(planned — not implemented)_
+#### Resource Usage Analysis
 
 **Feature**: Automatic resource optimization recommendations
 
-There is no backend support for this today — no 30-day consumption analysis and no
+There is no backend support for this today: no 30-day consumption analysis and no
 over/under-provisioned recommendations exist anywhere in the codebase. Treat the rest of this
 subsection as a roadmap description.
 
-The platform analyzes actual resource consumption over the last 30 days and compares it to configured requests/limits.
+The platform analyzes actual resource consumption over the last 30 days and compares it to
+configured requests/limits.
 
 **Recommendations Provided**:
 
@@ -76,7 +81,7 @@ The platform analyzes actual resource consumption over the last 30 days and comp
 - **Under-provisioned**: Resources too low, risking performance issues
 - **Optimal**: Resources properly configured
 
-**Example (illustrative — not a real output)**:
+**Example**:
 
 ```
 Pod "web-app" memory request (2Gi) exceeds average usage (512Mi)
@@ -91,7 +96,8 @@ by 75%. Consider reducing to 1Gi.
 **Severity**: Medium
 **Category**: Best Practices
 
-All containers must define at least one probe (liveness, readiness, or startup) for proper lifecycle management.
+All containers must define at least one probe (liveness, readiness, or startup) for proper
+lifecycle management.
 
 **Probe Types**:
 
@@ -197,7 +203,8 @@ volumes:
 
 Linux capabilities should be dropped, with only explicitly required capabilities added.
 
-**Allowed Capabilities**: `AUDIT_WRITE`, `CHOWN`, `DAC_OVERRIDE`, `FOWNER`, `FSETID`, `KILL`, `MKNOD`, `NET_BIND_SERVICE`, `SETFCAP`, `SETGID`, `SETPCAP`, `SETUID`, `SYS_CHROOT`
+**Allowed Capabilities**: `AUDIT_WRITE`, `CHOWN`, `DAC_OVERRIDE`, `FOWNER`, `FSETID`, `KILL`,
+`MKNOD`, `NET_BIND_SERVICE`, `SETFCAP`, `SETGID`, `SETPCAP`, `SETUID`, `SYS_CHROOT`
 
 **Recommended Configuration**:
 
@@ -242,7 +249,8 @@ annotations:
 **Policy**: `restrict-sysctls`
 **Severity**: Medium
 
-Only safe sysctls are allowed: `kernel.shm_rmid_forced`, `net.ipv4.ip_local_port_range`, `net.ipv4.ip_unprivileged_port_start`, `net.ipv4.tcp_syncookies`, `net.ipv4.ping_group_range`.
+Only safe sysctls are allowed: `kernel.shm_rmid_forced`, `net.ipv4.ip_local_port_range`,
+`net.ipv4.ip_unprivileged_port_start`, `net.ipv4.tcp_syncookies`, `net.ipv4.ping_group_range`.
 
 ### Restricted Security
 
@@ -306,7 +314,8 @@ Seccomp profile must be `RuntimeDefault` or `Localhost` (Unconfined not allowed)
 **Policy**: `restrict-volume-types`
 **Severity**: Medium
 
-Only specific volume types allowed: `configMap`, `csi`, `downwardAPI`, `emptyDir`, `ephemeral`, `persistentVolumeClaim`, `projected`, `secret`.
+Only specific volume types allowed: `configMap`, `csi`, `downwardAPI`, `emptyDir`, `ephemeral`,
+`persistentVolumeClaim`, `projected`, `secret`.
 
 ## Certificate Management
 
@@ -316,7 +325,8 @@ Only specific volume types allowed: `configMap`, `csi`, `downwardAPI`, `emptyDir
 **Severity**: Medium
 **Category**: Cert-Manager
 
-Each Certificate resource should contain only one DNS name for compatibility with applications that don't support multi-domain certificates.
+Each Certificate resource should contain only one DNS name for compatibility with applications
+that don't support multi-domain certificates.
 
 **Recommendation**:
 
@@ -377,11 +387,6 @@ image: nginx         # ❌ Not allowed (implies latest)
 
 ### Check Deprecated APIs
 
-::: tip No Registry-Restriction Policy Exists
-There is no `restrict-image-registries` (or equivalent) policy — image origin isn't checked at all
-today.
-:::
-
 **Policy**: `check-deprecated-apis`
 **Severity**: Medium
 **Category**: Best Practices
@@ -403,11 +408,6 @@ Resources using deprecated Kubernetes APIs are flagged for migration.
 
 Workloads should not run in the `default` namespace.
 
-::: tip No NetworkPolicy-Enforcement Policy Exists
-There is no `add-networkpolicy` (or equivalent) policy — namespace-level NetworkPolicy presence
-isn't checked today.
-:::
-
 ### Restrict Service External IPs
 
 **Policy**: `restrict-external-ips`
@@ -422,7 +422,8 @@ Services should not use `externalIPs` field unless explicitly required.
 **Severity**: Medium
 **Category**: Security
 
-NodePort services expose ports on all nodes and should be avoided in favor of LoadBalancer or Ingress.
+NodePort services expose ports on all nodes and should be avoided in favor of LoadBalancer or
+Ingress.
 
 ## Ingress Security
 
@@ -484,7 +485,8 @@ volumes:
 **Severity**: Medium
 **Category**: Security
 
-Containers should not mount container runtime sockets (`/var/run/docker.sock`, `/run/containerd/containerd.sock`).
+Containers should not mount container runtime sockets (`/var/run/docker.sock`,
+`/run/containerd/containerd.sock`).
 
 ## Accessing Policy Results
 
@@ -509,10 +511,10 @@ Violations are grouped by preset (`BEST_PRACTICES`, `MULTI_TENANCY`, `PSS_BASELI
 
 - **Policy**: Identifier of the rule
 - **Message**: Description of violation
-- **Severity**: `INFO`, `LOW`, `MEDIUM`, or `HIGH` — there is no `Critical` tier
+- **Severity**: `INFO`, `LOW`, `MEDIUM`, or `HIGH`, there is no `Critical` tier
 
 There is no separate per-violation `Category`, `Resource`, `Recommendation`, or `Timestamp` field
-in the API response — category exists only as an internal Kyverno annotation and is never
+in the API response. Category exists only as an internal Kyverno annotation and is never
 surfaced.
 
 ## Compliance Tracking
@@ -526,8 +528,8 @@ Overall health metric based on policy violations, deducted from 100:
 - **Low violations**: -5 points each
 - **Info violations**: -2 points each
 
-There is no `Critical` tier. The score floors at 0 — there is no fixed "target" percentage enforced
-anywhere.
+There is no `Critical` tier. The score floors at 0; there is no fixed "target" percentage
+enforced anywhere.
 
 ### Historical Trends
 

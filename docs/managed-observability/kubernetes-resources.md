@@ -4,7 +4,8 @@ Browse and inspect all Kubernetes resources in your cluster through the web port
 
 ## What You Can See
 
-The Resource Explorer gives you a complete view of your cluster with clear explanations for every component:
+The Resource Explorer gives you a complete view of your cluster with clear explanations for
+every component:
 
 - **Infrastructure**: Nodes and their health status
 - **Organization**: Namespaces and how your apps are grouped
@@ -14,7 +15,8 @@ The Resource Explorer gives you a complete view of your cluster with clear expla
 - **Jobs**: Batch processing and scheduled tasks
 
 ::: tip Everything Explained
-Every resource shows not just its status, but **what that status means** and **what to do if there's a problem**. No Kubernetes expertise required.
+Every resource shows not just its status, but **what that status means** and **what to do if
+there's a problem**. No Kubernetes expertise required.
 :::
 
 ## Understanding Your Resources
@@ -30,11 +32,13 @@ Every resource shows not just its status, but **what that status means** and **w
 - Which applications are running on each node
 - Common issues and how to resolve them
 
-**Example explanation**: "Node `worker-1` is healthy but using 85% of its memory. Consider adding more nodes or reducing workload memory requests."
+**Example explanation**: "Node `worker-1` is healthy but using 85% of its memory. Consider adding
+more nodes or reducing workload memory requests."
 
 ### Namespaces (Organizing Your Apps)
 
-**What they are**: Logical groups for organizing your applications — like folders for your workloads.
+**What they are**: Logical groups for organizing your applications (like folders for your
+workloads).
 
 **What we show you**:
 
@@ -42,7 +46,8 @@ Every resource shows not just its status, but **what that status means** and **w
 - Resource usage per namespace
 - Which team or environment each namespace represents
 
-**Example explanation**: "Namespace `production` contains 15 deployments and is using 45% of your cluster's CPU capacity."
+**Example explanation**: "Namespace `production` contains 15 deployments and is using 45% of
+your cluster's CPU capacity."
 
 ### Deployments (Your Applications)
 
@@ -55,7 +60,8 @@ Every resource shows not just its status, but **what that status means** and **w
 - If any copies are failing and why
 - Configuration that might need adjustment
 
-**Example explanation**: "Deployment `web-app` has 3 healthy replicas. All pods are running and responding to health checks."
+**Example explanation**: "Deployment `web-app` has 3 healthy replicas. All pods are running and
+responding to health checks."
 
 ### Pods (Individual Instances)
 
@@ -63,11 +69,13 @@ Every resource shows not just its status, but **what that status means** and **w
 
 **What we show you**:
 
-- Current state explained clearly ("Running", "Crashed and restarting", "Waiting for image download")
+- Current state explained clearly ("Running", "Crashed and restarting", "Waiting for image
+  download")
 - Why a pod might be failing with troubleshooting steps
 - Resource usage and whether it's appropriate
 
-**Example explanation**: "Pod `web-app-abc123` crashed due to out-of-memory error. The container is using more memory than its 256Mi limit. Consider increasing the memory limit to 512Mi."
+**Example explanation**: "Pod `web-app-abc123` crashed due to out-of-memory error. The container
+is using more memory than its 256Mi limit. Consider increasing the memory limit to 512Mi."
 
 ### Services (Network Access)
 
@@ -79,7 +87,8 @@ Every resource shows not just its status, but **what that status means** and **w
 - External access points (if any)
 - Connection health
 
-**Example explanation**: "Service `web-app` routes traffic to 3 healthy pods on port 8080. Accessible within the cluster at `web-app.production.svc.cluster.local`."
+**Example explanation**: "Service `web-app` routes traffic to 3 healthy pods on port 8080.
+Accessible within the cluster at `web-app.production.svc.cluster.local`."
 
 ## Accessing Resources
 
@@ -102,7 +111,8 @@ GET /v1/workspaces/{workspaceId}/observability/{clusterId}/kubernetes-proxy/{res
 Authorization: Bearer <access-token>
 ```
 
-**Resource Types** (singular, case-insensitive — normalized to uppercase server-side): `node`, `namespace`, `deployment`, `statefulset`, `daemonset`, `job`, `cronjob`, `pod`, `service`
+**Resource Types** (singular, case-insensitive, normalized to uppercase server-side): `node`,
+`namespace`, `deployment`, `statefulset`, `daemonset`, `job`, `cronjob`, `pod`, `service`
 
 **Query Parameters**:
 
@@ -142,7 +152,8 @@ GET /v1/workspaces/{workspaceId}/observability/{clusterId}/kubernetes-proxy/name
 Authorization: Bearer <access-token>
 ```
 
-**Resource Types**: `deployment`, `statefulset`, `daemonset`, `job`, `cronjob`, `pod`, `service`
+**Resource Types**: `deployment`, `statefulset`, `daemonset`, `job`, `cronjob`, `pod`,
+`service`
 
 **Query Parameters**:
 
@@ -197,7 +208,8 @@ Each pod provides:
 - **Restart Count**: Number of container restarts
 - **Resource Usage**: Current CPU and memory consumption
 
-Events aren't embedded in the pod fetch — see [Events & Logs](./events-logs.md) for the separate cluster-wide events endpoint.
+Events aren't embedded in the pod fetch, see [Events & Logs](./events-logs.md) for the separate
+cluster-wide events endpoint.
 
 ### Deployment Details
 
@@ -240,15 +252,18 @@ Track deployment status and pod readiness across namespaces to ensure applicatio
 
 ### Resource Planning
 
-Analyze node capacity and resource utilization to plan cluster scaling and optimize resource allocation.
+Analyze node capacity and resource utilization to plan cluster scaling and optimize resource
+allocation.
 
 ### Troubleshooting
 
-Quickly identify failing pods, check container restart counts, and review resource events to diagnose issues.
+Quickly identify failing pods, check container restart counts, and review resource events to
+diagnose issues.
 
 ### Compliance Auditing
 
-Review running workloads, resource configurations, and namespace organization for compliance verification.
+Review running workloads, resource configurations, and namespace organization for compliance
+verification.
 
 ## Related Resources
 
