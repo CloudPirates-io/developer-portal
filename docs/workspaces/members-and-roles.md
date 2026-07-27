@@ -105,33 +105,41 @@ Authorization: Bearer <access-token>
 
 ### Invite Member
 
+There is no direct member-creation route — members only join via an invitation that they accept
+themselves.
+
 ```http
-POST /v1/workspaces/{workspaceId}/members
+POST /v1/workspaces/{workspaceId}/invitations
 Authorization: Bearer <access-token>
 Content-Type: application/json
 
 {
   "email": "user@example.com",
-  "role": "Member"
+  "role": "MEMBER"
 }
 ```
+
+`message` (custom invite text) and `invitationExpireDate` are also accepted, both optional.
 
 ### Change Role
 
 ```http
-PATCH /v1/workspaces/{workspaceId}/members/{identityId}
+PUT /v1/workspaces/{workspaceId}/members/{workspaceMemberId}/role
 Authorization: Bearer <access-token>
 Content-Type: application/json
 
 {
-  "role": "Viewer"
+  "role": "VIEWER"
 }
 ```
+
+`workspaceMemberId` is a different ID than `identityId` — both are returned per member by
+[List Members](#list-members); using `identityId` here gets a 404.
 
 ### Remove Member
 
 ```http
-DELETE /v1/workspaces/{workspaceId}/members/{identityId}
+DELETE /v1/workspaces/{workspaceId}/members/{workspaceMemberId}
 Authorization: Bearer <access-token>
 ```
 

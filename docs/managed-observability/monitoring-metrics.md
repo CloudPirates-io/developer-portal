@@ -1,258 +1,105 @@
 # Performance Insights
 
-Monitor cluster performance with metrics and insights for capacity planning and optimization.
+Monitor node and pod CPU/memory usage for capacity planning.
+
+::: danger Danger: CPU/Memory Only
+Metrics collection covers **only CPU and memory** for nodes and pods, pulled from the Kubernetes
+`metrics.k8s.io` API. Disk, network, load average, ingress traffic/latency, volume usage, and
+control-plane component health are **not collected anywhere** — the sections below that describe
+them are planned, not current, functionality. There is also no server-side health classification
+layer ("Healthy"/"Under pressure"/"Overloaded") or alerting engine — the real data is a raw
+numeric `{created, cpu, memory}[]` time series per node/pod, with no thresholds or labels applied.
+Every "Alert"/"Alert Thresholds" callout on this page describes the same nonexistent alerting
+feature (see [Alert Reference](./alert-reference.md)).
+:::
 
 ## What We Monitor
 
-Performance data with context to help you make informed decisions about your infrastructure:
+- **Node CPU/Memory**: Raw usage series per node
+- **Pod CPU/Memory**: Raw usage series per pod
 
-- **Server Health**: Infrastructure resource utilization
-- **Application Performance**: Workload efficiency metrics
-- **Resource Usage**: Capacity and optimization opportunities
-- **Capacity Planning**: Growth trends and recommendations
+## Node Metrics
 
-::: tip Tip: Metrics with Context
-Performance metrics include descriptions and recommendations to help you understand what actions to take.
-:::
+### CPU and Memory
 
-## Server Health (Node Monitoring)
+CPU and memory usage per node, collected every `updateIntervalSeconds` (60s by default) from the
+Kubernetes `metrics.k8s.io` API. The response is a raw numeric series — there is no health
+classification, no "Healthy"/"Under pressure"/"Overloaded" labeling, and no derived insight text:
 
-### CPU: Is Your Server Keeping Up?
+```json
+[
+  { "created": "2024-01-15T10:30:00Z", "cpu": 450, "memory": 2147483648 }
+]
+```
 
-**What we show**:
+### Disk Space _(not collected)_
 
-- Clear health status: "Healthy", "Under pressure", or "Overloaded"
-- Usage patterns: consistent, spiky, or growing trend
-- Impact on your applications
+Free disk space, growth-rate tracking, and per-path breakdowns are not collected anywhere.
 
-**Example insights**:
+### Network Metrics _(not collected)_
 
-- ✅ "CPU usage is healthy at 45%. Your server has plenty of capacity."
-- ⚠️ "CPU usage is at 85%. Your server is working hard but managing. Consider scaling if usage continues to grow."
-- 🔴 "CPU usage is at 95%. Your applications may be slow. Add more nodes or reduce workload."
+Inbound/outbound throughput, error/drop counts, and connection statistics are not collected anywhere.
 
-### Memory: Do You Have Enough RAM?
+### Load Average _(not collected)_
 
-**What we show**:
-
-- Available memory in simple terms
-- Memory pressure warnings before problems occur
-- Which applications are using the most memory
-
-**Example insights**:
-
-- ✅ "Memory usage is healthy at 60%. Plenty of room for growth."
-- ⚠️ "Only 15% memory free. New pods may have trouble starting. Consider adding nodes."
-- 🔴 "Memory is critically low at 95%. The server may start killing processes. Immediate action needed."
-
-### Disk Space: Running Out of Room?
-
-**What we show**:
-
-- Free disk space in GB/TB (not just percentages)
-- Growth rate: how quickly you're filling up
-- Which areas are using the most space
-
-**Example insights**:
-
-- ✅ "Disk usage is at 45% (220 GB free). Plenty of space available."
-- ⚠️ "Disk is 88% full (30 GB free). You'll run out of space in approximately 2 weeks at current usage."
-- 🔴 "Disk is 96% full (8 GB free). Critical: Pods may fail to start or write logs."
-
-### Network Metrics
-
-**Network Throughput**
-
-- Inbound traffic (bytes/sec)
-- Outbound traffic (bytes/sec)
-- Network errors and drops
-- Connection statistics
-
-### Load Average
-
-**System Load**
-
-- 1-minute load average
-- 5-minute load average
-- 15-minute load average
-
-**Alert Thresholds**:
-
-- Warning: Load5 > CPU count \* 0.8
-- Critical: Load15 > CPU count \* 0.8
+1/5/15-minute load average is not collected anywhere.
 
 ## Pod Monitoring
 
-### Resource Consumption
+### CPU/Memory Usage
 
-**CPU Usage**
-
-- Current CPU consumption
-- CPU requests vs actual usage
-- CPU limits and throttling
-
-**Alert**: Pod CPU throttling > 25%
-
-**Memory Usage**
-
-- Current memory consumption
-- Memory requests vs actual usage
-- Memory limits
-- Out-of-memory (OOM) events
-
-**Alert Thresholds**:
-
-- Warning: Memory usage > 90% of requests
-- Critical: Memory usage > 95% of limits
+Same raw `{created, cpu, memory}[]` series as node metrics, collected per pod. There is no
+computed throttling percentage or alerting — CPU/memory limits and requests are visible on the
+raw pod manifest (see [Kubernetes Resources](./kubernetes-resources.md)), not as a derived metric.
 
 ### Pod Health
 
-**Status Monitoring**
+Status is read directly off the pod manifest via the resource explorer, not a separate
+monitoring feature:
 
 - Pod phase (Running, Pending, Failed, etc.)
 - Container readiness
 - Liveness probe status
 - Restart counts
 
-**Alerts**:
-
-- Pod not ready > 5 minutes
-- Excessive restarts (> 5 in 1 hour)
-- Pod OOM killed
-- Pod errors
-
-### Container Metrics
-
-**Per-Container Statistics**:
-
-- CPU usage per container
-- Memory usage per container
-- Restart history
-- Exit codes and reasons
-
 ## Workload Monitoring
 
-### Deployment Status
+Replica status for Deployments/StatefulSets/DaemonSets is read directly off the resource manifest
+via the resource explorer (see [Kubernetes Resources](./kubernetes-resources.md)):
 
-**Replica Monitoring**:
+- Desired / current / available / unavailable replicas
 
-- Desired replicas
-- Current replicas
-- Available replicas
-- Unavailable replicas
+## Volume Monitoring _(not collected)_
 
-**Alert**: Deployment replicas unavailable
+PVC capacity/usage metrics are not collected anywhere — the Kubernetes `metrics.k8s.io` API this
+platform reads from has no volume-metrics endpoint.
 
-### StatefulSet Status
+## Ingress Monitoring _(not collected)_
 
-**Ordered Pod Monitoring**:
-
-- Desired replicas
-- Current replicas
-- Ready replicas
-- Pod management status
-
-**Alert**: StatefulSet replicas unavailable
-
-### DaemonSet Status
-
-**Node Coverage**:
-
-- Desired pods (one per node)
-- Current pods
-- Available pods
-- Unavailable pods
-
-**Alert**: DaemonSet replicas unavailable
-
-## Volume Monitoring
-
-### Persistent Volume Claims
-
-**Storage Metrics**:
-
-- Volume capacity
-- Volume usage percentage
-- Available space
-
-**Alert Thresholds**:
-
-- Warning: Volume usage > 90%
-- Critical: Volume usage > 95%
-
-**Alert**: Volume stats missing (unable to retrieve metrics)
-
-## Ingress Monitoring
-
-### Traffic Metrics
-
-**Request Statistics**:
-
-- Request count
-- Request rate (requests/sec)
-- Response latency (p50, p95, p99)
-
-**Alert**: High request count (unusual traffic spike)
-
-### Error Rates
-
-**HTTP Status Codes**:
-
-- 2xx success rate
-- 4xx client error rate
-- 5xx server error rate
-
-**Alert**: 5xx error rate > 5%
-
-### Request Latency
-
-**Response Time Monitoring**:
-
-- Average request latency
-- 95th percentile latency
-- 99th percentile latency
-
-**Alert**: Request latency > 1 second (p95)
-
-### Certificate Monitoring
-
-**TLS Certificate Status**:
-
-- Certificate expiration date
-- Days until expiry
-- Certificate validity
-
-**Alert**: Certificate expires within 30 days
+Request rate, latency, error rate, and certificate-expiry tracking are not collected anywhere.
+Ingress resources also aren't browsable through the resource explorer today — `Ingress` isn't in
+the supported resource-type list.
 
 ## Cluster Health
 
 ### Overall Status
 
-**Cluster Indicators**:
+Read directly off the resource explorer/summary endpoint:
 
 - Total node count
-- Healthy nodes vs total
 - Total pod count
-- Running pods vs total
 - Resource utilization overview
 
 ### Resource Capacity
 
-**Cluster Resources**:
-
 - Total CPU capacity
 - Total memory capacity
-- Total storage capacity
 - Allocated vs available resources
 
-### Component Health
+### Component Health _(not collected)_
 
-**Control Plane**:
-
-- API server availability
-- Controller manager status
-- Scheduler status
-- etcd health
+Nothing probes control-plane components (API server, controller manager, scheduler, etcd) — there
+is no component health signal.
 
 ## Metrics Collection
 
@@ -270,17 +117,12 @@ clusterPirate:
 
 ### Metric Retention
 
-- **Real-time metrics**: Available immediately
-- **Historical metrics**: Retained for 90 days (default)
-- **Cache TTL**: 24 hours (86400 seconds)
-
-Configure cache:
+Configure the Valkey cache TTL (this is a cache duration, not a fixed historical-retention
+window):
 
 ```yaml
-clusterPirate:
-  metrics:
-    cache:
-      ttl: 86400
+valkey:
+  ttl: 86400 # 24 hours, default
 ```
 
 ## Viewing Metrics
@@ -290,7 +132,7 @@ clusterPirate:
 Access metrics through the portal:
 
 1. Navigate to [portal.cloudpirates.io](https://portal.cloudpirates.io)
-2. Select workspace and observability instance
+2. Select workspace
 3. Choose cluster
 4. View metrics dashboard with real-time data
 
@@ -299,7 +141,6 @@ Access metrics through the portal:
 - Interactive charts and graphs
 - Time range selection
 - Resource filtering
-- Alert status indicators
 
 ### API Reference
 

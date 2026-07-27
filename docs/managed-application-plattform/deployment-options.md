@@ -2,6 +2,18 @@
 The Managed Application Platform is currently in private beta. Contact us at [hello@cloudpirates.io](mailto:hello@cloudpirates.io) to request access.
 :::
 
+::: danger Danger: Most of This Page Describes Planned, Not Current, Capabilities
+Deploying an application at all currently always fails with a `501 Not Implemented` (see
+[Managed Application Platform](./index.md)). Beyond that, the cluster this points at only carries
+`clusterId`, `workspaceId`, `clusterName`, `clusterType` (`EXTERNAL`/`MANAGED`), a cluster-class
+string, and an access token — there is no region, shared-vs-dedicated flag, or cloud-provider
+metadata anywhere in the backend. Deploying to a `MANAGED` cluster is separately rejected with a
+`501` at the cluster level. "Bring Your Own Git"/"Bring Your Own ArgoCD" also have no backend
+support today: the GitOps integration is hardcoded to a single global GitLab project and a single
+global, **read-only** ArgoCD client — there is no way to connect a customer-supplied Git provider
+or ArgoCD instance. Treat everything below as the intended end state, not the current behavior.
+:::
+
 <br>
 
 # Deployment Options

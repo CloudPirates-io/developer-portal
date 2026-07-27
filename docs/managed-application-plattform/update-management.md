@@ -6,6 +6,15 @@ next: false
 The Managed Application Platform is currently in private beta. Contact us at [hello@cloudpirates.io](mailto:hello@cloudpirates.io) to request access.
 :::
 
+::: danger Danger: This Page Describes Planned, Not Current, Functionality
+Update channels, annotation-based configuration, automatic Helm value migrations, pre-update
+PVC/database backups, and changelog/notification/CVE-SLA handling have no corresponding backend
+code today. The one real primitive is a plain version bump (`{workspaceId, applicationId,
+appVersion}`, no channel concept) — and even that has no registered command handler yet, so
+requests to it never get a response. Treat everything on this page as a roadmap description, not a
+how-to for something you can use today.
+:::
+
 <br>
 
 # Update Management

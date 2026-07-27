@@ -60,9 +60,13 @@ resources:
     memory: "256Mi"
 ```
 
-#### Resource Usage Analysis
+#### Resource Usage Analysis _(planned — not implemented)_
 
 **Feature**: Automatic resource optimization recommendations
+
+There is no backend support for this today — no 30-day consumption analysis and no
+over/under-provisioned recommendations exist anywhere in the codebase. Treat the rest of this
+subsection as a roadmap description.
 
 The platform analyzes actual resource consumption over the last 30 days and compares it to configured requests/limits.
 
@@ -72,7 +76,7 @@ The platform analyzes actual resource consumption over the last 30 days and comp
 - **Under-provisioned**: Resources too low, risking performance issues
 - **Optimal**: Resources properly configured
 
-**Example Alert**:
+**Example (illustrative — not a real output)**:
 
 ```
 Pod "web-app" memory request (2Gi) exceeds average usage (512Mi)
@@ -129,7 +133,7 @@ Fundamental security controls that should be applied to all workloads.
 #### Disallow Privileged Containers
 
 **Policy**: `disallow-privileged-containers`
-**Severity**: High
+**Severity**: Medium
 
 Privileged containers have unrestricted access to host resources and should be avoided.
 
@@ -143,7 +147,7 @@ securityContext:
 #### Disallow Host Namespaces
 
 **Policy**: `disallow-host-namespaces`
-**Severity**: High
+**Severity**: Medium
 
 Containers should not share host network, PID, or IPC namespaces.
 
@@ -173,7 +177,7 @@ ports:
 #### Disallow Host Path Volumes
 
 **Policy**: `disallow-host-path`
-**Severity**: High
+**Severity**: Medium
 
 HostPath volumes provide access to the host filesystem and pose security risks.
 
@@ -193,7 +197,7 @@ volumes:
 
 Linux capabilities should be dropped, with only explicitly required capabilities added.
 
-**Allowed Capabilities**: `NET_BIND_SERVICE`
+**Allowed Capabilities**: `AUDIT_WRITE`, `CHOWN`, `DAC_OVERRIDE`, `FOWNER`, `FSETID`, `KILL`, `MKNOD`, `NET_BIND_SERVICE`, `SETFCAP`, `SETGID`, `SETPCAP`, `SETUID`, `SYS_CHROOT`
 
 **Recommended Configuration**:
 
@@ -249,7 +253,7 @@ Heavily restricted security controls for defense-in-depth.
 #### Require Non-Root User
 
 **Policy**: `require-run-as-nonroot`
-**Severity**: High
+**Severity**: Medium
 
 Containers must run as non-root user (UID > 0).
 
@@ -264,7 +268,7 @@ securityContext:
 #### Disallow Privilege Escalation
 
 **Policy**: `disallow-privilege-escalation`
-**Severity**: High
+**Severity**: Medium
 
 Privilege escalation must be explicitly disabled.
 
@@ -278,7 +282,7 @@ securityContext:
 #### Strict Capability Restrictions
 
 **Policy**: `disallow-capabilities-strict`
-**Severity**: High
+**Severity**: Medium
 
 All capabilities must be dropped with no additions allowed.
 
@@ -293,7 +297,7 @@ securityContext:
 #### Strict Seccomp Profile
 
 **Policy**: `restrict-seccomp-strict`
-**Severity**: High
+**Severity**: Medium
 
 Seccomp profile must be `RuntimeDefault` or `Localhost` (Unconfined not allowed).
 
@@ -336,8 +340,8 @@ dnsNames:
 
 ### Certificate Duration Limits
 
-**Policy**: `limit-cert-manager-duration`
-**Severity**: Low
+**Policy**: `cert-manager-limit-duration`
+**Severity**: Medium
 **Category**: Cert-Manager
 
 Certificate duration should not exceed 90 days, following best practices for certificate rotation.
@@ -371,25 +375,15 @@ image: nginx:latest  # ❌ Not allowed
 image: nginx         # ❌ Not allowed (implies latest)
 ```
 
-### Restrict Image Registries
-
-**Policy**: `restrict-image-registries`
-**Severity**: Medium
-**Category**: Best Practices
-
-Images must come from approved container registries.
-
-**Allowed Registries** (configurable):
-
-- `docker.io`
-- `gcr.io`
-- `ghcr.io`
-- Custom private registries
-
 ### Check Deprecated APIs
 
+::: tip Tip: No Registry-Restriction Policy Exists
+There is no `restrict-image-registries` (or equivalent) policy — image origin isn't checked at all
+today.
+:::
+
 **Policy**: `check-deprecated-apis`
-**Severity**: High
+**Severity**: Medium
 **Category**: Best Practices
 
 Resources using deprecated Kubernetes APIs are flagged for migration.
@@ -404,30 +398,27 @@ Resources using deprecated Kubernetes APIs are flagged for migration.
 ### Disallow Default Namespace
 
 **Policy**: `disallow-default-namespace`
-**Severity**: Low
+**Severity**: Medium
 **Category**: Multi-Tenancy
 
 Workloads should not run in the `default` namespace.
 
-### Require Network Policies
-
-**Policy**: `add-networkpolicy`
-**Severity**: Medium
-**Category**: Multi-Tenancy
-
-Namespaces should have NetworkPolicies defined for traffic control.
+::: tip Tip: No NetworkPolicy-Enforcement Policy Exists
+There is no `add-networkpolicy` (or equivalent) policy — namespace-level NetworkPolicy presence
+isn't checked today.
+:::
 
 ### Restrict Service External IPs
 
-**Policy**: `restrict-service-external-ips`
-**Severity**: High
+**Policy**: `restrict-external-ips`
+**Severity**: Medium
 **Category**: Security
 
 Services should not use `externalIPs` field unless explicitly required.
 
 ### Restrict NodePort Services
 
-**Policy**: `restrict-node-port`
+**Policy**: `restrict-nodeport`
 **Severity**: Medium
 **Category**: Security
 
@@ -445,8 +436,8 @@ Ingress resources must specify explicit host rules.
 
 ### Disallow Custom Snippets
 
-**Policy**: `disallow-custom-snippets`
-**Severity**: High
+**Policy**: `disallow-ingress-nginx-custom-snippets`
+**Severity**: Medium
 **Category**: Security
 
 Nginx custom snippets can introduce security vulnerabilities and should be disabled.
@@ -454,7 +445,7 @@ Nginx custom snippets can introduce security vulnerabilities and should be disab
 ### Restrict Default Backend
 
 **Policy**: `restrict-ingress-defaultbackend`
-**Severity**: Low
+**Severity**: High
 **Category**: Best Practices
 
 Ingress should use explicit path rules instead of default backend.
@@ -463,8 +454,8 @@ Ingress should use explicit path rules instead of default backend.
 
 ### Require Read-Only Root Filesystem
 
-**Policy**: `require-read-only-filesystem`
-**Severity**: Low
+**Policy**: `require-ro-rootfs`
+**Severity**: Medium
 **Category**: Best Practices
 
 Containers should use read-only root filesystem when possible.
@@ -489,8 +480,8 @@ volumes:
 
 ### Disallow CRI Socket Mount
 
-**Policy**: `disallow-cri-sock-mount`
-**Severity**: Critical
+**Policy**: `disallow-container-sock-mounts`
+**Severity**: Medium
 **Category**: Security
 
 Containers should not mount container runtime sockets (`/var/run/docker.sock`, `/run/containerd/containerd.sock`).
@@ -513,28 +504,30 @@ Containers should not mount container runtime sockets (`/var/run/docker.sock`, `
 
 ### Policy Violation Structure
 
-Each violation includes:
+Violations are grouped by preset (`BEST_PRACTICES`, `MULTI_TENANCY`, `PSS_BASELINE`,
+`PSS_RESTRICTED`, `OTHER`). Each violation itself only includes:
 
-- **Policy Name**: Identifier of the rule
-- **Severity**: Low, Medium, High, Critical
-- **Category**: Classification (Security, Best Practices, etc.)
-- **Resource**: Affected workload
+- **Policy**: Identifier of the rule
 - **Message**: Description of violation
-- **Recommendation**: How to fix
-- **Timestamp**: When detected
+- **Severity**: `INFO`, `LOW`, `MEDIUM`, or `HIGH` — there is no `Critical` tier
+
+There is no separate per-violation `Category`, `Resource`, `Recommendation`, or `Timestamp` field
+in the API response — category exists only as an internal Kyverno annotation and is never
+surfaced.
 
 ## Compliance Tracking
 
 ### Compliance Score
 
-Overall health metric based on policy violations:
+Overall health metric based on policy violations, deducted from 100:
 
-- **Critical violations**: -10 points each
-- **High violations**: -5 points each
-- **Medium violations**: -2 points each
-- **Low violations**: -1 point each
+- **High violations**: -20 points each
+- **Medium violations**: -10 points each
+- **Low violations**: -5 points each
+- **Info violations**: -2 points each
 
-**Target**: 90%+ compliance score
+There is no `Critical` tier. The score floors at 0 — there is no fixed "target" percentage enforced
+anywhere.
 
 ### Historical Trends
 

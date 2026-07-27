@@ -7,7 +7,7 @@ Get your cluster connected to CloudPirates Managed Observability in less than 5 
 **ClusterPirate** is a lightweight agent that runs in your cluster and securely sends monitoring data to CloudPirates. It:
 
 - Discovers all Kubernetes resources automatically
-- Collects metrics, events, and logs
+- Collects CPU/memory metrics and Kubernetes events
 - Validates security and best practices
 - Scans container images for vulnerabilities
 - Requires minimal resources (10m CPU, 100Mi memory)
@@ -21,9 +21,8 @@ ClusterPirate only **reads** data from your cluster and sends it securely to Clo
 Complete these quick steps in the portal first:
 
 1. **Register**: Sign up at [portal.cloudpirates.io](https://portal.cloudpirates.io)
-2. **Create Workspace**: Organize your observability instances
-3. **Create Observability Instance**: Set up monitoring for your clusters
-4. **Register Cluster**: Add your cluster to get the **access token**
+2. **Create Workspace**: Organize your clusters
+3. **Register Cluster**: Add your cluster in the workspace to get the **access token**
 
 The access token is your cluster's unique identifier — keep it secure.
 
@@ -63,8 +62,6 @@ clusterPirate:
   metrics:
     enabled: true
     updateIntervalSeconds: 60
-    cache:
-      ttl: 86400 # 24 hours
   monitoring:
     resourceEventsEnabled: true
     systemEventsEnabled: true
@@ -86,6 +83,7 @@ deployment:
 # Optional: Valkey configuration (caching)
 valkey:
   enabled: true
+  ttl: 86400 # 24 hours
   auth:
     enabled: true
     password: "" # Auto-generated if empty
@@ -126,6 +124,7 @@ helm install clusterpirate oci://registry-1.docker.io/cloudpirates/clusterpirate
 | `deployment.resources.requests.memory`        | Memory request                       | `100Mi` |
 | `deployment.resources.limits.memory`          | Memory limit                         | `300Mi` |
 | `valkey.enabled`                              | Enable Valkey caching                | `true`  |
+| `valkey.ttl`                                  | Cache TTL in seconds                 | `86400` |
 
 ## Verification
 
@@ -175,8 +174,7 @@ helm uninstall clusterpirate --namespace clusterpirate-system
 **Solution**:
 
 - Verify token is correctly copied from portal
-- Ensure cluster was created in correct observability instance
-- Check token hasn't expired
+- Check that the cluster hasn't had its access token rotated since (rotating a token invalidates the old one)
 
 ### Pod Not Starting
 

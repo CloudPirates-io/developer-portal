@@ -74,7 +74,6 @@ Access [security page](https://portal.cloudpirates.io/security) to see:
 - Label
 - Key ID
 - Creation date
-- Last used
 
 ### Delete Keys
 

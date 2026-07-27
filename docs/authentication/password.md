@@ -101,8 +101,8 @@ Authorization: Bearer <access-token>
 Content-Type: application/json
 
 {
-  "currentPassword": "current",
-  "newPassword": "new"
+  "existingPassword": "current",
+  "password": "new"
 }
 ```
 

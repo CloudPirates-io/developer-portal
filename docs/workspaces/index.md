@@ -17,7 +17,6 @@ You cannot use CloudPirates services without a workspace. All services including
 - **Service Management**: Organize all CloudPirates services in one place
 - **Team Collaboration**: Invite members with different access levels
 - **Access Control**: Three roles (Owner, Member, Viewer) control permissions
-- **Billing Management**: Assign billing profiles for paid features
 
 ## Workspace Roles
 
@@ -50,11 +49,12 @@ Invitations are sent via email.
 
 [Learn more →](./members-and-roles.md)
 
-### 3. Assign Billing (Optional)
+### 3. Set Up Billing (Optional)
 
-Workspace Owners can assign personal billing profiles to enable paid features.
+Billing profiles are personal — assigned to your user identity, not to the workspace — and enable
+paid features for whichever services you use.
 
-[Learn more →](./billing.md)
+[Learn more →](/billing/billing-profiles.md)
 
 ## Common Use Cases
 

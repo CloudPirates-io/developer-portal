@@ -89,22 +89,71 @@ Authorization: Bearer <access-token>
 
 ### Enable SMS
 
+Setting up SMS is a two-step process. First request a challenge:
+
 ```http
 POST /v1/auth/challenges/sms
 Authorization: Bearer <access-token>
 Content-Type: application/json
 
 {
-  "phoneNumber": "+1234567890"
+  "number": "+1234567890"
 }
 ```
 
+Response:
+
+```json
+{
+  "verificationToken": "token"
+}
+```
+
+Then activate it with the code received via SMS:
+
+```http
+POST /v1/auth/challenges/sms/activate
+Authorization: Bearer <access-token>
+Content-Type: application/json
+
+{
+  "verificationToken": "token",
+  "challengeCode": "123456"
+}
+```
+
+The SMS challenge isn't usable for login until activation completes.
+
 ### Enable TOTP
+
+Setting up TOTP is also a two-step process. First request a challenge:
 
 ```http
 POST /v1/auth/challenges/totp
 Authorization: Bearer <access-token>
 ```
+
+Response:
+
+```json
+{
+  "otpAuthUri": "otpauth://totp/..."
+}
+```
+
+Then activate it with the current code from your authenticator app:
+
+```http
+POST /v1/auth/challenges/totp/activate
+Authorization: Bearer <access-token>
+Content-Type: application/json
+
+{
+  "token": "123456"
+}
+```
+
+The TOTP challenge isn't usable for login until activation completes.
 
 ### Login with MFA
 
@@ -115,9 +164,11 @@ Content-Type: application/json
 {
   "email": "user@example.com",
   "password": "password",
-  "desiredChallenge": "sms"
+  "desiredChallenge": "SMS"
 }
 ```
+
+`desiredChallenge` accepts `SMS` or `TOTP` (uppercase only — lowercase values are rejected with a `400`).
 
 Then complete with challenge code:
 
