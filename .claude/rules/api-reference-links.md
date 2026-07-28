@@ -6,9 +6,7 @@ paths:
 # "## API Reference" sections link out to the live Swagger docs, not raw examples
 
 This is a repo-wide structural convention, not just wording (contrast with `tone-and-style.md`,
-which is about wording only). It supersedes the older pattern still visible on some pages, where a
-page's `## API Reference` section listed every endpoint as a full raw `POST /v1/...`
-request/response code block, usually ending in a generic "visit api.cloudpirates.io/docs" info box.
+which is about wording only).
 
 ## The rule
 
@@ -35,10 +33,9 @@ sentence level.
 - Don't convert a page's `## API Reference` section as a side effect of an unrelated edit; treat it
   as its own deliberate step per domain (confirm the real tag/anchor first, see below) unless the
   user has already asked for it on that page.
-
-See `authentication-docs.md`, `billing-docs.md`, and `managed-application-platform-docs.md` for
-domain-specific notes on which boxes were kept per page (e.g. `sessions.md`'s deliberate exception,
-still on raw examples because its tag isn't live yet).
+- If a domain's Swagger tag isn't live yet, keep that page's raw examples rather than linking to a
+  nonexistent anchor; see the domain-specific rules files (e.g. `authentication-docs.md`) for
+  current exceptions.
 
 ## Finding the right tag/anchor — don't guess, verify
 
@@ -90,6 +87,6 @@ Notes:
 - `Kubernetes` most likely corresponds to `docs/managed-observability/kubernetes-resources.md`
   given the description overlap, but this is an inference from the description text, not confirmed
   against the live Swagger UI the way the `Auth ...` tags were — verify before relying on it.
-- No `Auth Session` tag exists in this list. This confirms, rather than contradicts,
-  `authentication-docs.md`'s note that `sessions.md` was left with raw examples because that tag
-  isn't live yet — re-check this list next time it's refreshed from `openapi.yaml`.
+- No `Auth Session` tag exists in this list. Pages that would map to it (e.g. `sessions.md`) should
+  keep raw examples until the tag goes live — re-check this list next time it's refreshed from
+  `openapi.yaml`.

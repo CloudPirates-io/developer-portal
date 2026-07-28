@@ -9,8 +9,7 @@ Ground truth cross-checked against
 `src/services/apigateway/src/Api/v1/Billing/{BillingProfileApi,InvoiceApi}.ts` and the JSON
 command-payload contracts under
 `src/shared/contracts/schemas/src/Contracts/Billing/BillingProfile/Commands/**`. Re-verify against
-current source before trusting this if it's been a while. This domain has the smallest drift of
-the areas audited so far.
+current source before trusting this if it's been a while.
 
 ## Billing profile field names
 

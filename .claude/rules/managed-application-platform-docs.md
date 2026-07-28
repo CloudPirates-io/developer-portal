@@ -6,9 +6,9 @@ paths:
 # Managed Application Platform docs
 
 Ground truth traced through the `application-manager` service, plus ApiGateway's
-`Api/v1/Applications/{ApplicationsApi,WorkspaceApplicationsApi}.ts`. This is the domain with the
-most severe drift risk of any audited so far — most of what these docs could describe either
-doesn't exist in code at all, or exists as dead code behind a hard `501`. Treat this the same way
+`Api/v1/Applications/{ApplicationsApi,WorkspaceApplicationsApi}.ts`. This domain carries severe
+drift risk — most of what these docs could describe either doesn't exist in code at all, or exists
+as dead code behind a hard `501`. Treat this the same way
 `src/services/apigateway/.claude/rules/cluster-docs.md` treats the `MANAGED` cluster type: looking
 wired up (real schemas, real routes, real DB writes for lookups) is not the same as working.
 Re-verify against current source before trusting this if it's been a while.
@@ -51,8 +51,7 @@ can ever be created to delete.
 
 - If a route/schema is real but the _outcome_ is broken (create's 501, update's missing handler),
   correct the request body/route to the real shape and add a `::: danger Roadmap` box (see
-  `tone-and-style.md`) rather than removing the section — `index.md`'s Create/Update Application
-  sections follow this pattern.
+  `tone-and-style.md`) rather than removing the section.
 - If a whole page is almost entirely aspirational (`deployment-options.md`, `gitops-setup.md`,
   `update-management.md`), don't line-item-correct every claim — open with a single `::: danger
 Roadmap` box summarizing that most of the page isn't implemented yet, and leave the rest of the

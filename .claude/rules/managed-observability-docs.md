@@ -11,10 +11,9 @@ handler code in `observabilityservice`, `clusterpirate`, `clusterservice`, `cves
 `policyreporter`. Those two ApiGateway rule files are the primary source of truth for
 response shapes, status codes, and the pagination header mechanism — cross-link them before editing
 any page in this domain, and re-diff against the source directly if they and this file disagree.
-This is the domain with the most drift risk of any audited so far; several pages describe features
-that were renamed, removed, or never actually built. Re-verify against current source before
-trusting this if it's been a while — this file is a map to the source of truth, not the source of
-truth itself.
+This domain carries high drift risk; several pages describe features that were renamed, removed,
+or never actually built. Re-verify against current source before trusting this if it's been a
+while — this file is a map to the source of truth, not the source of truth itself.
 
 ## Dead "observability instance" concept — don't use it in any example
 
@@ -183,18 +182,9 @@ That fully-managed-vs-in-house choice belongs to the separate **Full Observabili
 (Grafana/Prometheus/Loki/Tempo/Alloy), per `index.md`'s own "Two Approaches to Observability"
 section. The ClusterPirate agent (the actual "Managed Observability" product this rules file
 covers) is always a single Helm chart installed in your own cluster, no CloudPirates-hosted
-option. `../managed-services/index.md` used to list "Fully Managed"/"Managed In-House" as
-deployment options for Managed Observability itself, which conflated the two products; fixed
-2026-07-28 by moving the fully-managed/in-house framing to a "Full Observability Stack" callout
-instead. Watch for this conflation resurfacing on any page that summarizes Managed Observability
-alongside the full stack.
-
-## Note: this file's `paths:` glob is stale
-
-Frontmatter says `docs/managed-observability/**` but the actual content directory is
-`src/managed-observability/**` (repo was restructured, `docs/` no longer exists as of
-2026-07-28). Auto-loading via `paths:` for this file may not currently trigger; re-verify and fix
-the glob if it's still `docs/**` when next touching this file.
+option. Watch for pages that summarize Managed Observability alongside the full stack conflating
+the two by attaching "Fully Managed"/"Managed In-House" to the ClusterPirate agent itself; that
+framing belongs on a "Full Observability Stack" callout instead.
 
 ## Confirmed accurate — don't rewrite these
 

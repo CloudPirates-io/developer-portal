@@ -77,16 +77,13 @@ security-sensitive-operation restriction are both accurate.
 
 ## `## API Reference` sections link out instead of embedding raw examples
 
-Applies to `password.md`, `mfa.md`, `webauthn.md`, `api-keys.md`, `sessions.md`. Condense each
-page's `## API Reference` section to one or two sentences linking directly to the relevant tag on
-`https://api.cloudpirates.dev/docs/` (note: `.dev`, not `.io`) instead of listing every endpoint as
-a raw request/response code block. Keep standalone tip/warning/info boxes that state a general
-capability fact (e.g. "API Keys Cannot Modify Passwords", "Bearer Token Required for Session
-Management"); cut prose that only explains one specific request/response body (e.g. the two-step
-SMS/TOTP activation explanation that used to live inline in `mfa.md` — now just the Swagger link).
-If applying this same pattern to another domain, follow the same split: keep general-fact boxes,
-cut example-bound prose and code, link to the matching Swagger tag. See `api-reference-links.md`
-for the repo-wide version of this convention.
+Applies to `password.md`, `mfa.md`, `webauthn.md`, `api-keys.md`, `sessions.md`. Each page's
+`## API Reference` section should be one or two sentences linking directly to the relevant tag on
+`https://api.cloudpirates.dev/docs/` (note: `.dev`, not `.io`), not a raw request/response code
+block per endpoint. Keep standalone tip/warning/info boxes that state a general capability fact
+(e.g. "API Keys Cannot Modify Passwords", "Bearer Token Required for Session Management"); cut
+prose that only explains one specific request/response body. See `api-reference-links.md` for the
+repo-wide version of this convention.
 
 **Swagger UI tags are prefixed `Auth`, not the bare backend class name minus `Api`** (verified
 against the live docs, not inferred):
@@ -101,10 +98,8 @@ against the live docs, not inferred):
 
 Don't guess anchors as `#/<ClassName>` (e.g. `#/Session`, `#/WebAuthn`) — verified wrong.
 
-**`sessions.md`'s API Reference is intentionally not converted to a link yet.** The
-`#/Auth%20Session` tag doesn't exist yet on the live docs site, so `sessions.md` keeps raw
-`List Sessions`/`Logout Session` examples (its `Get Current User`/`Validate Session` examples were
-dropped rather than kept). There's a `<!-- TODO: Implement session API documentation -->` HTML
-comment with the intended link commented out right below the examples. When that tag goes live,
-swap the raw examples for that commented-out link (matching the other four pages) and check
-whether `Get Current User`/`Validate Session` need to come back too.
+**`sessions.md`'s API Reference intentionally keeps raw examples, unlike the other four pages.**
+The `#/Auth%20Session` tag doesn't exist yet on the live docs site. Once it goes live, convert
+`sessions.md` to a Swagger link the same way as the other pages (there's a commented-out link
+already in place to swap in) and check whether the current example set still covers what the page
+needs.
