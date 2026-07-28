@@ -10,7 +10,8 @@ Configure and manage your workspaces.
 4. Save changes
 
 ::: tip Workspace ID Remains Unchanged
-The workspace ID remains unchanged after renaming. All API integrations will continue working without any modifications.
+The workspace ID remains unchanged after renaming.
+Existing API integrations keep working without any changes.
 :::
 
 ## Workspace Information
@@ -24,9 +25,12 @@ View workspace details:
 - **Members**: Current members and their roles
 - **Open Invitations**: Pending member invitations
 
-There is no creation-date, member-count, or "active services" field on the workspace today.
-
 ## Deleting Workspaces
+
+::: danger Workspace Deletion Is Permanent
+Workspace deletion is permanent and cannot be undone.
+Back up all data before deleting a workspace.
+:::
 
 **Requirements**:
 
@@ -34,8 +38,8 @@ There is no creation-date, member-count, or "active services" field on the works
 - Deletion is permanent
 
 ::: warning Deleting a Workspace Does Not Clean Up Its Resources
-The delete-workspace operation only checks that you're an Owner — it does not check for or block
-on remaining Managed Observability, Managed Applications, or Managed Cluster Components. We still
+The delete-workspace operation only checks that you're an Owner. It does not check for or block on
+remaining Managed Observability, Managed Applications, or Managed Cluster Components. We still
 recommend removing those first, since the workspace itself won't do it for you.
 :::
 
@@ -55,10 +59,6 @@ recommend removing those first, since the workspace itself won't do it for you.
    - Type workspace name to confirm
    - Workspace deleted immediately
 
-::: danger Workspace Deletion Is Permanent
-Workspace deletion is permanent and cannot be undone. You must back up all data before deleting a workspace.
-:::
-
 ## Workspace Switching
 
 If you're in multiple workspaces:
@@ -69,39 +69,8 @@ If you're in multiple workspaces:
 
 ## API Reference
 
-### Get Workspace Details
-
-```http
-GET /v1/workspaces/{workspaceId}
-Authorization: Bearer <access-token>
-```
-
-### Update Name
-
-```http
-PUT /v1/workspaces/{workspaceId}/name
-Authorization: Bearer <access-token>
-Content-Type: application/json
-
-{
-  "workspaceName": "New Name"
-}
-```
-
-### Delete Workspace
-
-```http
-DELETE /v1/workspaces/{workspaceId}
-Authorization: Bearer <access-token>
-```
-
-::: warning API Deletion Is Permanent
-Workspace deletion via API is permanent and cannot be undone. Ensure you are using the correct workspace ID before executing this operation.
-:::
-
-::: info Full API Documentation Available
-These are example requests. For complete API documentation including all parameters, response schemas, and authentication details, visit [api.cloudpirates.io/docs](https://api.cloudpirates.io/docs/).
-:::
+For workspace detail, rename, and deletion requests, see the
+[Workspace API reference](https://api.cloudpirates.dev/docs/#/Workspace).
 
 ## Related Resources
 
