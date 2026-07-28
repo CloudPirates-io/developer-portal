@@ -5,33 +5,38 @@ next: false
 
 # Managed Services
 
-CloudPirates offers managed Kubernetes services designed to simplify your cloud operations. Focus on your applications while we handle the infrastructure, monitoring, and maintenance.
+CloudPirates currently offers two managed services on top of your Kubernetes clusters:
+visibility into what's running, and GitOps-based deployment of new applications.
 
 ## Our Managed Services
 
-### 📊 Managed Observability
+### Managed Observability
 
-**Essential cluster visibility with intelligent insights**
+**Cluster visibility through a single lightweight agent**
 
-Get comprehensive monitoring and observability for your Kubernetes clusters through a single lightweight agent.
+Monitor your Kubernetes clusters without deploying Prometheus, Grafana, or any other stack
+yourself.
+
+::: danger Roadmap
+CVE scanning, AI-assisted insights, and automated resource recommendations not implemented yet.
+:::
 
 **Key Features**:
 
-- CVE scanning and security analysis
-- Kubernetes event monitoring with AI-powered context
-- Automated resource recommendations
-- Intelligent insights not available in traditional stacks
+- Kubernetes event monitoring with plain-language explanations
+- Best practice validation against Pod Security Standards
+- CVE scanning of container images
+- AI-assisted insights and automated resource recommendations
 
-**Deployment Options**:
-
-- **Fully Managed**: Hosted by CloudPirates (no infrastructure required)
-- **Managed In-House**: Deployed in your cluster (full observability stack)
+Need custom metrics or long-term storage? Add the separate Full Observability Stack (Grafana,
+Prometheus, Loki, Tempo, and Alloy), available fully managed by CloudPirates or deployed in your
+own cluster.
 
 [Learn more about Managed Observability →](../managed-observability/)
 
 ---
 
-### 🚀 Managed Application Platform
+### Managed Application Platform
 
 **Deploy production-ready applications with GitOps workflows**
 
@@ -39,7 +44,13 @@ Get comprehensive monitoring and observability for your Kubernetes clusters thro
 Currently in private beta. [Contact us](mailto:hello@cloudpirates.io) to request access.
 :::
 
-Streamline application deployment with pre-configured templates, automatic updates, and GitOps-based management.
+Deploy databases, caches, and other applications from pre-configured templates, then manage them
+via GitOps with ArgoCD.
+
+::: danger Roadmap
+Automatic updates, Helm value migrations, and pre-update backups are not implemented yet.
+See [Managed Application Platform](../managed-application-plattform/) for details.
+:::
 
 **Key Features**:
 
@@ -53,14 +64,14 @@ Streamline application deployment with pre-configured templates, automatic updat
 **Deployment Options**:
 
 - **Fully Managed**: Git + ArgoCD + Kubernetes hosted by CloudPirates
-- **Bring Your Own**: Use your existing Git, ArgoCD, and/or Kubernetes infrastructure
-- **Mix & Match**: Combine managed and self-hosted components
+- **Bring Your Own**: use your existing Git, ArgoCD, and/or Kubernetes infrastructure
+- **Mix & Match**: combine managed and self-hosted components
 
 [Learn more about Managed Application Platform →](../managed-application-plattform/)
 
 ## Need Help?
 
-Our team can help you choose the right services and deployment options for your requirements.
+Not sure which service fits your setup? We can help you choose.
 
 📧 [hello@cloudpirates.io](mailto:hello@cloudpirates.io)
 📞 [+49-571-784628-20](tel:+4957178462820)

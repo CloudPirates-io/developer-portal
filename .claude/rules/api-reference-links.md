@@ -1,6 +1,6 @@
 ---
 paths:
-  - "docs/**"
+  - "src/**"
 ---
 
 # "## API Reference" sections link out to the live Swagger docs, not raw examples
@@ -59,26 +59,26 @@ sets one, its `externalDocs` target (the developer-portal page the spec itself a
 canonical for that tag — a strong signal for which `docs/**` page should link to it, though still
 worth confirming against the live site since these are hand-maintained in the spec too).
 
-| Tag | Anchor | Covers | `externalDocs` (if set in spec) |
-| --- | --- | --- | --- |
-| Auth | `#/Auth` | Login, registration, activation, password mgmt, token refresh, session validation | `/authentication/` |
-| Auth Challenge | `#/Auth%20Challenge` | MFA/passwordless setup: TOTP, SMS 2FA, WebAuthn | — |
-| Auth API Key | `#/Auth%20API%20Key` | Create/list/revoke API keys | `/authentication/api-keys` |
-| Training | `#/Training` | Core training mgmt: create, settings, certificates, feedback forms | — |
-| Training Participant | `#/Training%20Participant` | Participants: add/remove, roles, environment assignment | — |
-| Training Session | `#/Training%20Session` | Session scheduling, dates/times, Teams meeting URLs | — |
-| Training Invitation | `#/Training%20Invitation` | Portal invitations: send, status, public accept/reject | — |
-| Workspace | `#/Workspace` | Create/manage workspaces, members, permissions, settings | `/workspaces/` |
-| Cluster | `#/Cluster` | Register/monitor/manage Kubernetes clusters, tokens, config | — |
-| Application Template | `#/Application%20Template` | Admin-managed template catalog: versions, presets, config options | `/managed-application-plattform/templates` |
-| Application | `#/Application` | User-facing deployed apps: deploy, update, status, logs, config | `/managed-application-plattform/` |
-| Observability | `#/Observability` | Workspace/cluster summaries, tracked resources, policy compliance, metrics, health reports | `/managed-observability/` |
-| Kubernetes | `#/Kubernetes` | Browse/inspect K8s resources (pods, deployments, services, ...) in monitored clusters | — |
-| Billing | `#/Billing` | Billing profiles, addresses, email delivery prefs, transactions, invoices | — |
-| Notification | `#/Notification` | In-app notifications, mark-as-read, notification preferences | — |
-| Country | `#/Country` | Country reference data: names, codes, flags, currencies, dialing codes | — |
-| Request | `#/Request` | Public, unauthenticated contact/demo/training/consulting/callback request forms | — |
-| System | `#/System` | Internal health check / readiness endpoints | — |
+| Tag                  | Anchor                     | Covers                                                                                     | `externalDocs` (if set in spec)            |
+| -------------------- | -------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------ |
+| Auth                 | `#/Auth`                   | Login, registration, activation, password mgmt, token refresh, session validation          | `/authentication/`                         |
+| Auth Challenge       | `#/Auth%20Challenge`       | MFA/passwordless setup: TOTP, SMS 2FA, WebAuthn                                            | —                                          |
+| Auth API Key         | `#/Auth%20API%20Key`       | Create/list/revoke API keys                                                                | `/authentication/api-keys`                 |
+| Training             | `#/Training`               | Core training mgmt: create, settings, certificates, feedback forms                         | —                                          |
+| Training Participant | `#/Training%20Participant` | Participants: add/remove, roles, environment assignment                                    | —                                          |
+| Training Session     | `#/Training%20Session`     | Session scheduling, dates/times, Teams meeting URLs                                        | —                                          |
+| Training Invitation  | `#/Training%20Invitation`  | Portal invitations: send, status, public accept/reject                                     | —                                          |
+| Workspace            | `#/Workspace`              | Create/manage workspaces, members, permissions, settings                                   | `/workspaces/`                             |
+| Cluster              | `#/Cluster`                | Register/monitor/manage Kubernetes clusters, tokens, config                                | —                                          |
+| Application Template | `#/Application%20Template` | Admin-managed template catalog: versions, presets, config options                          | `/managed-application-plattform/templates` |
+| Application          | `#/Application`            | User-facing deployed apps: deploy, update, status, logs, config                            | `/managed-application-plattform/`          |
+| Observability        | `#/Observability`          | Workspace/cluster summaries, tracked resources, policy compliance, metrics, health reports | `/managed-observability/`                  |
+| Kubernetes           | `#/Kubernetes`             | Browse/inspect K8s resources (pods, deployments, services, ...) in monitored clusters      | —                                          |
+| Billing              | `#/Billing`                | Billing profiles, addresses, email delivery prefs, transactions, invoices                  | —                                          |
+| Notification         | `#/Notification`           | In-app notifications, mark-as-read, notification preferences                               | —                                          |
+| Country              | `#/Country`                | Country reference data: names, codes, flags, currencies, dialing codes                     | —                                          |
+| Request              | `#/Request`                | Public, unauthenticated contact/demo/training/consulting/callback request forms            | —                                          |
+| System               | `#/System`                 | Internal health check / readiness endpoints                                                | —                                          |
 
 Notes:
 

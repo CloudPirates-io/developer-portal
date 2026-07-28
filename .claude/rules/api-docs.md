@@ -1,6 +1,6 @@
 ---
 paths:
-  - 'docs/api/**'
+  - "src/api/**"
 ---
 
 # General API docs (pagination, error handling)

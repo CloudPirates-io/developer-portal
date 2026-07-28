@@ -1,6 +1,6 @@
 ---
 paths:
-  - "docs/**"
+  - "src/**"
 ---
 
 # Tone & style for developer-portal docs

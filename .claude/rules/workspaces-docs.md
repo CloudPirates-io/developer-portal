@@ -1,6 +1,6 @@
 ---
 paths:
-  - 'docs/workspaces/**'
+  - "src/workspaces/**"
 ---
 
 # Workspaces docs
@@ -32,9 +32,9 @@ accurate as documented.
 - **Rename** is `PUT /:workspaceId/name` (`WorkspaceApi.ts:78-84`), body field `workspaceName`
   (`change_workspace_name_command_payload_v1.json`) — not `PATCH .../{workspaceId}` with `name`.
 - **Workspace detail fields.** The domain model (`workspaceservice/src/Workspaces/Domain/
-  Workspace.ts`) only has `_id`, `workspaceName`, `workspaceKey`; the real query response
+Workspace.ts`) only has `_id`, `workspaceName`, `workspaceKey`; the real query response
   (`workspaceQueryHandler.ts`) returns `{workspaceId, workspaceKey, workspaceDomain, workspaceName,
-  members[], openMemberInvitations[]}` — no creation timestamp, no member-count field, no "active
+members[], openMemberInvitations[]}` — no creation timestamp, no member-count field, no "active
   services" concept. Don't document fields that aren't in this response.
 - **Deletion has no service-cleanup precondition.** `deleteWorkspaceCommandHandler.ts` only checks
   that the requester is an Owner — no check for observability/application/cluster resources exists
@@ -48,11 +48,11 @@ documented.
 
 ## `members-and-roles.md`: invite/change-role/remove-member endpoints
 
-| Common wrong assumption | Real behavior |
-| --- | --- |
-| `POST /v1/workspaces/{workspaceId}/members` (invite) | `POST /:workspaceId/invitations` (`WorkspaceApi.ts:140-146`) — there is no member-creation route; members only exist via the invitation-accept flow (`POST /invitations/accept`, `:165-176`, not separately documented since it's not something the inviter calls). Contract also supports optional `message`/`invitationExpireDate`. |
-| `PATCH /v1/workspaces/{workspaceId}/members/{identityId}` `{"role": "Viewer"}` (change role) | `PUT /:workspaceId/members/:workspaceMemberId/role` (`WorkspaceApi.ts:113-119`) — different method, different path (needs `/role`), different param (`workspaceMemberId`, not `identityId`). |
-| `DELETE /v1/workspaces/{workspaceId}/members/{identityId}` (remove member) | Path shape is right but the param is `workspaceMemberId`, not `identityId` (`WorkspaceApi.ts:105-111`). |
+| Common wrong assumption                                                                      | Real behavior                                                                                                                                                                                                                                                                                                                         |
+| -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `POST /v1/workspaces/{workspaceId}/members` (invite)                                         | `POST /:workspaceId/invitations` (`WorkspaceApi.ts:140-146`) — there is no member-creation route; members only exist via the invitation-accept flow (`POST /invitations/accept`, `:165-176`, not separately documented since it's not something the inviter calls). Contract also supports optional `message`/`invitationExpireDate`. |
+| `PATCH /v1/workspaces/{workspaceId}/members/{identityId}` `{"role": "Viewer"}` (change role) | `PUT /:workspaceId/members/:workspaceMemberId/role` (`WorkspaceApi.ts:113-119`) — different method, different path (needs `/role`), different param (`workspaceMemberId`, not `identityId`).                                                                                                                                          |
+| `DELETE /v1/workspaces/{workspaceId}/members/{identityId}` (remove member)                   | Path shape is right but the param is `workspaceMemberId`, not `identityId` (`WorkspaceApi.ts:105-111`).                                                                                                                                                                                                                               |
 
 `identityId` and `workspaceMemberId` are **two distinct IDs** — the query response returns both per
 member (`workspaceQueryHandler.ts`). Use `workspaceMemberId` throughout these endpoints; using
@@ -69,7 +69,7 @@ src` has zero references to `workspaceId`. The real, currently-live assignment m
 profiles attach to a **user identity**, not a workspace.
 
 Despite that, workspace-scoped billing is a confirmed near-term product roadmap item, not something
-to document as nonexistent. `billing.md` should describe the *planned* workspace-scoped flow,
+to document as nonexistent. `billing.md` should describe the _planned_ workspace-scoped flow,
 clearly marked as not implemented yet (a top-level `::: danger Roadmap` box, repeated directly
 above the illustrative API examples — see `tone-and-style.md`'s "Roadmap disclaimer boxes" section
 for the box convention), with everything else on the page worded as if the feature already shipped

@@ -1,6 +1,6 @@
 ---
 paths:
-  - 'docs/managed-observability/**'
+  - "src/managed-observability/**"
 ---
 
 # Managed Observability docs
@@ -29,10 +29,10 @@ Cluster API routes (list/create/get/rename/rotate-token/delete), not observabili
 
 ## `kubernetes-resources.md` / `events-logs.md`: required `/kubernetes-proxy/` segment
 
-| Common wrong assumption | Real pattern |
-| --- | --- |
-| `.../observability/{observabilityInstanceId}/clusters/{clusterId}/{resourceType}` | `GET /v1/workspaces/:workspaceId/observability/:clusterId/kubernetes-proxy/:resourceType` |
-| `.../namespaces/{namespace}/pods/{podName}` (namespaced) | `GET /v1/workspaces/:workspaceId/observability/:clusterId/kubernetes-proxy/namespaces/:namespace/:resourceType` (then `/:name` for a single resource) |
+| Common wrong assumption                                                           | Real pattern                                                                                                                                          |
+| --------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.../observability/{observabilityInstanceId}/clusters/{clusterId}/{resourceType}` | `GET /v1/workspaces/:workspaceId/observability/:clusterId/kubernetes-proxy/:resourceType`                                                             |
+| `.../namespaces/{namespace}/pods/{podName}` (namespaced)                          | `GET /v1/workspaces/:workspaceId/observability/:clusterId/kubernetes-proxy/namespaces/:namespace/:resourceType` (then `/:name` for a single resource) |
 
 Verified in `ObservabilityApi.ts:69` (namespaced list) and `:122` (cluster-wide list).
 
@@ -98,11 +98,11 @@ cron, no dashboard query — the entire pipeline this doc could describe (automa
 zero-config on ClusterPirate install, CVE dashboard with severity counts) has no backend. The doc
 should open with a danger box making this explicit.
 
-The one thing that *is* accurate: Trivy is the real underlying scanner, and its vulnerability
+The one thing that _is_ accurate: Trivy is the real underlying scanner, and its vulnerability
 severity vocabulary (critical/high/medium/low/unknown, from
 `schemas/src/_Shared/CveScanner/vulnerability_severity.json`) does genuinely include "Critical" —
 unlike the unrelated policy-report `Severity` enum below, so if this pipeline is ever wired up,
-"Critical" would be a legitimate value *here specifically*.
+"Critical" would be a legitimate value _here specifically_.
 
 ## Metrics collection is CPU/memory only
 
@@ -164,7 +164,7 @@ place rather than flagging the page as aspirational:
 - **"Restrict Capabilities" allowed-list.** The real policy
   (`pod-security-standards/baseline/disallow-capabilities.yaml`) allows a longer standard list than
   just `NET_BIND_SERVICE`: `AUDIT_WRITE, CHOWN, DAC_OVERRIDE, FOWNER, FSETID, KILL, MKNOD,
-  NET_BIND_SERVICE, SETFCAP, SETGID, SETPCAP, SETUID, SYS_CHROOT`.
+NET_BIND_SERVICE, SETFCAP, SETGID, SETPCAP, SETUID, SYS_CHROOT`.
 - **"Resource Usage Analysis"** (30-day consumption analysis, over/under-provisioned
   recommendations) has zero backend support — fictional, same category as the "Resource
   Recommendations" bullet in `index.md`. Mark `(planned — not implemented)`.
@@ -176,6 +176,25 @@ place rather than flagging the page as aspirational:
 Confirmed accurate and don't need touching: the sysctls allow-list, the volume-types allow-list
 (both match their Kyverno YAML message text exactly), any policy name not listed above as a
 mismatch, and the general "every workload checked, issue/impact/remediation" mechanism description.
+
+## Don't attach "Fully Managed / Managed In-House" to the ClusterPirate agent itself
+
+That fully-managed-vs-in-house choice belongs to the separate **Full Observability Stack**
+(Grafana/Prometheus/Loki/Tempo/Alloy), per `index.md`'s own "Two Approaches to Observability"
+section. The ClusterPirate agent (the actual "Managed Observability" product this rules file
+covers) is always a single Helm chart installed in your own cluster, no CloudPirates-hosted
+option. `../managed-services/index.md` used to list "Fully Managed"/"Managed In-House" as
+deployment options for Managed Observability itself, which conflated the two products; fixed
+2026-07-28 by moving the fully-managed/in-house framing to a "Full Observability Stack" callout
+instead. Watch for this conflation resurfacing on any page that summarizes Managed Observability
+alongside the full stack.
+
+## Note: this file's `paths:` glob is stale
+
+Frontmatter says `docs/managed-observability/**` but the actual content directory is
+`src/managed-observability/**` (repo was restructured, `docs/` no longer exists as of
+2026-07-28). Auto-loading via `paths:` for this file may not currently trigger; re-verify and fix
+the glob if it's still `docs/**` when next touching this file.
 
 ## Confirmed accurate — don't rewrite these
 

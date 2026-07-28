@@ -1,6 +1,6 @@
 ---
 paths:
-  - 'docs/authentication/**'
+  - "src/authentication/**"
 ---
 
 # Authentication docs
@@ -12,7 +12,7 @@ Express app (`authenticationservice/src/app.ts`) with real routes mounted direct
 SessionApi}.ts`, plus handler code (`loginIdentityWithWebAuthn.ts`, `loginIdentityWithLocalAuth.ts`,
 `registerKey.ts`, `getSessions.ts`, `getDeviceFingerprint.ts`, `refreshIdentitySession.ts`) under
 `authenticationservice/src/Auth/**`. ApiGateway itself has no `Auth` route files of its own — its
-`src/Authentication/` directory only holds middleware for authenticating requests to *other*
+`src/Authentication/` directory only holds middleware for authenticating requests to _other_
 ApiGateway routes (`authenticationFinder.ts`, `authenticationMiddleware.ts`), and its
 `src/docs/paths/auth/**` only mirrors the OpenAPI spec for authenticationservice's routes. Don't go
 looking for these handlers inside apigateway. Re-verify against current source before trusting
@@ -20,12 +20,12 @@ this if it's been a while.
 
 ## `webauthn.md` real endpoint shapes
 
-| Common wrong assumption | Real behavior |
-| --- | --- |
-| `GET /v1/auth/webauthn/devices` (list) | `GET /v1/auth/webauthn` (`WebAuthnApi.ts:15`) — no `/devices` segment |
-| `DELETE /v1/auth/webauthn/devices/{deviceId}` | `DELETE /v1/auth/webauthn/{webAuthnKeyId}` (`WebAuthnApi.ts:68-89`) — no `/devices` segment, param is `webAuthnKeyId` |
+| Common wrong assumption                               | Real behavior                                                                                                                                                                                                                                                                                                                                |
+| ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `GET /v1/auth/webauthn/devices` (list)                | `GET /v1/auth/webauthn` (`WebAuthnApi.ts:15`) — no `/devices` segment                                                                                                                                                                                                                                                                        |
+| `DELETE /v1/auth/webauthn/devices/{deviceId}`         | `DELETE /v1/auth/webauthn/{webAuthnKeyId}` (`WebAuthnApi.ts:68-89`) — no `/devices` segment, param is `webAuthnKeyId`                                                                                                                                                                                                                        |
 | Register body `{"label": "...", "credential": {...}}` | Handler (`WebAuthnApi.ts:41-56` → `registerKey.ts:9-44`) takes the raw WebAuthn `RegistrationJSON` directly as the body — no wrapper, no separate `label` field. The label is derived server-side from `validatedRegistration.user.name` (`registerKey.ts:27`), from the WebAuthn ceremony itself, not a client-supplied field on this call. |
-| Login body `{"credential": {...}}` | Handler (`WebAuthnApi.ts:58-65`) passes `req.body` directly as the `AuthenticationResponseJSON` — no `credential` wrapper key. |
+| Login body `{"credential": {...}}`                    | Handler (`WebAuthnApi.ts:58-65`) passes `req.body` directly as the `AuthenticationResponseJSON` — no `credential` wrapper key.                                                                                                                                                                                                               |
 
 Also real but easy to miss: a mandatory `POST /v1/auth/webauthn/challenge` (`WebAuthnApi.ts:35-38`,
 returns `{challenge}`) step must precede register/login — both handlers look the challenge up in
@@ -91,13 +91,13 @@ for the repo-wide version of this convention.
 **Swagger UI tags are prefixed `Auth`, not the bare backend class name minus `Api`** (verified
 against the live docs, not inferred):
 
-| Page | Backend class | Real anchor |
-| --- | --- | --- |
-| `password.md` | `AuthApi` | `#/Auth` |
-| `mfa.md` | `ChallengeApi` | `#/Auth%20Challenge` |
-| `webauthn.md` | `WebAuthnApi` | `#/Auth%20Challenge` (same tag as `mfa.md` — WebAuthn's challenge endpoint shares the Challenge tag rather than getting its own; re-verify if this looks wrong) |
-| `api-keys.md` | `ApiKeyApi` | `#/Auth%20API%20Key` |
-| `sessions.md` | `SessionApi` | `#/Auth%20Session` (not live yet, see below) |
+| Page          | Backend class  | Real anchor                                                                                                                                                     |
+| ------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `password.md` | `AuthApi`      | `#/Auth`                                                                                                                                                        |
+| `mfa.md`      | `ChallengeApi` | `#/Auth%20Challenge`                                                                                                                                            |
+| `webauthn.md` | `WebAuthnApi`  | `#/Auth%20Challenge` (same tag as `mfa.md` — WebAuthn's challenge endpoint shares the Challenge tag rather than getting its own; re-verify if this looks wrong) |
+| `api-keys.md` | `ApiKeyApi`    | `#/Auth%20API%20Key`                                                                                                                                            |
+| `sessions.md` | `SessionApi`   | `#/Auth%20Session` (not live yet, see below)                                                                                                                    |
 
 Don't guess anchors as `#/<ClassName>` (e.g. `#/Session`, `#/WebAuthn`) — verified wrong.
 
