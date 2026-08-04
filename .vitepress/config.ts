@@ -7,7 +7,7 @@ export default defineConfig({
   description:
     "The CloudPirates Developer Portal provides developers with the resources they need to integrate our products into their own applications using our API.",
   cleanUrls: true,
-  srcDir: 'src',
+  srcDir: "src",
   sitemap: {
     hostname: "https://developer.cloudpirates.io",
   },
@@ -127,6 +127,19 @@ export default defineConfig({
           { text: "Overview", link: "/billing/" },
           { text: "Billing Profiles", link: "/billing/billing-profiles" },
           { text: "Invoices", link: "/billing/invoices" },
+        ],
+      },
+      {
+        text: "Docs",
+        items: [
+          {
+            text: "Training Requirements (EN)",
+            link: "/docs/training-requirements-en",
+          },
+          {
+            text: "Training Requirements (DE)",
+            link: "/docs/training-requirements-de",
+          },
         ],
       },
     ],
