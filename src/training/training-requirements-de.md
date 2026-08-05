@@ -5,8 +5,8 @@ zu vertiefen. Dadurch ergeben sich für die Schulungsteilnehmer folgende Vorauss
 
 ## Zugriff auf Demo-Files
 
-Der Quellcode für alle Übungen liegt auf einem von uns betriebenen Soft-Serve-Git-Server. Der
-Zugriff erfolgt per SSH:
+Der Quellcode für alle Übungen liegt auf einem von uns betriebenen
+[Soft-Serve](https://github.com/charmbracelet/soft-serve)-Git-Server. Der Zugriff erfolgt per SSH:
 
 ```bash
 ssh git.cloudpirates.io

@@ -5,7 +5,8 @@ knowledge. This results in the following requirements for the training participa
 
 ## Access to Demo Files
 
-The source code for all exercises is hosted on our own Soft Serve git server. Access it over SSH:
+The source code for all exercises is hosted on our own
+[Soft Serve](https://github.com/charmbracelet/soft-serve) git server. Access it over SSH:
 
 ```bash
 ssh git.cloudpirates.io
