@@ -37,6 +37,7 @@ Podman (z.B. podman ps) wie folgt durchgeführt werden:
 ```text
 ~ podman|docker ps
 CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES
+
 ~ podman|docker run -d -p 8080:80 nginx:alpine
 Unable to find image 'nginx:alpine' locally
 alpine: Pulling from library/nginx
@@ -49,9 +50,11 @@ b2e41dd2ded0: Pull complete
 Digest: sha256:cc8c413c74aba9fef9dae7f3da736725136bad1e3f24fbc93788aea1944f51c4
 Status: Downloaded newer image for nginx:alpine
 03d9355e1878ca71af0f483259cfb76997e2a8aefc81518a8a5eecc75df28e1b
+
 ~ podman|docker ps
 CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES
 03d9355e1878 nginx:alpine "/docker-entrypoint.…" 5 seconds ago Up 3 seconds 0.0.0.0:8080->80/tcp, :::8080->80/tcp heuristic_merkle
+
 ~ curl localhost:8080
 <!DOCTYPE html>
 <html>
@@ -135,6 +138,7 @@ Grundlegende Funktionsprüfung:
 ~ kubectl version --short
 Client Version: v1.23.5
 Server Version: v1.23.5
+
 ~ kubectl get po -A
 NAMESPACE NAME READY STATUS RESTARTS AGE
 kube-system coredns-558bd4d5db-8v9rq 1/1 Running 0 3m20s
@@ -153,9 +157,11 @@ Testen der Erstellung neuer Pods:
 ```text
 ~ kubectl create deployment nginx --image=nginx
 deployment.apps/nginx created
+
 ~ kubectl get pods
 NAME READY STATUS RESTARTS AGE
 nginx-6799fc88d8-zdgnz 0/1 ContainerCreating 0 6s
+
 ~ kubectl get pods
 NAME READY STATUS RESTARTS AGE
 nginx-6799fc88d8-zdgnz 1/1 Running 0 22s
