@@ -3,13 +3,20 @@
 During the training sessions, many practical exercises are carried out to deepen the theoretical
 knowledge. This results in the following requirements for the training participants:
 
-## Access to GitLab / Demo Files
+## Access to Demo Files
 
-The source code for all exercises is on a GitLab instance provided by us. The source code can be
-downloaded and used either via Git clone (https) or download (.zip, .tar.gz). GitLab can be reached
-under the following domain:
+The source code for all exercises is hosted on our own Soft Serve git server. Access it over SSH:
 
-<https://gitlab.cloudpirates.io/explore>
+```bash
+ssh git.cloudpirates.io
+```
+
+This opens an interactive terminal interface where the available repositories can be browsed, file
+contents viewed, and the `git clone` command copied for the repository needed, for example:
+
+```bash
+git clone https://git.cloudpirates.io/kind-cluster.git
+```
 
 ## Container Runtime: Installed Docker Desktop OR Podman
 
@@ -93,10 +100,14 @@ Client Version: v1.24.0
 ## Installed KIND
 
 KIND (Kubernetes in Docker) is used to set up a local Kubernetes cluster on the participants'
-computer within a container. The required configuration for this can be found under the following
-link.
+computer within a container. The required configuration for this can be cloned with the following
+command.
 
-Required configuration: <https://gitlab.cloudpirates.io/training/kind-cluster>
+Required configuration:
+
+```bash
+git clone https://git.cloudpirates.io/kind-cluster.git
+```
 
 After installing KIND, a cluster can be created with the following command:
 

@@ -11,8 +11,8 @@ during the session.
 ## What You Need
 
 Every training includes practical exercises. To follow along, you need access to the exercise
-files on GitLab, a container runtime (Docker Desktop or Podman), kubectl, and KIND to run a local
-Kubernetes cluster.
+files on our Soft Serve git server, a container runtime (Docker Desktop or Podman), kubectl, and
+KIND to run a local Kubernetes cluster.
 
 ## Setup Instructions
 

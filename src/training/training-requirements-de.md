@@ -3,13 +3,22 @@
 Während der Schulungen werden viele praktische Übungen durchgeführt, um das theoretische Wissen
 zu vertiefen. Dadurch ergeben sich für die Schulungsteilnehmer folgende Voraussetzungen:
 
-## Zugriff auf GitLab / Demo-Files
+## Zugriff auf Demo-Files
 
-Der Quellcode für alle Übungen liegt auf einer von uns bereitgestellten GitLab Instanz. Der
-Quellcode kann von dort wahlweise per Git-Clone (https) oder Download (.zip, .tar.gz)
-heruntergeladen und genutzt werden. GitLab ist unter folgender Domain erreichbar:
+Der Quellcode für alle Übungen liegt auf einem von uns betriebenen Soft-Serve-Git-Server. Der
+Zugriff erfolgt per SSH:
 
-<https://gitlab.cloudpirates.io/explore>
+```bash
+ssh git.cloudpirates.io
+```
+
+Dies öffnet eine interaktive Terminal-Oberfläche, über die sich die verfügbaren Repositories
+durchsuchen lassen. Dort können Dateiinhalte eingesehen und der `git clone`-Befehl für das
+benötigte Repository kopiert werden, zum Beispiel:
+
+```bash
+git clone https://git.cloudpirates.io/kind-cluster.git
+```
 
 ## Container Runtime: Installiertes Docker Desktop ODER Podman
 
@@ -94,10 +103,14 @@ Client Version: v1.24.0
 ## Installiertes Kind
 
 KIND (Kubernetes in Docker) wird verwendet, um ein lokales Kubernetes Cluster auf dem Rechner der
-Teilnehmer innerhalb eines Containers einzurichten. Die erforderliche Konfiguration dazu findet
-sich unter dem folgenden Link.
+Teilnehmer innerhalb eines Containers einzurichten. Die erforderliche Konfiguration dazu lässt
+sich mit folgendem Befehl klonen.
 
-Erforderliche Konfiguration: <https://gitlab.cloudpirates.io/training/kind-cluster>
+Erforderliche Konfiguration:
+
+```bash
+git clone https://git.cloudpirates.io/kind-cluster.git
+```
 
 Nach der Installation von KIND kann mit folgendem Befehl ein Cluster erstellt werden:
 
