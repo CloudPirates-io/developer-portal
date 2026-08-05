@@ -130,15 +130,16 @@ export default defineConfig({
         ],
       },
       {
-        text: "Docs",
+        text: "Training",
         items: [
+          { text: "Overview", link: "/training/" },
           {
             text: "Training Requirements (EN)",
-            link: "/docs/training-requirements-en",
+            link: "/training/training-requirements-en",
           },
           {
             text: "Training Requirements (DE)",
-            link: "/docs/training-requirements-de",
+            link: "/training/training-requirements-de",
           },
         ],
       },

@@ -25,7 +25,7 @@ Installation Docker Desktop: <https://www.docker.com/products/docker-desktop>
 Depending on the container runtime used, a function check can be carried out via Docker (e.g.
 docker ps) or Podman (e.g. podman ps) as follows:
 
-```
+```text
 ~ podman|docker ps
 CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES
 ~ podman|docker run -d -p 8080:80 nginx:alpine
@@ -42,8 +42,7 @@ Status: Downloaded newer image for nginx:alpine
 03d9355e1878ca71af0f483259cfb76997e2a8aefc81518a8a5eecc75df28e1b
 ~ podman|docker ps
 CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES
-03d9355e1878 nginx:alpine "/docker-entrypoint...." 5 seconds ago Up 3 seconds 0.0.0.0:8080->80/tcp, :::8080->80/tcp
-heuristic_merkle
+03d9355e1878 nginx:alpine "/docker-entrypoint...." 5 seconds ago Up 3 seconds 0.0.0.0:8080->80/tcp, :::8080->80/tcp heuristic_merkle
 ~ curl localhost:8080
 <!DOCTYPE html>
 <html>
@@ -86,7 +85,7 @@ at <https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#enable-kubectl
 
 Function test kubectl (client):
 
-```
+```text
 ~ kubectl version --short --client
 Client Version: v1.24.0
 ```
@@ -101,7 +100,7 @@ Required configuration: <https://gitlab.cloudpirates.io/training/kind-cluster>
 
 After installing KIND, a cluster can be created with the following command:
 
-```
+```text
 ~/training/kind kind create cluster --config=cluster.yaml
 Creating cluster "kind" ...
 ✓ Ensuring node image (kindest/node:v1.24.0) 🖼
@@ -118,7 +117,7 @@ Not sure what to do next? 😅 Check out https://kind.sigs.k8s.io/docs/user/quic
 
 Basic function test:
 
-```
+```text
 ~ kubectl version --short
 Client Version: v1.24.0
 Server Version: v1.24.0
@@ -137,7 +136,7 @@ local-path-storage local-path-provisioner-547f784dff-j4xwt 1/1 Running 0 3m20s
 
 Testing the creation of new pods:
 
-```
+```text
 ~ kubectl create deployment nginx --image=nginx
 deployment.apps/nginx created
 ~ kubectl get pods
@@ -151,7 +150,7 @@ nginx-6799fc88d8-zdgnz 1/1 Running 0 22s
 Testing the networking (Pod -> Internet). Attention: The name of the pod could be different. This
 can be checked beforehand with kubectl get pods:
 
-```
+```text
 ~ kubectl exec -ti nginx-xxxxxxxx-xxxxx -- bash
 root@nginx-xxxxxxxx-xxxxx:/# curl google.de
 <HTML><HEAD><meta http-equiv="content-type" content="text/html;charset=utf-8">
@@ -164,7 +163,7 @@ The document has moved
 
 Test the networking (Pod -> Local) via a port forward and a call via curl in another terminal:
 
-```
+```text
 ~ kubectl port-forward nginx-xxxxxxxx-xxxxx 8085:80
 Forwarding from 127.0.0.1:8085 -> 80
 Forwarding from [::1]:8085 -> 80
@@ -172,7 +171,7 @@ Forwarding from [::1]:8085 -> 80
 
 New terminal:
 
-```
+```text
 ~ curl localhost:8085
 <!DOCTYPE html>
 <html>

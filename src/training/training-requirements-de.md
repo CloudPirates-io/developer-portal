@@ -25,10 +25,10 @@ Installation Docker Desktop: <https://www.docker.com/products/docker-desktop>
 Eine Funktionsprüfung kann je nach verwendeter Container Runtime über Docker (z.B. docker ps) oder
 Podman (z.B. podman ps) wie folgt durchgeführt werden:
 
-```
-~   podman|docker ps
+```text
+~ podman|docker ps
 CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES
-~   podman|docker run -d -p 8080:80 nginx:alpine
+~ podman|docker run -d -p 8080:80 nginx:alpine
 Unable to find image 'nginx:alpine' locally
 alpine: Pulling from library/nginx
 540db60ca938: Pull complete
@@ -40,12 +40,10 @@ b2e41dd2ded0: Pull complete
 Digest: sha256:cc8c413c74aba9fef9dae7f3da736725136bad1e3f24fbc93788aea1944f51c4
 Status: Downloaded newer image for nginx:alpine
 03d9355e1878ca71af0f483259cfb76997e2a8aefc81518a8a5eecc75df28e1b
-~   podman|docker ps
-CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS
-NAMES
-03d9355e1878 nginx:alpine "/docker-entrypoint.…" 5 seconds ago Up 3 seconds 0.0.0.0:8080->80/tcp, :::8080-
->80/tcp heuristic_merkle
-~   curl localhost:8080
+~ podman|docker ps
+CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES
+03d9355e1878 nginx:alpine "/docker-entrypoint.…" 5 seconds ago Up 3 seconds 0.0.0.0:8080->80/tcp, :::8080->80/tcp heuristic_merkle
+~ curl localhost:8080
 <!DOCTYPE html>
 <html>
 <head>
@@ -88,29 +86,12 @@ zu finden.
 
 Funktionsprüfung kubectl (Client):
 
-```
-~   kubectl version --short --client
+```text
+~ kubectl version --short --client
 Client Version: v1.24.0
 ```
 
 ## Installiertes Kind
-
-```
-~   kubectl version --short
-Client Version: v1.23.5
-Server Version: v1.23.5
-~   kubectl get po -A
-NAMESPACE NAME READY STATUS RESTARTS AGE
-kube-system coredns-558bd4d5db-8v9rq 1/1 Running 0 3m20s
-kube-system coredns-558bd4d5db-qtp9j 1/1 Running 0 3m20s
-kube-system etcd-kind-control-plane 1/1 Running 0 3m25s
-kube-system kindnet-gjf2j 1/1 Running 0 3m20s
-kube-system kube-apiserver-kind-control-plane 1/1 Running 0 3m25s
-kube-system kube-controller-manager-kind-control-plane 1/1 Running 0 3m25s
-kube-system kube-proxy-k4ps7 1/1 Running 0 3m20s
-kube-system kube-scheduler-kind-control-plane 1/1 Running 0 3m25s
-local-path-storage local-path-provisioner-547f784dff-j4xwt 1/1 Running 0 3m20s
-```
 
 KIND (Kubernetes in Docker) wird verwendet, um ein lokales Kubernetes Cluster auf dem Rechner der
 Teilnehmer innerhalb eines Containers einzurichten. Die erforderliche Konfiguration dazu findet
@@ -120,8 +101,8 @@ Erforderliche Konfiguration: <https://gitlab.cloudpirates.io/training/kind-clust
 
 Nach der Installation von KIND kann mit folgendem Befehl ein Cluster erstellt werden:
 
-```
-~/Schulungen/kind   kind create cluster --config=cluster.yaml
+```text
+~/Schulungen/kind kind create cluster --config=cluster.yaml
 Creating cluster "kind" ...
 ✓ Ensuring node image (kindest/node:v1.23.5) 🖼
 ✓ Preparing nodes 📦
@@ -137,15 +118,32 @@ Not sure what to do next? 😅 Check out https://kind.sigs.k8s.io/docs/user/quic
 
 Grundlegende Funktionsprüfung:
 
+```text
+~ kubectl version --short
+Client Version: v1.23.5
+Server Version: v1.23.5
+~ kubectl get po -A
+NAMESPACE NAME READY STATUS RESTARTS AGE
+kube-system coredns-558bd4d5db-8v9rq 1/1 Running 0 3m20s
+kube-system coredns-558bd4d5db-qtp9j 1/1 Running 0 3m20s
+kube-system etcd-kind-control-plane 1/1 Running 0 3m25s
+kube-system kindnet-gjf2j 1/1 Running 0 3m20s
+kube-system kube-apiserver-kind-control-plane 1/1 Running 0 3m25s
+kube-system kube-controller-manager-kind-control-plane 1/1 Running 0 3m25s
+kube-system kube-proxy-k4ps7 1/1 Running 0 3m20s
+kube-system kube-scheduler-kind-control-plane 1/1 Running 0 3m25s
+local-path-storage local-path-provisioner-547f784dff-j4xwt 1/1 Running 0 3m20s
+```
+
 Testen der Erstellung neuer Pods:
 
-```
-~   kubectl create deployment nginx --image=nginx
+```text
+~ kubectl create deployment nginx --image=nginx
 deployment.apps/nginx created
-~   kubectl get pods
+~ kubectl get pods
 NAME READY STATUS RESTARTS AGE
 nginx-6799fc88d8-zdgnz 0/1 ContainerCreating 0 6s
-~   kubectl get pods
+~ kubectl get pods
 NAME READY STATUS RESTARTS AGE
 nginx-6799fc88d8-zdgnz 1/1 Running 0 22s
 ```
@@ -153,8 +151,8 @@ nginx-6799fc88d8-zdgnz 1/1 Running 0 22s
 Testen des Networkings (Pod -> Internet). Achtung: Der Name des Pods könnte anders lauten. Dies
 kann mit kubectl get pods zuvor geprüft werden:
 
-```
-~   kubectl exec -ti nginx-xxxxxxxxxx-xxxxx –- bash
+```text
+~ kubectl exec -ti nginx-xxxxxxxxxx-xxxxx -- bash
 root@nginx-xxxxxxxxxx-xxxxx:/# curl google.de
 <HTML><HEAD><meta http-equiv="content-type" content="text/html;charset=utf-8">
 <TITLE>301 Moved</TITLE></HEAD><BODY>
@@ -167,16 +165,16 @@ The document has moved
 Testen des Networking (Pod -> Local) über ein Port Forward sowie einen Aufruf über curl in einem
 weiteren Terminal:
 
-```
-~   kubectl port-forward nginx-xxxxxxxxxx-xxxxx 8085:80
+```text
+~ kubectl port-forward nginx-xxxxxxxxxx-xxxxx 8085:80
 Forwarding from 127.0.0.1:8085 -> 80
 Forwarding from [::1]:8085 -> 80
 ```
 
 Neues Terminal:
 
-```
-~   curl localhost:8085
+```text
+~ curl localhost:8085
 <!DOCTYPE html>
 <html>
 <head>
