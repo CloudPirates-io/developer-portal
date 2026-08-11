@@ -39,6 +39,9 @@ when working on matching files. Current files:
   flagging severe drift, most described features are either missing or dead code behind a `501`.
 - **`vitepress-rendering.md`** (`node_modules/vitepress/**`, `docs/.vitepress/**`): VitePress
   rendering quirks found by reading the installed package's source directly.
+- **`training-docs.md`** (`docs/training/**`): git hosting for training exercise files moved from a
+  public GitLab instance to a self-hosted Soft Serve server; old `gitlab.cloudpirates.io` links are
+  stale.
 
 ## Persist long-term-important findings into `.claude/rules/`, not just chat
 
