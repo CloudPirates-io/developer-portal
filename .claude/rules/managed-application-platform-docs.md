@@ -1,14 +1,14 @@
 ---
 paths:
-  - 'docs/managed-application-plattform/**'
+  - "src/managed-application-plattform/**"
 ---
 
 # Managed Application Platform docs
 
 Ground truth traced through the `application-manager` service, plus ApiGateway's
-`Api/v1/Applications/{ApplicationsApi,WorkspaceApplicationsApi}.ts`. This is the domain with the
-most severe drift risk of any audited so far — most of what these docs could describe either
-doesn't exist in code at all, or exists as dead code behind a hard `501`. Treat this the same way
+`Api/v1/Applications/{ApplicationsApi,WorkspaceApplicationsApi}.ts`. This domain carries severe
+drift risk — most of what these docs could describe either doesn't exist in code at all, or exists
+as dead code behind a hard `501`. Treat this the same way
 `src/services/apigateway/.claude/rules/cluster-docs.md` treats the `MANAGED` cluster type: looking
 wired up (real schemas, real routes, real DB writes for lookups) is not the same as working.
 Re-verify against current source before trusting this if it's been a while.
@@ -20,7 +20,10 @@ Re-verify against current source before trusting this if it's been a while.
 
 ```ts
 export async function installApplication(config: ApplicationInstallConfig) {
-  throw new CloudEventError({ message: 'Not implemented', statusCode: CloudEventErrorStatusCode.NOT_IMPLEMENTED })
+  throw new CloudEventError({
+    message: "Not implemented",
+    statusCode: CloudEventErrorStatusCode.NOT_IMPLEMENTED,
+  });
   // ... entire real ArgoCD Application manifest + gitLabClient.createApplicationInstance() call, commented out
 }
 ```
@@ -46,13 +49,12 @@ can ever be created to delete.
 
 ## How to treat pages describing this: line-correct what's real, flag what isn't
 
-- If a route/schema is real but the *outcome* is broken (create's 501, update's missing handler),
+- If a route/schema is real but the _outcome_ is broken (create's 501, update's missing handler),
   correct the request body/route to the real shape and add a `::: danger Roadmap` box (see
-  `tone-and-style.md`) rather than removing the section — `index.md`'s Create/Update Application
-  sections follow this pattern.
+  `tone-and-style.md`) rather than removing the section.
 - If a whole page is almost entirely aspirational (`deployment-options.md`, `gitops-setup.md`,
   `update-management.md`), don't line-item-correct every claim — open with a single `::: danger
-  Roadmap` box summarizing that most of the page isn't implemented yet, and leave the rest of the
+Roadmap` box summarizing that most of the page isn't implemented yet, and leave the rest of the
   page's structure intact.
 
 ### `deployment-options.md` — what's real underneath
@@ -74,12 +76,12 @@ DevOps, Self-hosted" claim.
 `ApplicationTemplates` is fully wired end-to-end (unlike `Applications`) — every command has a
 registered handler, event handler, and query handler. Real shapes:
 
-| Common wrong assumption | Real behavior |
-| --- | --- |
-| `GET /v1/templates` | `GET /v1/applications/templates` (mount is `/v1/applications`, router path `/templates` — `ApplicationsApi.ts`) |
-| `GET /v1/templates/{applicationTemplateId}` | `GET /v1/applications/templates/{applicationTemplateId}` |
-| Response `{"templates": [...]}` | Route passes `dataAttribute: 'applicationTemplates'` + `isPaginated: true` — real body is a **bare array** (see `api-docs.md`'s pagination rule). |
-| Template fields `id`, `category`, `chartUrl` | Real fields: `applicationTemplateId`; no `category`/`chartUrl` — `source` object only has `{type: HELM_CHART, repositoryUrl, chartName}` |
+| Common wrong assumption                                         | Real behavior                                                                                                                                                                                                      |
+| --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `GET /v1/templates`                                             | `GET /v1/applications/templates` (mount is `/v1/applications`, router path `/templates` — `ApplicationsApi.ts`)                                                                                                    |
+| `GET /v1/templates/{applicationTemplateId}`                     | `GET /v1/applications/templates/{applicationTemplateId}`                                                                                                                                                           |
+| Response `{"templates": [...]}`                                 | Route passes `dataAttribute: 'applicationTemplates'` + `isPaginated: true` — real body is a **bare array** (see `api-docs.md`'s pagination rule).                                                                  |
+| Template fields `id`, `category`, `chartUrl`                    | Real fields: `applicationTemplateId`; no `category`/`chartUrl` — `source` object only has `{type: HELM_CHART, repositoryUrl, chartName}`                                                                           |
 | Preset fields `id`, `name`, `resources: {cpu, memory, storage}` | Real: `applicationTemplatePresetId`, `presetName`, `supportedVersionRange`, `valuesSchema` — sizing is validated against an arbitrary per-preset JSON Schema (`valuesSchema`), there's no fixed `resources` object |
 
 Note: even ApiGateway's own OpenAPI schema (`ApplicationTemplates.yaml`) still documents the stale
@@ -130,10 +132,10 @@ but are never produced by any handler in this repo.
 
 ## Summary
 
-| Doc file | Backend exists? |
-| --- | --- |
-| `index.md` | Routes/schemas real; create is a 501 dead-end; update/values routes have no handler; delete is the only real op |
-| `deployment-options.md` | Cluster domain exists but lacks every field described (region, shared/dedicated); BYO Git/ArgoCD has zero code |
-| `templates.md` | Solid — real CRUD, real routes |
-| `gitops-setup.md` | Almost nothing real |
-| `update-management.md` | Entirely aspirational |
+| Doc file                | Backend exists?                                                                                                 |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `index.md`              | Routes/schemas real; create is a 501 dead-end; update/values routes have no handler; delete is the only real op |
+| `deployment-options.md` | Cluster domain exists but lacks every field described (region, shared/dedicated); BYO Git/ArgoCD has zero code  |
+| `templates.md`          | Solid — real CRUD, real routes                                                                                  |
+| `gitops-setup.md`       | Almost nothing real                                                                                             |
+| `update-management.md`  | Entirely aspirational                                                                                           |

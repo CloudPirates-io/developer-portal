@@ -1,6 +1,6 @@
 ---
 paths:
-  - 'docs/billing/**'
+  - "src/billing/**"
 ---
 
 # Billing docs
@@ -9,8 +9,7 @@ Ground truth cross-checked against
 `src/services/apigateway/src/Api/v1/Billing/{BillingProfileApi,InvoiceApi}.ts` and the JSON
 command-payload contracts under
 `src/shared/contracts/schemas/src/Contracts/Billing/BillingProfile/Commands/**`. Re-verify against
-current source before trusting this if it's been a while. This domain has the smallest drift of
-the areas audited so far.
+current source before trusting this if it's been a while.
 
 ## Billing profile field names
 
@@ -44,7 +43,7 @@ same mechanism applies here).
 
 `docs/billing/index.md`'s "Billing Profiles are personal and can only be accessed by their owner"
 framing matches today's identity-based assignment model and is the correct mental model for
-*current* behavior. `workspaces/billing.md` describes a workspace-scoped billing flow that doesn't
+_current_ behavior. `workspaces/billing.md` describes a workspace-scoped billing flow that doesn't
 exist in the backend yet, but is a confirmed product roadmap item (see `workspaces-docs.md`), so
 it's intentionally documented there as planned/not-live rather than denied outright. Both pages are
 correct for their own timeframe (today vs. planned) — don't let one override the other.

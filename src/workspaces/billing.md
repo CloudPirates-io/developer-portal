@@ -63,31 +63,8 @@ These endpoints aren't live yet and may still change.
 See [Billing Profiles](/billing/billing-profiles.md) for how billing works today.
 :::
 
-**Get Billing Status**
-
-```http
-GET /v1/workspaces/{workspaceId}/billing
-Authorization: Bearer <access-token>
-```
-
-**Assign Billing Profile**
-
-```http
-POST /v1/workspaces/{workspaceId}/billing
-Authorization: Bearer <access-token>
-Content-Type: application/json
-
-{
-  "billingProfileId": "bp-123456"
-}
-```
-
-**Remove Billing Profile**
-
-```http
-DELETE /v1/workspaces/{workspaceId}/billing
-Authorization: Bearer <access-token>
-```
+For workspace billing status, assignment, and removal requests, see the
+[Billing API reference](https://api.cloudpirates.dev/docs/#/Billing).
 
 ## Related Resources
 

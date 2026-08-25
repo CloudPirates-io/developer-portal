@@ -4,12 +4,14 @@ prev: false
 
 # Workspaces
 
-Workspaces are logical groups of users that organize and manage CloudPirates services. They provide collaborative access control for your team.
+Workspaces are logical groups of users that organize and manage CloudPirates services. They
+provide collaborative access control for your team.
 
 ## Overview
 
 ::: warning Workspace Required for All Services
-You cannot use CloudPirates services without a workspace. All services including Managed Observability, Managed Applications, and Managed Cluster Components are workspace-based.
+You cannot use CloudPirates services without a workspace. Managed Observability, Managed
+Applications, and Managed Cluster Components are all workspace-based.
 :::
 
 ### Key Features
@@ -20,7 +22,8 @@ You cannot use CloudPirates services without a workspace. All services including
 
 ## Workspace Roles
 
-- **Owner**: Full access including member management, billing, and workspace deletion
+- **Owner**: Full access including member management, [billing](./billing.md), and workspace
+  deletion
 - **Member**: Can use services and view members (default role for invitations)
 - **Viewer**: Read-only access to services and members
 
@@ -51,8 +54,8 @@ Invitations are sent via email.
 
 ### 3. Set Up Billing (Optional)
 
-Billing profiles are personal — assigned to your user identity, not to the workspace — and enable
-paid features for whichever services you use.
+Billing profiles are currently personal (assigned to your user identity, not the workspace) and
+enable paid features for whichever services you use.
 
 [Learn more →](/billing/billing-profiles.md)
 
@@ -62,7 +65,8 @@ paid features for whichever services you use.
 
 **Company Workspace**: Multiple team members managing production infrastructure.
 
-**Organizational Units**: Separate workspaces for different teams or environments (e.g., "Engineering - Production", "Engineering - Staging").
+**Organizational Units**: Separate workspaces for different teams or environments (e.g.,
+"Engineering - Production", "Engineering - Staging").
 
 ## Related Resources
 

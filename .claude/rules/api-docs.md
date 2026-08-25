@@ -1,6 +1,6 @@
 ---
 paths:
-  - 'docs/api/**'
+  - "src/api/**"
 ---
 
 # General API docs (pagination, error handling)
@@ -53,10 +53,10 @@ differently per domain page.
   enforced at the infra/ingress layer, not something the backend guarantees.
 
 The generic 400 (AJV-style)/404/500/502/503/504 examples and the "eventually consistent read
-models can 404 briefly after a write" caveat are accurate as documented.
+models can 404 briefly after a write" caveat match the backend.
 
 ## `index.md`
 
 Base URL pattern, example routes, and the event-sourced/eventually-consistent-read-model framing
-all check out against real routes and the CQRS Command/Event handler pattern used throughout the
+should stay aligned with real routes and the CQRS Command/Event handler pattern used throughout the
 backend services.

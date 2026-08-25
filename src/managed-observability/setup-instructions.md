@@ -1,19 +1,23 @@
 # Setup Instructions
 
-Get your cluster connected to CloudPirates Managed Observability in less than 5 minutes. Just one helm chart installation — no complex configuration required.
+Get your cluster connected to CloudPirates Managed Observability in less than 5 minutes. Just one
+helm chart installation, no complex configuration required.
 
 ## What You'll Install
 
-**ClusterPirate** is a lightweight agent that runs in your cluster and securely sends monitoring data to CloudPirates. It:
+**ClusterPirate** is a lightweight agent that runs in your cluster and securely sends monitoring
+data to CloudPirates. It:
 
 - Discovers all Kubernetes resources automatically
 - Collects CPU/memory metrics and Kubernetes events
 - Validates security and best practices
-- Scans container images for vulnerabilities
 - Requires minimal resources (10m CPU, 100Mi memory)
 
+Container vulnerability scanning is planned but not wired up yet, see [CVE Scans](./cve-scans.md).
+
 ::: tip Lightweight & Secure
-ClusterPirate only **reads** data from your cluster and sends it securely to CloudPirates. It never modifies your workloads or stores sensitive data.
+ClusterPirate only **reads** data from your cluster and sends it securely to CloudPirates. It
+never modifies your workloads or stores sensitive data.
 :::
 
 ## Before You Begin
@@ -24,7 +28,7 @@ Complete these quick steps in the portal first:
 2. **Create Workspace**: Organize your clusters
 3. **Register Cluster**: Add your cluster in the workspace to get the **access token**
 
-The access token is your cluster's unique identifier — keep it secure.
+The access token is your cluster's unique identifier. Keep it secure.
 
 ## Installation
 
@@ -44,7 +48,8 @@ helm install clusterpirate oci://registry-1.docker.io/cloudpirates/clusterpirate
 
 Replace `YOUR_ACCESS_TOKEN` with the token from your portal cluster registration.
 
-**That's it!** The agent starts monitoring immediately. Check your portal to see cluster data flowing in.
+**That's it!** The agent starts monitoring immediately. Check your portal to see cluster data
+flowing in.
 
 ### Advanced Configuration (Optional)
 
@@ -174,7 +179,8 @@ helm uninstall clusterpirate --namespace clusterpirate-system
 **Solution**:
 
 - Verify token is correctly copied from portal
-- Check that the cluster hasn't had its access token rotated since (rotating a token invalidates the old one)
+- Check that the cluster hasn't had its access token rotated since (rotating a token invalidates
+  the old one)
 
 ### Pod Not Starting
 

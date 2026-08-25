@@ -1,23 +1,21 @@
 ---
 paths:
-  - "docs/**"
+  - "src/**"
 ---
 
 # Tone & style for developer-portal docs
 
-Most docs under `docs/` were originally drafted with older LLMs and read as generic
-"AI-management-speech": vague, superlative-heavy marketing copy instead of direct technical
-writing. The goal of this file is to rewrite this content for human readability, aimed at
-developers, without losing accuracy.
+House style for `docs/`: direct technical writing aimed at developers, not marketing copy. Applies
+to new content and edits alike.
 
 Reference basis: `https://www.cloudpirates.io/` (marketing site, mostly German) — specifically its
 managed-observability solutions page and a "101 series" technical blog post (Kubernetes Probes) as
 the closest analogues to developer-facing technical writing on that site.
 
-## The core problem to fix
+## Avoid buzzwords and vague superlatives
 
-Existing text leans on corporate/AI buzzwords and vague superlatives instead of saying what a
-thing actually does. Words/patterns to hunt down and remove or replace when editing docs:
+Say what a thing actually does instead of describing it with corporate/AI-buzzword adjectives.
+Watch for:
 
 - "comprehensive", "intelligent", "seamless(ly)", "streamline", "leverage", "empower(ing)",
   "unlock", "robust", "cutting-edge", "state-of-the-art", "ecosystem", "journey" (as in "Cloud
@@ -100,8 +98,8 @@ e.g. "Add your billing information at portal.cloudpirates.io/billing", with the 
 as a "see X for details" trailer), and consider deleting a "Related Resources" section that becomes
 fully redundant with the list right above it.
 
-The same "two sections describing the same thing" smell can also show up as duplicated *field
-lists* rather than duplicated links. If a page has both a "how to do X" procedure and a "what X's
+The same "two sections describing the same thing" smell can also show up as duplicated _field
+lists_ rather than duplicated links. If a page has both a "how to do X" procedure and a "what X's
 parts mean" reference right next to each other, the procedure should point at the reference instead
 of restating it, e.g. "3. Enter your billing information (see Billing Information below for what
 each field means)" instead of re-listing every field inline.
@@ -123,7 +121,7 @@ Examples of intentional duplication, don't merge or remove these patterns:
 
 - A warning box repeated verbatim across two sibling sections, e.g. an "Asynchronous Request
   Processing" warning box that appears in both `## 503 Service Unavailable` and `## 504 Gateway
-  Timeout` in `docs/api/error-handling.md`. A reader jumping straight to `#504-gateway-timeout` from
+Timeout` in `docs/api/error-handling.md`. A reader jumping straight to `#504-gateway-timeout` from
   a link elsewhere would otherwise miss it.
 - The same explanation appearing in two different files at the two places a reader is likely to
   land, e.g. the eventually-consistent-read-models explanation in both `docs/api/index.md` (under
@@ -216,7 +214,15 @@ Example, used at the top of a page:
 
 ```
 ::: danger Roadmap
-Workspace-scoped billing is on the roadmap, but none of it is implemented yet.
+Most of the features described here are not yet implemented.
+:::
+```
+
+Optionally, can have a bit more information (but not too much):
+
+```
+::: danger Roadmap
+Workspace-scoped billing is not implemented yet.
 See [Billing Profiles](/billing/billing-profiles.md) for current usage.
 :::
 ```
@@ -250,6 +256,15 @@ every sentence below it is the same duplicate-information problem covered above,
 a whole page instead of one paragraph, and it reads as hedging rather than documentation. State the
 box once, then document the feature normally.
 
+This holds across a whole page, not just directly below one box. If a page already has a Roadmap
+box for a feature (even in an earlier or later section, or on a top-of-page box covering several
+features at once), don't re-hedge that same feature with mixed real/planned phrasing somewhere
+else on the page, e.g. don't write "Kubernetes event monitoring today; CVE scanning, AI-assisted
+insights, and automated resource recommendations are on the roadmap" in a feature list. List the
+capabilities plainly ("Kubernetes event monitoring, CVE scanning, AI-assisted insights, and
+automated resource recommendations") and let the page's Roadmap box(es) carry the caveat, the same
+way a single "planned" tag on a heading isn't repeated in the prose underneath it.
+
 ## Open question — nautical/pirate metaphors
 
 The marketing site leans on nautical metaphors ("Stromschnellen sehen, bevor sie zum Problem
@@ -259,21 +274,8 @@ setup/reference docs want the direct capability, not brand flavor. If the user w
 carried into the dev portal too, that's a deliberate call to confirm with them first, not something
 to infer from the marketing site.
 
-## How to apply when rewriting a doc page
+## Don't change facts while fixing wording
 
-1. Read the current page in full first.
-2. For every sentence, ask: "what does this actually let a developer do, concretely?" If the
-   sentence doesn't survive that question, cut or rewrite it.
-3. Replace buzzword-adjective openers with a direct statement of capability.
-4. Keep sentences short-to-medium; vary length rather than defaulting to long marketing sentences.
-5. Prefer "you" addressing the reader over passive/third-person phrasing.
-6. Don't invent nautical metaphors unprompted (see open question above).
-7. Don't use em dashes ("—"); rewrite the sentence instead (see section above).
-8. After the buzzword pass, do a second pass for duplicate information: does this sentence repeat
-   something the header, the example right below, or an adjacent sentence already established? Cut
-   it if so, unless it's a case where a reader could land on this section/page directly without
-   seeing the other instance (see "Some duplicate information is intentional" above).
-9. Don't change factual/technical claims (endpoints, feature lists, links) without verifying them
-   against source. This file is about wording, not content accuracy.
-10. Wrap long lines in the source at ~100 characters (see "Wrap long source lines" above). Purely
-    cosmetic, do this on every page you touch regardless of whether you changed the wording.
+This file governs wording, not content accuracy. Don't change factual/technical claims (endpoints,
+feature lists, links) as a side effect of a style pass, without verifying them against source
+separately.

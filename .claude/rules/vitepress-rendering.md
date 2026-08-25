@@ -1,7 +1,7 @@
 ---
 paths:
   - "node_modules/vitepress/**"
-  - "docs/.vitepress/**"
+  - "src/.vitepress/**"
 ---
 
 # VitePress rendering quirks

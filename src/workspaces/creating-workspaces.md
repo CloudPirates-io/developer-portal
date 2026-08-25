@@ -29,31 +29,12 @@ Create separate workspaces for:
 
 ## API Reference
 
-### Create Workspace
+For workspace creation and listing requests, see the
+[Workspace API reference](https://api.cloudpirates.dev/docs/#/Workspace).
 
-```http
-POST /v1/workspaces
-Authorization: Bearer <access-token>
-Content-Type: application/json
-
-{
-  "workspaceName": "My Workspace",
-  "workspaceKey": "my-workspace"
-}
-```
-
-`workspaceKey` is a unique, URL-safe identifier for the workspace (lowercase letters, digits, and
-single hyphens between segments) — it must be unique across all workspaces.
-
-### List Workspaces
-
-```http
-GET /v1/workspaces
-Authorization: Bearer <access-token>
-```
-
-::: info Full API Documentation Available
-These are example requests. For complete API documentation including all parameters, response schemas, and authentication details, visit [api.cloudpirates.io/docs](https://api.cloudpirates.io/docs/).
+::: tip Workspace Key Format
+`workspaceKey` must be unique across all workspaces: lowercase letters, digits, and single
+hyphens between segments.
 :::
 
 ## Related Resources
