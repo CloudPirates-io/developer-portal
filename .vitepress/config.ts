@@ -152,7 +152,7 @@ export default defineConfig({
 
     editLink: {
       pattern:
-        "https://github.com/CloudPirates-io/developer-portal/edit/main/docs/:path",
+        "https://github.com/CloudPirates-io/developer-portal/blob/main/src/:path",
       text: "Edit this page on GitHub",
     },
 
@@ -165,7 +165,7 @@ export default defineConfig({
     },
 
     footer: {
-      copyright: "Copyright © 2025 CloudPirates GmbH & Co. KG",
+      copyright: `Copyright © 2025–${new Date().getFullYear()} CloudPirates GmbH & Co. KG. All rights reserved.`,
     },
   },
 });
