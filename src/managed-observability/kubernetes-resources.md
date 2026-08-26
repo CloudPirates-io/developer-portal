@@ -101,8 +101,7 @@ Accessible within the cluster at `web-app.production.svc.cluster.local`."
 
 ### Via API
 
-All resource browsing goes through the `kubernetes-proxy` sub-path, keyed by `clusterId` directly
-(there is no separate "observability instance" resource to route through).
+All resource browsing goes through the `kubernetes-proxy` sub-path, keyed by `clusterId` directly.
 
 #### List Cluster-Scoped Resources
 
@@ -208,8 +207,7 @@ Each pod provides:
 - **Restart Count**: Number of container restarts
 - **Resource Usage**: Current CPU and memory consumption
 
-Events aren't embedded in the pod fetch, see [Events & Logs](./events-logs.md) for the separate
-cluster-wide events endpoint.
+Events come from the cluster-wide events endpoint, see [Events & Logs](./events-logs.md).
 
 ### Deployment Details
 

@@ -91,7 +91,7 @@ Response:
 ```
 
 `auth` is the decoded JWT payload for the new access token (includes `exp`, the expiration as a
-Unix timestamp). There's no separate `expiresIn` seconds field.
+Unix timestamp).
 
 Both tokens rotate for security.
 

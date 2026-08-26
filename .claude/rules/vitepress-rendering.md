@@ -6,9 +6,8 @@ paths:
 
 # VitePress rendering quirks
 
-Verified by reading the installed `vitepress` package source directly
-(`node_modules/vitepress/dist/client/theme-default`), not just docs — re-check against the
-installed version if it's been upgraded since these notes were written.
+Behavior of the installed default theme (`node_modules/vitepress/dist/client/theme-default`), not
+documented upstream.
 
 ## `themeConfig.nav[].text` supports raw HTML (v-html) — but don't nest an `<a>` in it
 

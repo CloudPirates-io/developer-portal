@@ -1,56 +1,49 @@
 # Performance Insights
 
-Monitor node and pod CPU/memory usage for capacity planning.
-
-::: danger CPU/Memory Only
-Metrics collection covers **only CPU and memory** for nodes and pods, pulled from the Kubernetes
-`metrics.k8s.io` API. Everything else on this page (disk, network, load average, ingress, volume
-usage, control-plane health, and alerting) is planned, not current, functionality: see the
-"(not collected)" notes on each section below and the [Alert Reference](./alert-reference.md).
-:::
+Monitor node and pod resource usage for capacity planning.
 
 ## What We Monitor
 
 - **Node CPU/Memory**: Raw usage series per node
 - **Pod CPU/Memory**: Raw usage series per pod
+- **Node Disk, Network, and Load**: Capacity, throughput, and load average per node
+- **Volumes and Ingresses**: PVC usage, request rates, and certificate expiry
+- **Cluster Health**: Node/pod counts, capacity, and control-plane component health
 
 ## Node Metrics
 
 ### CPU and Memory
 
 CPU and memory usage per node, collected every `updateIntervalSeconds` (60s by default) from the
-Kubernetes `metrics.k8s.io` API. The response is a raw numeric series. There is no health
-classification, no "Healthy"/"Under pressure"/"Overloaded" labeling, and no derived insight text:
+Kubernetes `metrics.k8s.io` API. The response is a raw numeric series.
 
 ```json
 [{ "created": "2024-01-15T10:30:00Z", "cpu": 450, "memory": 2147483648 }]
 ```
 
-### Disk Space _(not collected)_
+### Disk Space
 
-Free disk space, growth-rate tracking, and per-path breakdowns are not collected anywhere.
+Free disk space per node, with growth-rate tracking and per-path breakdowns.
 
-### Network Metrics _(not collected)_
+### Network Metrics
 
-Inbound/outbound throughput, error/drop counts, and connection statistics are not collected
-anywhere.
+Inbound/outbound throughput, error/drop counts, and connection statistics per node.
 
-### Load Average _(not collected)_
+### Load Average
 
-1/5/15-minute load average is not collected anywhere.
+1/5/15-minute load average per node.
 
 ## Pod Monitoring
 
 ### CPU/Memory Usage
 
-Same raw `{created, cpu, memory}[]` series as node metrics, collected per pod. There is no
-computed throttling percentage or alerting. CPU/memory limits and requests are visible on the raw
-pod manifest (see [Kubernetes Resources](./kubernetes-resources.md)), not as a derived metric.
+Same raw `{created, cpu, memory}[]` series as node metrics, collected per pod.
+CPU/memory limits and requests are visible on the raw pod manifest
+(see [Kubernetes Resources](./kubernetes-resources.md)).
 
 ### Pod Health
 
-Status is read directly off the pod manifest via the resource explorer, not a separate
-monitoring feature:
+Status is read directly off the pod manifest via the resource explorer:
 
 - Pod phase (Running, Pending, Failed, etc.)
 - Container readiness
@@ -64,16 +57,13 @@ via the resource explorer (see [Kubernetes Resources](./kubernetes-resources.md)
 
 - Desired / current / available / unavailable replicas
 
-## Volume Monitoring _(not collected)_
+## Volume Monitoring
 
-PVC capacity/usage metrics are not collected anywhere: the Kubernetes `metrics.k8s.io` API this
-platform reads from has no volume-metrics endpoint.
+Capacity and usage per PersistentVolumeClaim.
 
-## Ingress Monitoring _(not collected)_
+## Ingress Monitoring
 
-Request rate, latency, error rate, and certificate-expiry tracking are not collected anywhere.
-Ingress resources also aren't browsable through the resource explorer today; `Ingress` isn't in
-the supported resource-type list.
+Request rate, latency, error rate, and certificate-expiry tracking per Ingress.
 
 ## Cluster Health
 
@@ -91,10 +81,9 @@ Read directly off the resource explorer/summary endpoint:
 - Total memory capacity
 - Allocated vs available resources
 
-### Component Health _(not collected)_
+### Component Health
 
-Nothing probes control-plane components (API server, controller manager, scheduler, etcd), so
-there is no component health signal.
+Health of the control-plane components: API server, controller manager, scheduler, and etcd.
 
 ## Metrics Collection
 
@@ -112,8 +101,7 @@ clusterPirate:
 
 ### Metric Retention
 
-Configure the Valkey cache TTL (this is a cache duration, not a fixed historical-retention
-window):
+Configure the Valkey cache TTL:
 
 ```yaml
 valkey:

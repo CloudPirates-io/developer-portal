@@ -37,15 +37,14 @@ Back up all data before deleting a workspace.
 - Only Owners can delete workspaces
 - Deletion is permanent
 
-::: warning Deleting a Workspace Does Not Clean Up Its Resources
-The delete-workspace operation only checks that you're an Owner. It does not check for or block on
-remaining Managed Observability, Managed Applications, or Managed Cluster Components. We still
-recommend removing those first, since the workspace itself won't do it for you.
+::: warning Remove Services Before Deleting a Workspace
+Deleting a workspace leaves any Managed Observability, Managed Applications, and Managed Cluster
+Components behind. Remove those first.
 :::
 
 ### Deletion Steps
 
-1. **Recommended: remove services first** (not enforced by the platform)
+1. **Remove services first**
    - Managed Observability configurations
    - Managed Applications
    - Managed Cluster Components

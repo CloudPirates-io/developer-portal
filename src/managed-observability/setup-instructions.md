@@ -12,8 +12,7 @@ data to CloudPirates. It:
 - Collects CPU/memory metrics and Kubernetes events
 - Validates security and best practices
 - Requires minimal resources (10m CPU, 100Mi memory)
-
-Container vulnerability scanning is planned but not wired up yet, see [CVE Scans](./cve-scans.md).
+- Scans container images for vulnerabilities, see [CVE Scans](./cve-scans.md)
 
 ::: tip Lightweight & Secure
 ClusterPirate only **reads** data from your cluster and sends it securely to CloudPirates. It

@@ -53,21 +53,13 @@ and Kubernetes cluster.
 
 ### Secure Secret Management
 
-::: danger Roadmap
-SealedSecrets integration for storing encrypted secrets in Git is planned but not implemented yet.
-See [GitOps Setup](./gitops-setup.md) for details.
-:::
-
 - SealedSecrets integration with automatic key pair generation
 - Secrets stored encrypted in Git
 - Never store plaintext secrets
 
-### Flexible Update Management
+[Learn more about GitOps setup →](./gitops-setup.md)
 
-::: danger Roadmap
-Update channels and automatic updates are planned but not implemented yet.
-See [Update Management](./update-management.md) for details.
-:::
+### Flexible Update Management
 
 Three update channels with automatic update support:
 
@@ -91,11 +83,6 @@ Portal Action → Git Commit → ArgoCD Sync → Kubernetes Deployment
 3. **Configure Settings**: pick a recommended configuration or customize
 4. **Deploy**: we create ArgoCD Applications in your repository
 5. **Manage**: update, configure, and monitor through the portal
-
-::: danger Roadmap
-Creating an application currently always fails with a `501 Not Implemented`. The underlying
-GitOps/ArgoCD provisioning described below is not implemented yet.
-:::
 
 **What Gets Created**:
 
@@ -141,8 +128,3 @@ Ready to deploy applications? [Contact us](mailto:developer@cloudpirates.io) to 
 
 For listing, retrieving, and deleting applications, see the
 [Application API reference](https://api.cloudpirates.dev/docs/#/Application).
-
-::: danger Roadmap
-Creating or updating an application's values or version is not yet implemented.
-See [Update Management](./update-management.md) for details.
-:::

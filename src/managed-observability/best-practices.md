@@ -68,10 +68,6 @@ resources:
 
 **Feature**: Automatic resource optimization recommendations
 
-There is no backend support for this today: no 30-day consumption analysis and no
-over/under-provisioned recommendations exist anywhere in the codebase. Treat the rest of this
-subsection as a roadmap description.
-
 The platform analyzes actual resource consumption over the last 30 days and compares it to
 configured requests/limits.
 
@@ -511,11 +507,7 @@ Violations are grouped by preset (`BEST_PRACTICES`, `MULTI_TENANCY`, `PSS_BASELI
 
 - **Policy**: Identifier of the rule
 - **Message**: Description of violation
-- **Severity**: `INFO`, `LOW`, `MEDIUM`, or `HIGH`, there is no `Critical` tier
-
-There is no separate per-violation `Category`, `Resource`, `Recommendation`, or `Timestamp` field
-in the API response. Category exists only as an internal Kyverno annotation and is never
-surfaced.
+- **Severity**: `INFO`, `LOW`, `MEDIUM`, or `HIGH`
 
 ## Compliance Tracking
 
@@ -528,8 +520,7 @@ Overall health metric based on policy violations, deducted from 100:
 - **Low violations**: -5 points each
 - **Info violations**: -2 points each
 
-There is no `Critical` tier. The score floors at 0; there is no fixed "target" percentage
-enforced anywhere.
+The score floors at 0.
 
 ### Historical Trends
 

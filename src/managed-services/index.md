@@ -17,10 +17,6 @@ visibility into what's running, and GitOps-based deployment of new applications.
 Monitor your Kubernetes clusters without deploying Prometheus, Grafana, or any other stack
 yourself.
 
-::: danger Roadmap
-CVE scanning, AI-assisted insights, and automated resource recommendations not implemented yet.
-:::
-
 **Key Features**:
 
 - Kubernetes event monitoring with plain-language explanations
@@ -46,11 +42,6 @@ Currently in private beta. [Contact us](mailto:hello@cloudpirates.io) to request
 
 Deploy databases, caches, and other applications from pre-configured templates, then manage them
 via GitOps with ArgoCD.
-
-::: danger Roadmap
-Automatic updates, Helm value migrations, and pre-update backups are not implemented yet.
-See [Managed Application Platform](../managed-application-plattform/) for details.
-:::
 
 **Key Features**:
 

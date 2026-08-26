@@ -54,8 +54,8 @@ registered devices.
 4. Confirm
 
 ::: warning Keep at Least One Authentication Method
-Removing your last authentication method is not blocked by the API. Deleting it without another
-sign-in method configured (e.g. a password) could lock you out of your account.
+Deleting your last authentication method without another sign-in method configured (e.g. a
+password) locks you out of your account.
 :::
 
 ## Multiple Devices

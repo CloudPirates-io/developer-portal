@@ -54,8 +54,7 @@ Invitations are sent via email.
 
 ### 3. Set Up Billing (Optional)
 
-Billing profiles are currently personal (assigned to your user identity, not the workspace) and
-enable paid features for whichever services you use.
+Billing profiles enable paid features for whichever services you use.
 
 [Learn more →](/billing/billing-profiles.md)
 
