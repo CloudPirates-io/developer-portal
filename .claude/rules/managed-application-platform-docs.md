@@ -29,8 +29,8 @@ The templates router is mounted under `/v1/applications`, so the routes are:
 
 Not `/v1/templates`. Other shapes to get right:
 
-| Wrong                                                  | Right                                                                                                                                            |
-| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Wrong                                                  | Right                                                                                                                                             |
+| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Response `{"templates": [...]}`                        | A bare array, paginated via headers (see `api-docs.md`). ApiGateway's `ApplicationTemplates.yaml` OpenAPI schema shows an envelope; don't copy it |
 | Template fields `id`, `category`, `chartUrl`           | `applicationTemplateId`, plus a `source` object of `{type: HELM_CHART, repositoryUrl, chartName}`                                                 |
 | Preset fields `id`, `name`, `resources: {cpu, memory}` | `applicationTemplatePresetId`, `presetName`, `supportedVersionRange`, `valuesSchema`                                                              |

@@ -61,7 +61,7 @@ A password reset doesn't disable MFA.
 ## API Reference
 
 For registration, login, password reset, and password change requests, see the
-[Auth API reference](https://api.cloudpirates.dev/docs/#/Auth).
+[Auth API reference](https://api.cloudpirates.io/docs/#/Auth).
 
 ::: tip API Keys Cannot Modify Passwords
 API keys cannot be used to modify your password. Use your Bearer token instead for this operation.

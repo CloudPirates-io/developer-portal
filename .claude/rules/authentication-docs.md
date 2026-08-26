@@ -54,8 +54,9 @@ local auth), and API keys can't perform security-sensitive operations such as ch
 
 Applies to `password.md`, `mfa.md`, `webauthn.md`, `api-keys.md`, `sessions.md`. Each page's
 `## API Reference` section is one or two sentences linking to the relevant tag on
-`https://api.cloudpirates.dev/docs/` (note: `.dev`, not `.io`), not a raw request/response code
-block per endpoint. Keep standalone tip/warning/info boxes that state a general capability fact
+`https://api.cloudpirates.io/docs/` (the production host, not `.dev`), rather than a raw
+request/response code block per endpoint. Keep standalone tip/warning/info boxes that state a
+general capability fact
 (e.g. "API Keys Cannot Modify Passwords", "Bearer Token Required for Session Management"); cut
 prose that only explains one specific request/response body. See `api-reference-links.md` for the
 repo-wide version of this convention.

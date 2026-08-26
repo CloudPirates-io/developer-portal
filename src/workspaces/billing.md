@@ -52,7 +52,7 @@ a single invoice and a per-workspace breakdown in the billing portal.
 ## API Reference
 
 For workspace billing status, assignment, and removal requests, see the
-[Billing API reference](https://api.cloudpirates.dev/docs/#/Billing).
+[Billing API reference](https://api.cloudpirates.io/docs/#/Billing).
 
 ## Related Resources
 

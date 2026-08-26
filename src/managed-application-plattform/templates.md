@@ -57,7 +57,7 @@ Customize any template by overriding Helm values for resources, storage, replica
 ## API Reference
 
 For listing and retrieving application templates, see the
-[Application Template API reference](https://api.cloudpirates.dev/docs/#/Application%20Template).
+[Application Template API reference](https://api.cloudpirates.io/docs/#/Application%20Template).
 
 ::: tip Response Shapes
 `GET /v1/applications/templates` returns a bare, paginated array (see

@@ -25,9 +25,10 @@ validated for uniqueness, so document it rather than dropping it.
 - **Workspace detail response** is `{workspaceId, workspaceKey, workspaceDomain, workspaceName,
 members[], openMemberInvitations[]}`. There's no creation timestamp, member-count field, or "active
   services" concept. Don't document fields outside this response.
-- **Deleting a workspace only requires Owner rights.** There's no precondition that observability,
-  application or cluster resources be removed first. Frame "remove services first" as a
-  recommendation, with an explicit note that the platform doesn't enforce it.
+- **Deleting a workspace cascades.** It requires Owner rights and takes every resource in the
+  workspace with it (observability configurations, applications, cluster components). Don't tell
+  readers to remove services first; the point to make is that deletion is permanent and takes the
+  contents with it.
 
 ## `members-and-roles.md`: invite, change role, remove member
 

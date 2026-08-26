@@ -20,11 +20,11 @@ API routes (list, create, get, rename, rotate-token, delete).
 
 ## `kubernetes-resources.md` / `events-logs.md`: the `/kubernetes-proxy/` segment
 
-| Scope           | Route                                                                                                    |
-| --------------- | -------------------------------------------------------------------------------------------------------- |
-| Cluster-wide    | `GET /v1/workspaces/:workspaceId/observability/:clusterId/kubernetes-proxy/:resourceType`                 |
+| Scope           | Route                                                                                                           |
+| --------------- | --------------------------------------------------------------------------------------------------------------- |
+| Cluster-wide    | `GET /v1/workspaces/:workspaceId/observability/:clusterId/kubernetes-proxy/:resourceType`                       |
 | Namespaced      | `GET /v1/workspaces/:workspaceId/observability/:clusterId/kubernetes-proxy/namespaces/:namespace/:resourceType` |
-| Single resource | append `/:name` to the namespaced form                                                                   |
+| Single resource | append `/:name` to the namespaced form                                                                          |
 
 `labelSelector` is supported as a query param.
 

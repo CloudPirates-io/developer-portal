@@ -111,7 +111,7 @@ Your payment is usually reflected within 2-3 business days. The invoice status t
 ## API Reference
 
 For invoice listing, invoice detail, PDF download, and transaction requests, see the
-[Billing API reference](https://api.cloudpirates.dev/docs/#/Billing).
+[Billing API reference](https://api.cloudpirates.io/docs/#/Billing).
 
 ::: tip Paginated List Endpoints
 `List Invoices` and `List Transactions` are paginated like every other list endpoint in the API.

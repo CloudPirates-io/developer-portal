@@ -12,8 +12,9 @@ which is about wording only).
 
 A page's `## API Reference` section should not embed raw request/response examples for endpoints
 that are already documented on the live Swagger UI. Instead, condense it to one or two sentences
-linking straight to the matching tag on `https://api.cloudpirates.dev/docs/` (note: `.dev`, not
-`.io`).
+linking straight to the matching tag on `https://api.cloudpirates.io/docs/`. That's the production
+API host, which is the one other developers will hit; `api.cloudpirates.dev` also serves these docs
+but is the dev environment, so don't link to it.
 
 **Why:** the Swagger docs are generated from the same OpenAPI spec the API itself ships from, so
 they can't drift out of sync the way a hand-written markdown example can. Maintaining two copies of
@@ -36,7 +37,7 @@ sentence level.
 
 ## Finding the right tag/anchor: don't guess
 
-Swagger UI tags on `api.cloudpirates.dev/docs/` are not always the bare backend class/domain name.
+Swagger UI tags on `api.cloudpirates.io/docs/` are not always the bare backend class/domain name.
 Tags are prefixed `Auth ...` for the authentication domain (`AuthApi` → `#/Auth`, not `#/AuthApi`;
 `ChallengeApi` → `#/Auth%20Challenge`, not `#/Challenge`). Take anchors from the table below or
 from the `openapi.yaml` `tags:` block, never from a backend class or docs folder name.

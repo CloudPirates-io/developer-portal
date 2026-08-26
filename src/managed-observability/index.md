@@ -157,9 +157,9 @@ everything through the web portal.
 
 ### Performance Insights
 
-**Track CPU and memory usage per node and pod.**
+**Track resource usage per node and pod.**
 
-- Resource utilization (CPU/memory only, no disk or network metrics)
+- Resource utilization (CPU, memory, disk, and network)
 
 [Learn more →](./monitoring-metrics.md)
 
@@ -225,7 +225,7 @@ with `clusterType: "EXTERNAL"` instead; the response includes the `accessToken` 
 install the ClusterPirate agent.
 :::
 
-See the [Cluster API Reference](https://api.cloudpirates.dev/docs/#/Cluster) for the
+See the [Cluster API Reference](https://api.cloudpirates.io/docs/#/Cluster) for the
 list/create/get/rename/rotate-token/delete endpoints.
 
 ## Related Resources

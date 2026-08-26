@@ -127,4 +127,4 @@ Ready to deploy applications? [Contact us](mailto:developer@cloudpirates.io) to 
 ## API Reference
 
 For listing, retrieving, and deleting applications, see the
-[Application API reference](https://api.cloudpirates.dev/docs/#/Application).
+[Application API reference](https://api.cloudpirates.io/docs/#/Application).

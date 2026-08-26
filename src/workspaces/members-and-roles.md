@@ -96,7 +96,7 @@ Configure service-specific permissions after granting workspace access.
 ## API Reference
 
 For member listing, invitation, role change, and removal requests, see the
-[Workspace API reference](https://api.cloudpirates.dev/docs/#/Workspace).
+[Workspace API reference](https://api.cloudpirates.io/docs/#/Workspace).
 
 ::: tip `workspaceMemberId` vs. `identityId`
 Changing a role or removing a member takes a `workspaceMemberId`, not an `identityId`. The member

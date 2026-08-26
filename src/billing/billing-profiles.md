@@ -123,7 +123,7 @@ covered by a single invoice.
 ## API Reference
 
 For billing profile listing, creation, updates, and deletion requests, see the
-[Billing API reference](https://api.cloudpirates.dev/docs/#/Billing).
+[Billing API reference](https://api.cloudpirates.io/docs/#/Billing).
 
 ## Related Resources
 

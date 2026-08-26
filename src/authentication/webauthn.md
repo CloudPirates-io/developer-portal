@@ -70,7 +70,7 @@ Register multiple devices for flexibility:
 ## API Reference
 
 For challenge, registration, login, and device management requests, see the
-[WebAuthn API reference](https://api.cloudpirates.dev/docs/#/Auth%20Challenge).
+[WebAuthn API reference](https://api.cloudpirates.io/docs/#/Auth%20Challenge).
 
 ## Related Resources
 

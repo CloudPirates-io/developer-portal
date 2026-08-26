@@ -109,7 +109,7 @@ an API key.
 ## API Reference
 
 For key listing, creation, and deletion requests, see the
-[API Key reference](https://api.cloudpirates.dev/docs/#/Auth%20API%20Key).
+[API Key reference](https://api.cloudpirates.io/docs/#/Auth%20API%20Key).
 
 ## Related Resources
 
