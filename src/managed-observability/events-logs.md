@@ -1,7 +1,7 @@
 # Events & Troubleshooting
 
-Access Kubernetes events with descriptions and troubleshooting guidance. There is currently no
-container log-streaming feature, see the [Pod Logs](#pod-logs) note below.
+Access Kubernetes events with descriptions and troubleshooting guidance, plus container logs
+for the pods in your cluster.
 
 ## What Are Events?
 
@@ -51,10 +51,10 @@ These events indicate potential issues that haven't caused failures yet:
   - _What it means_: Your application isn't responding to readiness probes
   - _What to do_: Check application logs for startup issues
 
-::: tip Only Two Real Event Types
-Kubernetes (and our API) only classifies events as `Normal` or `Warning`, there is no separate
-"Error" type. The scenarios below surface as `Warning` events; we still call out the more serious
-ones separately here because they usually need immediate action.
+::: tip Two Event Types
+Kubernetes (and our API) classifies events as `Normal` or `Warning`. The scenarios below surface as
+`Warning` events; we still call out the more serious ones separately here because they usually need
+immediate action.
 :::
 
 ### 🔴 Serious Warning Events (Action Required)
@@ -65,8 +65,7 @@ These `Warning` events indicate active problems:
 
 - **"Container crashed with exit code 1"**
   - _What it means_: Your application exited with an error
-  - _What to do_: Check your application's own logging/monitoring for the error message (this
-    platform doesn't provide container log access)
+  - _What to do_: Check the container logs for the error message
 
 - **"Out of memory (OOMKilled)"**
   - _What it means_: Container used more memory than its limit
@@ -194,15 +193,11 @@ clusterPirate:
 
 ## Pod Logs
 
-::: danger Not Implemented
-There is no container log-streaming feature anywhere in the platform today, no way to view
-stdout/stderr, historical logs, or filter log content. Everything below is a planned capability,
-not something you can use now. Don't confuse this with the unrelated, real
-[deployed-application logs](/managed-application-plattform/) endpoint in the Managed Application
-Platform, which is a different feature for a different resource type.
-:::
+These are the container logs for pods in a monitored cluster. For logs of an application you
+deployed through the Managed Application Platform, see
+[deployed-application logs](/managed-application-plattform/) instead.
 
-### Accessing Logs _(planned)_
+### Accessing Logs
 
 Logs are available for all containers in running and recently terminated pods.
 
@@ -213,7 +208,7 @@ Logs are available for all containers in running and recently terminated pods.
 3. Choose container (if multiple)
 4. View real-time logs
 
-### Log Features _(planned)_
+### Log Features
 
 **Real-time Streaming**
 
@@ -231,7 +226,7 @@ Logs are available for all containers in running and recently terminated pods.
 - Filter by timestamp
 - Filter by log level (if structured)
 
-### Log Retention _(planned)_
+### Log Retention
 
 - **Active Containers**: Logs available while container is running
 - **Terminated Containers**: Logs retained based on Kubernetes configuration
@@ -242,8 +237,7 @@ Logs are available for all containers in running and recently terminated pods.
 ### Troubleshooting Application Issues
 
 1. **Check Pod Events**: Identify scheduling or startup issues
-2. **Review Container Logs**: Look for application errors or exceptions (via your own logging
-   setup, not available through this platform)
+2. **Review Container Logs**: Look for application errors or exceptions
 3. **Monitor Resource Events**: Track deployment updates and rollouts
 4. **Examine System Events**: Identify infrastructure problems
 
@@ -335,7 +329,7 @@ Response:
 ### Event Monitoring
 
 - Enable both resource and system events for complete visibility
-- Regularly review warning events to catch issues early (there is no alerting engine yet, see
+- Regularly review warning events to catch issues early (see
   [Alert Reference](./alert-reference.md))
 
 ### Log Management
@@ -348,8 +342,7 @@ Response:
 ### Troubleshooting Workflow
 
 1. Start with events to identify the problem type
-2. Review your application's own logs for application-specific details (not available through
-   this platform)
+2. Review the container logs for application-specific details
 3. Check resource configuration for misconfigurations
 4. Examine metrics for resource constraints
 5. Review cluster-wide events for infrastructure issues

@@ -25,5 +25,4 @@ Manage your Billing Profiles at
 
 ## Payment Methods
 
-All payments currently go through **wire transfer** (Überweisung).
-Additional payment methods are coming soon (PayPal, Credit Card, Direct Debit (SEPA)).
+Payments go through **wire transfer** (Überweisung).

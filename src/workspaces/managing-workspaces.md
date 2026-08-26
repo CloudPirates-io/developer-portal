@@ -28,8 +28,8 @@ View workspace details:
 ## Deleting Workspaces
 
 ::: danger Workspace Deletion Is Permanent
-Workspace deletion is permanent and cannot be undone.
-Back up all data before deleting a workspace.
+Deleting a workspace also deletes everything in it: Managed Observability configurations, Managed
+Applications, and Managed Cluster Components. This cannot be undone, so back up all data first.
 :::
 
 **Requirements**:
@@ -37,27 +37,16 @@ Back up all data before deleting a workspace.
 - Only Owners can delete workspaces
 - Deletion is permanent
 
-::: warning Deleting a Workspace Does Not Clean Up Its Resources
-The delete-workspace operation only checks that you're an Owner. It does not check for or block on
-remaining Managed Observability, Managed Applications, or Managed Cluster Components. We still
-recommend removing those first, since the workspace itself won't do it for you.
-:::
-
 ### Deletion Steps
 
-1. **Recommended: remove services first** (not enforced by the platform)
-   - Managed Observability configurations
-   - Managed Applications
-   - Managed Cluster Components
+1. **Navigate to workspace settings**
 
-2. **Navigate to workspace settings**
-
-3. **Click "Delete Workspace"**
+2. **Click "Delete Workspace"**
    - Confirmation required
 
-4. **Confirm deletion**
+3. **Confirm deletion**
    - Type workspace name to confirm
-   - Workspace deleted immediately
+   - Workspace and its resources are deleted immediately
 
 ## Workspace Switching
 
@@ -70,7 +59,7 @@ If you're in multiple workspaces:
 ## API Reference
 
 For workspace detail, rename, and deletion requests, see the
-[Workspace API reference](https://api.cloudpirates.dev/docs/#/Workspace).
+[Workspace API reference](https://api.cloudpirates.io/docs/#/Workspace).
 
 ## Related Resources
 

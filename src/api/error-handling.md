@@ -21,8 +21,7 @@ Here are the most common ones you'll run into.
 | 504  | Gateway Timeout - The server did not receive a timely response from an upstream server or proxy.                           |
 
 ::: tip 429 Too Many Requests
-Rate limiting, if enforced, happens at the infrastructure/ingress layer in front of our API and
-is not something our backend services implement or guarantee.
+Rate limiting happens at the infrastructure/ingress layer in front of our API.
 Treat a `429` as a signal to back off and retry with backoff, but don't rely on specific limits
 unless we document them separately.
 :::

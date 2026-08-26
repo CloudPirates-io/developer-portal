@@ -12,8 +12,9 @@ which is about wording only).
 
 A page's `## API Reference` section should not embed raw request/response examples for endpoints
 that are already documented on the live Swagger UI. Instead, condense it to one or two sentences
-linking straight to the matching tag on `https://api.cloudpirates.dev/docs/` (note: `.dev`, not
-`.io`, a different host than the old generic link still on some pages).
+linking straight to the matching tag on `https://api.cloudpirates.io/docs/`. That's the production
+API host, which is the one other developers will hit; `api.cloudpirates.dev` also serves these docs
+but is the dev environment, so don't link to it.
 
 **Why:** the Swagger docs are generated from the same OpenAPI spec the API itself ships from, so
 they can't drift out of sync the way a hand-written markdown example can. Maintaining two copies of
@@ -33,18 +34,13 @@ sentence level.
 - Don't convert a page's `## API Reference` section as a side effect of an unrelated edit; treat it
   as its own deliberate step per domain (confirm the real tag/anchor first, see below) unless the
   user has already asked for it on that page.
-- If a domain's Swagger tag isn't live yet, keep that page's raw examples rather than linking to a
-  nonexistent anchor; see the domain-specific rules files (e.g. `authentication-docs.md`) for
-  current exceptions.
 
-## Finding the right tag/anchor — don't guess, verify
+## Finding the right tag/anchor: don't guess
 
-Swagger UI tags on `api.cloudpirates.dev/docs/` are not always the bare backend class/domain name.
-Confirmed case: tags are prefixed `Auth ...` for the authentication domain
-(`AuthApi` → `#/Auth`, not `#/AuthApi`; `ChallengeApi` → `#/Auth%20Challenge`, not `#/Challenge`).
-Re-verify against the live docs or the source `openapi.yaml` `tags:` block before linking to a tag
-this file hasn't already confirmed (the table below), rather than inferring it from a backend class
-or docs folder name.
+Swagger UI tags on `api.cloudpirates.io/docs/` are not always the bare backend class/domain name.
+Tags are prefixed `Auth ...` for the authentication domain (`AuthApi` → `#/Auth`, not `#/AuthApi`;
+`ChallengeApi` → `#/Auth%20Challenge`, not `#/Challenge`). Take anchors from the table below or
+from the `openapi.yaml` `tags:` block, never from a backend class or docs folder name.
 
 The anchor format is `#/<tag-name-with-spaces-replaced-by-%20>` (case preserved), e.g. `Auth API
 Key` → `#/Auth%20API%20Key`.
@@ -61,6 +57,7 @@ worth confirming against the live site since these are hand-maintained in the sp
 | Auth                 | `#/Auth`                   | Login, registration, activation, password mgmt, token refresh, session validation          | `/authentication/`                         |
 | Auth Challenge       | `#/Auth%20Challenge`       | MFA/passwordless setup: TOTP, SMS 2FA, WebAuthn                                            | —                                          |
 | Auth API Key         | `#/Auth%20API%20Key`       | Create/list/revoke API keys                                                                | `/authentication/api-keys`                 |
+| Auth Session         | `#/Auth%20Session`         | List active sessions, logout by session, session device/location details                   | `/authentication/sessions`                 |
 | Training             | `#/Training`               | Core training mgmt: create, settings, certificates, feedback forms                         | —                                          |
 | Training Participant | `#/Training%20Participant` | Participants: add/remove, roles, environment assignment                                    | —                                          |
 | Training Session     | `#/Training%20Session`     | Session scheduling, dates/times, Teams meeting URLs                                        | —                                          |
@@ -84,9 +81,4 @@ Notes:
   `Auth`'s three-way one).
 - Several tags (`Training*`, `Notification`, `Country`, `Request`, `System`) have no corresponding
   `docs/**` domain at all. Don't invent a docs page for a tag just because the tag exists.
-- `Kubernetes` most likely corresponds to `docs/managed-observability/kubernetes-resources.md`
-  given the description overlap, but this is an inference from the description text, not confirmed
-  against the live Swagger UI the way the `Auth ...` tags were — verify before relying on it.
-- No `Auth Session` tag exists in this list. Pages that would map to it (e.g. `sessions.md`) should
-  keep raw examples until the tag goes live — re-check this list next time it's refreshed from
-  `openapi.yaml`.
+- `Kubernetes` corresponds to `docs/managed-observability/kubernetes-resources.md`.

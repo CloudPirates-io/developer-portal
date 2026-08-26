@@ -45,11 +45,6 @@ Customize any template by overriding Helm values for resources, storage, replica
 
 ## Updates & Security
 
-::: danger Roadmap
-Update channels and SealedSecrets-based secret encryption are planned but not implemented yet.
-See [Update Management](./update-management.md) and [GitOps Setup](./gitops-setup.md) for details.
-:::
-
 **Update Channels**:
 
 - **CloudPirates Stable**: released ~2 weeks after upstream with extensive testing and automatic
@@ -62,14 +57,13 @@ See [Update Management](./update-management.md) and [GitOps Setup](./gitops-setu
 ## API Reference
 
 For listing and retrieving application templates, see the
-[Application Template API reference](https://api.cloudpirates.dev/docs/#/Application%20Template).
+[Application Template API reference](https://api.cloudpirates.io/docs/#/Application%20Template).
 
 ::: tip Response Shapes
 `GET /v1/applications/templates` returns a bare, paginated array (see
-[Pagination](/api/pagination.md)), not wrapped in a `templates` key. A template's real fields are
-`applicationTemplateId`, `name`, `description`, `logoUrl`, and a `source` object
-(`{type, repositoryUrl, chartName}`); a preset has no fixed `resources` object, sizing
-(CPU/memory/storage) is validated against `valuesSchema`, an arbitrary per-preset JSON Schema.
+[Pagination](/api/pagination.md)). A template's fields are `applicationTemplateId`, `name`,
+`description`, `logoUrl`, and a `source` object (`{type, repositoryUrl, chartName}`). Preset sizing
+(CPU/memory/storage) is validated against `valuesSchema`, a per-preset JSON Schema.
 :::
 
 ## Related Resources

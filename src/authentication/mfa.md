@@ -83,7 +83,7 @@ Enable both SMS and TOTP:
 ## API Reference
 
 For MFA setup, activation, and login-with-MFA requests, see the
-[Auth API reference](https://api.cloudpirates.dev/docs/#/Auth%20Challenge).
+[Auth API reference](https://api.cloudpirates.io/docs/#/Auth%20Challenge).
 
 ## Related Resources
 

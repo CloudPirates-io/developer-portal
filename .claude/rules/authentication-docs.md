@@ -5,101 +5,69 @@ paths:
 
 # Authentication docs
 
-Ground truth is `authenticationservice`'s own HTTP surface, not ApiGateway — unlike
-`clusterservice` (pure CQRS, no HTTP — see `cluster-docs.md`), `authenticationservice` runs its own
-Express app (`authenticationservice/src/app.ts`) with real routes mounted directly:
-`src/services/authenticationservice/src/Api/v1/{AuthApi,ChallengeApi,WebAuthnApi,ApiKeyApi,
-SessionApi}.ts`, plus handler code (`loginIdentityWithWebAuthn.ts`, `loginIdentityWithLocalAuth.ts`,
-`registerKey.ts`, `getSessions.ts`, `getDeviceFingerprint.ts`, `refreshIdentitySession.ts`) under
-`authenticationservice/src/Auth/**`. ApiGateway itself has no `Auth` route files of its own — its
-`src/Authentication/` directory only holds middleware for authenticating requests to _other_
-ApiGateway routes (`authenticationFinder.ts`, `authenticationMiddleware.ts`), and its
-`src/docs/paths/auth/**` only mirrors the OpenAPI spec for authenticationservice's routes. Don't go
-looking for these handlers inside apigateway. Re-verify against current source before trusting
-this if it's been a while.
+Authentication is served by `authenticationservice`'s own Express app, not by ApiGateway. The
+routes live in `authenticationservice/src/Api/v1/{AuthApi,ChallengeApi,WebAuthnApi,ApiKeyApi,
+SessionApi}.ts` with handlers under `authenticationservice/src/Auth/**`. ApiGateway's
+`src/Authentication/` directory only holds middleware for authenticating requests to other
+ApiGateway routes, so don't look for these handlers there.
 
-## `webauthn.md` real endpoint shapes
+## `webauthn.md` endpoint shapes
 
-| Common wrong assumption                               | Real behavior                                                                                                                                                                                                                                                                                                                                |
-| ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `GET /v1/auth/webauthn/devices` (list)                | `GET /v1/auth/webauthn` (`WebAuthnApi.ts:15`) — no `/devices` segment                                                                                                                                                                                                                                                                        |
-| `DELETE /v1/auth/webauthn/devices/{deviceId}`         | `DELETE /v1/auth/webauthn/{webAuthnKeyId}` (`WebAuthnApi.ts:68-89`) — no `/devices` segment, param is `webAuthnKeyId`                                                                                                                                                                                                                        |
-| Register body `{"label": "...", "credential": {...}}` | Handler (`WebAuthnApi.ts:41-56` → `registerKey.ts:9-44`) takes the raw WebAuthn `RegistrationJSON` directly as the body — no wrapper, no separate `label` field. The label is derived server-side from `validatedRegistration.user.name` (`registerKey.ts:27`), from the WebAuthn ceremony itself, not a client-supplied field on this call. |
-| Login body `{"credential": {...}}`                    | Handler (`WebAuthnApi.ts:58-65`) passes `req.body` directly as the `AuthenticationResponseJSON` — no `credential` wrapper key.                                                                                                                                                                                                               |
+- List keys: `GET /v1/auth/webauthn` (no `/devices` segment).
+- Delete a key: `DELETE /v1/auth/webauthn/{webAuthnKeyId}`.
+- Rename a key: `PUT /v1/auth/webauthn/{webAuthnKeyId}/label`.
+- Register: the body is the raw WebAuthn `RegistrationJSON`, with no wrapper object and no
+  client-supplied `label` field. The label is derived server-side from the WebAuthn ceremony
+  (`validatedRegistration.user.name`).
+- Login: the body is the raw `AuthenticationResponseJSON`, with no `credential` wrapper key.
+- `POST /v1/auth/webauthn/challenge` (returns `{challenge}`) is a mandatory step before both
+  register and login. Both handlers look the challenge up in Redis and fail without it.
 
-Also real but easy to miss: a mandatory `POST /v1/auth/webauthn/challenge` (`WebAuthnApi.ts:35-38`,
-returns `{challenge}`) step must precede register/login — both handlers look the challenge up in
-Redis and fail if it's missing. There's also a `PUT /v1/auth/webauthn/{webAuthnKeyId}/label` rename
-endpoint (`WebAuthnApi.ts:91-116`).
+## `mfa.md` endpoint shapes
 
-**"Keep at Least One Authentication Method" is not enforced.** No "last method" guard exists in the
-delete handler (`WebAuthnApi.ts:68-89`). Frame this in the doc as "not enforced by the API, could
-lock you out", not as something the system blocks. Re-verify if a guard is ever added.
+- **The SMS field name is `number`**, not `phoneNumber`.
+- **SMS/TOTP setup is a two-phase flow.** `POST /v1/auth/challenges/sms` (or `/totp`) returns a
+  `verificationToken` (SMS) or `otpAuthUri` (TOTP); the challenge only becomes usable for login
+  after `POST /v1/auth/challenges/sms/activate` `{verificationToken, challengeCode}` or
+  `POST /v1/auth/challenges/totp/activate` `{token}`. Document both `/activate` endpoints as
+  separate steps, not as an implementation detail of the first call.
+- **`desiredChallenge` is uppercase-only** (`SMS`, `TOTP`). Lowercase is rejected with a 400
+  `ChallengeTypeInvalidError`.
+- Login with a challenge is `POST /v1/auth/login/challenge` `{verificationToken, challengeCode}`.
 
-## `mfa.md` real endpoint shapes
-
-- **SMS field name is `number`, not `phoneNumber`** (`ChallengeApi.ts:32-51`).
-- **SMS/TOTP setup is a mandatory two-phase flow.** `POST /v1/auth/challenges/sms` (or `/totp`)
-  returns a `verificationToken` (SMS) or `otpAuthUri` (TOTP), but the challenge isn't usable for
-  login until you also call `POST /v1/auth/challenges/sms/activate`
-  `{verificationToken, challengeCode}` (`ChallengeApi.ts:120-148`) or
-  `POST /v1/auth/challenges/totp/activate` `{token}` (`ChallengeApi.ts:150-174`). Document both
-  `/activate` endpoints as separate steps, not an implementation detail of the first call.
-- **`desiredChallenge` enum is uppercase-only.** The real enum (`AUTH_CHALLENGE_TYPE`,
-  `Sms = 'SMS'`, `Totp = 'TOTP'`) is uppercase, and `validateChallengeType.ts` does a strict
-  membership check — lowercase throws a 400 `ChallengeTypeInvalidError`.
-- `POST /v1/auth/login/challenge` with `{verificationToken, challengeCode}` is accurate as
-  documented (`AuthApi.ts:230-251`).
-
-## `password.md`, `api-keys.md`, `sessions.md` real shapes
+## `password.md`, `api-keys.md`, `sessions.md` shapes
 
 - **Change-password body** is `{"existingPassword": "...", "password": "..."}`, not
-  `{"currentPassword", "newPassword"}` (`AuthApi.ts:265-274`). Everything else in `password.md`
-  (`/register`, `/login`, `/request-reset-password` bodies, the HaveIBeenPwned breach-check
-  framing, the "API keys cannot modify passwords" tip) is accurate.
-- **API key list response has no `lastUsed` field.** The real shape (`ApiKeyApi.ts:15-19`) is
-  `{id, label, createdAt}` only. If the portal UI displays a "last used" value, it isn't sourced
-  from this endpoint — check the underlying model/UI code before documenting it here. Everything
-  else in `api-keys.md` (the Local-only route limitations list, list/create/delete endpoints and
-  bodies) is accurate.
-- **`POST /v1/auth/refresh` response has no `expiresIn`.** The real payload
-  (`refreshIdentitySession.ts:65-69`) returns `{accessToken, refreshToken, auth}` (a decoded JWT
-  payload with `exp`, etc.), not a precomputed seconds value. Everything else in `sessions.md`
-  (sessions list with `includeExpired`, logout-by-session, `/me`, `/validate`, device/browser/OS/
-  location fields including the GDPR "last octet removed" IP-anonymization claim, genuinely
-  implemented in `getDeviceFingerprint.ts`) is accurate.
+  `{"currentPassword", "newPassword"}`.
+- **The API key list response** is `{id, label, createdAt}`.
+- **`POST /v1/auth/refresh`** returns `{accessToken, refreshToken, auth}`, where `auth` is a decoded
+  JWT payload (with `exp` and friends), not a precomputed `expiresIn` value.
+- Sessions carry device/browser/OS/location details, and client IPs are anonymized by dropping the
+  last octet.
 
-## Confirmed accurate
+## Facts worth keeping on the pages
 
-`index.md`'s "No MFA required when using WebAuthn" claim (`loginIdentityWithWebAuthn.ts` never
-checks challenge/MFA state, unlike `loginIdentityWithLocalAuth.ts`) and the API-key
-security-sensitive-operation restriction are both accurate.
+WebAuthn logins don't require MFA (the WebAuthn login path never checks challenge state, unlike
+local auth), and API keys can't perform security-sensitive operations such as changing a password.
 
 ## `## API Reference` sections link out instead of embedding raw examples
 
 Applies to `password.md`, `mfa.md`, `webauthn.md`, `api-keys.md`, `sessions.md`. Each page's
-`## API Reference` section should be one or two sentences linking directly to the relevant tag on
-`https://api.cloudpirates.dev/docs/` (note: `.dev`, not `.io`), not a raw request/response code
-block per endpoint. Keep standalone tip/warning/info boxes that state a general capability fact
+`## API Reference` section is one or two sentences linking to the relevant tag on
+`https://api.cloudpirates.io/docs/` (the production host, not `.dev`), rather than a raw
+request/response code block per endpoint. Keep standalone tip/warning/info boxes that state a
+general capability fact
 (e.g. "API Keys Cannot Modify Passwords", "Bearer Token Required for Session Management"); cut
 prose that only explains one specific request/response body. See `api-reference-links.md` for the
 repo-wide version of this convention.
 
-**Swagger UI tags are prefixed `Auth`, not the bare backend class name minus `Api`** (verified
-against the live docs, not inferred):
+**Swagger UI tags are prefixed `Auth`**, not the bare backend class name minus `Api`. Don't guess
+anchors as `#/<ClassName>` (e.g. `#/Session`, `#/WebAuthn`); those are wrong.
 
-| Page          | Backend class  | Real anchor                                                                                                                                                     |
-| ------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `password.md` | `AuthApi`      | `#/Auth`                                                                                                                                                        |
-| `mfa.md`      | `ChallengeApi` | `#/Auth%20Challenge`                                                                                                                                            |
-| `webauthn.md` | `WebAuthnApi`  | `#/Auth%20Challenge` (same tag as `mfa.md` — WebAuthn's challenge endpoint shares the Challenge tag rather than getting its own; re-verify if this looks wrong) |
-| `api-keys.md` | `ApiKeyApi`    | `#/Auth%20API%20Key`                                                                                                                                            |
-| `sessions.md` | `SessionApi`   | `#/Auth%20Session` (not live yet, see below)                                                                                                                    |
-
-Don't guess anchors as `#/<ClassName>` (e.g. `#/Session`, `#/WebAuthn`) — verified wrong.
-
-**`sessions.md`'s API Reference intentionally keeps raw examples, unlike the other four pages.**
-The `#/Auth%20Session` tag doesn't exist yet on the live docs site. Once it goes live, convert
-`sessions.md` to a Swagger link the same way as the other pages (there's a commented-out link
-already in place to swap in) and check whether the current example set still covers what the page
-needs.
+| Page          | Backend class  | Anchor                                                        |
+| ------------- | -------------- | ------------------------------------------------------------- |
+| `password.md` | `AuthApi`      | `#/Auth`                                                      |
+| `mfa.md`      | `ChallengeApi` | `#/Auth%20Challenge`                                          |
+| `webauthn.md` | `WebAuthnApi`  | `#/Auth%20Challenge` (shares the Challenge tag with `mfa.md`) |
+| `api-keys.md` | `ApiKeyApi`    | `#/Auth%20API%20Key`                                          |
+| `sessions.md` | `SessionApi`   | `#/Auth%20Session`                                            |

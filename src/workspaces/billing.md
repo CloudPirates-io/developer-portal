@@ -4,13 +4,6 @@ next: false
 
 # Workspace Billing
 
-::: danger Roadmap
-Workspace-scoped billing is on the roadmap, but none of it is implemented yet.
-See [Billing Profiles](/billing/billing-profiles.md) for current usage.
-:::
-
-## Assigning Billing Profiles
-
 **Prerequisites**:
 
 - You must be a workspace Owner
@@ -58,13 +51,8 @@ a single invoice and a per-workspace breakdown in the billing portal.
 
 ## API Reference
 
-::: danger Roadmap
-These endpoints aren't live yet and may still change.
-See [Billing Profiles](/billing/billing-profiles.md) for how billing works today.
-:::
-
 For workspace billing status, assignment, and removal requests, see the
-[Billing API reference](https://api.cloudpirates.dev/docs/#/Billing).
+[Billing API reference](https://api.cloudpirates.io/docs/#/Billing).
 
 ## Related Resources
 

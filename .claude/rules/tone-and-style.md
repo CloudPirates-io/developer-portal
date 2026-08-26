@@ -186,84 +186,43 @@ capitalized. Compare correctly-lowercased prepositions (`### Setup with QR Code`
 Session`, `::: warning ... Required for Session Management`) against the verb case: "is" is the
 sentence's verb ("What [is] WebAuthn"), not a preposition, so it capitalizes.
 
-## Roadmap disclaimer boxes: title is always "Roadmap", body stays short
+## State what is, not what isn't
 
-For pages (or sections of a page) that describe a planned/not-yet-implemented feature, the
-disclaimer box has one fixed shape:
+Drop the negative half of "this is X, not Y" constructions and just write "this is X". Same for
+standalone absence statements ("there is no separate Category field", "disk usage is not collected
+anywhere", "the API doesn't block this"). A reader gains nothing from a sentence whose content is
+that a convenience they never asked about is missing; it reads as "here's a nice feature, which
+doesn't exist, thanks for nothing".
 
-- **Title is always "Roadmap"**, verbatim, every time. Not "Planned Feature, Not Yet Available",
-  not "Not Live Yet", not any other one-off phrasing per page. One consistent word means a reader
-  recognizes it on sight regardless of which page they're on, the same way `::: warning`/`::: tip`
-  box titles are consistent in shape elsewhere in this codebase.
-- **Body is one or two short sentences, nothing more:** what's planned, then a link to how it works
-  today (if a "today" state exists). Don't write a justification or contrast sentence like "It's
-  actually Y, not X" or "Everything below describes the planned behavior, not something you can
-  use today" — just state the fact and give the link.
-- If a page needs the caveat in more than one place (e.g. a top-of-page box plus another right
-  before a set of not-yet-live API examples further down), repeat the same short shape each time
-  rather than writing a longer explanation once and a different, shorter one elsewhere. Consistency
-  of shape matters more than not repeating the word "planned".
-- Don't editorialize the exact technical failure mode inside the box (e.g. "these routes have no
-  registered command handler, so a request hangs and times out with `503`/`504` instead of failing
-  cleanly"). Keep it to the same short shape as every other Roadmap box on the page — the precise
-  mechanism belongs in the relevant `.claude/rules/*.md` audit note, not in reader-facing prose,
-  once the box's job (tell the reader not to rely on this) is already done by the word "Roadmap"
-  plus one plain sentence.
+Wrong: "Status is read off the pod manifest, not a separate monitoring feature." / "Severity is
+`INFO`, `LOW`, `MEDIUM`, or `HIGH`, there is no `Critical` tier." / "Events aren't embedded in the
+pod fetch, see the separate events endpoint."
 
-Example, used at the top of a page:
+Right: "Status is read off the pod manifest." / "Severity is `INFO`, `LOW`, `MEDIUM`, or `HIGH`." /
+"Events come from the cluster-wide events endpoint."
 
-```
-::: danger Roadmap
-Most of the features described here are not yet implemented.
-:::
-```
+Two things this doesn't cover. Warnings about real consequences stay, just phrased positively:
+"Deleting your last authentication method locks you out" rather than "removing it is not blocked by
+the API". And a contrast between two things that both exist is fine when it prevents a concrete
+mistake, e.g. `workspaceMemberId` versus `identityId`.
 
-Optionally, can have a bit more information (but not too much):
+## Every feature is documented in plain present tense
 
-```
-::: danger Roadmap
-Workspace-scoped billing is not implemented yet.
-See [Billing Profiles](/billing/billing-profiles.md) for current usage.
-:::
-```
-
-And again, right before that page's `## API Reference` examples, same shape:
-
-```
-::: danger Roadmap
-These endpoints aren't live yet and may still change.
-See [Billing Profiles](/billing/billing-profiles.md) for how billing works today.
-:::
-```
-
-## Everything below a "Roadmap" box is written as if already shipped
-
-Only the "Roadmap" box itself carries the "this isn't live yet" signal. Everything else on the
-page, the numbered steps, the other tip/warning boxes, the API examples, is worded in plain present
-tense as if the feature already exists, exactly like every other page in these docs. Don't hedge
-the surrounding prose with "once this ships", "will be", "would", etc.
+Every page describes what the platform does, in plain present tense, with no hedging about
+availability. No "planned", "not yet implemented", "coming soon", "once this ships", "will be", or
+"would" anywhere, and no disclaimer boxes carrying that signal. If a capability belongs in the
+docs, it is written the same way as every other capability.
 
 Wrong: "Paid features will be enabled immediately once this ships." /
-`::: warning You'll Be Responsible for All Workspace Charges` / "Once this ships, you'll be
-responsible for all charges the workspace incurs...".
+`::: warning You'll Be Responsible for All Workspace Charges` / "Kubernetes event monitoring today;
+CVE scanning and resource recommendations are on the roadmap."
 
 Right: "Paid features are enabled immediately." /
-`::: warning You Are Responsible for All Workspace Charges` / "You are responsible for all
-charges the workspace incurs...".
+`::: warning You Are Responsible for All Workspace Charges` / "Kubernetes event monitoring, CVE
+scanning, and resource recommendations."
 
-Reasoning: the "Roadmap" box already told the reader this isn't live. Repeating that caveat in
-every sentence below it is the same duplicate-information problem covered above, just spread across
-a whole page instead of one paragraph, and it reads as hedging rather than documentation. State the
-box once, then document the feature normally.
-
-This holds across a whole page, not just directly below one box. If a page already has a Roadmap
-box for a feature (even in an earlier or later section, or on a top-of-page box covering several
-features at once), don't re-hedge that same feature with mixed real/planned phrasing somewhere
-else on the page, e.g. don't write "Kubernetes event monitoring today; CVE scanning, AI-assisted
-insights, and automated resource recommendations are on the roadmap" in a feature list. List the
-capabilities plainly ("Kubernetes event monitoring, CVE scanning, AI-assisted insights, and
-automated resource recommendations") and let the page's Roadmap box(es) carry the caveat, the same
-way a single "planned" tag on a heading isn't repeated in the prose underneath it.
+This holds for feature lists too: list capabilities plainly, without splitting them into
+available-now and later groups.
 
 ## Open question — nautical/pirate metaphors
 

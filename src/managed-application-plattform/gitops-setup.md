@@ -3,10 +3,6 @@ The Managed Application Platform is currently in private beta.
 Contact us at [hello@cloudpirates.io](mailto:hello@cloudpirates.io) to request access.
 :::
 
-::: danger Roadmap
-Most of the features described here are not yet implemented.
-:::
-
 <br>
 
 # GitOps Setup

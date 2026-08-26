@@ -91,7 +91,7 @@ Response:
 ```
 
 `auth` is the decoded JWT payload for the new access token (includes `exp`, the expiration as a
-Unix timestamp). There's no separate `expiresIn` seconds field.
+Unix timestamp).
 
 Both tokens rotate for security.
 
@@ -117,7 +117,7 @@ Authorization: Bearer <access-token>
 
 <!-- TODO: Implement session API documentation -->
 <!-- For session listing and logout requests, see the
-[Session API reference](https://api.cloudpirates.dev/docs/#/Auth%20Session). -->
+[Session API reference](https://api.cloudpirates.io/docs/#/Auth%20Session). -->
 
 ::: warning Bearer Token Required for Session Management
 API keys cannot be used for session management operations. A Bearer token is required.

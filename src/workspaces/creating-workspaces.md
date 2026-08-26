@@ -30,7 +30,7 @@ Create separate workspaces for:
 ## API Reference
 
 For workspace creation and listing requests, see the
-[Workspace API reference](https://api.cloudpirates.dev/docs/#/Workspace).
+[Workspace API reference](https://api.cloudpirates.io/docs/#/Workspace).
 
 ::: tip Workspace Key Format
 `workspaceKey` must be unique across all workspaces: lowercase letters, digits, and single

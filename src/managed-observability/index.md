@@ -8,11 +8,6 @@ See what's happening inside your Kubernetes clusters without running your own ob
 stack. CloudPirates Managed Observability gives you cluster visibility through a single
 lightweight agent.
 
-::: danger Roadmap
-CVE scanning, AI-assisted insights, automated resource recommendations, and alerting are planned
-but not implemented yet.
-:::
-
 ## What Is Managed Observability?
 
 CloudPirates Managed Observability gives you quick insight into your Kubernetes clusters without
@@ -139,7 +134,7 @@ advanced dashboards, and detailed application instrumentation.
 The ClusterPirate agent automatically discovers and observes:
 
 - **All Kubernetes Resources**: Nodes, namespaces, deployments, pods, services, ingresses
-- **Performance Metrics**: CPU and memory usage (disk and network usage are not collected)
+- **Performance Metrics**: CPU, memory, disk, and network usage
 - **Application Health**: Container status, restart counts, probe failures
 - **Security Posture**: Policy violations, CVE vulnerabilities
 - **Events**: Real-time access to Kubernetes events
@@ -162,9 +157,9 @@ everything through the web portal.
 
 ### Performance Insights
 
-**Track CPU and memory usage per node and pod.**
+**Track resource usage per node and pod.**
 
-- Resource utilization (CPU/memory only, no disk or network metrics)
+- Resource utilization (CPU, memory, disk, and network)
 
 [Learn more →](./monitoring-metrics.md)
 
@@ -230,7 +225,7 @@ with `clusterType: "EXTERNAL"` instead; the response includes the `accessToken` 
 install the ClusterPirate agent.
 :::
 
-See the [Cluster API Reference](https://api.cloudpirates.dev/docs/#/Cluster) for the
+See the [Cluster API Reference](https://api.cloudpirates.io/docs/#/Cluster) for the
 list/create/get/rename/rotate-token/delete endpoints.
 
 ## Related Resources
